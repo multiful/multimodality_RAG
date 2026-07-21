@@ -27,11 +27,18 @@ MODELS = {
     "llava": "llava-hf/llava-onevision-qwen2-7b-ov-hf",
 }
 
-PROMPT = (
-    "This image shows a company logo. Which company does it belong to? "
-    "Answer with exactly 3 candidate company names, most likely first, "
-    "separated by commas. Company names only, no other text."
-)
+PROMPTS = {
+    "logo": (
+        "This image shows a company logo. Which company does it belong to? "
+        "Answer with exactly 3 candidate company names, most likely first, "
+        "separated by commas. Company names only, no other text."
+    ),
+    "product": (
+        "This image shows a product. Which company makes or sells it? "
+        "Answer with exactly 3 candidate company names, most likely first, "
+        "separated by commas. Company names only, no other text."
+    ),
+}
 
 MAX_SIDE = 768
 MIN_SIDE = 56  # Qwen vision tower needs >=28px per side after patching; be safe
@@ -91,13 +98,13 @@ def build_model(key: str):
 
 
 @torch.inference_mode()
-def infer(processor, model, img: Image.Image) -> tuple[str, float]:
+def infer(processor, model, img: Image.Image, prompt: str) -> tuple[str, float]:
     messages = [
         {
             "role": "user",
             "content": [
                 {"type": "image"},
-                {"type": "text", "text": PROMPT},
+                {"type": "text", "text": prompt},
             ],
         }
     ]
@@ -131,6 +138,7 @@ def collect_samples(data_dir: str) -> list[tuple[str, str]]:
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--model", choices=list(MODELS), required=True)
+    ap.add_argument("--task", choices=list(PROMPTS), default="logo")
     ap.add_argument("--data", required=True)
     ap.add_argument("--out", required=True)
     ap.add_argument("--limit", type=int, default=0)
@@ -164,7 +172,7 @@ def main():
             rec = {"file": rel, "label": ticker}
             try:
                 img = load_image(path)
-                answer, dt = infer(processor, model, img)
+                answer, dt = infer(processor, model, img, PROMPTS[args.task])
                 rec.update({"answer": answer, "pred": link(answer, top_k=3), "ms": round(dt, 1)})
             except Exception as e:
                 n_err += 1
