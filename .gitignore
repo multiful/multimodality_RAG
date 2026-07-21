@@ -4,7 +4,5 @@ __pycache__/
 chroma_db/
 .DS_Store
 models/
-__pycache__/
-*.pyc
 output/*
 !output/financial Statement/
