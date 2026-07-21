@@ -6,4 +6,5 @@ chroma_db/
 models/
 __pycache__/
 *.pyc
-output/
+output/*
+!output/financial Statement/
