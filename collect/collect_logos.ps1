@@ -1,18 +1,24 @@
 ﻿# ============================================================
-#  NASDAQ-100 로고 수집기 v4  (Claude 생성)
+#  NASDAQ-100 로고 수집기 v6  (Claude 생성)
 #  위키류(나무위키/위키피디아) 전부 제외. 종목당 20장 목표.
 #  소스: Clearbit 공식 로고 + DuckDuckGo + Bing (제목에 브랜드명 필수)
 #  중복: MD5(완전 동일) + 지각해시 dHash(거의 동일한 리사이즈본) 제거
+#  품질: 콜라주/파트너로고모음 등 키워드 배제 강화 +
+#        다운로드 후 화질 검사(가로세로비, 투명배경/단색배경 여부)로
+#        "로고 하나만 깔끔하게" 아닌 이미지 자동 제거
+#  주의: 여러 로고가 같이 있는지(멀티 오브젝트)는 픽셀 휴리스틱만으로는
+#        완전히 못 잡음 — 키워드 필터로 상당수 걸러내는 수준. 더 정확히
+#        하려면 수집 후 VLM(Qwen2.5-VL)으로 2차 검수하는 걸 추천.
 # ============================================================
 $ErrorActionPreference = 'Continue'
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 Add-Type -AssemblyName System.Drawing
 $UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36'
-$BAD = 'history|evolution|evoluc|timeline|through the years|over the years|old and new|all logos|logo collection|collection of|logo pack|bundle|set of|comparison|versus| vs |infographic|chart|banner|wallpaper|mockup|변천|역사|모음'
+$BAD = 'history|evolution|evoluc|timeline|through the years|over the years|old and new|all logos|logos of|brand logos|logo collection|collection of|logo pack|bundle|set of|comparison|versus| vs |infographic|chart|banner|wallpaper|mockup|collage|compilation|grid|sprite sheet|icon set|icon pack|top \d+|ranking|alternative(s)?|competitor|portfolio|showcase|our (client|partner|sponsor)|client list|sponsor|screenshot|storefront|building|sign(age)?|store front|변천|역사|모음|로고 모음|브랜드 모음|파트너사|고객사|스크린샷|매장|간판|건물'
 $Root = Join-Path (Split-Path $PSScriptRoot -Parent) 'logos'
 New-Item -ItemType Directory -Force -Path $Root | Out-Null
 $Log = Join-Path (Split-Path $PSScriptRoot -Parent) 'collect_log.txt'
-"===== v5 시작(단일 로고 필터)(위키 전체 제외, k=20): $(Get-Date) =====" | Out-File $Log -Encoding utf8 -Append
+"===== v6 시작(단일 로고 필터 + 화질 검사)(위키 전체 제외, k=20): $(Get-Date) =====" | Out-File $Log -Encoding utf8 -Append
 $K = 20
 $md5 = [System.Security.Cryptography.MD5]::Create()
 function LogLine([string]$m) { $m | Out-File $Log -Append -Encoding utf8 }
@@ -29,6 +35,47 @@ function Valid-Image([string]$path) {
     if ($head -match '<!DOC|<html') { return $false }
     return $true
   } catch { return $false }
+}
+function Test-CleanLogo([string]$path) {
+  # 로고 하나만 깔끔하게 나오는지 검사: 1) 가로세로비가 콜라주/배너처럼 극단적이지 않은지
+  # 2) 투명 배경이거나(알파채널) 테두리 색이 거의 단색(플랫 배경)인지
+  $ext = [IO.Path]::GetExtension($path).ToLower()
+  if ($ext -eq '.svg') { return $true }  # 벡터 로고(공식 브랜드 에셋)는 신뢰
+  try {
+    $img = [System.Drawing.Image]::FromFile($path)
+    $w = $img.Width; $h = $img.Height; $pf = $img.PixelFormat
+    $bmp = New-Object System.Drawing.Bitmap $img
+    $img.Dispose()
+  } catch { return $false }
+
+  if ($w -lt 32 -or $h -lt 32) { $bmp.Dispose(); return $false }
+  $ratio = [double]$w / [double]$h
+  if ($ratio -gt 5.0 -or $ratio -lt 0.2) { $bmp.Dispose(); return $false }  # 배너/콜라주형 배제
+
+  $pts = @(
+    @(1, 1), @(($w - 2), 1), @(1, ($h - 2)), @(($w - 2), ($h - 2)),
+    @([int]($w / 2), 1), @([int]($w / 2), ($h - 2)), @(1, [int]($h / 2)), @(($w - 2), [int]($h / 2))
+  )
+  $hasAlpha = [System.Drawing.Image]::IsAlphaPixelFormat($pf)
+  if ($hasAlpha) {
+    $transparent = 0
+    foreach ($pt in $pts) { if ($bmp.GetPixel($pt[0], $pt[1]).A -lt 20) { $transparent++ } }
+    $bmp.Dispose()
+    return ($transparent -ge 4)  # 테두리 샘플 절반 이상 투명 = 로고만 분리되어 있음
+  } else {
+    $rs = @(); $gs = @(); $bs = @()
+    foreach ($pt in $pts) { $c = $bmp.GetPixel($pt[0], $pt[1]); $rs += $c.R; $gs += $c.G; $bs += $c.B }
+    $bmp.Dispose()
+    $avgR = ($rs | Measure-Object -Average).Average
+    $avgG = ($gs | Measure-Object -Average).Average
+    $avgB = ($bs | Measure-Object -Average).Average
+    $maxDiff = 0
+    for ($i = 0; $i -lt $rs.Count; $i++) {
+      $d = [Math]::Abs($rs[$i] - $avgR) + [Math]::Abs($gs[$i] - $avgG) + [Math]::Abs($bs[$i] - $avgB)
+      if ($d -gt $maxDiff) { $maxDiff = $d }
+    }
+    return ($maxDiff -lt 45)  # 테두리 색상이 거의 균일 = 깔끔한 단색 배경 (사진 배경이면 편차 큼)
+  }
 }
 function Get-DHash([string]$path) {
   try {
@@ -60,6 +107,7 @@ function Try-Add([string]$url, [string]$path, [hashtable]$hashes, [System.Collec
     Invoke-WebRequest -Uri $url -Headers @{ 'User-Agent' = $UA; 'Accept' = 'image/*,*/*;q=0.8' } -OutFile $path -TimeoutSec 25 -UseBasicParsing | Out-Null
   } catch { Remove-Item $path -Force -ErrorAction SilentlyContinue; return $false }
   if (-not (Valid-Image $path)) { Remove-Item $path -Force -ErrorAction SilentlyContinue; return $false }
+  if (-not (Test-CleanLogo $path)) { Remove-Item $path -Force -ErrorAction SilentlyContinue; return $false }
   $hh = [BitConverter]::ToString($md5.ComputeHash([IO.File]::ReadAllBytes($path)))
   if ($hashes[$hh]) { Remove-Item $path -Force; return $false }
   $dh = Get-DHash $path
@@ -201,8 +249,8 @@ foreach ($line in ($DATA -split "`n")) {
   $p = Join-Path $dir ("{0}_{1}_clearbit.png" -f $tick, $brand)
   if (Try-Add ("https://logo.clearbit.com/{0}?size=512" -f $dom) $p $hashes $dhashes) { $count++; Write-Host "  + clearbit" -ForegroundColor Green }
 
-  # 2) DuckDuckGo 이미지 (쿼리 2종)
-  foreach ($q in @("$tok logo", "$tok logo png transparent")) {
+  # 2) DuckDuckGo 이미지 (투명배경 쿼리 우선, 일반 쿼리는 부족할 때만 보충)
+  foreach ($q in @("$tok logo png transparent", "$tok logo transparent background", "$tok logo")) {
     if ($count -ge $K) { break }
     $h1 = Get-Html ("https://duckduckgo.com/?q=" + [uri]::EscapeDataString($q) + "&iax=images&ia=images")
     $vqd = ''
