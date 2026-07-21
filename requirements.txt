@@ -1,0 +1,9 @@
+FlagEmbedding
+sentence-transformers
+openai
+chromadb
+pandas
+python-dotenv
+requests
+yfinance
+matplotlib
