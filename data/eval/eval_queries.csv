@@ -1,0 +1,81 @@
+id,ticker,company,query_type,query,expected_topic,gold_chunk_id
+1,AAPL,Apple,financial,애플의 최근 분기 매출과 영업이익은 얼마야?,분기 실적(매출·영업이익·순이익) 수치가 포함된 재무제표 섹션,AAPL_financial
+2,AAPL,Apple,news,애플 관련 최근 뉴스 알려줘,최근 발행된 애플 관련 뉴스(신제품·실적발표·규제 이슈 등),AAPL_news
+3,AAPL,Apple,trend,애플의 최근 동향을 요약해줘,재무 실적·주가 흐름·최근 뉴스를 종합한 요약(재무제표+주가+뉴스 청크 모두 relevant),AAPL_trend
+4,MSFT,Microsoft,financial,마이크로소프트의 최근 분기 매출과 영업이익은 얼마야?,분기 실적(매출·영업이익·순이익) 수치가 포함된 재무제표 섹션,MSFT_financial
+5,MSFT,Microsoft,news,마이크로소프트 관련 최근 뉴스 알려줘,최근 발행된 마이크로소프트 관련 뉴스(클라우드·AI·실적발표 등),MSFT_news
+6,MSFT,Microsoft,trend,마이크로소프트의 최근 동향을 요약해줘,재무 실적·주가 흐름·최근 뉴스를 종합한 요약(재무제표+주가+뉴스 청크 모두 relevant),MSFT_trend
+7,NVDA,NVIDIA,financial,엔비디아의 최근 분기 매출과 영업이익은 얼마야?,분기 실적(매출·영업이익·순이익) 수치가 포함된 재무제표 섹션,NVDA_financial
+8,NVDA,NVIDIA,news,엔비디아 관련 최근 뉴스 알려줘,최근 발행된 엔비디아 관련 뉴스(GPU·AI 수요·수출규제 등),NVDA_news
+9,NVDA,NVIDIA,trend,엔비디아의 최근 동향을 요약해줘,재무 실적·주가 흐름·최근 뉴스를 종합한 요약(재무제표+주가+뉴스 청크 모두 relevant),NVDA_trend
+10,AMZN,Amazon,financial,아마존의 최근 분기 매출과 영업이익은 얼마야?,분기 실적(매출·영업이익·순이익) 수치가 포함된 재무제표 섹션,AMZN_financial
+11,AMZN,Amazon,news,아마존 관련 최근 뉴스 알려줘,최근 발행된 아마존 관련 뉴스(AWS·물류·실적발표 등),AMZN_news
+12,AMZN,Amazon,trend,아마존의 최근 동향을 요약해줘,재무 실적·주가 흐름·최근 뉴스를 종합한 요약(재무제표+주가+뉴스 청크 모두 relevant),AMZN_trend
+13,GOOGL,Alphabet,financial,알파벳(구글)의 최근 분기 매출과 영업이익은 얼마야?,분기 실적(매출·영업이익·순이익) 수치가 포함된 재무제표 섹션,GOOGL_financial
+14,GOOGL,Alphabet,news,알파벳(구글) 관련 최근 뉴스 알려줘,최근 발행된 알파벳 관련 뉴스(검색광고·AI·반독점 소송 등),GOOGL_news
+15,GOOGL,Alphabet,trend,알파벳(구글)의 최근 동향을 요약해줘,재무 실적·주가 흐름·최근 뉴스를 종합한 요약(재무제표+주가+뉴스 청크 모두 relevant),GOOGL_trend
+16,META,Meta Platforms,financial,메타의 최근 분기 매출과 영업이익은 얼마야?,분기 실적(매출·영업이익·순이익) 수치가 포함된 재무제표 섹션,META_financial
+17,META,Meta Platforms,news,메타 관련 최근 뉴스 알려줘,최근 발행된 메타 관련 뉴스(광고사업·AI·VR/AR 등),META_news
+18,META,Meta Platforms,trend,메타의 최근 동향을 요약해줘,재무 실적·주가 흐름·최근 뉴스를 종합한 요약(재무제표+주가+뉴스 청크 모두 relevant),META_trend
+19,TSLA,Tesla,financial,테슬라의 최근 분기 매출과 영업이익은 얼마야?,분기 실적(매출·영업이익·순이익) 수치가 포함된 재무제표 섹션,TSLA_financial
+20,TSLA,Tesla,news,테슬라 관련 최근 뉴스 알려줘,최근 발행된 테슬라 관련 뉴스(판매량·신모델·리콜 등),TSLA_news
+21,TSLA,Tesla,trend,테슬라의 최근 동향을 요약해줘,재무 실적·주가 흐름·최근 뉴스를 종합한 요약(재무제표+주가+뉴스 청크 모두 relevant),TSLA_trend
+22,AVGO,Broadcom,financial,브로드컴의 최근 분기 매출과 영업이익은 얼마야?,분기 실적(매출·영업이익·순이익) 수치가 포함된 재무제표 섹션,AVGO_financial
+23,AVGO,Broadcom,news,브로드컴 관련 최근 뉴스 알려줘,최근 발행된 브로드컴 관련 뉴스(반도체·M&A 등),AVGO_news
+24,AVGO,Broadcom,trend,브로드컴의 최근 동향을 요약해줘,재무 실적·주가 흐름·최근 뉴스를 종합한 요약(재무제표+주가+뉴스 청크 모두 relevant),AVGO_trend
+25,NFLX,Netflix,financial,넷플릭스의 최근 분기 매출과 영업이익은 얼마야?,분기 실적(매출·영업이익·순이익) 수치가 포함된 재무제표 섹션,NFLX_financial
+26,NFLX,Netflix,news,넷플릭스 관련 최근 뉴스 알려줘,최근 발행된 넷플릭스 관련 뉴스(구독자수·콘텐츠·요금제 등),NFLX_news
+27,NFLX,Netflix,trend,넷플릭스의 최근 동향을 요약해줘,재무 실적·주가 흐름·최근 뉴스를 종합한 요약(재무제표+주가+뉴스 청크 모두 relevant),NFLX_trend
+28,AMD,Advanced Micro Devices,financial,AMD의 최근 분기 매출과 영업이익은 얼마야?,분기 실적(매출·영업이익·순이익) 수치가 포함된 재무제표 섹션,AMD_financial
+29,AMD,Advanced Micro Devices,news,AMD 관련 최근 뉴스 알려줘,최근 발행된 AMD 관련 뉴스(CPU/GPU 신제품·엔비디아 경쟁 등),AMD_news
+30,AMD,Advanced Micro Devices,trend,AMD의 최근 동향을 요약해줘,재무 실적·주가 흐름·최근 뉴스를 종합한 요약(재무제표+주가+뉴스 청크 모두 relevant),AMD_trend
+31,INTC,Intel,financial,인텔의 최근 분기 매출과 영업이익은 얼마야?,분기 실적(매출·영업이익·순이익) 수치가 포함된 재무제표 섹션,INTC_financial
+32,INTC,Intel,news,인텔 관련 최근 뉴스 알려줘,최근 발행된 인텔 관련 뉴스(파운드리·구조조정·신공장 등),INTC_news
+33,INTC,Intel,trend,인텔의 최근 동향을 요약해줘,재무 실적·주가 흐름·최근 뉴스를 종합한 요약(재무제표+주가+뉴스 청크 모두 relevant),INTC_trend
+34,ADBE,Adobe,financial,어도비의 최근 분기 매출과 영업이익은 얼마야?,분기 실적(매출·영업이익·순이익) 수치가 포함된 재무제표 섹션,ADBE_financial
+35,ADBE,Adobe,news,어도비 관련 최근 뉴스 알려줘,최근 발행된 어도비 관련 뉴스(AI 기능·구독모델·M&A 등),ADBE_news
+36,ADBE,Adobe,trend,어도비의 최근 동향을 요약해줘,재무 실적·주가 흐름·최근 뉴스를 종합한 요약(재무제표+주가+뉴스 청크 모두 relevant),ADBE_trend
+37,CSCO,Cisco,financial,시스코의 최근 분기 매출과 영업이익은 얼마야?,분기 실적(매출·영업이익·순이익) 수치가 포함된 재무제표 섹션,CSCO_financial
+38,CSCO,Cisco,news,시스코 관련 최근 뉴스 알려줘,최근 발행된 시스코 관련 뉴스(네트워크 장비·보안사업 등),CSCO_news
+39,CSCO,Cisco,trend,시스코의 최근 동향을 요약해줘,재무 실적·주가 흐름·최근 뉴스를 종합한 요약(재무제표+주가+뉴스 청크 모두 relevant),CSCO_trend
+40,PEP,PepsiCo,financial,펩시코의 최근 분기 매출과 영업이익은 얼마야?,분기 실적(매출·영업이익·순이익) 수치가 포함된 재무제표 섹션,PEP_financial
+41,PEP,PepsiCo,news,펩시코 관련 최근 뉴스 알려줘,최근 발행된 펩시코 관련 뉴스(음료·스낵사업·실적발표 등),PEP_news
+42,PEP,PepsiCo,trend,펩시코의 최근 동향을 요약해줘,재무 실적·주가 흐름·최근 뉴스를 종합한 요약(재무제표+주가+뉴스 청크 모두 relevant),PEP_trend
+43,COST,Costco,financial,코스트코의 최근 분기 매출과 영업이익은 얼마야?,분기 실적(매출·영업이익·순이익) 수치가 포함된 재무제표 섹션,COST_financial
+44,COST,Costco,news,코스트코 관련 최근 뉴스 알려줘,최근 발행된 코스트코 관련 뉴스(매장확장·회원비·실적발표 등),COST_news
+45,COST,Costco,trend,코스트코의 최근 동향을 요약해줘,재무 실적·주가 흐름·최근 뉴스를 종합한 요약(재무제표+주가+뉴스 청크 모두 relevant),COST_trend
+46,QCOM,Qualcomm,financial,퀄컴의 최근 분기 매출과 영업이익은 얼마야?,분기 실적(매출·영업이익·순이익) 수치가 포함된 재무제표 섹션,QCOM_financial
+47,QCOM,Qualcomm,news,퀄컴 관련 최근 뉴스 알려줘,최근 발행된 퀄컴 관련 뉴스(모바일칩·라이선스분쟁 등),QCOM_news
+48,QCOM,Qualcomm,trend,퀄컴의 최근 동향을 요약해줘,재무 실적·주가 흐름·최근 뉴스를 종합한 요약(재무제표+주가+뉴스 청크 모두 relevant),QCOM_trend
+49,TXN,Texas Instruments,financial,텍사스 인스트루먼트의 최근 분기 매출과 영업이익은 얼마야?,분기 실적(매출·영업이익·순이익) 수치가 포함된 재무제표 섹션,TXN_financial
+50,TXN,Texas Instruments,news,텍사스 인스트루먼트 관련 최근 뉴스 알려줘,최근 발행된 텍사스 인스트루먼트 관련 뉴스(아날로그 반도체·설비투자 등),TXN_news
+51,TXN,Texas Instruments,trend,텍사스 인스트루먼트의 최근 동향을 요약해줘,재무 실적·주가 흐름·최근 뉴스를 종합한 요약(재무제표+주가+뉴스 청크 모두 relevant),TXN_trend
+52,SBUX,Starbucks,financial,스타벅스의 최근 분기 매출과 영업이익은 얼마야?,분기 실적(매출·영업이익·순이익) 수치가 포함된 재무제표 섹션,SBUX_financial
+53,SBUX,Starbucks,news,스타벅스 관련 최근 뉴스 알려줘,최근 발행된 스타벅스 관련 뉴스(동일점포매출·신메뉴·노조 이슈 등),SBUX_news
+54,SBUX,Starbucks,trend,스타벅스의 최근 동향을 요약해줘,재무 실적·주가 흐름·최근 뉴스를 종합한 요약(재무제표+주가+뉴스 청크 모두 relevant),SBUX_trend
+55,AMAT,Applied Materials,financial,어플라이드 머티리얼즈의 최근 분기 매출과 영업이익은 얼마야?,분기 실적(매출·영업이익·순이익) 수치가 포함된 재무제표 섹션,AMAT_financial
+56,AMAT,Applied Materials,news,어플라이드 머티리얼즈 관련 최근 뉴스 알려줘,최근 발행된 어플라이드 머티리얼즈 관련 뉴스(반도체 장비·수출규제 등),AMAT_news
+57,AMAT,Applied Materials,trend,어플라이드 머티리얼즈의 최근 동향을 요약해줘,재무 실적·주가 흐름·최근 뉴스를 종합한 요약(재무제표+주가+뉴스 청크 모두 relevant),AMAT_trend
+58,BKNG,Booking Holdings,financial,부킹홀딩스의 최근 분기 매출과 영업이익은 얼마야?,분기 실적(매출·영업이익·순이익) 수치가 포함된 재무제표 섹션,BKNG_financial
+59,BKNG,Booking Holdings,news,부킹홀딩스 관련 최근 뉴스 알려줘,최근 발행된 부킹홀딩스 관련 뉴스(여행수요·플랫폼 경쟁 등),BKNG_news
+60,BKNG,Booking Holdings,trend,부킹홀딩스의 최근 동향을 요약해줘,재무 실적·주가 흐름·최근 뉴스를 종합한 요약(재무제표+주가+뉴스 청크 모두 relevant),BKNG_trend
+61,AAPL,Apple,price,애플의 최근 주가 흐름을 알려줘,최근 주가 시세/등락률 데이터가 포함된 주가 섹션,AAPL_price
+62,MSFT,Microsoft,price,마이크로소프트의 최근 주가 흐름을 알려줘,최근 주가 시세/등락률 데이터가 포함된 주가 섹션,MSFT_price
+63,NVDA,NVIDIA,price,엔비디아의 최근 주가 흐름을 알려줘,최근 주가 시세/등락률 데이터가 포함된 주가 섹션,NVDA_price
+64,AMZN,Amazon,price,아마존의 최근 주가 흐름을 알려줘,최근 주가 시세/등락률 데이터가 포함된 주가 섹션,AMZN_price
+65,GOOGL,Alphabet,price,알파벳(구글)의 최근 주가 흐름을 알려줘,최근 주가 시세/등락률 데이터가 포함된 주가 섹션,GOOGL_price
+66,META,Meta Platforms,price,메타의 최근 주가 흐름을 알려줘,최근 주가 시세/등락률 데이터가 포함된 주가 섹션,META_price
+67,TSLA,Tesla,price,테슬라의 최근 주가 흐름을 알려줘,최근 주가 시세/등락률 데이터가 포함된 주가 섹션,TSLA_price
+68,AVGO,Broadcom,price,브로드컴의 최근 주가 흐름을 알려줘,최근 주가 시세/등락률 데이터가 포함된 주가 섹션,AVGO_price
+69,NFLX,Netflix,price,넷플릭스의 최근 주가 흐름을 알려줘,최근 주가 시세/등락률 데이터가 포함된 주가 섹션,NFLX_price
+70,AMD,Advanced Micro Devices,price,AMD의 최근 주가 흐름을 알려줘,최근 주가 시세/등락률 데이터가 포함된 주가 섹션,AMD_price
+71,INTC,Intel,price,인텔의 최근 주가 흐름을 알려줘,최근 주가 시세/등락률 데이터가 포함된 주가 섹션,INTC_price
+72,ADBE,Adobe,price,어도비의 최근 주가 흐름을 알려줘,최근 주가 시세/등락률 데이터가 포함된 주가 섹션,ADBE_price
+73,CSCO,Cisco,price,시스코의 최근 주가 흐름을 알려줘,최근 주가 시세/등락률 데이터가 포함된 주가 섹션,CSCO_price
+74,PEP,PepsiCo,price,펩시코의 최근 주가 흐름을 알려줘,최근 주가 시세/등락률 데이터가 포함된 주가 섹션,PEP_price
+75,COST,Costco,price,코스트코의 최근 주가 흐름을 알려줘,최근 주가 시세/등락률 데이터가 포함된 주가 섹션,COST_price
+76,QCOM,Qualcomm,price,퀄컴의 최근 주가 흐름을 알려줘,최근 주가 시세/등락률 데이터가 포함된 주가 섹션,QCOM_price
+77,TXN,Texas Instruments,price,텍사스 인스트루먼트의 최근 주가 흐름을 알려줘,최근 주가 시세/등락률 데이터가 포함된 주가 섹션,TXN_price
+78,SBUX,Starbucks,price,스타벅스의 최근 주가 흐름을 알려줘,최근 주가 시세/등락률 데이터가 포함된 주가 섹션,SBUX_price
+79,AMAT,Applied Materials,price,어플라이드 머티리얼즈의 최근 주가 흐름을 알려줘,최근 주가 시세/등락률 데이터가 포함된 주가 섹션,AMAT_price
+80,BKNG,Booking Holdings,price,부킹홀딩스의 최근 주가 흐름을 알려줘,최근 주가 시세/등락률 데이터가 포함된 주가 섹션,BKNG_price

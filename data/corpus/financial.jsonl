@@ -1,0 +1,20 @@
+{"id": "AAPL_financial", "ticker": "AAPL", "type": "financial", "text": "애플(AAPL)의 2026 Q2 분기 실적: 매출 $111.18B, 영업이익 $35.88B, 순이익 $29.58B (SEC EDGAR 10-Q 기준, 2026-03-28 마감 분기)."}
+{"id": "MSFT_financial", "ticker": "MSFT", "type": "financial", "text": "마이크로소프트(MSFT)의 2026 Q3 분기 실적: 매출 $82.89B, 영업이익 $38.40B, 순이익 $31.78B (SEC EDGAR 10-Q 기준, 2026-03-31 마감 분기)."}
+{"id": "NVDA_financial", "ticker": "NVDA", "type": "financial", "text": "엔비디아(NVDA)의 2027 Q1 분기 실적: 매출 $81.61B, 영업이익 $53.54B, 순이익 $58.32B (SEC EDGAR 10-Q 기준, 2026-04-26 마감 분기)."}
+{"id": "AMZN_financial", "ticker": "AMZN", "type": "financial", "text": "아마존(AMZN)의 2026 Q1 분기 실적: 매출 $181.52B, 영업이익 $23.85B, 순이익 $30.25B (SEC EDGAR 10-Q 기준, 2026-03-31 마감 분기)."}
+{"id": "GOOGL_financial", "ticker": "GOOGL", "type": "financial", "text": "알파벳(구글)(GOOGL)의 2026 Q1 분기 실적: 매출 $109.90B, 영업이익 $39.70B, 순이익 $62.58B (SEC EDGAR 10-Q 기준, 2026-03-31 마감 분기)."}
+{"id": "META_financial", "ticker": "META", "type": "financial", "text": "메타(META)의 2026 Q1 분기 실적: 매출 $56.31B, 영업이익 $22.87B, 순이익 $26.77B (SEC EDGAR 10-Q 기준, 2026-03-31 마감 분기)."}
+{"id": "TSLA_financial", "ticker": "TSLA", "type": "financial", "text": "테슬라(TSLA)의 2026 Q1 분기 실적: 매출 $22.39B, 영업이익 $0.94B, 순이익 $0.48B (SEC EDGAR 10-Q 기준, 2026-03-31 마감 분기)."}
+{"id": "AVGO_financial", "ticker": "AVGO", "type": "financial", "text": "브로드컴(AVGO)의 2026 Q2 분기 실적: 매출 $22.19B, 영업이익 $10.79B, 순이익 $0.71B (SEC EDGAR 10-Q 기준, 2026-05-03 마감 분기)."}
+{"id": "NFLX_financial", "ticker": "NFLX", "type": "financial", "text": "넷플릭스(NFLX)의 2026 Q2 분기 실적: 매출 $12.56B, 영업이익 $4.19B, 순이익 $3.40B (SEC EDGAR 10-Q 기준, 2026-06-30 마감 분기)."}
+{"id": "AMD_financial", "ticker": "AMD", "type": "financial", "text": "AMD(AMD)의 2026 Q1 분기 실적: 매출 $10.25B, 영업이익 $1.48B, 순이익 $1.38B (SEC EDGAR 10-Q 기준, 2026-03-28 마감 분기)."}
+{"id": "INTC_financial", "ticker": "INTC", "type": "financial", "text": "인텔(INTC)의 2026 Q1 분기 실적: 매출 $13.58B, 영업이익 $-3.14B, 순이익 $-3.73B (SEC EDGAR 10-Q 기준, 2026-03-28 마감 분기)."}
+{"id": "ADBE_financial", "ticker": "ADBE", "type": "financial", "text": "어도비(ADBE)의 2026 Q2 분기 실적: 매출 $6.62B, 영업이익 $2.24B, 순이익 $1.71B (SEC EDGAR 10-Q 기준, 2026-05-29 마감 분기)."}
+{"id": "CSCO_financial", "ticker": "CSCO", "type": "financial", "text": "시스코(CSCO)의 2026 Q3 분기 실적: 매출 $15.84B, 영업이익 $3.96B, 순이익 $3.37B (SEC EDGAR 10-Q 기준, 2026-04-25 마감 분기)."}
+{"id": "PEP_financial", "ticker": "PEP", "type": "financial", "text": "펩시코(PEP)의 2026 Q2 분기 실적: 매출 $24.18B, 영업이익 $4.02B, 순이익 $2.98B (SEC EDGAR 10-Q 기준, 2026-06-13 마감 분기)."}
+{"id": "COST_financial", "ticker": "COST", "type": "financial", "text": "코스트코(COST)의 2026 Q3 분기 실적: 매출 $70.53B, 영업이익 $2.81B, 순이익 $2.19B (SEC EDGAR 10-Q 기준, 2026-05-10 마감 분기)."}
+{"id": "QCOM_financial", "ticker": "QCOM", "type": "financial", "text": "퀄컴(QCOM)의 2026 Q2 분기 실적: 매출 $10.60B, 영업이익 $2.31B, 순이익 $7.37B (SEC EDGAR 10-Q 기준, 2026-03-29 마감 분기)."}
+{"id": "TXN_financial", "ticker": "TXN", "type": "financial", "text": "텍사스 인스트루먼트(TXN)의 2026 Q1 분기 실적: 매출 $4.83B, 영업이익 $1.81B, 순이익 $1.54B (SEC EDGAR 10-Q 기준, 2026-03-31 마감 분기)."}
+{"id": "SBUX_financial", "ticker": "SBUX", "type": "financial", "text": "스타벅스(SBUX)의 2026 Q2 분기 실적: 매출 $9.53B, 영업이익 $0.83B, 순이익 $0.51B (SEC EDGAR 10-Q 기준, 2026-03-29 마감 분기)."}
+{"id": "AMAT_financial", "ticker": "AMAT", "type": "financial", "text": "어플라이드 머티리얼즈(AMAT)의 2026 Q2 분기 실적: 매출 $7.91B, 영업이익 $2.52B, 순이익 $2.81B (SEC EDGAR 10-Q 기준, 2026-04-26 마감 분기)."}
+{"id": "BKNG_financial", "ticker": "BKNG", "type": "financial", "text": "부킹홀딩스(BKNG)의 2026 Q1 분기 실적: 매출 $5.53B, 영업이익 $1.27B, 순이익 $0.29B (SEC EDGAR 10-Q 기준, 2026-03-31 마감 분기)."}
