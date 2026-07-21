@@ -25,6 +25,8 @@ from entity_linking import link
 MODELS = {
     "qwen": "Qwen/Qwen2.5-VL-7B-Instruct",
     "llava": "llava-hf/llava-onevision-qwen2-7b-ov-hf",
+    # local_dir download (HF cache symlinks unsupported on this Windows box)
+    "qwen3": os.environ.get("QWEN3_VL_PATH", "Qwen/Qwen3-VL-8B-Instruct"),
 }
 
 PROMPTS = {
