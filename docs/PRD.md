@@ -95,6 +95,22 @@ Advanced RAG              SVG면 래스터 변환
 평가 축(예정): **정확도 · 응답속도(Latency) · 비용 · 도메인 특화(파인튜닝 가능성)**
 — 각 후보를 이 4축으로 채점 후 "최종 선택" 근거를 정량화할 것.
 
+### 5.1 Logo Recognition 평가 지표
+
+VLM(Qwen/LLaVA)은 자유 텍스트 출력이라, 엔티티 링킹으로 정규화(티커 변환) 후 동일 라벨 기준으로 비교.
+
+**① 로고 인지(존재 여부) — YOLO vs Qwen2.5-VL vs LLaVA**
+- Accuracy / Precision / Recall / F1 (이진: 로고 있음/없음), Confusion Matrix
+- PR-AUC (YOLO만 continuous confidence 있어 자연 계산 가능)
+- 지연시간(ms/image)
+- 테스트셋: positive(로고) + negative(로고 없는 이미지) 필수 포함
+
+**② 로고 예측(기업 분류) — ViT vs Qwen2.5-VL vs LLaVA**
+- Top-1 / Top-3 Accuracy (엔티티 링킹 정규화 후)
+- Macro F1 / Precision / Recall (기업당 이미지 수 불균형 대응), Confusion Matrix
+- OOD 기권율 — 스코프 밖(비-NASDAQ100) 이미지에 "모름" 응답하는 비율
+- 지연시간(ms/image)
+
 ## 6. 고도화(Stretch) 아이디어
 
 - 재무제표는 Supabase 관계형 테이블 + Text-to-SQL, 뉴스/서술형 텍스트만 pgvector로 이원화
