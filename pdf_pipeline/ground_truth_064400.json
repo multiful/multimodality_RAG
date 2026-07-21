@@ -1,0 +1,93 @@
+{
+  "source_pdf": "20260721_company_279243000.pdf",
+  "document_summary": "교보증권(KYOBO) LG CNS(064400) 기업분석 리포트, 2026-07-21 발행, BUY/TP 89,000원 유지",
+  "primary_entity": {
+    "name": "LG CNS",
+    "ticker": "064400",
+    "aliases": ["LGCNS", "엘지씨엔에스"],
+    "found_on_pages": [1, 2, 3, 4, 5],
+    "source_type": ["text", "table", "image"],
+    "note": "제목/헤더 텍스트, 모든 표 상단, page1 로고 이미지에 모두 등장 — 반드시 추출되어야 하는 핵심 엔티티"
+  },
+  "related_entities": [
+    {
+      "name": "LG전자",
+      "ticker": "066570",
+      "relation": "계열회사 / 최대 매출처(25.1%) / Physical AI 인프라 계약·N-ERP 계약 상대방",
+      "found_on_pages": [2, 3],
+      "source_type": ["table"],
+      "note": "도표3 파이차트, 도표4 수주공시 표, 도표6 계약공시 표에 반복 등장 — 테이블 라우팅 recall 테스트 핵심"
+    },
+    {
+      "name": "LG화학",
+      "ticker": "051910",
+      "relation": "매출처 (20.1%)",
+      "found_on_pages": [2],
+      "source_type": ["table"],
+      "note": "도표3 파이차트(이미지 성격의 벡터 그래픽)에만 등장 — 이미지/차트 라우팅 recall 테스트"
+    },
+    {
+      "name": "LG유플러스",
+      "ticker": "032640",
+      "relation": "매출처 (5.8%)",
+      "found_on_pages": [2],
+      "source_type": ["table"],
+      "note": "도표3 파이차트에만 등장"
+    },
+    {
+      "name": "네이버클라우드",
+      "ticker": null,
+      "relation": "데이터센터 Co-location 서비스 계약 상대방 (2건)",
+      "found_on_pages": [3],
+      "source_type": ["table"],
+      "note": "비상장 자회사(네이버 035420 산하). 도표4 수주공시 표에만 등장 — 텍스트 본문엔 없음, 테이블 전용 엔티티"
+    },
+    {
+      "name": "우리은행",
+      "ticker": null,
+      "relation": "데이터센터 위탁운영/구축 계약 상대방",
+      "found_on_pages": [3],
+      "source_type": ["table"],
+      "note": "우리금융지주(316140) 자회사, 비상장. 도표4 표에만 등장"
+    },
+    {
+      "name": "NH농협은행",
+      "ticker": null,
+      "relation": "「프로젝트 NEO」계정계 차세대 구축 우선협상대상자 선정",
+      "found_on_pages": [3],
+      "source_type": ["table"],
+      "note": "NH농협금융지주 자회사, 비상장. 도표4 표에만 등장"
+    },
+    {
+      "name": "국민연금공단",
+      "ticker": null,
+      "relation": "LG CNS 주요주주 (6.09%)",
+      "found_on_pages": [1],
+      "source_type": ["text/table (Company Data 박스)"],
+      "note": "기관/기금, 상장기업 아님"
+    },
+    {
+      "name": "교보증권",
+      "ticker": "030610",
+      "relation": "리포트 발행 증권사 (엔티티 대상이 아니라 발행 주체)",
+      "found_on_pages": [1, 2, 3, 4, 5, 6],
+      "source_type": ["image", "text"],
+      "note": "page1 상단 로고 이미지 + 전 페이지 헤더/푸터 텍스트. '분석 대상 기업'이 아니므로 별도 카테고리로 처리 권장"
+    }
+  ],
+  "key_financial_facts_to_preserve": [
+    "투자의견: BUY(매수) 유지 / 목표주가(TP) 89,000원 유지",
+    "현재가(07/20) 61,800원, 시가총액 59,876억원",
+    "2Q26F 매출 1,544십억원(YoY+5.7%), 영업이익 133십억원(YoY-5.7%)",
+    "사업부문 3개: 클라우드&AI / 스마트엔지니어링 / Digital Business Service",
+    "2026F~2028F 매출액 6,516/7,084/7,733십억원, 영업이익 614/674/741십억원 (p.1, p.4 재무제표)",
+    "LG전자 Physical AI 인프라 계약 189,747,247,549원 (2026-08-01~2029-07-31)",
+    "삼송 데이터센터 Co-location 계약 603,000,000,000원 (네이버클라우드, ~2035-05-31)"
+  ],
+  "entity_recall_target_set": [
+    "LG CNS", "064400",
+    "LG전자", "LG화학", "LG유플러스",
+    "네이버클라우드", "우리은행", "NH농협은행",
+    "국민연금공단", "교보증권"
+  ]
+}
