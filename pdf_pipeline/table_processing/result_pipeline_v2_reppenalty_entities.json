@@ -1,0 +1,31 @@
+{
+  "recall": 0.9,
+  "hits": [
+    "LG CNS",
+    "064400",
+    "LG전자",
+    "LG화학",
+    "LG유플러스",
+    "네이버클라우드",
+    "NH농협은행",
+    "국민연금공단",
+    "교보증권"
+  ],
+  "misses": [
+    "우리은행"
+  ],
+  "precision_approx": 0.8333,
+  "f1_approx": 0.8654,
+  "docling_table_stage_s": 11.422,
+  "entity_extract_stage_s": 695.524,
+  "classify_text_image_stage_s": 390.57,
+  "total_pipeline_s": 1097.51,
+  "per_page_entities": {
+    "1": "LG CNS (064400), 국민연금공단, LG, LG CNS",
+    "2": "LG CNS (064400), 업계, 엑소, 엣지, 엘지전자, 엘지화학, 엘지유플러스, 기타 특수관계자, 대외고객",
+    "3": "LG CNS (064400), LG전자, NH농협은행, 네이버 클라우드, 고양 삼송 데이터센터, 죽전데이터센터, LG CNS, LG CNS, LG CNS, LG CNS, LG CNS, LG CNS, LG CNS, LG CNS, LG CNS, LG CNS, LG CNS, LG CNS, LG CNS, LG CNS, LG CNS, LG CNS, LG CNS, LG CNS, LG CNS, LG CNS, LG CNS, LG CNS, LG CNS, LG CNS, LG CNS, LG CNS, LG CNS, LG CNS, LG CNS, LG CNS, LG CNS, LG CNS, LG CNS, LG CNS, LG CNS, LG CNS, LG CNS, LG CNS, LG CNS, LG CNS, LG CNS, LG CNS, LG CNS, LG CNS, LG CNS, LG CNS, LG CNS, LG CNS, LG CNS, LG CNS, LG CNS, LG CNS,",
+    "4": "LG CNS (064400), 교보증권 리서치 센터",
+    "5": "LG CNS (064400), 교보증권 리서치 센터",
+    "6": "LG CNS (064400), Research Center"
+  }
+}

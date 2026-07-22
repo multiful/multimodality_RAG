@@ -1,0 +1,74 @@
+{
+  "n_crops": 13,
+  "n_workers": 8,
+  "wall_clock_s": 5.638,
+  "total_rows": 149,
+  "zero_row_count": 3,
+  "per_crop": [
+    {
+      "file": "page_1_table_9.png",
+      "elapsed_s": 0.812,
+      "n_rows": 0
+    },
+    {
+      "file": "page_1_table_5.png",
+      "elapsed_s": 1.6,
+      "n_rows": 0
+    },
+    {
+      "file": "page_3_table_4.png",
+      "elapsed_s": 3.027,
+      "n_rows": 10
+    },
+    {
+      "file": "page_1_table_2.png",
+      "elapsed_s": 3.459,
+      "n_rows": 12
+    },
+    {
+      "file": "page_3_table_0.png",
+      "elapsed_s": 3.505,
+      "n_rows": 9
+    },
+    {
+      "file": "page_6_table_8.png",
+      "elapsed_s": 0.25,
+      "n_rows": 0
+    },
+    {
+      "file": "page_4_table_4.png",
+      "elapsed_s": 2.34,
+      "n_rows": 10
+    },
+    {
+      "file": "page_5_table_3.png",
+      "elapsed_s": 1.475,
+      "n_rows": 3
+    },
+    {
+      "file": "page_4_table_5.png",
+      "elapsed_s": 2.147,
+      "n_rows": 9
+    },
+    {
+      "file": "page_4_table_0.png",
+      "elapsed_s": 5.174,
+      "n_rows": 25
+    },
+    {
+      "file": "page_2_table_0.png",
+      "elapsed_s": 5.505,
+      "n_rows": 14
+    },
+    {
+      "file": "page_4_table_1.png",
+      "elapsed_s": 5.352,
+      "n_rows": 28
+    },
+    {
+      "file": "page_4_table_2.png",
+      "elapsed_s": 4.824,
+      "n_rows": 29
+    }
+  ]
+}

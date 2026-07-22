@@ -1,0 +1,217 @@
+{
+  "method": "PyMuPDF Fast Scan + YOLOv11 Crop (Armaggheddon/yolo11-document-layout, nano, DocLayNet)",
+  "yolo_model_load_ms": 16.31,
+  "per_label": {
+    "has_text": {
+      "tp": 6,
+      "fp": 0,
+      "fn": 0,
+      "tn": 0,
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "has_table": {
+      "tp": 6,
+      "fp": 0,
+      "fn": 0,
+      "tn": 0,
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "has_image": {
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "tn": 2,
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    }
+  },
+  "overall_label_accuracy": 1.0,
+  "exact_match_page_accuracy": 1.0,
+  "avg_latency_ms_per_page": 212.195,
+  "total_latency_ms_6pages": 1273.17,
+  "predictions": {
+    "1": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "2": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "3": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "4": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": false
+    },
+    "5": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "6": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": false
+    }
+  },
+  "per_page_latency_ms": {
+    "1": 301.7,
+    "2": 181.55,
+    "3": 124.02,
+    "4": 398.4,
+    "5": 117.98,
+    "6": 149.52
+  },
+  "detections": {
+    "1": {
+      "classes_found": [
+        "Text",
+        "Text",
+        "Table",
+        "Text",
+        "Picture",
+        "Page-header",
+        "Text",
+        "Table",
+        "Text",
+        "Picture",
+        "Section-header",
+        "Section-header",
+        "Page-header",
+        "Text",
+        "Section-header",
+        "Picture",
+        "Caption",
+        "Section-header",
+        "Section-header",
+        "Section-header",
+        "Page-header",
+        "Text",
+        "Section-header",
+        "Table"
+      ],
+      "table_crops": [
+        "pdf_pipeline/page_classification/table_crops/page_1_table_2.png",
+        "pdf_pipeline/page_classification/table_crops/page_1_table_7.png",
+        "pdf_pipeline/page_classification/table_crops/page_1_table_23.png"
+      ]
+    },
+    "2": {
+      "classes_found": [
+        "Table",
+        "Page-header",
+        "Picture",
+        "Page-footer",
+        "Section-header",
+        "Section-header",
+        "Page-header",
+        "Section-header",
+        "Section-header",
+        "Section-header",
+        "Picture",
+        "Picture"
+      ],
+      "table_crops": [
+        "pdf_pipeline/page_classification/table_crops/page_2_table_0.png"
+      ]
+    },
+    "3": {
+      "classes_found": [
+        "Table",
+        "Page-header",
+        "Picture",
+        "Page-footer",
+        "Table",
+        "Section-header",
+        "Section-header",
+        "Page-header",
+        "Section-header",
+        "Section-header",
+        "Section-header"
+      ],
+      "table_crops": [
+        "pdf_pipeline/page_classification/table_crops/page_3_table_0.png",
+        "pdf_pipeline/page_classification/table_crops/page_3_table_4.png"
+      ]
+    },
+    "4": {
+      "classes_found": [
+        "Table",
+        "Page-header",
+        "Table",
+        "Table",
+        "Page-footer",
+        "Text",
+        "Text",
+        "Section-header",
+        "Section-header",
+        "Page-header",
+        "Table",
+        "Table",
+        "Table"
+      ],
+      "table_crops": [
+        "pdf_pipeline/page_classification/table_crops/page_4_table_0.png",
+        "pdf_pipeline/page_classification/table_crops/page_4_table_2.png",
+        "pdf_pipeline/page_classification/table_crops/page_4_table_3.png",
+        "pdf_pipeline/page_classification/table_crops/page_4_table_10.png",
+        "pdf_pipeline/page_classification/table_crops/page_4_table_11.png",
+        "pdf_pipeline/page_classification/table_crops/page_4_table_12.png"
+      ]
+    },
+    "5": {
+      "classes_found": [
+        "Picture",
+        "Page-header",
+        "Table",
+        "Page-footer",
+        "Page-footer",
+        "Page-header",
+        "Section-header"
+      ],
+      "table_crops": [
+        "pdf_pipeline/page_classification/table_crops/page_5_table_2.png"
+      ]
+    },
+    "6": {
+      "classes_found": [
+        "Text",
+        "Text",
+        "Text",
+        "Page-header",
+        "Table",
+        "List-item",
+        "List-item",
+        "Section-header",
+        "Page-footer",
+        "Text",
+        "List-item",
+        "List-item",
+        "Text",
+        "Section-header",
+        "List-item",
+        "Text",
+        "List-item",
+        "Page-header"
+      ],
+      "table_crops": [
+        "pdf_pipeline/page_classification/table_crops/page_6_table_4.png"
+      ]
+    }
+  }
+}

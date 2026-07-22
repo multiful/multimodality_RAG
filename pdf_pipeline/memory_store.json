@@ -111,5 +111,59 @@
         "- LG CNS [064400]\n- Compliance Notice: 94.7%\n- Trading Buy(예수): 4.6%\n- Hold(보유): 0.7%\n- Sell(매도): 0.0%\n- Overweight(과중확률): 50%\n- Underweight(미중확률): 50%\n- Trading Buy: 10% 이상 초과수익이 예상되거나 불확실성 높은 경우\n- Hold: 10% 이하\n- Sell: 10% 이하"
       ]
     }
-  ]
+  ],
+  "timing": {
+    "model_load_s": 13.67,
+    "pages": [
+      {
+        "page": 1,
+        "classify_s": 0.302,
+        "text_extract_s": 0.0,
+        "table_extract_s": 0.011,
+        "image_vlm_s": 67.954,
+        "page_total_s": 68.267
+      },
+      {
+        "page": 2,
+        "classify_s": 0.46,
+        "text_extract_s": 0.0,
+        "table_extract_s": 0.009,
+        "image_vlm_s": 63.019,
+        "page_total_s": 63.488
+      },
+      {
+        "page": 3,
+        "classify_s": 0.168,
+        "text_extract_s": 0.0,
+        "table_extract_s": 0.0,
+        "image_vlm_s": 66.082,
+        "page_total_s": 66.25
+      },
+      {
+        "page": 4,
+        "classify_s": 0.465,
+        "text_extract_s": 0.0,
+        "table_extract_s": 0.008,
+        "image_vlm_s": 67.552,
+        "page_total_s": 68.025
+      },
+      {
+        "page": 5,
+        "classify_s": 0.144,
+        "text_extract_s": 0.0,
+        "table_extract_s": 0.002,
+        "image_vlm_s": 62.61,
+        "page_total_s": 62.756
+      },
+      {
+        "page": 6,
+        "classify_s": 0.172,
+        "text_extract_s": 0.0,
+        "table_extract_s": 0.01,
+        "image_vlm_s": 47.969,
+        "page_total_s": 48.151
+      }
+    ],
+    "total_pipeline_s": 390.61
+  }
 }

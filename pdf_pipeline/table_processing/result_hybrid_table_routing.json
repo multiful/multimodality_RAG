@@ -1,0 +1,90 @@
+{
+  "method": "YOLOv11 Crop + 표 크기 라우팅(<550px pdfplumber / >= Docling 동적병렬)",
+  "small_table_count": 9,
+  "large_table_count": 5,
+  "n_docling_workers_used": 5,
+  "small_pdfplumber_elapsed_s": 0.949,
+  "large_docling_elapsed_s": 8.471,
+  "total_elapsed_s": 9.42,
+  "total_rows_extracted": 192,
+  "small_results": [
+    {
+      "page": 1,
+      "height_px": 277.0072021484375,
+      "n_rows": 12
+    },
+    {
+      "page": 1,
+      "height_px": 362.8026123046875,
+      "n_rows": 0
+    },
+    {
+      "page": 1,
+      "height_px": 84.63803100585938,
+      "n_rows": 0
+    },
+    {
+      "page": 2,
+      "height_px": 530.2975769042969,
+      "n_rows": 8
+    },
+    {
+      "page": 3,
+      "height_px": 399.2869873046875,
+      "n_rows": 0
+    },
+    {
+      "page": 3,
+      "height_px": 313.1146240234375,
+      "n_rows": 0
+    },
+    {
+      "page": 4,
+      "height_px": 264.21771240234375,
+      "n_rows": 1
+    },
+    {
+      "page": 5,
+      "height_px": 340.457763671875,
+      "n_rows": 2
+    },
+    {
+      "page": 6,
+      "height_px": 39.975830078125,
+      "n_rows": 2
+    }
+  ],
+  "large_results": [
+    {
+      "file": "page_4_table_11.png",
+      "elapsed_s": 3.809,
+      "n_rows": 25
+    },
+    {
+      "file": "page_4_table_0.png",
+      "elapsed_s": 4.005,
+      "n_rows": 28
+    },
+    {
+      "file": "page_4_table_3.png",
+      "elapsed_s": 4.129,
+      "n_rows": 29
+    },
+    {
+      "file": "page_4_table_2.png",
+      "elapsed_s": 5.766,
+      "n_rows": 25
+    },
+    {
+      "file": "page_4_table_12.png",
+      "elapsed_s": 8.379,
+      "n_rows": 60
+    }
+  ],
+  "comparison_vs_all_docling_parallel": {
+    "all_docling_parallel_s": 10.649,
+    "all_docling_parallel_rows": 240,
+    "hybrid_s": 9.42,
+    "hybrid_rows": 192
+  }
+}

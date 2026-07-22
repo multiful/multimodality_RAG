@@ -18,3 +18,11 @@ pillow>=11.3.0
 pdfplumber
 pymupdf
 rank-bm25
+docling
+ultralytics
+# 아래 3개는 Unstructured(Hi-Res) 비교실험용 — 최종 채택 파이프라인에는 미포함(속도 문제로 탈락).
+# unstructured[pdf] 자체는 pi-heif가 libheif 네이티브 라이브러리 없이 빌드 실패하니, pip install 전에
+# site-packages에 더미 pi_heif 모듈(register_heif_opener 빈 함수)을 만들어 import만 통과시켜야 함.
+unstructured
+paddlepaddle
+unstructured_paddleocr

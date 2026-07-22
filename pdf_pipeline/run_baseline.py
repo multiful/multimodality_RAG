@@ -1,5 +1,5 @@
-"""PDF 페이지 라우팅 베이스라인: 이미지/텍스트/테이블 각각 최소 구현으로 처리 후
-엔티티를 추출하고, ground_truth_*.json 대비 recall을 측정한다.
+"""PDF 페이지 라우팅 베이스라인: 이미지/텍스트/테이블 각각 최소 구현으로 처리해
+memory_store.json(+ 페이지·단계별 소요시간)을 만든다.
 
 - 텍스트: pdfplumber 텍스트 추출 (BGE-M3/BM25 인덱싱은 DB가 없는 현재 단계라 생략,
   엔티티 추출에 필요한 원문만 사용)
@@ -7,11 +7,13 @@
 - 이미지: 임베디드 래스터 이미지 유무 또는 벡터 드로잉(차트) 밀도로 판별 →
   해당 페이지 렌더링본을 Qwen2.5-VL로 설명/엔티티 추출
 - 이미지·테이블에서 나온 내용은 memory_store.json에 저장해 추후 LLM 답변 생성 시 같이 제공
-- 엔티티 추출은 페이지별 결과를 모두 합쳐 Qwen2.5-VL(텍스트 전용 프롬프트) 1회 호출로 수행
+
+엔티티 추출/recall/precision/latency 집계는 extract_entities_and_eval.py에서 이어서 수행
+(긴 컨텍스트를 한 번에 넣으면 MPS OOM이 나서 페이지 단위로 분리했음).
 """
 
 import json
-import re
+import time
 from pathlib import Path
 from typing import Optional
 
@@ -22,14 +24,11 @@ from PIL import Image
 from transformers import AutoProcessor, Qwen2_5_VLForConditionalGeneration
 
 ROOT = Path(__file__).resolve().parent.parent
-PDF_PATH = ROOT / "20260721_company_279243000.pdf"
+PDF_PATH = ROOT / "pdf_pipeline" / "reference" / "20260721_company_279243000.pdf"
 MODEL_PATH = ROOT / "models" / "Qwen2.5-VL-7B-Instruct"
 OUT_DIR = Path(__file__).resolve().parent
 PAGE_IMG_DIR = OUT_DIR / "rendered_pages"
-GROUND_TRUTH_PATH = OUT_DIR / "ground_truth_064400.json"
 MEMORY_PATH = OUT_DIR / "memory_store.json"
-ENTITIES_PATH = OUT_DIR / "extracted_entities.json"
-REPORT_PATH = OUT_DIR / "recall_report.md"
 
 VECTOR_DRAWING_THRESHOLD = 40  # 이 이상이면 차트/그래픽으로 간주(휴리스틱, 고도화 시 조정 대상)
 MAX_IMG_SIDE = 900  # VLM 입력 리사이즈 상한 — 원본 150dpi 풀페이지를 그대로 넣으면 추론이 극도로 느려짐
@@ -103,35 +102,44 @@ def main():
     PAGE_IMG_DIR.mkdir(exist_ok=True)
 
     doc_fitz = fitz.open(str(PDF_PATH))
-    memory = {"pages": []}
-    all_text_parts = []
+    memory = {"pages": [], "timing": {"model_load_s": None, "pages": []}}
 
+    t0 = time.time()
     model, processor, device = load_model()
+    memory["timing"]["model_load_s"] = round(time.time() - t0, 2)
+    print(f"[timing] model load: {memory['timing']['model_load_s']}s", flush=True)
 
     with pdfplumber.open(str(PDF_PATH)) as pdf:
         for i, (page_pp, page_fz) in enumerate(zip(pdf.pages, doc_fitz), start=1):
             print(f"\n=== page {i} ===", flush=True)
+            page_timing = {"page": i}
+
+            t = time.time()
             cls = classify_page(page_pp, page_fz)
-            print(f"  classify: {cls}", flush=True)
+            page_timing["classify_s"] = round(time.time() - t, 3)
+            print(f"  classify: {cls}  ({page_timing['classify_s']}s)", flush=True)
 
             page_record = {"page": i, "classification": cls, "text": "", "tables_markdown": [], "image_descriptions": []}
 
             # 텍스트 라우팅 (baseline: pdfplumber 텍스트 추출)
+            t = time.time()
             if cls["has_text"]:
                 text = page_pp.extract_text() or ""
                 page_record["text"] = text
-                all_text_parts.append(f"[p.{i} 텍스트]\n{text}")
+            page_timing["text_extract_s"] = round(time.time() - t, 3)
 
             # 테이블 라우팅 (baseline: pdfplumber table 추출 → markdown)
+            t = time.time()
             if cls["has_table"]:
                 for t_idx, table in enumerate(page_pp.extract_tables(), start=1):
                     md = table_to_markdown(table)
                     if md:
                         page_record["tables_markdown"].append(md)
-                        all_text_parts.append(f"[p.{i} 표{t_idx}]\n{md}")
                         print(f"  table {t_idx}: {len(table)} rows extracted", flush=True)
+            page_timing["table_extract_s"] = round(time.time() - t, 3)
 
             # 이미지 라우팅 (baseline: 페이지 렌더링본을 VLM으로 설명/엔티티 추출)
+            t = time.time()
             if cls["has_image"]:
                 pix = page_fz.get_pixmap(dpi=150)
                 img_path = PAGE_IMG_DIR / f"page_{i}.png"
@@ -146,69 +154,29 @@ def main():
                     max_new_tokens=300,
                 )
                 page_record["image_descriptions"].append(desc)
-                all_text_parts.append(f"[p.{i} 이미지/차트 설명]\n{desc}")
                 print(f"  image desc: {desc[:120]}...", flush=True)
+            page_timing["image_vlm_s"] = round(time.time() - t, 3)
+
+            page_timing["page_total_s"] = round(
+                page_timing["classify_s"] + page_timing["text_extract_s"]
+                + page_timing["table_extract_s"] + page_timing["image_vlm_s"], 3
+            )
+            print(f"  [timing] page {i} total: {page_timing['page_total_s']}s "
+                  f"(classify {page_timing['classify_s']}s / text {page_timing['text_extract_s']}s / "
+                  f"table {page_timing['table_extract_s']}s / image {page_timing['image_vlm_s']}s)", flush=True)
 
             memory["pages"].append(page_record)
+            memory["timing"]["pages"].append(page_timing)
 
     doc_fitz.close()
 
+    memory["timing"]["total_pipeline_s"] = round(
+        memory["timing"]["model_load_s"] + sum(p["page_total_s"] for p in memory["timing"]["pages"]), 2
+    )
+
     MEMORY_PATH.write_text(json.dumps(memory, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"\n[memory] saved to {MEMORY_PATH}", flush=True)
-
-    # 엔티티 추출 (baseline: 전체 페이지 결과를 합쳐 1회 LLM 호출)
-    full_context = "\n\n".join(all_text_parts)
-    entity_prompt = (
-        "다음은 한 증권사 기업분석 리포트에서 텍스트/표/이미지·차트로부터 추출한 내용입니다. "
-        "이 문서에 등장하는 모든 '기업/기관 엔티티'를 빠짐없이 나열하세요. "
-        "표 안에서만 언급된 계약 상대방 기업, 차트 범례/파이차트에만 나온 기업도 반드시 포함하세요. "
-        "형식: 한 줄에 하나씩 '기업명 (알고 있다면 종목코드)' 형태로만 출력하고 다른 설명은 하지 마세요.\n\n"
-        f"{full_context}"
-    )
-    print("\n[entity extraction] running over aggregated context "
-          f"({len(full_context)} chars)...", flush=True)
-    entity_raw = vlm_generate(model, processor, device, entity_prompt, image=None, max_new_tokens=500)
-    print(f"[entity extraction] raw output:\n{entity_raw}", flush=True)
-
-    ENTITIES_PATH.write_text(entity_raw, encoding="utf-8")
-
-    # Recall 평가
-    ground_truth = json.loads(GROUND_TRUTH_PATH.read_text(encoding="utf-8"))
-    target_set = ground_truth["entity_recall_target_set"]
-    extracted_lower = entity_raw.lower()
-
-    hits, misses = [], []
-    for ent in target_set:
-        norm = ent.lower().replace(" ", "")
-        if norm in extracted_lower.replace(" ", ""):
-            hits.append(ent)
-        else:
-            misses.append(ent)
-
-    recall = len(hits) / len(target_set)
-    report_lines = [
-        "# Baseline 엔티티 Recall 리포트",
-        "",
-        f"- 대상 문서: {PDF_PATH.name}",
-        f"- 정답 엔티티 수: {len(target_set)}",
-        f"- 추출 성공(hit): {len(hits)}",
-        f"- 누락(miss): {len(misses)}",
-        f"- **Recall: {recall:.1%}**",
-        "",
-        "## Hit",
-        *[f"- {h}" for h in hits],
-        "",
-        "## Miss",
-        *[f"- {m}" for m in misses],
-        "",
-        "## 추출된 원본 엔티티 리스트 (LLM 출력)",
-        "```",
-        entity_raw,
-        "```",
-    ]
-    REPORT_PATH.write_text("\n".join(report_lines), encoding="utf-8")
-    print(f"\n[recall] {recall:.1%} ({len(hits)}/{len(target_set)})", flush=True)
-    print(f"[report] saved to {REPORT_PATH}", flush=True)
+    print(f"[timing] total (model load + all pages): {memory['timing']['total_pipeline_s']}s", flush=True)
 
 
 if __name__ == "__main__":

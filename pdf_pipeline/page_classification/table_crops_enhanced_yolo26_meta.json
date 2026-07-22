@@ -1,0 +1,269 @@
+{
+  "pdf_pipeline/page_classification/table_crops_enhanced_yolo26/page_1_table_1.png": {
+    "page": 1,
+    "table_idx": 1,
+    "table_bbox_150dpi_px": [
+      448.34027099609375,
+      1414.2855224609375,
+      1147.9615478515625,
+      1689.0341796875
+    ],
+    "padded_bbox_150dpi_px": [
+      436.34027099609375,
+      1379.2855224609375,
+      1159.9615478515625,
+      1701.0341796875
+    ],
+    "caption_bbox_150dpi_px": null,
+    "caption_distance_px": 203.7,
+    "render_dpi": 300
+  },
+  "pdf_pipeline/page_classification/table_crops_enhanced_yolo26/page_1_table_2.png": {
+    "page": 1,
+    "table_idx": 2,
+    "table_bbox_150dpi_px": [
+      98.72628784179688,
+      540.905517578125,
+      385.9692077636719,
+      879.2702026367188
+    ],
+    "padded_bbox_150dpi_px": [
+      86.72628784179688,
+      505.905517578125,
+      397.9692077636719,
+      891.2702026367188
+    ],
+    "caption_bbox_150dpi_px": [
+      96.16605377197266,
+      516.3489379882812,
+      243.73513793945312,
+      535.5746459960938
+    ],
+    "caption_distance_px": 72.6,
+    "render_dpi": 300
+  },
+  "pdf_pipeline/page_classification/table_crops_enhanced_yolo26/page_1_table_3.png": {
+    "page": 1,
+    "table_idx": 3,
+    "table_bbox_150dpi_px": [
+      94.56797790527344,
+      1132.9248046875,
+      382.7360534667969,
+      1198.76171875
+    ],
+    "padded_bbox_150dpi_px": [
+      82.56797790527344,
+      1097.9248046875,
+      394.7360534667969,
+      1210.76171875
+    ],
+    "caption_bbox_150dpi_px": null,
+    "caption_distance_px": 202.9,
+    "render_dpi": 300
+  },
+  "pdf_pipeline/page_classification/table_crops_enhanced_yolo26/page_2_table_1.png": {
+    "page": 2,
+    "table_idx": 1,
+    "table_bbox_150dpi_px": [
+      152.8468017578125,
+      254.3933563232422,
+      1108.019775390625,
+      781.098388671875
+    ],
+    "padded_bbox_150dpi_px": [
+      140.8468017578125,
+      219.3933563232422,
+      1120.019775390625,
+      793.098388671875
+    ],
+    "caption_bbox_150dpi_px": null,
+    "caption_distance_px": 414.2,
+    "render_dpi": 300
+  },
+  "pdf_pipeline/page_classification/table_crops_enhanced_yolo26/page_3_table_1.png": {
+    "page": 3,
+    "table_idx": 1,
+    "table_bbox_150dpi_px": [
+      152.77349853515625,
+      271.13702392578125,
+      1099.468017578125,
+      660.2160034179688
+    ],
+    "padded_bbox_150dpi_px": [
+      140.77349853515625,
+      236.13702392578125,
+      1111.468017578125,
+      672.2160034179688
+    ],
+    "caption_bbox_150dpi_px": null,
+    "caption_distance_px": 295.2,
+    "render_dpi": 300
+  },
+  "pdf_pipeline/page_classification/table_crops_enhanced_yolo26/page_3_table_2.png": {
+    "page": 3,
+    "table_idx": 2,
+    "table_bbox_150dpi_px": [
+      656.2542724609375,
+      799.1824340820312,
+      1102.39892578125,
+      1105.902587890625
+    ],
+    "padded_bbox_150dpi_px": [
+      644.2542724609375,
+      764.1824340820312,
+      1114.39892578125,
+      1117.902587890625
+    ],
+    "caption_bbox_150dpi_px": [
+      649.22314453125,
+      759.7450561523438,
+      952.7264404296875,
+      778.29052734375
+    ],
+    "caption_distance_px": 81.1,
+    "render_dpi": 300
+  },
+  "pdf_pipeline/page_classification/table_crops_enhanced_yolo26/page_4_table_1.png": {
+    "page": 4,
+    "table_idx": 1,
+    "table_bbox_150dpi_px": [
+      129.3658447265625,
+      961.0157470703125,
+      619.18017578125,
+      1534.1781005859375
+    ],
+    "padded_bbox_150dpi_px": [
+      117.3658447265625,
+      926.0157470703125,
+      631.18017578125,
+      1546.1781005859375
+    ],
+    "caption_bbox_150dpi_px": null,
+    "caption_distance_px": 691.5,
+    "render_dpi": 300
+  },
+  "pdf_pipeline/page_classification/table_crops_enhanced_yolo26/page_4_table_2.png": {
+    "page": 4,
+    "table_idx": 2,
+    "table_bbox_150dpi_px": [
+      129.27767944335938,
+      270.2444763183594,
+      618.1892700195312,
+      922.9014892578125
+    ],
+    "padded_bbox_150dpi_px": [
+      117.27767944335938,
+      235.24447631835938,
+      630.1892700195312,
+      934.9014892578125
+    ],
+    "caption_bbox_150dpi_px": [
+      136.74435424804688,
+      248.2384033203125,
+      269.5506591796875,
+      265.8927307128906
+    ],
+    "caption_distance_px": 170.6,
+    "render_dpi": 300
+  },
+  "pdf_pipeline/page_classification/table_crops_enhanced_yolo26/page_4_table_3.png": {
+    "page": 4,
+    "table_idx": 3,
+    "table_bbox_150dpi_px": [
+      642.4767456054688,
+      269.6959533691406,
+      1139.8924560546875,
+      943.5040283203125
+    ],
+    "padded_bbox_150dpi_px": [
+      630.4767456054688,
+      234.69595336914062,
+      1151.8924560546875,
+      955.5040283203125
+    ],
+    "caption_bbox_150dpi_px": null,
+    "caption_distance_px": 670.0,
+    "render_dpi": 300
+  },
+  "pdf_pipeline/page_classification/table_crops_enhanced_yolo26/page_4_table_4.png": {
+    "page": 4,
+    "table_idx": 4,
+    "table_bbox_150dpi_px": [
+      643.1836547851562,
+      961.0711059570312,
+      1137.6959228515625,
+      1223.0322265625
+    ],
+    "padded_bbox_150dpi_px": [
+      631.1836547851562,
+      926.0711059570312,
+      1149.6959228515625,
+      1235.0322265625
+    ],
+    "caption_bbox_150dpi_px": null,
+    "caption_distance_px": 700.5,
+    "render_dpi": 300
+  },
+  "pdf_pipeline/page_classification/table_crops_enhanced_yolo26/page_4_table_5.png": {
+    "page": 4,
+    "table_idx": 5,
+    "table_bbox_150dpi_px": [
+      644.8513793945312,
+      1240.690673828125,
+      1137.51416015625,
+      1541.2779541015625
+    ],
+    "padded_bbox_150dpi_px": [
+      632.8513793945312,
+      1205.690673828125,
+      1149.51416015625,
+      1553.2779541015625
+    ],
+    "caption_bbox_150dpi_px": null,
+    "caption_distance_px": 971.4,
+    "render_dpi": 300
+  },
+  "pdf_pipeline/page_classification/table_crops_enhanced_yolo26/page_5_table_1.png": {
+    "page": 5,
+    "table_idx": 1,
+    "table_bbox_150dpi_px": [
+      144.03524780273438,
+      751.6993408203125,
+      1131.7237548828125,
+      1113.790771484375
+    ],
+    "padded_bbox_150dpi_px": [
+      132.03524780273438,
+      716.6993408203125,
+      1143.7237548828125,
+      1125.790771484375
+    ],
+    "caption_bbox_150dpi_px": null,
+    "caption_distance_px": null,
+    "render_dpi": 300
+  },
+  "pdf_pipeline/page_classification/table_crops_enhanced_yolo26/page_6_table_1.png": {
+    "page": 6,
+    "table_idx": 1,
+    "table_bbox_150dpi_px": [
+      177.0323944091797,
+      1318.856689453125,
+      927.8121337890625,
+      1356.4969482421875
+    ],
+    "padded_bbox_150dpi_px": [
+      165.0323944091797,
+      1283.856689453125,
+      939.8121337890625,
+      1368.4969482421875
+    ],
+    "caption_bbox_150dpi_px": [
+      147.9515838623047,
+      1287.7003173828125,
+      592.07958984375,
+      1305.7459716796875
+    ],
+    "caption_distance_px": 182.9,
+    "render_dpi": 300
+  }
+}

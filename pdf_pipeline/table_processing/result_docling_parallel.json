@@ -1,0 +1,100 @@
+{
+  "method": "PyMuPDF Fast Scan + YOLOv11 Crop + Docling(TableFormer), 프로세스 병렬(worker=8, 워커당 모델 1회 로딩+재사용)",
+  "n_workers": 8,
+  "wall_clock_s_incl_pool_startup": 10.626,
+  "total_rows_extracted": 240,
+  "per_crop": [
+    {
+      "file": "page_1_table_23.png",
+      "elapsed_s": 0.293,
+      "n_rows": 0,
+      "n_tables": 0
+    },
+    {
+      "file": "page_1_table_7.png",
+      "elapsed_s": 1.908,
+      "n_rows": 14,
+      "n_tables": 1
+    },
+    {
+      "file": "page_1_table_2.png",
+      "elapsed_s": 2.725,
+      "n_rows": 12,
+      "n_tables": 1
+    },
+    {
+      "file": "page_3_table_4.png",
+      "elapsed_s": 2.726,
+      "n_rows": 11,
+      "n_tables": 1
+    },
+    {
+      "file": "page_3_table_0.png",
+      "elapsed_s": 3.21,
+      "n_rows": 9,
+      "n_tables": 1
+    },
+    {
+      "file": "page_4_table_10.png",
+      "elapsed_s": 3.135,
+      "n_rows": 10,
+      "n_tables": 1
+    },
+    {
+      "file": "page_6_table_4.png",
+      "elapsed_s": 0.384,
+      "n_rows": 0,
+      "n_tables": 0
+    },
+    {
+      "file": "page_5_table_2.png",
+      "elapsed_s": 1.632,
+      "n_rows": 3,
+      "n_tables": 1
+    },
+    {
+      "file": "page_4_table_11.png",
+      "elapsed_s": 5.131,
+      "n_rows": 25,
+      "n_tables": 1
+    },
+    {
+      "file": "page_4_table_0.png",
+      "elapsed_s": 5.637,
+      "n_rows": 28,
+      "n_tables": 1
+    },
+    {
+      "file": "page_2_table_0.png",
+      "elapsed_s": 5.812,
+      "n_rows": 14,
+      "n_tables": 1
+    },
+    {
+      "file": "page_4_table_3.png",
+      "elapsed_s": 4.077,
+      "n_rows": 29,
+      "n_tables": 1
+    },
+    {
+      "file": "page_4_table_2.png",
+      "elapsed_s": 5.647,
+      "n_rows": 25,
+      "n_tables": 1
+    },
+    {
+      "file": "page_4_table_12.png",
+      "elapsed_s": 8.664,
+      "n_rows": 60,
+      "n_tables": 5
+    }
+  ],
+  "comparison_vs_sequential": {
+    "sequential_total_s": 27.601,
+    "sequential_rows": 240,
+    "parallel_wall_clock_s": 10.626,
+    "parallel_rows": 240,
+    "latency_reduction_s": 16.975,
+    "latency_reduction_pct": 61.5
+  }
+}

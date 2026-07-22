@@ -1,0 +1,123 @@
+{
+  "recall": 0.9,
+  "hits": [
+    "LG CNS",
+    "064400",
+    "LG전자",
+    "LG화학",
+    "LG유플러스",
+    "네이버클라우드",
+    "NH농협은행",
+    "국민연금공단",
+    "교보증권"
+  ],
+  "misses": [
+    "우리은행"
+  ],
+  "precision_approx": 0.9737,
+  "f1_approx": 0.9354,
+  "n_simple_tables": 2,
+  "n_complex_tables": 12,
+  "table_type_log": [
+    {
+      "page": 1,
+      "table_idx": 1,
+      "type": "finance"
+    },
+    {
+      "page": 1,
+      "table_idx": 2,
+      "type": "contract_or_general"
+    },
+    {
+      "page": 1,
+      "table_idx": 3,
+      "type": "contract_or_general"
+    },
+    {
+      "page": 6,
+      "table_idx": 1,
+      "type": "contract_or_general"
+    },
+    {
+      "page": 3,
+      "table_idx": 1,
+      "type": "contract_or_general"
+    },
+    {
+      "page": 3,
+      "table_idx": 2,
+      "type": "contract_or_general"
+    },
+    {
+      "page": 4,
+      "table_idx": 1,
+      "type": "finance"
+    },
+    {
+      "page": 4,
+      "table_idx": 2,
+      "type": "finance"
+    },
+    {
+      "page": 4,
+      "table_idx": 3,
+      "type": "finance"
+    },
+    {
+      "page": 4,
+      "table_idx": 4,
+      "type": "finance"
+    },
+    {
+      "page": 4,
+      "table_idx": 5,
+      "type": "finance"
+    },
+    {
+      "page": 4,
+      "table_idx": 6,
+      "type": "finance"
+    },
+    {
+      "page": 5,
+      "table_idx": 1,
+      "type": "contract_or_general"
+    },
+    {
+      "page": 2,
+      "table_idx": 1,
+      "type": "finance"
+    }
+  ],
+  "llm_calls_made": 6,
+  "llm_calls_skipped": 0,
+  "anchor_entities": [
+    "064400",
+    "LG CNS"
+  ],
+  "table_stage_s": 12.277,
+  "entity_extract_stage_s": 78.322,
+  "classify_text_image_stage_s": 390.57,
+  "total_pipeline_s": 481.17,
+  "per_page_entities": {
+    "1": "LG CNS (064400), 국민연금공단, LG, LG CNS",
+    "2": "LG CNS (064400), 업계, 엑세르시티, 엣지테크놀로지, 엘지전자, 엘지화학, 엘지유플러스, 엘지윤포스코, 엘지디스플레이, 엘지케미칼, 엘지그룹, 엘지글로벌, 엘지인더스트리, 엘지솔루션, 엘지네오티, 엘지씨알, 엘지디바이스, 엘지데이터센타, 엘지네오, 엘지네오톡, 엘지네오타임, 엘지네오테크노, 엘지네오펙토, 엘지네오패트, 엘지네오퍼블릭,\nLG CNS, 스마트엔지니어링",
+    "3": "LG CNS (064400), LG전자, NH농협은행, 네이버 클라우드, 고양 삼송 데이터센터, 죽전데이터센터, LG CNS, 교보증권 리서치센터, DART",
+    "4": "LG CNS (064400), 교보증권 리서치 센터\nLG CNS, 교보증권, 064400, LG CNS",
+    "5": "LG CNS (064400), 교보증권 리서치 센터",
+    "6": "LG CNS (064400), Research Center"
+  },
+  "comparison_vs_v2_baseline": {
+    "recall": 0.9,
+    "precision": 0.8333,
+    "f1": 0.8654,
+    "total_pipeline_s": 1097.51
+  },
+  "comparison_vs_v5_adaptive_router": {
+    "recall": 0.9,
+    "precision": 0.8421,
+    "f1": 0.8701,
+    "total_pipeline_s": 992.74
+  }
+}
