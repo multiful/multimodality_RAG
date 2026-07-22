@@ -1,0 +1,283 @@
+{
+  "pdf_pipeline/page_classification/table_crops_enhanced_yolo11/page_1_table_1.png": {
+    "page": 1,
+    "table_idx": 1,
+    "table_bbox_150dpi_px": [
+      447.4567565917969,
+      1413.482421875,
+      1145.8447265625,
+      1690.4896240234375
+    ],
+    "padded_bbox_150dpi_px": [
+      435.4567565917969,
+      1378.482421875,
+      1157.8447265625,
+      1702.4896240234375
+    ],
+    "caption_bbox_150dpi_px": null,
+    "caption_distance_px": 202.5,
+    "render_dpi": 300
+  },
+  "pdf_pipeline/page_classification/table_crops_enhanced_yolo11/page_1_table_2.png": {
+    "page": 1,
+    "table_idx": 2,
+    "table_bbox_150dpi_px": [
+      97.3289794921875,
+      517.5391235351562,
+      385.0072326660156,
+      880.3417358398438
+    ],
+    "padded_bbox_150dpi_px": [
+      85.3289794921875,
+      482.53912353515625,
+      397.0072326660156,
+      892.3417358398438
+    ],
+    "caption_bbox_150dpi_px": null,
+    "caption_distance_px": 253.4,
+    "render_dpi": 300
+  },
+  "pdf_pipeline/page_classification/table_crops_enhanced_yolo11/page_1_table_3.png": {
+    "page": 1,
+    "table_idx": 3,
+    "table_bbox_150dpi_px": [
+      93.58074951171875,
+      389.33428955078125,
+      385.4134521484375,
+      473.9723205566406
+    ],
+    "padded_bbox_150dpi_px": [
+      81.58074951171875,
+      354.33428955078125,
+      397.4134521484375,
+      485.9723205566406
+    ],
+    "caption_bbox_150dpi_px": [
+      97.74407958984375,
+      142.73707580566406,
+      554.2688598632812,
+      278.8061218261719
+    ],
+    "caption_distance_px": 140.4,
+    "render_dpi": 300
+  },
+  "pdf_pipeline/page_classification/table_crops_enhanced_yolo11/page_2_table_1.png": {
+    "page": 2,
+    "table_idx": 1,
+    "table_bbox_150dpi_px": [
+      148.34938049316406,
+      251.09219360351562,
+      1112.211181640625,
+      781.3897705078125
+    ],
+    "padded_bbox_150dpi_px": [
+      136.34938049316406,
+      216.09219360351562,
+      1124.211181640625,
+      793.3897705078125
+    ],
+    "caption_bbox_150dpi_px": null,
+    "caption_distance_px": 307.8,
+    "render_dpi": 300
+  },
+  "pdf_pipeline/page_classification/table_crops_enhanced_yolo11/page_3_table_1.png": {
+    "page": 3,
+    "table_idx": 1,
+    "table_bbox_150dpi_px": [
+      153.54266357421875,
+      258.9754638671875,
+      1103.2923583984375,
+      658.262451171875
+    ],
+    "padded_bbox_150dpi_px": [
+      141.54266357421875,
+      223.9754638671875,
+      1115.2923583984375,
+      670.262451171875
+    ],
+    "caption_bbox_150dpi_px": null,
+    "caption_distance_px": 308.4,
+    "render_dpi": 300
+  },
+  "pdf_pipeline/page_classification/table_crops_enhanced_yolo11/page_3_table_2.png": {
+    "page": 3,
+    "table_idx": 2,
+    "table_bbox_150dpi_px": [
+      651.7164306640625,
+      799.8975830078125,
+      1102.567626953125,
+      1113.01220703125
+    ],
+    "padded_bbox_150dpi_px": [
+      639.7164306640625,
+      764.8975830078125,
+      1114.567626953125,
+      1125.01220703125
+    ],
+    "caption_bbox_150dpi_px": [
+      646.0966186523438,
+      756.7907104492188,
+      952.4649047851562,
+      779.1954956054688
+    ],
+    "caption_distance_px": 80.6,
+    "render_dpi": 300
+  },
+  "pdf_pipeline/page_classification/table_crops_enhanced_yolo11/page_4_table_1.png": {
+    "page": 4,
+    "table_idx": 1,
+    "table_bbox_150dpi_px": [
+      128.16465759277344,
+      269.451416015625,
+      619.9288940429688,
+      922.0209350585938
+    ],
+    "padded_bbox_150dpi_px": [
+      116.16465759277344,
+      234.451416015625,
+      631.9288940429688,
+      934.0209350585938
+    ],
+    "caption_bbox_150dpi_px": [
+      161.51004028320312,
+      145.2605743408203,
+      506.4808654785156,
+      168.31175231933594
+    ],
+    "caption_distance_px": 108.8,
+    "render_dpi": 300
+  },
+  "pdf_pipeline/page_classification/table_crops_enhanced_yolo11/page_4_table_2.png": {
+    "page": 4,
+    "table_idx": 2,
+    "table_bbox_150dpi_px": [
+      128.50987243652344,
+      958.0087280273438,
+      1140.1925048828125,
+      1537.9989013671875
+    ],
+    "padded_bbox_150dpi_px": [
+      116.50987243652344,
+      923.0087280273438,
+      1152.1925048828125,
+      1549.9989013671875
+    ],
+    "caption_bbox_150dpi_px": null,
+    "caption_distance_px": 814.7,
+    "render_dpi": 300
+  },
+  "pdf_pipeline/page_classification/table_crops_enhanced_yolo11/page_4_table_3.png": {
+    "page": 4,
+    "table_idx": 3,
+    "table_bbox_150dpi_px": [
+      639.6459350585938,
+      266.4348449707031,
+      1137.9822998046875,
+      939.2952880859375
+    ],
+    "padded_bbox_150dpi_px": [
+      627.6459350585938,
+      231.43484497070312,
+      1149.9822998046875,
+      951.2952880859375
+    ],
+    "caption_bbox_150dpi_px": null,
+    "caption_distance_px": 563.4,
+    "render_dpi": 300
+  },
+  "pdf_pipeline/page_classification/table_crops_enhanced_yolo11/page_4_table_4.png": {
+    "page": 4,
+    "table_idx": 4,
+    "table_bbox_150dpi_px": [
+      636.1123657226562,
+      961.7011108398438,
+      1135.2620849609375,
+      1225.9188232421875
+    ],
+    "padded_bbox_150dpi_px": [
+      624.1123657226562,
+      926.7011108398438,
+      1147.2620849609375,
+      1237.9188232421875
+    ],
+    "caption_bbox_150dpi_px": null,
+    "caption_distance_px": 966.3,
+    "render_dpi": 300
+  },
+  "pdf_pipeline/page_classification/table_crops_enhanced_yolo11/page_4_table_5.png": {
+    "page": 4,
+    "table_idx": 5,
+    "table_bbox_150dpi_px": [
+      128.87457275390625,
+      962.4337768554688,
+      622.691650390625,
+      1546.5107421875
+    ],
+    "padded_bbox_150dpi_px": [
+      116.87457275390625,
+      927.4337768554688,
+      634.691650390625,
+      1558.5107421875
+    ],
+    "caption_bbox_150dpi_px": null,
+    "caption_distance_px": 716.9,
+    "render_dpi": 300
+  },
+  "pdf_pipeline/page_classification/table_crops_enhanced_yolo11/page_4_table_6.png": {
+    "page": 4,
+    "table_idx": 6,
+    "table_bbox_150dpi_px": [
+      123.87386322021484,
+      248.7110595703125,
+      1142.0206298828125,
+      1508.50732421875
+    ],
+    "padded_bbox_150dpi_px": [
+      111.87386322021484,
+      213.7110595703125,
+      1154.0206298828125,
+      1520.50732421875
+    ],
+    "caption_bbox_150dpi_px": null,
+    "caption_distance_px": 309.6,
+    "render_dpi": 300
+  },
+  "pdf_pipeline/page_classification/table_crops_enhanced_yolo11/page_5_table_1.png": {
+    "page": 5,
+    "table_idx": 1,
+    "table_bbox_150dpi_px": [
+      144.64315795898438,
+      775.802001953125,
+      1114.9136962890625,
+      1116.259765625
+    ],
+    "padded_bbox_150dpi_px": [
+      132.64315795898438,
+      740.802001953125,
+      1126.9136962890625,
+      1128.259765625
+    ],
+    "caption_bbox_150dpi_px": null,
+    "caption_distance_px": 675.7,
+    "render_dpi": 300
+  },
+  "pdf_pipeline/page_classification/table_crops_enhanced_yolo11/page_6_table_1.png": {
+    "page": 6,
+    "table_idx": 1,
+    "table_bbox_150dpi_px": [
+      167.71449279785156,
+      1318.1282958984375,
+      907.2225952148438,
+      1358.1041259765625
+    ],
+    "padded_bbox_150dpi_px": [
+      155.71449279785156,
+      1283.1282958984375,
+      919.2225952148438,
+      1370.1041259765625
+    ],
+    "caption_bbox_150dpi_px": null,
+    "caption_distance_px": 1167.7,
+    "render_dpi": 300
+  }
+}

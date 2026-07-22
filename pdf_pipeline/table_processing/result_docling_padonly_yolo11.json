@@ -1,0 +1,101 @@
+{
+  "method": "YOLOv11n + 기본 패딩(12px 사방 균일, 150dpi 유지, DPI 변경 없음) + Docling(프로세스 병렬)",
+  "n_workers": 8,
+  "n_crops": 14,
+  "wall_clock_s_incl_pool_startup": 10.536,
+  "total_rows_extracted": 220,
+  "per_crop": [
+    {
+      "file": "page_1_table_3.png",
+      "elapsed_s": 0.479,
+      "n_rows": 0,
+      "n_tables": 0
+    },
+    {
+      "file": "page_1_table_2.png",
+      "elapsed_s": 2.434,
+      "n_rows": 15,
+      "n_tables": 1
+    },
+    {
+      "file": "page_3_table_2.png",
+      "elapsed_s": 2.582,
+      "n_rows": 11,
+      "n_tables": 1
+    },
+    {
+      "file": "page_3_table_1.png",
+      "elapsed_s": 2.892,
+      "n_rows": 9,
+      "n_tables": 1
+    },
+    {
+      "file": "page_1_table_1.png",
+      "elapsed_s": 3.362,
+      "n_rows": 12,
+      "n_tables": 1
+    },
+    {
+      "file": "page_4_table_4.png",
+      "elapsed_s": 2.202,
+      "n_rows": 10,
+      "n_tables": 1
+    },
+    {
+      "file": "page_6_table_1.png",
+      "elapsed_s": 0.199,
+      "n_rows": 0,
+      "n_tables": 0
+    },
+    {
+      "file": "page_5_table_1.png",
+      "elapsed_s": 1.799,
+      "n_rows": 3,
+      "n_tables": 1
+    },
+    {
+      "file": "page_2_table_1.png",
+      "elapsed_s": 5.845,
+      "n_rows": 14,
+      "n_tables": 1
+    },
+    {
+      "file": "page_4_table_1.png",
+      "elapsed_s": 5.91,
+      "n_rows": 28,
+      "n_tables": 1
+    },
+    {
+      "file": "page_4_table_5.png",
+      "elapsed_s": 3.995,
+      "n_rows": 25,
+      "n_tables": 1
+    },
+    {
+      "file": "page_4_table_3.png",
+      "elapsed_s": 4.782,
+      "n_rows": 29,
+      "n_tables": 1
+    },
+    {
+      "file": "page_4_table_2.png",
+      "elapsed_s": 7.315,
+      "n_rows": 25,
+      "n_tables": 1
+    },
+    {
+      "file": "page_4_table_6.png",
+      "elapsed_s": 7.642,
+      "n_rows": 39,
+      "n_tables": 1
+    }
+  ],
+  "comparison_vs_plain_crop": {
+    "plain_crop_rows": 240,
+    "plain_crop_latency_s": 10.65,
+    "enhanced_crop_rows": 220,
+    "enhanced_crop_latency_s": 10.536,
+    "row_delta": -20,
+    "row_delta_pct": -8.3
+  }
+}

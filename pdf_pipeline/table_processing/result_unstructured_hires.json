@@ -1,0 +1,117 @@
+{
+  "method": "Unstructured Hi-Res (partition_image + PaddleOCR, poppler/tesseract 우회)",
+  "warmup_s_incl_model_download": 31.289,
+  "avg_steady_state_s_per_page": 23.726,
+  "per_label": {
+    "has_text": {
+      "tp": 6,
+      "fp": 0,
+      "fn": 0,
+      "tn": 0,
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "has_table": {
+      "tp": 6,
+      "fp": 0,
+      "fn": 0,
+      "tn": 0,
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "has_image": {
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "tn": 2,
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    }
+  },
+  "overall_label_accuracy": 1.0,
+  "exact_match_page_accuracy": 1.0,
+  "per_page": [
+    {
+      "page": 1,
+      "elapsed_s": 31.289,
+      "has_text": true,
+      "has_table": true,
+      "has_image": true,
+      "categories": {
+        "UncategorizedText": 8,
+        "Title": 3,
+        "Table": 3,
+        "NarrativeText": 4,
+        "Image": 2,
+        "FigureCaption": 1
+      }
+    },
+    {
+      "page": 2,
+      "elapsed_s": 24.648,
+      "has_text": true,
+      "has_table": true,
+      "has_image": true,
+      "categories": {
+        "UncategorizedText": 11,
+        "Table": 1,
+        "Image": 2
+      }
+    },
+    {
+      "page": 3,
+      "elapsed_s": 14.118,
+      "has_text": true,
+      "has_table": true,
+      "has_image": true,
+      "categories": {
+        "UncategorizedText": 9,
+        "Table": 2,
+        "Image": 1
+      }
+    },
+    {
+      "page": 4,
+      "elapsed_s": 69.372,
+      "has_text": true,
+      "has_table": true,
+      "has_image": false,
+      "categories": {
+        "UncategorizedText": 11,
+        "Table": 3
+      }
+    },
+    {
+      "page": 5,
+      "elapsed_s": 5.185,
+      "has_text": true,
+      "has_table": true,
+      "has_image": true,
+      "categories": {
+        "UncategorizedText": 2,
+        "Image": 1,
+        "Table": 1,
+        "NarrativeText": 1
+      }
+    },
+    {
+      "page": 6,
+      "elapsed_s": 5.305,
+      "has_text": true,
+      "has_table": true,
+      "has_image": false,
+      "categories": {
+        "UncategorizedText": 7,
+        "Title": 2,
+        "NarrativeText": 2,
+        "Table": 1
+      }
+    }
+  ]
+}

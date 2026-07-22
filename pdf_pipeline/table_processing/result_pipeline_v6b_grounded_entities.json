@@ -1,0 +1,124 @@
+{
+  "recall": 0.9,
+  "hits": [
+    "LG CNS",
+    "064400",
+    "LG전자",
+    "LG화학",
+    "LG유플러스",
+    "네이버클라우드",
+    "NH농협은행",
+    "국민연금공단",
+    "교보증권"
+  ],
+  "misses": [
+    "우리은행"
+  ],
+  "precision_approx": 0.9444,
+  "f1_approx": 0.9217,
+  "n_dropped_hallucinations": 21,
+  "dropped_log": [
+    {
+      "page": 2,
+      "candidate": "업계"
+    },
+    {
+      "page": 2,
+      "candidate": "엑세르시티"
+    },
+    {
+      "page": 2,
+      "candidate": "엣지테크놀로지"
+    },
+    {
+      "page": 2,
+      "candidate": "엘지윤포스코"
+    },
+    {
+      "page": 2,
+      "candidate": "엘지디스플레이"
+    },
+    {
+      "page": 2,
+      "candidate": "엘지케미칼"
+    },
+    {
+      "page": 2,
+      "candidate": "엘지그룹"
+    },
+    {
+      "page": 2,
+      "candidate": "엘지글로벌"
+    },
+    {
+      "page": 2,
+      "candidate": "엘지인더스트리"
+    },
+    {
+      "page": 2,
+      "candidate": "엘지솔루션"
+    },
+    {
+      "page": 2,
+      "candidate": "엘지네오티"
+    },
+    {
+      "page": 2,
+      "candidate": "엘지씨알"
+    },
+    {
+      "page": 2,
+      "candidate": "엘지디바이스"
+    },
+    {
+      "page": 2,
+      "candidate": "엘지데이터센타"
+    },
+    {
+      "page": 2,
+      "candidate": "엘지네오"
+    },
+    {
+      "page": 2,
+      "candidate": "엘지네오톡"
+    },
+    {
+      "page": 2,
+      "candidate": "엘지네오타임"
+    },
+    {
+      "page": 2,
+      "candidate": "엘지네오테크노"
+    },
+    {
+      "page": 2,
+      "candidate": "엘지네오펙토"
+    },
+    {
+      "page": 2,
+      "candidate": "엘지네오패트"
+    },
+    {
+      "page": 2,
+      "candidate": "엘지네오퍼블릭"
+    }
+  ],
+  "filtered_per_page_entities": {
+    "1": "LG CNS (064400), 국민연금공단, LG, LG CNS",
+    "2": "LG CNS (064400), 엘지전자, 엘지화학, 엘지유플러스, LG CNS, 스마트엔지니어링",
+    "3": "LG CNS (064400), LG전자, NH농협은행, 네이버 클라우드, 고양 삼송 데이터센터, 죽전데이터센터, LG CNS, 교보증권 리서치센터, DART",
+    "4": "LG CNS (064400), 교보증권 리서치 센터, LG CNS, 교보증권, 064400, LG CNS",
+    "5": "LG CNS (064400), 교보증권 리서치 센터",
+    "6": "LG CNS (064400), Research Center"
+  },
+  "unfiltered_v6": {
+    "recall": 0.9,
+    "precision_approx": 0.9737,
+    "f1_approx": 0.9354
+  },
+  "latency_unchanged_from_v6": {
+    "table_stage_s": 12.277,
+    "entity_extract_stage_s": 78.322,
+    "total_pipeline_s": 481.17
+  }
+}

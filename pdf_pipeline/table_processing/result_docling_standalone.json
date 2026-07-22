@@ -1,0 +1,69 @@
+{
+  "method": "Docling Framework standalone (1-Stage, whole PDF page fed directly, no YOLO crop)",
+  "per_page": [
+    {
+      "page": 1,
+      "elapsed_s": 9.147,
+      "n_tables": 3,
+      "n_rows": 29,
+      "n_pictures": 3,
+      "has_table": true,
+      "has_image": true,
+      "matches_ground_truth": true
+    },
+    {
+      "page": 2,
+      "elapsed_s": 1.932,
+      "n_tables": 1,
+      "n_rows": 14,
+      "n_pictures": 3,
+      "has_table": true,
+      "has_image": true,
+      "matches_ground_truth": true
+    },
+    {
+      "page": 3,
+      "elapsed_s": 1.318,
+      "n_tables": 2,
+      "n_rows": 9,
+      "n_pictures": 3,
+      "has_table": true,
+      "has_image": true,
+      "matches_ground_truth": true
+    },
+    {
+      "page": 4,
+      "elapsed_s": 5.28,
+      "n_tables": 5,
+      "n_rows": 108,
+      "n_pictures": 1,
+      "has_table": true,
+      "has_image": true,
+      "matches_ground_truth": false
+    },
+    {
+      "page": 5,
+      "elapsed_s": 0.699,
+      "n_tables": 1,
+      "n_rows": 3,
+      "n_pictures": 2,
+      "has_table": true,
+      "has_image": true,
+      "matches_ground_truth": true
+    },
+    {
+      "page": 6,
+      "elapsed_s": 0.476,
+      "n_tables": 1,
+      "n_rows": 2,
+      "n_pictures": 2,
+      "has_table": true,
+      "has_image": true,
+      "matches_ground_truth": false
+    }
+  ],
+  "total_time_s_6pages": 18.852,
+  "avg_time_s_per_page": 3.142,
+  "total_rows_extracted": 165,
+  "page_classification_match": "4/6"
+}

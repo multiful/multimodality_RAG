@@ -1,0 +1,31 @@
+{
+  "recall": 0.6,
+  "hits": [
+    "LG CNS",
+    "064400",
+    "LG전자",
+    "네이버클라우드",
+    "NH농협은행",
+    "교보증권"
+  ],
+  "misses": [
+    "LG화학",
+    "LG유플러스",
+    "우리은행",
+    "국민연금공단"
+  ],
+  "precision_approx": 0.8333,
+  "f1_approx": 0.6977,
+  "docling_table_stage_s": 10.808,
+  "entity_extract_stage_s": 703.762,
+  "classify_text_image_stage_s": 390.57,
+  "total_pipeline_s": 1105.14,
+  "per_page_entities": {
+    "1": "LG CNS (064400)",
+    "2": "LG CNS (064400)  \nLG CNS (064400)  \nLG CNS (064400)  \nLG CNS (064400)  \nLG CNS (064400)  \nLG CNS (064400)  \nLG CNS (064400)  \nLG CNS (064400)  \nLG CNS (064400)  \nLG CNS (064400)  \nLG CNS (064400)  \nLG CNS (064400)  \nLG CNS (064400)  \nLG CNS (064400)  \nLG CNS (064400)  \nLG CNS (064400)  \nLG CNS (064400)  \nLG CNS (064400)  \nLG CNS",
+    "3": "LG CNS (064400), LG전자, LG전자, 네이버 클라우드, NH농협은행, LG전자, LG전자, LG전자, LG전자, LG전자, LG전자, LG전자, LG전자, LG전자, LG전자, LG전자, LG전자, LG전자, LG전자, LG전자, LG전자, LG전자, LG전자, LG전자, LG전자, LG전자, LG전자, LG전자, LG전자, LG전자, LG전자, LG전자, LG전자, LG전자, LG전자, LG전자, LG전자, LG전자, LG전자, LG전자, LG전자, LG전자, LG전자, LG전자, LG전자, LG전자, LG전자,",
+    "4": "LG CNS (064400)",
+    "5": "LG CNS (064400)  \n교보증권 리서치센터",
+    "6": "LG CNS (064400)  \nResearch Center"
+  }
+}

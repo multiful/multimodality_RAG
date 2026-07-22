@@ -1,0 +1,344 @@
+{
+  "version": "round1_initial",
+  "thresholds": {
+    "fill_ratio_min": 0.6,
+    "min_quick_rows": 2,
+    "nonempty_cell_ratio_min": 0.5,
+    "fallback_line_height_pt": 12.0
+  },
+  "n_simple": 2,
+  "n_complex": 12,
+  "simple_rows": 14,
+  "docling_rows": 228,
+  "total_rows_extracted": 242,
+  "route_decision_s": 2.193,
+  "docling_elapsed_s": 10.927,
+  "n_docling_workers": 8,
+  "total_elapsed_s_docling_stage_only": 13.12,
+  "routed_detail": [
+    {
+      "page": 1,
+      "table_idx": 1,
+      "complexity": "simple",
+      "reason": "quick_parse_sufficient",
+      "signals": {
+        "quick_rows": 12,
+        "expected_rows": 15.1,
+        "fill_ratio": 0.794,
+        "consistent_columns": true,
+        "nonempty_ratio": 1.0
+      },
+      "bbox_px": [
+        447.4567565917969,
+        1413.482421875,
+        1145.8447265625,
+        1690.4896240234375
+      ],
+      "height_px": 277.0,
+      "median_line_height_pt": 8.8,
+      "markdown": "| 매출액(십억원) |\n| --- |\n| YoY(%) |\n| 영업이익(십억원) |\n| OP마진(%) |\n| 순이익(십억원) |\n| EPS(원) |\n| YoY(%) |\n| PER(배) |\n| PCR(배) |\n| PBR(배) |\n| EV/EBITDA(배) |\n| ROE(% |",
+      "n_rows": 12
+    },
+    {
+      "page": 1,
+      "table_idx": 2,
+      "complexity": "complex",
+      "reason": "quick_parse_empty",
+      "signals": {
+        "quick_rows": 0,
+        "expected_rows": 19.8,
+        "fill_ratio": 0.0,
+        "consistent_columns": false,
+        "nonempty_ratio": 0.0
+      },
+      "bbox_px": [
+        97.3289794921875,
+        517.5391235351562,
+        385.0072326660156,
+        880.3417358398438
+      ],
+      "height_px": 362.8,
+      "median_line_height_pt": 8.8,
+      "crop_path": "/Users/baiohelseu/Desktop/Project/multimodality_RAG/pdf_pipeline/table_processing/table_crops_router_complex/page_1_table_2.png"
+    },
+    {
+      "page": 1,
+      "table_idx": 3,
+      "complexity": "complex",
+      "reason": "quick_parse_empty",
+      "signals": {
+        "quick_rows": 0,
+        "expected_rows": 4.6,
+        "fill_ratio": 0.0,
+        "consistent_columns": false,
+        "nonempty_ratio": 0.0
+      },
+      "bbox_px": [
+        93.58074951171875,
+        389.33428955078125,
+        385.4134521484375,
+        473.9723205566406
+      ],
+      "height_px": 84.6,
+      "median_line_height_pt": 8.8,
+      "crop_path": "/Users/baiohelseu/Desktop/Project/multimodality_RAG/pdf_pipeline/table_processing/table_crops_router_complex/page_1_table_3.png"
+    },
+    {
+      "page": 2,
+      "table_idx": 1,
+      "complexity": "complex",
+      "reason": "low_fill_ratio",
+      "signals": {
+        "quick_rows": 8,
+        "expected_rows": 53.6,
+        "fill_ratio": 0.149,
+        "consistent_columns": true,
+        "nonempty_ratio": 1.0
+      },
+      "bbox_px": [
+        148.34938049316406,
+        251.09219360351562,
+        1112.211181640625,
+        781.3897705078125
+      ],
+      "height_px": 530.3,
+      "median_line_height_pt": 4.75,
+      "crop_path": "/Users/baiohelseu/Desktop/Project/multimodality_RAG/pdf_pipeline/table_processing/table_crops_router_complex/page_2_table_1.png"
+    },
+    {
+      "page": 3,
+      "table_idx": 1,
+      "complexity": "complex",
+      "reason": "quick_parse_empty",
+      "signals": {
+        "quick_rows": 0,
+        "expected_rows": 30.9,
+        "fill_ratio": 0.0,
+        "consistent_columns": false,
+        "nonempty_ratio": 0.0
+      },
+      "bbox_px": [
+        153.54266357421875,
+        258.9754638671875,
+        1103.2923583984375,
+        658.262451171875
+      ],
+      "height_px": 399.3,
+      "median_line_height_pt": 6.2,
+      "crop_path": "/Users/baiohelseu/Desktop/Project/multimodality_RAG/pdf_pipeline/table_processing/table_crops_router_complex/page_3_table_1.png"
+    },
+    {
+      "page": 3,
+      "table_idx": 2,
+      "complexity": "complex",
+      "reason": "quick_parse_empty",
+      "signals": {
+        "quick_rows": 0,
+        "expected_rows": 24.2,
+        "fill_ratio": 0.0,
+        "consistent_columns": false,
+        "nonempty_ratio": 0.0
+      },
+      "bbox_px": [
+        651.7164306640625,
+        799.8975830078125,
+        1102.567626953125,
+        1113.01220703125
+      ],
+      "height_px": 313.1,
+      "median_line_height_pt": 6.2,
+      "crop_path": "/Users/baiohelseu/Desktop/Project/multimodality_RAG/pdf_pipeline/table_processing/table_crops_router_complex/page_3_table_2.png"
+    },
+    {
+      "page": 4,
+      "table_idx": 1,
+      "complexity": "complex",
+      "reason": "too_few_rows",
+      "signals": {
+        "quick_rows": 1,
+        "expected_rows": 32.6,
+        "fill_ratio": 0.031,
+        "consistent_columns": true,
+        "nonempty_ratio": 1.0
+      },
+      "bbox_px": [
+        128.16465759277344,
+        269.451416015625,
+        619.9288940429688,
+        922.0209350585938
+      ],
+      "height_px": 652.6,
+      "median_line_height_pt": 9.6,
+      "crop_path": "/Users/baiohelseu/Desktop/Project/multimodality_RAG/pdf_pipeline/table_processing/table_crops_router_complex/page_4_table_1.png"
+    },
+    {
+      "page": 4,
+      "table_idx": 2,
+      "complexity": "complex",
+      "reason": "too_few_rows",
+      "signals": {
+        "quick_rows": 1,
+        "expected_rows": 29.0,
+        "fill_ratio": 0.034,
+        "consistent_columns": true,
+        "nonempty_ratio": 1.0
+      },
+      "bbox_px": [
+        128.50987243652344,
+        958.0087280273438,
+        1140.1925048828125,
+        1537.9989013671875
+      ],
+      "height_px": 580.0,
+      "median_line_height_pt": 9.6,
+      "crop_path": "/Users/baiohelseu/Desktop/Project/multimodality_RAG/pdf_pipeline/table_processing/table_crops_router_complex/page_4_table_2.png"
+    },
+    {
+      "page": 4,
+      "table_idx": 3,
+      "complexity": "complex",
+      "reason": "too_few_rows",
+      "signals": {
+        "quick_rows": 1,
+        "expected_rows": 33.6,
+        "fill_ratio": 0.03,
+        "consistent_columns": true,
+        "nonempty_ratio": 1.0
+      },
+      "bbox_px": [
+        639.6459350585938,
+        266.4348449707031,
+        1137.9822998046875,
+        939.2952880859375
+      ],
+      "height_px": 672.9,
+      "median_line_height_pt": 9.6,
+      "crop_path": "/Users/baiohelseu/Desktop/Project/multimodality_RAG/pdf_pipeline/table_processing/table_crops_router_complex/page_4_table_3.png"
+    },
+    {
+      "page": 4,
+      "table_idx": 4,
+      "complexity": "complex",
+      "reason": "too_few_rows",
+      "signals": {
+        "quick_rows": 1,
+        "expected_rows": 13.2,
+        "fill_ratio": 0.076,
+        "consistent_columns": true,
+        "nonempty_ratio": 1.0
+      },
+      "bbox_px": [
+        636.1123657226562,
+        961.7011108398438,
+        1135.2620849609375,
+        1225.9188232421875
+      ],
+      "height_px": 264.2,
+      "median_line_height_pt": 9.6,
+      "crop_path": "/Users/baiohelseu/Desktop/Project/multimodality_RAG/pdf_pipeline/table_processing/table_crops_router_complex/page_4_table_4.png"
+    },
+    {
+      "page": 4,
+      "table_idx": 5,
+      "complexity": "complex",
+      "reason": "too_few_rows",
+      "signals": {
+        "quick_rows": 1,
+        "expected_rows": 29.2,
+        "fill_ratio": 0.034,
+        "consistent_columns": true,
+        "nonempty_ratio": 1.0
+      },
+      "bbox_px": [
+        128.87457275390625,
+        962.4337768554688,
+        622.691650390625,
+        1546.5107421875
+      ],
+      "height_px": 584.1,
+      "median_line_height_pt": 9.6,
+      "crop_path": "/Users/baiohelseu/Desktop/Project/multimodality_RAG/pdf_pipeline/table_processing/table_crops_router_complex/page_4_table_5.png"
+    },
+    {
+      "page": 4,
+      "table_idx": 6,
+      "complexity": "complex",
+      "reason": "too_few_rows",
+      "signals": {
+        "quick_rows": 1,
+        "expected_rows": 63.0,
+        "fill_ratio": 0.016,
+        "consistent_columns": true,
+        "nonempty_ratio": 1.0
+      },
+      "bbox_px": [
+        123.87386322021484,
+        248.7110595703125,
+        1142.0206298828125,
+        1508.50732421875
+      ],
+      "height_px": 1259.8,
+      "median_line_height_pt": 9.6,
+      "crop_path": "/Users/baiohelseu/Desktop/Project/multimodality_RAG/pdf_pipeline/table_processing/table_crops_router_complex/page_4_table_6.png"
+    },
+    {
+      "page": 5,
+      "table_idx": 1,
+      "complexity": "complex",
+      "reason": "sparse_cells",
+      "signals": {
+        "quick_rows": 2,
+        "expected_rows": 8.4,
+        "fill_ratio": 0.239,
+        "consistent_columns": true,
+        "nonempty_ratio": 0.429
+      },
+      "bbox_px": [
+        144.64315795898438,
+        775.802001953125,
+        1114.9136962890625,
+        1116.259765625
+      ],
+      "height_px": 340.5,
+      "median_line_height_pt": 19.5,
+      "crop_path": "/Users/baiohelseu/Desktop/Project/multimodality_RAG/pdf_pipeline/table_processing/table_crops_router_complex/page_5_table_1.png"
+    },
+    {
+      "page": 6,
+      "table_idx": 1,
+      "complexity": "simple",
+      "reason": "quick_parse_sufficient",
+      "signals": {
+        "quick_rows": 2,
+        "expected_rows": 1.7,
+        "fill_ratio": 1.193,
+        "consistent_columns": true,
+        "nonempty_ratio": 1.0
+      },
+      "bbox_px": [
+        167.71449279785156,
+        1318.1282958984375,
+        907.2225952148438,
+        1358.1041259765625
+      ],
+      "height_px": 40.0,
+      "median_line_height_pt": 11.45,
+      "markdown": "| 구분 | Buy(매수) | Trading Buy(매수) | Hold(보유) | Sell(매도) |\n| --- | --- | --- | --- | --- |\n| 비율 | 94.7% | 4.6% | 0.7% | 0.0% |",
+      "n_rows": 2
+    }
+  ],
+  "comparison": {
+    "all_docling_parallel": {
+      "rows": 240,
+      "docling_elapsed_s": 10.65
+    },
+    "naive_height_router_v4_rejected": {
+      "rows": 192,
+      "elapsed_s": 9.42
+    },
+    "this_version": {
+      "rows": 242,
+      "docling_elapsed_s": 10.927
+    }
+  }
+}
