@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import os
 
 from supabase import Client, create_client
@@ -8,9 +10,16 @@ from embeddings.base import BaseEmbedder
 class SupabaseVectorStore:
     """financial_chunks 테이블(pgvector, supabase/schema.sql 참고)에 청크를 적재/검색한다."""
 
-    def __init__(self, embedder: BaseEmbedder, table: str = "financial_chunks", batch_size: int = 100):
+    def __init__(
+        self,
+        embedder: BaseEmbedder,
+        table: str = "financial_chunks",
+        rpc_name: str | None = None,
+        batch_size: int = 100,
+    ):
         self.embedder = embedder
         self.table = table
+        self.rpc_name = rpc_name or f"match_{table}"
         self.batch_size = batch_size
         self.client: Client = create_client(
             os.environ["SUPABASE_URL"],
@@ -30,7 +39,7 @@ class SupabaseVectorStore:
     def query(self, text: str, top_k: int = 5, ticker: str | None = None):
         vector = self.embedder.embed([text])[0]
         resp = self.client.rpc(
-            "match_financial_chunks",
+            self.rpc_name,
             {"query_embedding": vector, "match_count": top_k, "filter_ticker": ticker},
         ).execute()
         return resp.data

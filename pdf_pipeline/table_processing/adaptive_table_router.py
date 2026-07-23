@@ -21,13 +21,17 @@
 """
 
 import statistics
+import sys
 from dataclasses import dataclass, field
 from pathlib import Path
 
 import fitz
 import pdfplumber
 from PIL import Image
-from ultralytics import YOLO
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))  # [26] yolo_layout이 pdf_pipeline/에 있음
+from yolo_layout import run_yolo_layout  # noqa: E402
+from text_cleanup import clean_extracted_text  # noqa: E402 — [36] raw_text가 구조화 출력(LLM) 입력으로도 쓰여서 정규화 필요
 
 ROOT = Path(__file__).resolve().parent.parent.parent
 PDF_PATH = ROOT / "pdf_pipeline" / "reference" / "LGCNS" / "20260721_company_279243000.pdf"
@@ -103,43 +107,68 @@ def classify_table(quick_table, bbox_height_pt: float, median_line_height_pt: fl
     return "simple", "quick_parse_sufficient", signals
 
 
-def detect_and_route(thresholds: RouterThresholds = RouterThresholds(), crop_dir: Path = None):
+def detect_and_route(thresholds: RouterThresholds = RouterThresholds(), crop_dir: Path = None,
+                      yolo_model=None, page_boxes: dict = None, pdf_pp=None):
     """PDF 전체에서 YOLO로 표를 찾고, 표마다 SIMPLE/COMPLEX를 판정한다.
     SIMPLE 표는 pdfplumber 결과(마크다운 포함)까지 바로 채워서 반환하고,
-    COMPLEX 표는 크롭 이미지 경로만 반환(Docling은 호출측에서 병렬 처리)."""
-    model = YOLO(str(YOLO_MODEL_PATH))
+    COMPLEX 표는 크롭 이미지 경로만 반환(Docling은 호출측에서 병렬 처리).
+
+    [26] 사용자 지적 반영: 이 함수가 자체적으로 YOLO 모델을 새로 로드해 페이지당 또 한 번
+    추론하던 문제(page_classification/text_processing이 이미 공유 중인 `run_yolo_layout()`과
+    별개로 중복 호출) 수정. page_boxes({1-based page: [(cls_name, fitz.Rect), ...]}, 예를 들어
+    `page_classification.page_classifier.classify_pdf()`가 반환하는 cached_boxes를 모은 것)를
+    넘기면 그 페이지는 YOLO를 아예 다시 안 부른다. page_boxes에 없는 페이지만 `run_yolo_layout()`
+    (공유 유틸)로 새로 추론하며, 이때만 yolo_model이 필요(안 주면 여기서 1회 로드).
+
+    [39] pdf_pp: 호출측(build_records())이 이미 같은 PDF를 pdfplumber로 열어뒀으면 그 객체를
+    넘겨 재사용 — 이 함수와 build_records()가 각자 pdfplumber.open()을 불러 pdfminer가 페이지당
+    콘텐츠 스트림을 두 번 해석하던 것(LGCNS 6페이지 기준 측정 ~3s)이 실측 병목이었음. None이면
+    기존처럼 이 함수가 열고 닫는다(하위호환) — 넘겨받은 경우엔 호출측이 lifecycle을 소유하므로
+    여기서 닫지 않는다."""
     doc_fitz = fitz.open(str(PDF_PATH))
     if crop_dir:
         crop_dir.mkdir(exist_ok=True, parents=True)
 
     routed = []
-    with pdfplumber.open(str(PDF_PATH)) as pdf:
+    _owns_pdf_pp = pdf_pp is None
+    pdf = pdf_pp if pdf_pp is not None else pdfplumber.open(str(PDF_PATH))
+    try:
         for i, (page_pp, page_fz) in enumerate(zip(pdf.pages, doc_fitz), start=1):
             median_lh = page_median_line_height(page_pp)
-            pix = page_fz.get_pixmap(dpi=RENDER_DPI)
-            tmp_path = (crop_dir or Path(".")) / f"_tmp_router_p{i}.png"
-            pix.save(str(tmp_path))
-            img = Image.open(tmp_path).convert("RGB")
+            # [33] 성능 수정: img는 COMPLEX 표를 크롭 저장할 때(crop_dir 지정 시)만 실제로
+            # 쓰이는데, 예전엔 crop_dir 없이 호출하는 현재 프로덕션 경로에서도 매 페이지
+            # PNG를 디스크에 썼다가 곧바로 다시 읽어들이고 있었다(순수 낭비 — run_yolo_layout()도
+            # 자체적으로 렌더링하므로 여기서 미리 만들어둘 필요가 없음). crop_dir이 실제로
+            # 주어졌을 때만 렌더링하도록 지연시키고, 그마저도 디스크 왕복 없이 pix.samples를
+            # 바로 PIL 이미지로 변환(yolo_layout.py [33]과 동일 기법).
+            img = None
+            if crop_dir:
+                pix = page_fz.get_pixmap(dpi=RENDER_DPI)
+                img = Image.frombytes("RGB", (pix.width, pix.height), pix.samples)
 
-            results = model.predict(img, conf=CONF_THRESHOLD, verbose=False)[0]
-            names = model.names
-            boxes = results.boxes
-            tmp_path.unlink(missing_ok=True)
-            if boxes is None:
+            cached = page_boxes.get(i) if page_boxes else None
+            if cached is None:
+                if yolo_model is None:
+                    from ultralytics import YOLO
+                    yolo_model = YOLO(str(YOLO_MODEL_PATH))
+                cached = run_yolo_layout(yolo_model, page_fz, i - 1)
+            table_rects_pt = [rect for cls_name, rect in cached if cls_name == "Table"]
+            if not table_rects_pt:
                 continue
 
             t_idx = 0
-            for cls_idx, xyxy in zip(boxes.cls, boxes.xyxy):
-                if names[int(cls_idx)] != "Table":
-                    continue
+            for rect in table_rects_pt:
                 t_idx += 1
-                x1, y1, x2, y2 = [float(v) for v in xyxy.tolist()]
-                bbox_pt = (x1 / SCALE, y1 / SCALE, x2 / SCALE, y2 / SCALE)
+                bbox_pt = (rect.x0, rect.y0, rect.x1, rect.y1)
+                x1, y1, x2, y2 = [v * SCALE for v in bbox_pt]
                 height_pt = bbox_pt[3] - bbox_pt[1]
                 try:
                     cropped_page = page_pp.crop(bbox_pt)
                     quick_table = cropped_page.extract_table()
-                    raw_text = cropped_page.extract_text() or ""
+                    # [36] raw_text는 classify_table()의 재무 키워드 매칭뿐 아니라 구조화 출력
+                    # (extract_table_metadata, [25])의 LLM 입력으로도 그대로 쓰이는데 PUA/구두점
+                    # 정규화가 전혀 안 되고 있었음 — text_cleanup.clean_extracted_text()로 통일.
+                    raw_text = clean_extracted_text(cropped_page.extract_text() or "")
                 except Exception:
                     quick_table = None
                     raw_text = ""
@@ -166,5 +195,8 @@ def detect_and_route(thresholds: RouterThresholds = RouterThresholds(), crop_dir
                         crop.save(crop_path)
                     entry["crop_path"] = str(crop_path) if crop_path else None
                 routed.append(entry)
-    doc_fitz.close()
+    finally:
+        if _owns_pdf_pp:
+            pdf.close()
+        doc_fitz.close()
     return routed

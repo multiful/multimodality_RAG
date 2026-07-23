@@ -1,0 +1,246 @@
+{
+  "LGCNS": {
+    "text": {
+      "elapsed_off_s": 1.006,
+      "elapsed_on_s": 15.594,
+      "added_s": 14.588,
+      "n_chunks": 17,
+      "added_ms_per_chunk": 858.1,
+      "sample": [
+        {
+          "page": 1,
+          "raw_chunk": "인터넷/게임",
+          "structured_metadata": {
+            "chunk_index": 0,
+            "entities": [],
+            "sector_mentioned": "인터넷/게임",
+            "topic": "기업 LG CNS 소개",
+            "metric_mentions": [],
+            "time_period": null,
+            "sentiment": "neutral",
+            "contains_forward_looking_statement": false,
+            "summary": "이는 LG CNS가 속한 인터넷 및 게임 섹터에 국한된 사항이다."
+          }
+        },
+        {
+          "page": 1,
+          "raw_chunk": "LG CNS 064400",
+          "structured_metadata": {
+            "chunk_index": 1,
+            "entities": [
+              "LG CNS"
+            ],
+            "sector_mentioned": "인터넷/게임",
+            "topic": "LG CNS의 이해",
+            "metric_mentions": [],
+            "time_period": null,
+            "sentiment": "neutral",
+            "contains_forward_looking_statement": false,
+            "summary": "LG CNS에 대한 정보가 포함되어 있다."
+          }
+        },
+        {
+          "page": 1,
+          "raw_chunk": "엔터프라이즈 AI 전환의 핵심 기업으로 부상 예상",
+          "structured_metadata": {
+            "chunk_index": 2,
+            "entities": [
+              "LG CNS"
+            ],
+            "sector_mentioned": "인터넷/게임",
+            "topic": "LG CNS의 AI 전환 전망",
+            "metric_mentions": [],
+            "time_period": null,
+            "sentiment": "positive",
+            "contains_forward_looking_statement": true,
+            "summary": "LG CNS가 엔터프라이즈 AI 전환의 핵심 기업으로 부상할 것으로 기대된다."
+          }
+        }
+      ]
+    },
+    "table": {
+      "elapsed_off_s": 8.05,
+      "elapsed_on_s": 12.004,
+      "added_s": 3.954,
+      "n_tables": 13,
+      "added_s_per_table": 0.304,
+      "sample": [
+        {
+          "source": "table",
+          "record_type": "table_metadata",
+          "pdf_id": "LGCNS",
+          "page": 1,
+          "table_idx": 1,
+          "table_type": "finance",
+          "table_title": "기업 실적 요약",
+          "entities_mentioned": [],
+          "time_periods_covered": [],
+          "table_type_refined": "실적 요약",
+          "unmapped_fields_summary": "결산과 관련된 재무 지표들",
+          "notable_finding": null
+        },
+        {
+          "source": "table",
+          "record_type": "table_metadata",
+          "pdf_id": "LGCNS",
+          "page": 1,
+          "table_idx": 3,
+          "table_type": "contract_or_general",
+          "table_title": "투자 의견 및 목표 주가",
+          "entities_mentioned": [],
+          "time_periods_covered": [],
+          "table_type_refined": "투자 의견",
+          "unmapped_fields_summary": "투자 의견과 목표 주가에 대한 정보",
+          "notable_finding": "목표 주가 89,000원 유지"
+        },
+        {
+          "source": "table",
+          "record_type": "table_metadata",
+          "pdf_id": "LGCNS",
+          "page": 4,
+          "table_idx": 3,
+          "table_type": "finance",
+          "table_title": "재무상태표",
+          "entities_mentioned": [],
+          "time_periods_covered": [
+            "2024A",
+            "2025A",
+            "2026F",
+            "2027F",
+            "2028F"
+          ],
+          "table_type_refined": "재무상태표",
+          "unmapped_fields_summary": "여러 재무 항목들이 나열되어 있음.",
+          "notable_finding": "차입금 항목에서 2026F, 2027F, 2028F에 대한 수치가 감소하는 경향을 보임."
+        }
+      ]
+    }
+  },
+  "Construct": {
+    "text": {
+      "elapsed_off_s": 1.149,
+      "elapsed_on_s": 10.173,
+      "added_s": 9.024,
+      "n_chunks": 20,
+      "added_ms_per_chunk": 451.2,
+      "sample": [
+        {
+          "page": 1,
+          "raw_chunk": "건설 Weekly  I 2026.7.21\nAnalyst 김승준 sjunkim@hanafn.com\nAnalyst 하민호 minhoha@hanafn",
+          "structured_metadata": {
+            "chunk_index": 0,
+            "entities": [],
+            "sector_mentioned": null,
+            "topic": "이번 주부터 실적발표 시작",
+            "metric_mentions": [],
+            "time_period": null,
+            "sentiment": "neutral",
+            "contains_forward_looking_statement": false,
+            "summary": "주간 종합 건설 업계 실적발표 관련 정보 제공."
+          }
+        },
+        {
+          "page": 1,
+          "raw_chunk": " 수익률은 건설업이 코스피 대비 0.6%p 상회했다. 지난 주 수급은 기관과 연기금, 외인이 모두 매수했다. 기관은 삼성E&A, \n삼성물산을 ",
+          "structured_metadata": {
+            "chunk_index": 1,
+            "entities": [
+              "삼성E&A",
+              "삼성물산",
+              "IPARK현대산업개발"
+            ],
+            "sector_mentioned": "건설",
+            "topic": "건설업 수익률과 기관 수급 동향",
+            "metric_mentions": [
+              "수익률",
+              "실적",
+              "밸류에이션"
+            ],
+            "time_period": "2분기",
+            "sentiment": "positive",
+            "contains_forward_looking_statement": true,
+            "summary": "건설업 수익률이 코스피 대비 높으며, 기관과 외인의 수급 흐름이 긍정적이다."
+          }
+        },
+        {
+          "page": 1,
+          "raw_chunk": " 전국 매매수급동향은 99.2로 2주 연속 상승했다(+0.30%p). 전국 아파트 매매가는 46주 연속 상승(+0.11%), 전세가는 57주 ",
+          "structured_metadata": {
+            "chunk_index": 2,
+            "entities": [],
+            "sector_mentioned": "부동산",
+            "topic": "전국 매매수급 동향 및 아파트 가격 변화",
+            "metric_mentions": [
+              "매매수급동향",
+              "아파트 매매가",
+              "전세가"
+            ],
+            "time_period": null,
+            "sentiment": "positive",
+            "contains_forward_looking_statement": false,
+            "summary": "전국 매매수급 및 아파트 매매가격이 지속 상승하고 있다."
+          }
+        }
+      ]
+    },
+    "table": {
+      "elapsed_off_s": 7.092,
+      "elapsed_on_s": 10.673,
+      "added_s": 3.581,
+      "n_tables": 15,
+      "added_s_per_table": 0.239,
+      "sample": [
+        {
+          "source": "table",
+          "record_type": "table_metadata",
+          "pdf_id": "Construct",
+          "page": 4,
+          "table_idx": 1,
+          "table_type": "contract_or_general",
+          "table_title": "지역별 경제 지표",
+          "entities_mentioned": [],
+          "time_periods_covered": [],
+          "table_type_refined": "경제 통계",
+          "unmapped_fields_summary": "규칙 기반 매칭 안 된 행의 데이터는 지역별 경제 지표 추정치로 추측됨.",
+          "notable_finding": null
+        },
+        {
+          "source": "table",
+          "record_type": "table_metadata",
+          "pdf_id": "Construct",
+          "page": 4,
+          "table_idx": 2,
+          "table_type": "contract_or_general",
+          "table_title": "매전 매세 분석",
+          "entities_mentioned": [
+            "지지"
+          ],
+          "time_periods_covered": [
+            "0"
+          ],
+          "table_type_refined": "실적 요약",
+          "unmapped_fields_summary": "표의 다양한 매출 지표 요약",
+          "notable_finding": "감소율이 이례적으로 높음"
+        },
+        {
+          "source": "table",
+          "record_type": "table_metadata",
+          "pdf_id": "Construct",
+          "page": 8,
+          "table_idx": 1,
+          "table_type": "contract_or_general",
+          "table_title": "투자의견 및 목표주가 괴리율",
+          "entities_mentioned": [],
+          "time_periods_covered": [
+            "2023",
+            "2024",
+            "2025"
+          ],
+          "table_type_refined": "투자 지표",
+          "unmapped_fields_summary": "날짜와 관련된 행 정보",
+          "notable_finding": "최근 목표주가가 지속적으로 상승 추세에 있음"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,6939 @@
+{
+  "pdf_id": "20260721_company_279243000",
+  "n_finance_rows_filtered": 72,
+  "n_rows_extracted": 227,
+  "n_rows_mapped_to_canonical_field": 27,
+  "hit_rate": 0.1189,
+  "n_records_flagged_data_quality": 1,
+  "canonical_field_counts": {
+    "contract_amount": 9,
+    "contract_period": 9,
+    "contract_counterparty": 9
+  },
+  "derived_signals_triggered": [],
+  "records": [
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "12결산 (십억원)",
+      "cells": [
+        "2024.12 2025.12 2026.12E 2027.12E 2028.12E"
+      ],
+      "numeric_values": [
+        null
+      ],
+      "unit": null,
+      "trend": null,
+      "data_quality": null,
+      "page": 1,
+      "table_idx": 1,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "YoY(%)",
+      "cells": [
+        "6.7 2.5 6.3 8.7 9.2"
+      ],
+      "numeric_values": [
+        null
+      ],
+      "unit": null,
+      "trend": null,
+      "data_quality": null,
+      "page": 1,
+      "table_idx": 1,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "OP마진(%)",
+      "cells": [
+        "8.6 9.0 9.4 9.5 9.6"
+      ],
+      "numeric_values": [
+        null
+      ],
+      "unit": null,
+      "trend": null,
+      "data_quality": null,
+      "page": 1,
+      "table_idx": 1,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "순이익(십억원)",
+      "cells": [
+        "365 439 497 547 598"
+      ],
+      "numeric_values": [
+        null
+      ],
+      "unit": null,
+      "trend": null,
+      "data_quality": null,
+      "page": 1,
+      "table_idx": 1,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "YoY(%)",
+      "cells": [
+        "9.7 8.8 12.6 10.2 9.3"
+      ],
+      "numeric_values": [
+        null
+      ],
+      "unit": null,
+      "trend": null,
+      "data_quality": null,
+      "page": 1,
+      "table_idx": 1,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "PCR(배)",
+      "cells": [
+        "0.0 8.2 7.9 7.4 6.9"
+      ],
+      "numeric_values": [
+        null
+      ],
+      "unit": null,
+      "trend": null,
+      "data_quality": null,
+      "page": 1,
+      "table_idx": 1,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "Company",
+      "cells": [
+        "Data"
+      ],
+      "numeric_values": [
+        null
+      ],
+      "unit": null,
+      "trend": null,
+      "data_quality": null,
+      "page": 1,
+      "table_idx": 2,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "현재가(07/20)",
+      "cells": [
+        "61,800 원"
+      ],
+      "numeric_values": [
+        null
+      ],
+      "unit": null,
+      "trend": null,
+      "data_quality": null,
+      "page": 1,
+      "table_idx": 2,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "액면가(원)",
+      "cells": [
+        "500 원"
+      ],
+      "numeric_values": [
+        null
+      ],
+      "unit": null,
+      "trend": null,
+      "data_quality": null,
+      "page": 1,
+      "table_idx": 2,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "52주 최고가(보통주)",
+      "cells": [
+        "143,700 원"
+      ],
+      "numeric_values": [
+        null
+      ],
+      "unit": null,
+      "trend": null,
+      "data_quality": null,
+      "page": 1,
+      "table_idx": 2,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "52주 최저가(보통주)",
+      "cells": [
+        "55,400 원"
+      ],
+      "numeric_values": [
+        null
+      ],
+      "unit": null,
+      "trend": null,
+      "data_quality": null,
+      "page": 1,
+      "table_idx": 2,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "KOSPI (07/20)",
+      "cells": [
+        "6,516.27p"
+      ],
+      "numeric_values": [
+        null
+      ],
+      "unit": null,
+      "trend": null,
+      "data_quality": null,
+      "page": 1,
+      "table_idx": 2,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "KOSDAQ (07/20)",
+      "cells": [
+        "749.64p"
+      ],
+      "numeric_values": [
+        null
+      ],
+      "unit": null,
+      "trend": null,
+      "data_quality": null,
+      "page": 1,
+      "table_idx": 2,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "시가총액",
+      "cells": [
+        "59,876 억원"
+      ],
+      "numeric_values": [
+        null
+      ],
+      "unit": null,
+      "trend": null,
+      "data_quality": null,
+      "page": 1,
+      "table_idx": 2,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "발행주식수(보통주)",
+      "cells": [
+        "9,689 만주"
+      ],
+      "numeric_values": [
+        null
+      ],
+      "unit": null,
+      "trend": null,
+      "data_quality": null,
+      "page": 1,
+      "table_idx": 2,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "발행주식수(우선주)",
+      "cells": [
+        "0 만주"
+      ],
+      "numeric_values": [
+        null
+      ],
+      "unit": null,
+      "trend": null,
+      "data_quality": null,
+      "page": 1,
+      "table_idx": 2,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "평균거래량(60일)",
+      "cells": [
+        "122.5 만주"
+      ],
+      "numeric_values": [
+        null
+      ],
+      "unit": null,
+      "trend": null,
+      "data_quality": null,
+      "page": 1,
+      "table_idx": 2,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "평균거래대금(60일)",
+      "cells": [
+        "928 억원"
+      ],
+      "numeric_values": [
+        null
+      ],
+      "unit": null,
+      "trend": null,
+      "data_quality": null,
+      "page": 1,
+      "table_idx": 2,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "외국인지분(보통주)",
+      "cells": [
+        "5.69%"
+      ],
+      "numeric_values": [
+        null
+      ],
+      "unit": null,
+      "trend": null,
+      "data_quality": null,
+      "page": 1,
+      "table_idx": 2,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "주요주주",
+      "cells": [],
+      "numeric_values": [],
+      "unit": null,
+      "trend": null,
+      "data_quality": null,
+      "page": 1,
+      "table_idx": 2,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "LG 외 5인",
+      "cells": [
+        "47.09%"
+      ],
+      "numeric_values": [
+        null
+      ],
+      "unit": null,
+      "trend": null,
+      "data_quality": null,
+      "page": 1,
+      "table_idx": 2,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "국민연금공단",
+      "cells": [
+        "6.09%"
+      ],
+      "numeric_values": [
+        null
+      ],
+      "unit": null,
+      "trend": null,
+      "data_quality": null,
+      "page": 1,
+      "table_idx": 2,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "BUY",
+      "cells": [],
+      "numeric_values": [],
+      "unit": null,
+      "trend": null,
+      "data_quality": null,
+      "page": 1,
+      "table_idx": 3,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "유지",
+      "cells": [],
+      "numeric_values": [],
+      "unit": null,
+      "trend": null,
+      "data_quality": null,
+      "page": 1,
+      "table_idx": 3,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "TP 89,000원",
+      "cells": [
+        "유지"
+      ],
+      "numeric_values": [
+        null
+      ],
+      "unit": null,
+      "trend": null,
+      "data_quality": null,
+      "page": 1,
+      "table_idx": 3,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "[도표1] LG CNS 분기별",
+      "cells": [
+        "기별 실적 추이",
+        "이및전망",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "(단위",
+        "위: 십억원)"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 2,
+      "table_idx": 1,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "",
+      "cells": [
+        "1Q25",
+        "2Q25",
+        "3Q25",
+        "4Q25",
+        "1Q26",
+        "2Q26F",
+        "3Q26F",
+        "4Q26F",
+        "2024",
+        "2025",
+        "2026F",
+        "2027F"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 2,
+      "table_idx": 1,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "성장률(YoY %)",
+      "cells": [
+        "13.2%",
+        "0.7%",
+        "5.8%",
+        "-4.4%",
+        "8.6%",
+        "5.7%",
+        "4.9%",
+        "6.4%",
+        "6.7%",
+        "2.5%",
+        "6.3%",
+        "8.7%"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 2,
+      "table_idx": 1,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "클라우드 & AI",
+      "cells": [
+        "717",
+        "872",
+        "880",
+        "1,118",
+        "765",
+        "921",
+        "930",
+        "1,184",
+        "3 ,352",
+        "3 ,587",
+        "3 ,801",
+        "4 ,143"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 2,
+      "table_idx": 1,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "스마트엔지니어링",
+      "cells": [
+        "206",
+        "267",
+        "306",
+        "414",
+        "228",
+        "278",
+        "294",
+        "432",
+        "1 ,237",
+        "1 ,194",
+        "1 ,232",
+        "1 ,296"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 2,
+      "table_idx": 1,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "Digital Business Service",
+      "cells": [
+        "288",
+        "321",
+        "337",
+        "404",
+        "322",
+        "344",
+        "373",
+        "444",
+        "1 ,394",
+        "1 ,349",
+        "1 ,483",
+        "1 ,645"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 2,
+      "table_idx": 1,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "GPM(%)",
+      "cells": [
+        "13.1%",
+        "16.4%",
+        "13.9%",
+        "17.7%",
+        "13.8%",
+        "15.5%",
+        "15.5%",
+        "18.0%",
+        "15.6%",
+        "15.5%",
+        "15.9%",
+        "15.9%"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 2,
+      "table_idx": 1,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "성장률(YoY %)",
+      "cells": [
+        "144.3%",
+        "2.3%",
+        "-15.8%",
+        "7.9%",
+        "19.4%",
+        "-5.7%",
+        "25.5%",
+        "9.2%",
+        "10.5%",
+        "7.6%",
+        "11.2%",
+        "9.9%"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 2,
+      "table_idx": 1,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "OPM(%)",
+      "cells": [
+        "6.5%",
+        "9.6%",
+        "7.9%",
+        "11.2%",
+        "7.2%",
+        "8.6%",
+        "9.4%",
+        "11.4%",
+        "8.6%",
+        "9.0%",
+        "9.4%",
+        "9.5%"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 2,
+      "table_idx": 1,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "NPM(%)",
+      "cells": [
+        "4.7%",
+        "6.8%",
+        "6.9%",
+        "9.3%",
+        "6.2%",
+        "6.0%",
+        "8.1%",
+        "9.4%",
+        "6.1%",
+        "7.2%",
+        "7.6%",
+        "7.7%"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 2,
+      "table_idx": 1,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "2026-08-01",
+      "cells": [],
+      "numeric_value": null,
+      "unit": null,
+      "data_quality": null,
+      "page": 3,
+      "table_idx": 1,
+      "row_record_idx": 0,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "LG전자 Physical AI 인프라계약",
+      "cells": [],
+      "numeric_value": null,
+      "unit": null,
+      "data_quality": null,
+      "page": 3,
+      "table_idx": 1,
+      "row_record_idx": 0,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": "contract_amount",
+      "canonical_category": "수주/계약",
+      "raw_label": "189,747,247,549",
+      "cells": [],
+      "numeric_value": 189747247549.0,
+      "unit": "KRW",
+      "data_quality": null,
+      "page": 3,
+      "table_idx": 1,
+      "row_record_idx": 0,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": "contract_period",
+      "canonical_category": "수주/계약",
+      "raw_label": "2026-08-01~2029-07-31",
+      "cells": [],
+      "numeric_value": null,
+      "unit": null,
+      "data_quality": null,
+      "page": 3,
+      "table_idx": 1,
+      "row_record_idx": 0,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": "contract_counterparty",
+      "canonical_category": "수주/계약",
+      "raw_label": "LG전자",
+      "cells": [],
+      "numeric_value": null,
+      "unit": null,
+      "data_quality": null,
+      "page": 3,
+      "table_idx": 1,
+      "row_record_idx": 0,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "월단위지급",
+      "cells": [],
+      "numeric_value": null,
+      "unit": null,
+      "data_quality": null,
+      "page": 3,
+      "table_idx": 1,
+      "row_record_idx": 0,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "2026-04-01",
+      "cells": [],
+      "numeric_value": null,
+      "unit": null,
+      "data_quality": null,
+      "page": 3,
+      "table_idx": 1,
+      "row_record_idx": 1,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "삼송데이터센터 Co-location 서비스계약",
+      "cells": [],
+      "numeric_value": null,
+      "unit": null,
+      "data_quality": null,
+      "page": 3,
+      "table_idx": 1,
+      "row_record_idx": 1,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": "contract_amount",
+      "canonical_category": "수주/계약",
+      "raw_label": "603,000,000,000",
+      "cells": [],
+      "numeric_value": 603000000000.0,
+      "unit": "KRW",
+      "data_quality": null,
+      "page": 3,
+      "table_idx": 1,
+      "row_record_idx": 1,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": "contract_period",
+      "canonical_category": "수주/계약",
+      "raw_label": "2026-07-01~2035-05-31",
+      "cells": [],
+      "numeric_value": null,
+      "unit": null,
+      "data_quality": null,
+      "page": 3,
+      "table_idx": 1,
+      "row_record_idx": 1,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": "contract_counterparty",
+      "canonical_category": "수주/계약",
+      "raw_label": "네이버클라우드주식회사",
+      "cells": [],
+      "numeric_value": null,
+      "unit": null,
+      "data_quality": null,
+      "page": 3,
+      "table_idx": 1,
+      "row_record_idx": 1,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "월단위지급",
+      "cells": [],
+      "numeric_value": null,
+      "unit": null,
+      "data_quality": null,
+      "page": 3,
+      "table_idx": 1,
+      "row_record_idx": 1,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "2026-04-01",
+      "cells": [],
+      "numeric_value": null,
+      "unit": null,
+      "data_quality": null,
+      "page": 3,
+      "table_idx": 1,
+      "row_record_idx": 2,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "고양삼송데이터센터위탁운영",
+      "cells": [],
+      "numeric_value": null,
+      "unit": null,
+      "data_quality": null,
+      "page": 3,
+      "table_idx": 1,
+      "row_record_idx": 2,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": "contract_amount",
+      "canonical_category": "수주/계약",
+      "raw_label": "182,034,798,000",
+      "cells": [],
+      "numeric_value": 182034798000.0,
+      "unit": "KRW",
+      "data_quality": null,
+      "page": 3,
+      "table_idx": 1,
+      "row_record_idx": 2,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": "contract_period",
+      "canonical_category": "수주/계약",
+      "raw_label": "2026-03-01~2035-05-31",
+      "cells": [],
+      "numeric_value": null,
+      "unit": null,
+      "data_quality": null,
+      "page": 3,
+      "table_idx": 1,
+      "row_record_idx": 2,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": "contract_counterparty",
+      "canonical_category": "수주/계약",
+      "raw_label": "주식회사우리은행외 1",
+      "cells": [],
+      "numeric_value": null,
+      "unit": null,
+      "data_quality": null,
+      "page": 3,
+      "table_idx": 1,
+      "row_record_idx": 2,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "프로젝트진행에따라청구및지급",
+      "cells": [],
+      "numeric_value": null,
+      "unit": null,
+      "data_quality": null,
+      "page": 3,
+      "table_idx": 1,
+      "row_record_idx": 2,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "2026-02-12",
+      "cells": [],
+      "numeric_value": null,
+      "unit": null,
+      "data_quality": null,
+      "page": 3,
+      "table_idx": 1,
+      "row_record_idx": 3,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "고양삼송 IT플랫폼센터 2단계구축공사",
+      "cells": [],
+      "numeric_value": null,
+      "unit": null,
+      "data_quality": null,
+      "page": 3,
+      "table_idx": 1,
+      "row_record_idx": 3,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": "contract_amount",
+      "canonical_category": "수주/계약",
+      "raw_label": "240,877,169,000",
+      "cells": [],
+      "numeric_value": 240877169000.0,
+      "unit": "KRW",
+      "data_quality": null,
+      "page": 3,
+      "table_idx": 1,
+      "row_record_idx": 3,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": "contract_period",
+      "canonical_category": "수주/계약",
+      "raw_label": "2025-12-18~2027-05-31",
+      "cells": [],
+      "numeric_value": null,
+      "unit": null,
+      "data_quality": null,
+      "page": 3,
+      "table_idx": 1,
+      "row_record_idx": 3,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": "contract_counterparty",
+      "canonical_category": "수주/계약",
+      "raw_label": "주식회사우리은행외 1",
+      "cells": [],
+      "numeric_value": null,
+      "unit": null,
+      "data_quality": null,
+      "page": 3,
+      "table_idx": 1,
+      "row_record_idx": 3,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "2025-12-29",
+      "cells": [],
+      "numeric_value": null,
+      "unit": null,
+      "data_quality": null,
+      "page": 3,
+      "table_idx": 1,
+      "row_record_idx": 4,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "25년 N-ERP 확산계약 ( 차세대 ERP 구축통합테스트및확산",
+      "cells": [],
+      "numeric_value": null,
+      "unit": null,
+      "data_quality": null,
+      "page": 3,
+      "table_idx": 1,
+      "row_record_idx": 4,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": "contract_amount",
+      "canonical_category": "수주/계약",
+      "raw_label": "226,178,000,000",
+      "cells": [],
+      "numeric_value": 226178000000.0,
+      "unit": "KRW",
+      "data_quality": null,
+      "page": 3,
+      "table_idx": 1,
+      "row_record_idx": 4,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": "contract_period",
+      "canonical_category": "수주/계약",
+      "raw_label": "2025-01-01~2026-12-31",
+      "cells": [],
+      "numeric_value": null,
+      "unit": null,
+      "data_quality": null,
+      "page": 3,
+      "table_idx": 1,
+      "row_record_idx": 4,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": "contract_counterparty",
+      "canonical_category": "수주/계약",
+      "raw_label": "LG전자",
+      "cells": [],
+      "numeric_value": null,
+      "unit": null,
+      "data_quality": null,
+      "page": 3,
+      "table_idx": 1,
+      "row_record_idx": 4,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "2025-12-29",
+      "cells": [],
+      "numeric_value": null,
+      "unit": null,
+      "data_quality": null,
+      "page": 3,
+      "table_idx": 1,
+      "row_record_idx": 5,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "N-ERP 구축 SI인건비계약",
+      "cells": [],
+      "numeric_value": null,
+      "unit": null,
+      "data_quality": null,
+      "page": 3,
+      "table_idx": 1,
+      "row_record_idx": 5,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": "contract_amount",
+      "canonical_category": "수주/계약",
+      "raw_label": "242,151,000,000",
+      "cells": [],
+      "numeric_value": 242151000000.0,
+      "unit": "KRW",
+      "data_quality": null,
+      "page": 3,
+      "table_idx": 1,
+      "row_record_idx": 5,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": "contract_period",
+      "canonical_category": "수주/계약",
+      "raw_label": "2024-01-01~2026-12-31",
+      "cells": [],
+      "numeric_value": null,
+      "unit": null,
+      "data_quality": null,
+      "page": 3,
+      "table_idx": 1,
+      "row_record_idx": 5,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": "contract_counterparty",
+      "canonical_category": "수주/계약",
+      "raw_label": "LG전자",
+      "cells": [],
+      "numeric_value": null,
+      "unit": null,
+      "data_quality": null,
+      "page": 3,
+      "table_idx": 1,
+      "row_record_idx": 5,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "2025-12-26",
+      "cells": [],
+      "numeric_value": null,
+      "unit": null,
+      "data_quality": null,
+      "page": 3,
+      "table_idx": 1,
+      "row_record_idx": 6,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "「프로젝트 NEO」계정계차세대구축",
+      "cells": [],
+      "numeric_value": null,
+      "unit": null,
+      "data_quality": null,
+      "page": 3,
+      "table_idx": 1,
+      "row_record_idx": 6,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": "contract_amount",
+      "canonical_category": "수주/계약",
+      "raw_label": "-",
+      "cells": [],
+      "numeric_value": null,
+      "unit": "KRW",
+      "data_quality": null,
+      "page": 3,
+      "table_idx": 1,
+      "row_record_idx": 6,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": "contract_period",
+      "canonical_category": "수주/계약",
+      "raw_label": "2026-01-05~2028-04-04",
+      "cells": [],
+      "numeric_value": null,
+      "unit": null,
+      "data_quality": null,
+      "page": 3,
+      "table_idx": 1,
+      "row_record_idx": 6,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": "contract_counterparty",
+      "canonical_category": "수주/계약",
+      "raw_label": "NH농협은행",
+      "cells": [],
+      "numeric_value": null,
+      "unit": null,
+      "data_quality": null,
+      "page": 3,
+      "table_idx": 1,
+      "row_record_idx": 6,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "NH농협은행 '프로젝트 NEO' 계정계차세대구축사업의우선협상대상자로선정",
+      "cells": [],
+      "numeric_value": null,
+      "unit": null,
+      "data_quality": null,
+      "page": 3,
+      "table_idx": 1,
+      "row_record_idx": 6,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "2025-11-25",
+      "cells": [],
+      "numeric_value": null,
+      "unit": null,
+      "data_quality": null,
+      "page": 3,
+      "table_idx": 1,
+      "row_record_idx": 7,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "클라우드운영실클라우드인프라통합운영계약",
+      "cells": [],
+      "numeric_value": null,
+      "unit": null,
+      "data_quality": null,
+      "page": 3,
+      "table_idx": 1,
+      "row_record_idx": 7,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": "contract_amount",
+      "canonical_category": "수주/계약",
+      "raw_label": "3(cid:9)47,462,730,000",
+      "cells": [],
+      "numeric_value": 3.0,
+      "unit": "KRW",
+      "data_quality": "unmapped_glyph",
+      "page": 3,
+      "table_idx": 1,
+      "row_record_idx": 7,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": "contract_period",
+      "canonical_category": "수주/계약",
+      "raw_label": "2025-07-01~2028-07-31",
+      "cells": [],
+      "numeric_value": null,
+      "unit": null,
+      "data_quality": null,
+      "page": 3,
+      "table_idx": 1,
+      "row_record_idx": 7,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": "contract_counterparty",
+      "canonical_category": "수주/계약",
+      "raw_label": "LG전자",
+      "cells": [],
+      "numeric_value": null,
+      "unit": null,
+      "data_quality": null,
+      "page": 3,
+      "table_idx": 1,
+      "row_record_idx": 7,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "월단위지급",
+      "cells": [],
+      "numeric_value": null,
+      "unit": null,
+      "data_quality": null,
+      "page": 3,
+      "table_idx": 1,
+      "row_record_idx": 7,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "2025-06-20",
+      "cells": [],
+      "numeric_value": null,
+      "unit": null,
+      "data_quality": null,
+      "page": 3,
+      "table_idx": 1,
+      "row_record_idx": 8,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "죽전데이터센터 Co-location 서비스계약서",
+      "cells": [],
+      "numeric_value": null,
+      "unit": null,
+      "data_quality": null,
+      "page": 3,
+      "table_idx": 1,
+      "row_record_idx": 8,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": "contract_amount",
+      "canonical_category": "수주/계약",
+      "raw_label": "-",
+      "cells": [],
+      "numeric_value": null,
+      "unit": "KRW",
+      "data_quality": null,
+      "page": 3,
+      "table_idx": 1,
+      "row_record_idx": 8,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": "contract_period",
+      "canonical_category": "수주/계약",
+      "raw_label": "2025-06-01~2033-05-31",
+      "cells": [],
+      "numeric_value": null,
+      "unit": null,
+      "data_quality": null,
+      "page": 3,
+      "table_idx": 1,
+      "row_record_idx": 8,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": "contract_counterparty",
+      "canonical_category": "수주/계약",
+      "raw_label": "네이버클라우드주식회사",
+      "cells": [],
+      "numeric_value": null,
+      "unit": null,
+      "data_quality": null,
+      "page": 3,
+      "table_idx": 1,
+      "row_record_idx": 8,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "월단위지급",
+      "cells": [],
+      "numeric_value": null,
+      "unit": null,
+      "data_quality": null,
+      "page": 3,
+      "table_idx": 1,
+      "row_record_idx": 8,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "포괄손익계산서",
+      "cells": [
+        "",
+        "",
+        "",
+        "단위",
+        "위: 십억원"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 1,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "12결산(십억원)",
+      "cells": [
+        "2024A",
+        "2025A",
+        "2026F",
+        "2027F",
+        "2028F"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 1,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "영업외손익",
+      "cells": [
+        "-27",
+        "41",
+        "51",
+        "51",
+        "51"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 1,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "관계기업손익",
+      "cells": [
+        "5",
+        "16",
+        "16",
+        "16",
+        "16"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 1,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "금융수익",
+      "cells": [
+        "39",
+        "62",
+        "65",
+        "65",
+        "65"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 1,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "금융비용",
+      "cells": [
+        "-30",
+        "-34",
+        "-32",
+        "-32",
+        "-32"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 1,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "기타",
+      "cells": [
+        "-42",
+        "-4",
+        "2",
+        "2",
+        "2"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 1,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "계속사업순손익",
+      "cells": [
+        "365",
+        "439",
+        "497",
+        "547",
+        "598"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 1,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "중단사업순손익",
+      "cells": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 1,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "비지배지분순이익",
+      "cells": [
+        "0",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 1,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "지배지분순이익",
+      "cells": [
+        "365",
+        "438",
+        "496",
+        "547",
+        "597"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 1,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "지배순이익률 (%)",
+      "cells": [
+        "6.1",
+        "7.1",
+        "7.6",
+        "7.7",
+        "7.7"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 1,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "매도가능금융자산평가",
+      "cells": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 1,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "기타포괄이익",
+      "cells": [
+        "20",
+        "4",
+        "4",
+        "4",
+        "4"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 1,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "포괄순이익",
+      "cells": [
+        "385",
+        "443",
+        "501",
+        "552",
+        "602"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 1,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "비지배지분포괄이익",
+      "cells": [
+        "0",
+        "1",
+        "1",
+        "2",
+        "2"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 1,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "지배지분포괄이익",
+      "cells": [
+        "384",
+        "442",
+        "500",
+        "550",
+        "601"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 1,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "현금흐름표",
+      "cells": [
+        "",
+        "",
+        "",
+        "단위",
+        "위: 십억원",
+        "주요 투자지표",
+        "",
+        "",
+        "",
+        "단위:",
+        "원, 배, %"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 2,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "12결산(십억원)",
+      "cells": [
+        "2024A",
+        "2025A",
+        "2026F",
+        "2027F",
+        "2028F",
+        "12결산(십억원)",
+        "2024A",
+        "2025A",
+        "2026F",
+        "2027F",
+        "2028F"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 2,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "영업활동 현금흐름",
+      "cells": [
+        "715",
+        "418",
+        "527",
+        "542",
+        "576",
+        "EPS",
+        "4,180",
+        "4,548",
+        "5,119",
+        "5,643",
+        "6,167"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 2,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "비현금항목의 가감",
+      "cells": [
+        "353",
+        "285",
+        "280",
+        "280",
+        "287",
+        "BPS",
+        "24,257",
+        "30,270",
+        "33,540",
+        "37,333",
+        "41,650"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 2,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "외환손익",
+      "cells": [
+        "-24",
+        "4",
+        "0",
+        "0",
+        "0",
+        "EBITDAPS",
+        "7,073",
+        "7,123",
+        "7,735",
+        "8,323",
+        "8,989"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 2,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "지분법평가손익",
+      "cells": [
+        "-5",
+        "-16",
+        "-16",
+        "-16",
+        "-16",
+        "EV/EBITDA",
+        "0.0",
+        "7.4",
+        "6.3",
+        "5.5",
+        "4.7"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 2,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "기타",
+      "cells": [
+        "296",
+        "179",
+        "170",
+        "172",
+        "179",
+        "SPS",
+        "68,610",
+        "63,667",
+        "67,255",
+        "73,119",
+        "79,813"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 2,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "자 기산타부 채의 증감",
+      "cells": [
+        "296 121",
+        "179 -206",
+        "170 -120",
+        "172 -151",
+        "179 -165",
+        "SPPSSR",
+        "68,610 0.0",
+        "63,667 1.0",
+        "67,255 1.0",
+        "73,119 0.9",
+        "79,813 0.8"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 2,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "자산부채의 증감 기타현금흐름",
+      "cells": [
+        "121 -124",
+        "-206 -100",
+        "-120 -131",
+        "-151 -134",
+        "-165 -143",
+        "PSR CFPS",
+        "0.0 6,654",
+        "1.0 3,034",
+        "1.0 4,449",
+        "0.9 4,605",
+        "0.8 4,957"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 2,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "기타현금흐름 투자활동 현금흐름",
+      "cells": [
+        "-124 -13",
+        "-100 -530",
+        "-131 -582",
+        "-134 -587",
+        "-143 -593",
+        "CFPS DPS",
+        "6,654 1,672",
+        "3,034 1,850",
+        "4,449 1,850",
+        "4,605 1,850",
+        "4,957 1,850"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 2,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "투자활동 현금흐름 투자자산",
+      "cells": [
+        "-13 -25",
+        "-530 -16",
+        "-582 -2",
+        "-587 -2",
+        "-593 -2",
+        "DPS",
+        "1,672",
+        "1,850",
+        "1,850",
+        "1,850",
+        "1,850"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 2,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "투자자산 유형자산",
+      "cells": [
+        "-25 -31",
+        "-16 -44",
+        "-2 -44",
+        "-2 -44",
+        "-2 -44",
+        "재무비율",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 2,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "투자자산 유형자산",
+      "cells": [
+        "-25 -31",
+        "-16 -44",
+        "-2 -44",
+        "-2 -44",
+        "-2 -44",
+        "재무비율",
+        "",
+        "",
+        "",
+        "단위:",
+        "원, 배, %"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 2,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "유형자산 기타",
+      "cells": [
+        "-31 42",
+        "-44 -469",
+        "-44 -536",
+        "-44 -542",
+        "-44 -548",
+        "재무비율 12결산(십억원)",
+        "2024A",
+        "2025A",
+        "2026F",
+        "단위: 2027F",
+        "원, 배, % 2028F"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 2,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "재무활동 현금흐름 단기차입금",
+      "cells": [
+        "-141 3",
+        "174 -5",
+        "-324 -5",
+        "-152 -5",
+        "-152 -5",
+        "성장성 매출액 증가율",
+        "6.7",
+        "2.5",
+        "6.3",
+        "8.7",
+        "9.2"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 2,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "단기차입금 사채",
+      "cells": [
+        "3 0",
+        "-5 -160",
+        "-5 20",
+        "-5 20",
+        "-5 20",
+        "매출액 증가율 영업이익 증가율",
+        "6.7 10.5",
+        "2.5 7.6",
+        "6.3 11.2",
+        "8.7 9.9",
+        "9.2 10.0"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 2,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "사채 장기차입금",
+      "cells": [
+        "0 0",
+        "-160 -1",
+        "20 -1",
+        "20 -1",
+        "20 -1",
+        "영업이익 증가율 순이익 증가율",
+        "10.5 9.8",
+        "7.6 20.3",
+        "11.2 13.2",
+        "9.9 10.1",
+        "10.0 9.3"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 2,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "장기차입금 자본의 증가(감소)",
+      "cells": [
+        "0 0",
+        "-1 600",
+        "-1 0",
+        "-1 0",
+        "-1 0",
+        "순이익 증가율 수익성",
+        "9.8",
+        "20.3",
+        "13.2",
+        "10.1",
+        "9.3"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 2,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "자본의 증가(감소) 현금배당",
+      "cells": [
+        "0 -133",
+        "600 -219",
+        "0 -179",
+        "0 -179",
+        "0 -179",
+        "수익성 ROIC",
+        "48.5",
+        "48.4",
+        "49.6",
+        "50.8",
+        "51.3"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 2,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "현금배당 기타",
+      "cells": [
+        "-133 -10",
+        "-219 -42",
+        "-179 -159",
+        "-179 13",
+        "-179 13",
+        "ROIC ROA",
+        "48.5 8.5",
+        "48.4 8.9",
+        "49.6 9.2",
+        "50.8 9.5",
+        "51.3 9.5"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 2,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "기타 현금의 증감",
+      "cells": [
+        "-10 572",
+        "-42 64",
+        "-159 519",
+        "13 275",
+        "13 304",
+        "ROA ROE",
+        "8.5 18.3",
+        "8.9 17.3",
+        "9.2 16.0",
+        "9.5 15.9",
+        "9.5 15.6"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 2,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "현금의 증감 기초 현금",
+      "cells": [
+        "572 505",
+        "64 1,077",
+        "519 1,141",
+        "275 1,660",
+        "304 1,935",
+        "ROE 안정성",
+        "18.3",
+        "17.3",
+        "16.0",
+        "15.9",
+        "15.6"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 2,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "기초 현금 기말 현금",
+      "cells": [
+        "505 1,077",
+        "1,077 1,141",
+        "1,141 1,660",
+        "1,660 1,935",
+        "1,935 2,239",
+        "안정성 부채비율",
+        "112.2",
+        "79.7",
+        "69.2",
+        "65.1",
+        "61.3"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 2,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "기말 현금 NOPLAT",
+      "cells": [
+        "1,077 385",
+        "1,141 408",
+        "1,660 459",
+        "1,935 509",
+        "2,239 560",
+        "부채비율 순차입금비율",
+        "112.2 15.4",
+        "79.7 14.6",
+        "69.2 11.6",
+        "65.1 11.5",
+        "61.3 11.2"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 2,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "NOPLAT FCF",
+      "cells": [
+        "385",
+        "408",
+        "459",
+        "509",
+        "560",
+        "순차입금비율 이자보상배율",
+        "15.4",
+        "14.6",
+        "11.6",
+        "11.5",
+        "11.2"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 2,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "재무상태표",
+      "cells": [
+        "",
+        "",
+        "",
+        "단위",
+        "위: 십억원"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 3,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "12결산(십억원)",
+      "cells": [
+        "2024A",
+        "2025A",
+        "2026F",
+        "2027F",
+        "2028F"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 3,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "매출채권 및 기타채권",
+      "cells": [
+        "1,714",
+        "1,708",
+        "1,806",
+        "1,954",
+        "2,125"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 3,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "재고자산",
+      "cells": [
+        "46",
+        "61",
+        "64",
+        "70",
+        "76"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 3,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "유형자산",
+      "cells": [
+        "545",
+        "536",
+        "559",
+        "554",
+        "550"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 3,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "관계기업투자금",
+      "cells": [
+        "124",
+        "145",
+        "147",
+        "148",
+        "150"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 3,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "기타금융자산",
+      "cells": [
+        "79",
+        "108",
+        "108",
+        "108",
+        "108"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 3,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "매입채무 및 기타채무",
+      "cells": [
+        "1,255",
+        "1,119",
+        "1,161",
+        "1,222",
+        "1,293"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 3,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "차입금",
+      "cells": [
+        "6",
+        "0",
+        "-5",
+        "-11",
+        "-16"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 3,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "유동성채무",
+      "cells": [
+        "202",
+        "333",
+        "161",
+        "161",
+        "161"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 3,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "차입금",
+      "cells": [
+        "0",
+        "0",
+        "-1",
+        "-1",
+        "-2"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 3,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "사채",
+      "cells": [
+        "389",
+        "160",
+        "180",
+        "200",
+        "220"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 3,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "지배지분",
+      "cells": [
+        "2,115",
+        "2,933",
+        "3,250",
+        "3,617",
+        "4,035"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 3,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "자본잉여금",
+      "cells": [
+        "35",
+        "624",
+        "624",
+        "624",
+        "624"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 3,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "기타자본변동",
+      "cells": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 3,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "비지배지분",
+      "cells": [
+        "8",
+        "9",
+        "10",
+        "11",
+        "12"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 3,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "총차입금",
+      "cells": [
+        "694",
+        "772",
+        "641",
+        "686",
+        "734"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 3,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "12결산(십억원)",
+      "cells": [
+        "2024A",
+        "2026F",
+        "2027F",
+        "2028F"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 4,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "SPS",
+      "cells": [
+        "68,610",
+        "67,255",
+        "73,119",
+        "79,813"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 4,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "PSR",
+      "cells": [
+        "0.0",
+        "1.0",
+        "0.9",
+        "0.8"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 4,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "현금흐름표",
+      "cells": [
+        "",
+        "",
+        "",
+        "단위",
+        "위: 십억원"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 5,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "12결산(십억원)",
+      "cells": [
+        "2024A",
+        "2025A",
+        "2026F",
+        "2027F",
+        "2028F"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 5,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "영업활동 현금흐름",
+      "cells": [
+        "715",
+        "418",
+        "527",
+        "542",
+        "576"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 5,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "비현금항목의 가감",
+      "cells": [
+        "353",
+        "285",
+        "280",
+        "280",
+        "287"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 5,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "외환손익",
+      "cells": [
+        "-24",
+        "4",
+        "0",
+        "0",
+        "0"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 5,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "지분법평가손익",
+      "cells": [
+        "-5",
+        "-16",
+        "-16",
+        "-16",
+        "-16"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 5,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "기타",
+      "cells": [
+        "296",
+        "179",
+        "170",
+        "172",
+        "179"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 5,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "자산부채의 증감",
+      "cells": [
+        "219261",
+        "-127096",
+        "-117200",
+        "-117521",
+        "-117695"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 5,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "기타현금흐름",
+      "cells": [
+        "-124",
+        "-100",
+        "-131",
+        "-134",
+        "-143"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 5,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "투자활동 현금흐름",
+      "cells": [
+        "-13",
+        "-530",
+        "-582",
+        "-587",
+        "-593"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 5,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "투자자산",
+      "cells": [
+        "-25",
+        "-16",
+        "-2",
+        "-2",
+        "-2"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 5,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "유형자산",
+      "cells": [
+        "-31",
+        "-44",
+        "-44",
+        "-44",
+        "-44"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 5,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "기타",
+      "cells": [
+        "42",
+        "-469",
+        "-536",
+        "-542",
+        "-548"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 5,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "재무활동 현금흐름",
+      "cells": [
+        "-141",
+        "174",
+        "-324",
+        "-152",
+        "-152"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 5,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "단기차입금",
+      "cells": [
+        "3",
+        "-5",
+        "-5",
+        "-5",
+        "-5"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 5,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "사채",
+      "cells": [
+        "0",
+        "-160",
+        "20",
+        "20",
+        "20"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 5,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "장기차입금",
+      "cells": [
+        "0",
+        "-1",
+        "-1",
+        "-1",
+        "-1"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 5,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "자본의 증가(감소)",
+      "cells": [
+        "0",
+        "600",
+        "0",
+        "0",
+        "0"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 5,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "현금배당",
+      "cells": [
+        "-133",
+        "-219",
+        "-179",
+        "-179",
+        "-179"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 5,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "기타",
+      "cells": [
+        "-10",
+        "-42",
+        "-159",
+        "13",
+        "13"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 5,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "현금의 증감",
+      "cells": [
+        "572",
+        "64",
+        "519",
+        "275",
+        "304"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 5,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "기초 현금",
+      "cells": [
+        "505",
+        "1,077",
+        "1,141",
+        "1,660",
+        "1,935"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 5,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "기말 현금",
+      "cells": [
+        "1,077",
+        "1,141",
+        "1,660",
+        "1,935",
+        "2,239"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 5,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "NOPLAT",
+      "cells": [
+        "385",
+        "408",
+        "459",
+        "509",
+        "560"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 5,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "FCF",
+      "cells": [
+        "580",
+        "292",
+        "431",
+        "446",
+        "480"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 5,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "포괄손익계산서",
+      "cells": [
+        "",
+        "",
+        "",
+        "단위",
+        "십억원",
+        "재무상태표",
+        "",
+        "",
+        "",
+        "단위",
+        ": 십억원"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 6,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "12결산(십억원)",
+      "cells": [
+        "2024A",
+        "2025A",
+        "2026F",
+        "2027F",
+        "2028F",
+        "12결산(십억원)",
+        "2024A",
+        "2025A",
+        "2026F",
+        "2027F",
+        "2028F"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 6,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "영업외손익 관계기업손익",
+      "cells": [
+        "-27 5",
+        "41 16",
+        "51 16",
+        "51 16",
+        "51 16",
+        "기타비유동자산 자산총계",
+        "321 4,505",
+        "532 5,285",
+        "519 5,514",
+        "509 5,989",
+        "502 6,527"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 6,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "관계기업손익 금융수익",
+      "cells": [
+        "5 39",
+        "16 62",
+        "16 65",
+        "16 65",
+        "16 65",
+        "자산총계 유동부채",
+        "4,505 1,852",
+        "5,285 1,861",
+        "5,514 1,725",
+        "5,989 1,781",
+        "6,527 1,846"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 6,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "금융비용 기타",
+      "cells": [
+        "-30 -42",
+        "-34 -4",
+        "-32 2",
+        "-32 2",
+        "-32 2",
+        "매입채무 및 기타채무 차입금",
+        "1,255 6",
+        "1,119 0",
+        "1,161 -5",
+        "1,222 -11",
+        "1,293 -16"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 6,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "계속사업순손익 중단사업순손익",
+      "cells": [
+        "365 0",
+        "439 0",
+        "497 0",
+        "547 0",
+        "598 0",
+        "비유동부채 차입금",
+        "529 0",
+        "483 0",
+        "530 -1",
+        "580 -1",
+        "633 -2"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 6,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "비지배지분순이익",
+      "cells": [
+        "0",
+        "1",
+        "1",
+        "1",
+        "1",
+        "부채총계",
+        "2,382",
+        "2,344",
+        "2,255",
+        "2,361",
+        "2,479"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 6,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "비지배지분순이익 지배지분순이익",
+      "cells": [
+        "0 365",
+        "1 438",
+        "1 496",
+        "1 547",
+        "1 597",
+        "부채총계 지배지분",
+        "2,382 2,115",
+        "2,344 2,933",
+        "2,255 3,250",
+        "2,361 3,617",
+        "2,479 4,035"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 6,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "지배지분순이익 지배순이익률 (%)",
+      "cells": [
+        "365 6.1",
+        "438 7.1",
+        "496 7.6",
+        "547 7.7",
+        "597 7.7",
+        "지배지분 자본금",
+        "2,115 47",
+        "2,933 52",
+        "3,250 52",
+        "3,617 52",
+        "4,035 52"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 6,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "지배순이익률 (%) 매도가능금융자산평가",
+      "cells": [
+        "6.1 0",
+        "7.1 0",
+        "7.6 0",
+        "7.7 0",
+        "7.7 0",
+        "자본금 자본잉여금",
+        "47 35",
+        "52 624",
+        "52 624",
+        "52 624",
+        "52 624"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 6,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "매도가능금융자산평가",
+      "cells": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "자본잉여금",
+        "35",
+        "624",
+        "624",
+        "624",
+        "624"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 6,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "매도가능금융자산평가 기타포괄이익",
+      "cells": [
+        "0 20",
+        "0 4",
+        "0 4",
+        "0 4",
+        "0 4",
+        "자본잉여금 이익잉여금",
+        "35 2,003",
+        "624 2,221",
+        "624 2,537",
+        "624 2,905",
+        "624 3,323"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 6,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "기타포괄이익 포괄순이익",
+      "cells": [
+        "20 385",
+        "4 443",
+        "4 501",
+        "4 552",
+        "4 602",
+        "이익잉여금 기타자본변동",
+        "2,003 0",
+        "2,221 0",
+        "2,537 0",
+        "2,905 0",
+        "3,323 0"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 6,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "기타포괄이익 포괄순이익",
+      "cells": [
+        "20 385",
+        "4 443",
+        "4 501",
+        "4 552",
+        "4 602",
+        "이익잉여금 기타자본변동",
+        "2,003 0",
+        "2,221 0",
+        "2,537 0",
+        "2,905 0",
+        "3,323 0"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 6,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "포괄순이익 비지배지분포괄이익",
+      "cells": [
+        "385 0",
+        "443 1",
+        "501 1",
+        "552 2",
+        "602 2",
+        "기타자본변동 비지배지분",
+        "0 8",
+        "0 9",
+        "0 10",
+        "0 11",
+        "0 12"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 6,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "비지배지분포괄이익",
+      "cells": [
+        "0",
+        "1",
+        "1",
+        "2",
+        "2",
+        "비지배지분",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 6,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "비지배지분포괄이익 지배지분포괄이익",
+      "cells": [
+        "0 384",
+        "1 442",
+        "1 500",
+        "2 550",
+        "2 601",
+        "비지배지분 자본총계",
+        "8 2,123",
+        "9 2,941",
+        "10 3,259",
+        "11 3,628",
+        "12 4,047"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 6,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "지배지분포괄이익 주: K-IFRS 회계기준 개정으",
+      "cells": [
+        "384 으로 기존의 기",
+        "442 기타영업수익/비",
+        "500 익/비용 항목은",
+        "550 제외됨",
+        "601",
+        "자본총계 총차입금",
+        "2,123 694",
+        "2,941 772",
+        "3,259 641",
+        "3,628 686",
+        "4,047 734"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 6,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "주: K-IFRS 회계기준 개정으",
+      "cells": [
+        "으로 기존의 기",
+        "기타영업수익/비",
+        "익/비용 항목은",
+        "제외됨",
+        "",
+        "총차입금",
+        "694",
+        "772",
+        "641",
+        "686",
+        "734"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 6,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "현금흐름표",
+      "cells": [
+        "",
+        "",
+        "",
+        "단위",
+        "십억원",
+        "주요 투자지표",
+        "",
+        "",
+        "",
+        "단위:",
+        "원, 배, %"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 6,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "현금흐름표 12결산(십억원)",
+      "cells": [
+        "2024A",
+        "2025A",
+        "2026F",
+        "단위 2027F",
+        "십억원 2028F",
+        "주요 투자지표 12결산(십억원)",
+        "2024A",
+        "2025A",
+        "2026F",
+        "단위: 2027F",
+        "원, 배, % 2028F"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 6,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "12결산(십억원) 영업활동 현금흐름",
+      "cells": [
+        "2024A 715",
+        "2025A 418",
+        "2026F 527",
+        "2027F 542",
+        "2028F 576",
+        "12결산(십억원) EPS",
+        "2024A 4,180",
+        "2025A 4,548",
+        "2026F 5,119",
+        "2027F 5,643",
+        "2028F 6,167"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 6,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "1영2업결활산동(십 현억금원흐) 름",
+      "cells": [
+        "2024A 715",
+        "2025A 418",
+        "2026F 527",
+        "2027F 542",
+        "202 5 8 7 F 6",
+        "1E2PS결 산(십억원)",
+        "2024A 4,180",
+        "2025A 4,548",
+        "2026F 5,119",
+        "2027F 5,643",
+        "2028F 6,167"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 6,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "비현금항목의 가감",
+      "cells": [
+        "353",
+        "285",
+        "280",
+        "280",
+        "287",
+        "BPS",
+        "24,257",
+        "30,270",
+        "33,540",
+        "37,333",
+        "41,650"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 6,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "외환손익 지분법평가손익",
+      "cells": [
+        "-24 -5",
+        "4 -16",
+        "0 -16",
+        "0 -16",
+        "0 -16",
+        "EBITDAPS EV/EBITDA",
+        "7,073 0.0",
+        "7,123 7.4",
+        "7,735 6.3",
+        "8,323 5.5",
+        "8,989 4.7"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 6,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "외환손익 지분법평가손익",
+      "cells": [
+        "-24 -5",
+        "4 -16",
+        "0 -16",
+        "0 -16",
+        "0 -16",
+        "EBITDAPS EV/EBITDA",
+        "7,073 0.0",
+        "7,123 7.4",
+        "7,735 6.3",
+        "8,323 5.5",
+        "8,989 4.7"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 6,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "기타",
+      "cells": [
+        "296",
+        "179",
+        "170",
+        "172",
+        "179",
+        "SPS",
+        "68,610",
+        "63,667",
+        "67,255",
+        "73,119",
+        "79,813"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 6,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "기타 자산부채의 증감",
+      "cells": [
+        "296 121",
+        "179 -206",
+        "170 -120",
+        "172 -151",
+        "179 -165",
+        "SPS PSR",
+        "68,610 0.0",
+        "63,667 1.0",
+        "67,255 1.0",
+        "73,119 0.9",
+        "79,813 0.8"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 6,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "자산부채의 증감",
+      "cells": [
+        "121",
+        "-206",
+        "-120",
+        "-151",
+        "-165",
+        "PSR",
+        "0.0",
+        "1.0",
+        "1.0",
+        "0.9",
+        "0.8"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 6,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "기타현금흐름",
+      "cells": [
+        "-124",
+        "-100",
+        "-131",
+        "-134",
+        "-143",
+        "CFPS",
+        "6,654",
+        "3,034",
+        "4,449",
+        "4,605",
+        "4,957"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 6,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "기타현금흐름 투자활동 현금흐름",
+      "cells": [
+        "-124 -13",
+        "-100 -530",
+        "-131 -582",
+        "-134 -587",
+        "-143 -593",
+        "CFPS DPS",
+        "6,654 1,672",
+        "3,034 1,850",
+        "4,449 1,850",
+        "4,605 1,850",
+        "4,957 1,850"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 6,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "투자활동 현금흐름 투자자산",
+      "cells": [
+        "-13 -25",
+        "-530 -16",
+        "-582 -2",
+        "-587 -2",
+        "-593 -2",
+        "DPS",
+        "1,672",
+        "1,850",
+        "1,850",
+        "1,850",
+        "1,850"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 6,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "투자자산",
+      "cells": [
+        "-25",
+        "-16",
+        "-2",
+        "-2",
+        "-2",
+        "재무비율",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 6,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "투자자산 유형자산",
+      "cells": [
+        "-25 -31",
+        "-16 -44",
+        "-2 -44",
+        "-2 -44",
+        "-2 -44",
+        "재무비율",
+        "",
+        "",
+        "",
+        "단위:",
+        "원, 배, %"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 6,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "유형자산 기타",
+      "cells": [
+        "-31 42",
+        "-44 -469",
+        "-44 -536",
+        "-44 -542",
+        "-44 -548",
+        "재무비율 12결산(십억원)",
+        "2024A",
+        "2025A",
+        "2026F",
+        "단위: 2027F",
+        "원, 배, % 2028F"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 6,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "기타 재무활동 현금흐름",
+      "cells": [
+        "42 -141",
+        "-469 174",
+        "-536 -324",
+        "-542 -152",
+        "-548 -152",
+        "12결산(십억원) 성장성",
+        "2024A",
+        "2025A",
+        "2026F",
+        "2027F",
+        "2028F"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 6,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "재무활동 현금흐름 단기차입금",
+      "cells": [
+        "-141 3",
+        "174 -5",
+        "-324 -5",
+        "-152 -5",
+        "-152 -5",
+        "성장성 매출액 증가율",
+        "6.7",
+        "2.5",
+        "6.3",
+        "8.7",
+        "9.2"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 6,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "단기차입금 사채",
+      "cells": [
+        "3 0",
+        "-5 -160",
+        "-5 20",
+        "-5 20",
+        "-5 20",
+        "매출액 증가율 영업이익 증가율",
+        "6.7 10.5",
+        "2.5 7.6",
+        "6.3 11.2",
+        "8.7 9.9",
+        "9.2 10.0"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 6,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "사채 장기차입금",
+      "cells": [
+        "0 0",
+        "-160 -1",
+        "20 -1",
+        "20 -1",
+        "20 -1",
+        "영업이익 증가율 순이익 증가율",
+        "10.5 9.8",
+        "7.6 20.3",
+        "11.2 13.2",
+        "9.9 10.1",
+        "10.0 9.3"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 6,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "장기차입금 자본의 증가(감소)",
+      "cells": [
+        "0 0",
+        "-1 600",
+        "-1 0",
+        "-1 0",
+        "-1 0",
+        "순이익 증가율 수익성",
+        "9.8",
+        "20.3",
+        "13.2",
+        "10.1",
+        "9.3"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 6,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "자본의 증가(감소) 현금배당",
+      "cells": [
+        "0 -133",
+        "600 -219",
+        "0 -179",
+        "0 -179",
+        "0 -179",
+        "수익성 ROIC",
+        "48.5",
+        "48.4",
+        "49.6",
+        "50.8",
+        "51.3"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 6,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "현금배당 기타",
+      "cells": [
+        "-133 -10",
+        "-219 -42",
+        "-179 -159",
+        "-179 13",
+        "-179 13",
+        "ROIC ROA",
+        "48.5 8.5",
+        "48.4 8.9",
+        "49.6 9.2",
+        "50.8 9.5",
+        "51.3 9.5"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 6,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "기타 현금의 증감",
+      "cells": [
+        "-10 572",
+        "-42 64",
+        "-159 519",
+        "13 275",
+        "13 304",
+        "ROA ROE",
+        "8.5 18.3",
+        "8.9 17.3",
+        "9.2 16.0",
+        "9.5 15.9",
+        "9.5 15.6"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 6,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "현금의 증감 기초 현금",
+      "cells": [
+        "572 505",
+        "64 1,077",
+        "519 1,141",
+        "275 1,660",
+        "304 1,935",
+        "ROE 안정성",
+        "18.3",
+        "17.3",
+        "16.0",
+        "15.9",
+        "15.6"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 6,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "기초 현금 기말 현금",
+      "cells": [
+        "505 1,077",
+        "1,077 1,141",
+        "1,141 1,660",
+        "1,660 1,935",
+        "1,935 2,239",
+        "안정성 부채비율",
+        "112.2",
+        "79.7",
+        "69.2",
+        "65.1",
+        "61.3"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 6,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "기말 현금",
+      "cells": [
+        "1,077",
+        "1,141",
+        "1,660",
+        "1,935",
+        "2,239",
+        "부채비율",
+        "112.2",
+        "79.7",
+        "69.2",
+        "65.1",
+        "61."
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 4,
+      "table_idx": 6,
+      "table_type": "finance"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "일자",
+      "cells": [
+        "투자의견",
+        "목표주가",
+        "괴리",
+        "리율",
+        "일자",
+        "투자의견",
+        "목표주가",
+        "괴리",
+        "리율"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 5,
+      "table_idx": 1,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "일자",
+      "cells": [
+        "투자의견",
+        "목표주가",
+        "평균",
+        "최고/최저",
+        "일자",
+        "투자의견",
+        "목표주가",
+        "평균",
+        "최고/최저"
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 5,
+      "table_idx": 1,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "2026.04.14",
+      "cells": [
+        "매수",
+        "89,000",
+        "(34.2)",
+        "(30.5)",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 5,
+      "table_idx": 1,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "2026.05.04",
+      "cells": [
+        "매수",
+        "89,000",
+        "(5.8)",
+        "38.1",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 5,
+      "table_idx": 1,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "2026.07.21",
+      "cells": [
+        "매수",
+        "89,000",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 5,
+      "table_idx": 1,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "2026.07.21",
+      "cells": [
+        "매수",
+        "89,000",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "numeric_values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unit": null,
+      "trend": {
+        "trend": null,
+        "first": null,
+        "last": null
+      },
+      "data_quality": null,
+      "page": 5,
+      "table_idx": 1,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "구분 Buy(매수) Trading Buy(매수) Hold(보유)",
+      "cells": [
+        "Sell(매도)"
+      ],
+      "numeric_values": [
+        null
+      ],
+      "unit": null,
+      "trend": null,
+      "data_quality": null,
+      "page": 6,
+      "table_idx": 1,
+      "table_type": "contract_or_general"
+    },
+    {
+      "source": "table",
+      "pdf_id": "20260721_company_279243000",
+      "canonical_field": null,
+      "canonical_category": null,
+      "raw_label": "비율 94.7% 4.6% 0.7%",
+      "cells": [
+        "0.0%"
+      ],
+      "numeric_values": [
+        null
+      ],
+      "unit": null,
+      "trend": null,
+      "data_quality": null,
+      "page": 6,
+      "table_idx": 1,
+      "table_type": "contract_or_general"
+    }
+  ],
+  "redis_cache_verification": {
+    "cached_record_count": 227,
+    "matches_source_record_count": true
+  }
+}

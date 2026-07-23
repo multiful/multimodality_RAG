@@ -1,0 +1,57 @@
+{
+  "_note": "3가지 청킹 전략(계층적/시멘틱/문맥적) 비교용 정답셋. [1]에서 이미 검증된 whole_page 추출(recall 100%) 대상 3개 페이지를 재사용 — LG CNS p1(애널리스트 본문), Construct p1(주간 투자전략), Construct p5(주간 뉴스). 각 페이지에 대해 '엔티티'(회사/기관명)와 '핵심 사실'(숫자+그 대상이 짝지어진 구체적 사실 — 청크 경계가 이 짝을 갈라놓으면 개별 청크 단위 추출에서 놓치기 쉬움)를 정답으로 정의. anchor는 LLM 출력에서 자동 매칭할 때 쓰는 짧고 구체적인 부분문자열(느슨한 표현 차이를 허용하기 위해 핵심 숫자/단어만). 평가는 청크를 하나씩 '독립적으로' LLM에 준 뒤(실제 RAG에서 청크 하나만 검색되는 상황 재현) 그 결과의 합집합이 정답을 얼마나 커버하는지로 측정.",
+  "documents": {
+    "lgcns_p1": {
+      "pdf": "reference/LGCNS/20260721_company_279243000.pdf",
+      "page": 1,
+      "entities": [
+        {"name": "LG CNS", "anchor": "LG CNS"},
+        {"name": "LG전자", "anchor": "LG전자"}
+      ],
+      "key_facts": [
+        {"fact": "매출 1.54조원(YoY +5.7%)", "anchor": "1.54조"},
+        {"fact": "영업이익 1,328억원(-5.7%)", "anchor": "1,328억"},
+        {"fact": "OPM 8.6%", "anchor": "8.6%"},
+        {"fact": "목표주가 89,000원 유지(BUY)", "anchor": "89,000"},
+        {"fact": "LG전자와 피지컬 AI 인프라 계약 1,897억원(26년 8월부터 3년간)", "anchor": "1,897억"}
+      ]
+    },
+    "construct_p1": {
+      "pdf": "reference/Construct/20260721_industry_362851000.pdf",
+      "page": 1,
+      "entities": [
+        {"name": "삼성E&A", "anchor": "삼성E&A"},
+        {"name": "삼성물산", "anchor": "삼성물산"},
+        {"name": "IPARK현대산업개발", "anchor": "IPARK현대산업개발"},
+        {"name": "대우건설", "anchor": "대우건설"},
+        {"name": "GS건설", "anchor": "GS건설"},
+        {"name": "DL이앤씨", "anchor": "DL이앤씨"},
+        {"name": "현대건설", "anchor": "현대건설"},
+        {"name": "GS그룹", "anchor": "GS그룹"}
+      ],
+      "key_facts": [
+        {"fact": "건설업 수익률이 코스피 대비 0.6%p 상회", "anchor": "0.6%p"},
+        {"fact": "기준금리 0.25%p 인상되어 2.75%", "anchor": "2.75%"},
+        {"fact": "5대 은행 가계대출 잔액 649.7조원", "anchor": "649.7조"},
+        {"fact": "GS건설을 TOP PICK으로 추천", "anchor": "TOP PICK"}
+      ]
+    },
+    "construct_p5": {
+      "pdf": "reference/Construct/20260721_industry_362851000.pdf",
+      "page": 5,
+      "entities": [
+        {"name": "GS그룹", "anchor": "GS그룹"},
+        {"name": "현대건설", "anchor": "현대건설"},
+        {"name": "원자력안전위원회", "anchor": "원자력안전위원회"},
+        {"name": "테라파워", "anchor": "테라파워"},
+        {"name": "솔트포스 에너지", "anchor": "솔트포스"}
+      ],
+      "key_facts": [
+        {"fact": "동해 AI데이터센터 3개 구역에 120조 투자", "anchor": "120조"},
+        {"fact": "2.4GW(기가와트)급 규모", "anchor": "2.4GW"},
+        {"fact": "GTX-C 자금조달 4조3000억원", "anchor": "4조3000억"},
+        {"fact": "5대 은행 가계대출 한도 80% 소진", "anchor": "80%"}
+      ]
+    }
+  }
+}

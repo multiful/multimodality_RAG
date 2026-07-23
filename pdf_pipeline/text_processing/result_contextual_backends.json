@@ -1,0 +1,125 @@
+{
+  "lgcns_p1": {
+    "qwen": {
+      "n_chunks": 6,
+      "chunk_construction_s": 54.822,
+      "extraction_total_s": 59.989,
+      "total_latency_s": 114.811,
+      "entity_recall": 1.0,
+      "fact_recall": 0.6,
+      "sample_context_prefixes": [
+        "이 chunk는 LG CNS 주식에 대해 분석하는 리포트의 한 부분이며, 주요 포인트는 2026년 제2분기에 대한 매출 및 영업이익 예측이다.",
+        "이 chunk는 LG CNS 주식에 대해 분석하는 리포트의 한 부분이며, 특별히 스마트 엔지니어링 부문과 딜렉셔널 서비스(Digital Business Services) 부문의 매출 변화와 영업이익률(OPEM) 등에 초점을 맞추고 있습니다.",
+        "해당 chunk는 LG CNS 주식에 대해 분석하는 리포트의 한 부분이며, 제목 '인ترنت/게임'과 함께 LG CNS의 2분기 실적이며, 향후 성장을 위해 다양한 프로젝트와 계약을 수행함을 언급합니다."
+      ]
+    },
+    "openai": {
+      "n_chunks": 6,
+      "chunk_construction_s": 7.935,
+      "extraction_total_s": 51.03,
+      "total_latency_s": 58.965,
+      "entity_recall": 0.5,
+      "fact_recall": 0.8,
+      "sample_context_prefixes": [
+        "이 chunk는 LG CNS에 대한 내용으로, 2026년 2분기의 매출 및 영업이익 전망과 클라우드 & AI 부문 성장을 다루고 있습니다.",
+        "이 chunk는 LG CNS의 2분기 매출 및 영업이익 전망에 대한 내용으로, 스마트 엔지니어링과 Digital Business Service 부문의 매출 성장과 관련된 정보를 포함하고 있습니다.",
+        "이 chunk는 LG CNS에 관한 내용으로, 2Q26의 매출 및 영업이익 전망과 함께 금융 차세대 인프라 사업의 성과 기여에 대한 분석을 다루고 있습니다."
+      ]
+    },
+    "rulebased": {
+      "n_chunks": 6,
+      "chunk_construction_s": 0.0,
+      "extraction_total_s": 48.962,
+      "total_latency_s": 48.962,
+      "entity_recall": 0.5,
+      "fact_recall": 0.6,
+      "sample_context_prefixes": [
+        "이 chunk는 다음 문맥에 속합니다: 20260721_company_279243000.pdf",
+        "이 chunk는 다음 문맥에 속합니다: 20260721_company_279243000.pdf",
+        "이 chunk는 다음 문맥에 속합니다: 20260721_company_279243000.pdf"
+      ]
+    }
+  },
+  "construct_p1": {
+    "qwen": {
+      "n_chunks": 6,
+      "chunk_construction_s": 70.013,
+      "extraction_total_s": 52.55,
+      "total_latency_s": 122.563,
+      "entity_recall": 0.875,
+      "fact_recall": 0.75,
+      "sample_context_prefixes": [
+        "이 chunk는 건설 업종의 주가 움직임과 실적 발표 정보를 다루며, 특히 IPARK현대산업개발과 현대건설 등의 실적 예상에 대해 언급합니다. 또한, 전국적인 아파트와 전세 거래량의 상승 트렌드와 함께, 건설업체의 실적 발표 일정을",
+        "이 chunk는 주택시장의 경기도 상황에 대해 다루며, 특히 아파트와 전셋집의 매매가와 전세가의 장기적인 상승 트렌드를 제시합니다. 또한 각 지역별로 세부적인 변화를 언급하며, 일부 도시에서는 상승세를 유지하는 한편 몇몇 도시에서는 하",
+        "이 chunk는 이번 주부터 건설사들이 실적발표를 시작하며, 각 업체의 실적 예상과 함께 국제 정치 상황에 대해 언급하는 부분입니다. 이는 주식시장의 향후 움직임과 건설업의 성능에 중요한 정보를 제공합니다."
+      ]
+    },
+    "openai": {
+      "n_chunks": 6,
+      "chunk_construction_s": 8.087,
+      "extraction_total_s": 56.082,
+      "total_latency_s": 64.169,
+      "entity_recall": 0.875,
+      "fact_recall": 0.5,
+      "sample_context_prefixes": [
+        "이 chunk는 건설업의 주간 동향과 실적 발표에 대한 내용을 다루며, IPARK현대산업개발의 상승과 코스피 대비 건설업의 성과를 언급하고 있습니다.",
+        "이 chunk는 주간 동향 및 이슈 섹션에서 전국 아파트 및 매매 가격 상승 추세에 대한 내용을 다루며, 건설업의 실적 전망과 금융환경에 대한 맥락을 제공합니다.",
+        "이 chunk는 2026년 2분기 건설사 실적 발표에 대한 내용으로, 주요 건설사인 삼성E&A, IPARK현대산업개발, 대우건설, GS건설, 삼성물산, DL이앤씨, 현대건설의 실적 예측 및 시장 리스크를 다루고 있다."
+      ]
+    },
+    "rulebased": {
+      "n_chunks": 6,
+      "chunk_construction_s": 0.0,
+      "extraction_total_s": 45.439,
+      "total_latency_s": 45.44,
+      "entity_recall": 0.875,
+      "fact_recall": 0.5,
+      "sample_context_prefixes": [
+        "이 chunk는 다음 문맥에 속합니다: 20260721_industry_362851000.pdf",
+        "이 chunk는 다음 문맥에 속합니다: 20260721_industry_362851000.pdf",
+        "이 chunk는 다음 문맥에 속합니다: 20260721_industry_362851000.pdf"
+      ]
+    }
+  },
+  "construct_p5": {
+    "qwen": {
+      "n_chunks": 4,
+      "chunk_construction_s": 33.23,
+      "extraction_total_s": 32.804,
+      "total_latency_s": 66.034,
+      "entity_recall": 0.8,
+      "fact_recall": 0.5,
+      "sample_context_prefixes": [
+        "이 chunk는 주간 뉴스 점검 및 관련 정보들을 다루며, 신규 원전·SMR 추가 건설 공식화, GS그룹 동해 AI데이터센터 프로젝트 등의 주제에 대해 언급하고 있습니다.",
+        "이 chunk는 GS그룹의 '동해AI데이터센터' 프로젝트에 대해 다루며, 이 데이터센터의 단계별 개발 로드맵 및 연간 지방세 수익 예측을 언급하고 있습니다. 또한, 원자력안전위원회가 SMR 등의 차세대 원자로 개발 속도를 높",
+        "이 chunk는 GTX-C 선상철도 사업의 진행 상황 및 관련 지역의 기대감에 대해 다루며, 또한 은행들의 가계대출 한도 소진 문제와 이를 해결하기 위한 신용대출 이용 여건 등을 언급하고 있습니다."
+      ]
+    },
+    "openai": {
+      "n_chunks": 4,
+      "chunk_construction_s": 5.862,
+      "extraction_total_s": 35.896,
+      "total_latency_s": 41.758,
+      "entity_recall": 0.4,
+      "fact_recall": 0.25,
+      "sample_context_prefixes": [
+        "이 chunk는 한국 정부의 원자력 발전 및 재생에너지 정책, 그리고 GS그룹의 동해 AI데이터센터 프로젝트에 대한 내용으로, 관련 산업의 발전 계획 및 투자 현황을 다룬 주간 뉴스 점검입니다.",
+        "이 chunk는 GS그룹의 동해 AI 데이터 센터 프로젝트 및 차세대 원자로인 SMR의 사전검토 제도와 관련된 기업들을 다루고 있으며, 원자력안전위원회의 SMR 개발 방향성에 대한 내용을 포함하고 있습니다.",
+        "이 chunk는 GTX-C 노선 공사 재개와 관련된 현대건설의 준비 작업 및 자금 조달 계획에 대한 내용과, 은행의 가계대출 한도 소진으로 인한 신용대출 수요 증가 상황을 다루고 있습니다."
+      ]
+    },
+    "rulebased": {
+      "n_chunks": 4,
+      "chunk_construction_s": 0.0,
+      "extraction_total_s": 31.781,
+      "total_latency_s": 31.781,
+      "entity_recall": 0.4,
+      "fact_recall": 0.75,
+      "sample_context_prefixes": [
+        "이 chunk는 다음 문맥에 속합니다: 20260721_industry_362851000.pdf",
+        "이 chunk는 다음 문맥에 속합니다: 20260721_industry_362851000.pdf",
+        "이 chunk는 다음 문맥에 속합니다: 20260721_industry_362851000.pdf"
+      ]
+    }
+  }
+}
