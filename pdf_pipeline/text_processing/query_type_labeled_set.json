@@ -1,0 +1,30 @@
+{
+  "note": "[44] 사용자 지적(\"쿼리 분류를 잘 하는지 모르겠네\") 반영 — 라우팅에서 실제로 중요한 건 4종 분류가 아니라 '키워드성(hybrid) vs 추상형(dense+MQE/HyDE)' 이진 구분이라 label은 그 축으로 통일. 기존 15개는 전부 keyword_specific(구체적 사실/수치/고유명사 anchor 보유), 신규 질의 1개는 abstract. 분류기 일반화 능력을 제대로 보려면 학습(키워드 설계)에 쓰인 것과 다른 표현의 abstract 질의가 필요해서 6개를 새로 추가(전부 '요약/인사이트/도출' 같은 트리거 단어를 의도적으로 피해서 작성) + 대조군으로 keyword_specific 신규 3개도 추가.",
+  "items": [
+    {"query": "LG CNS 2분기 매출액과 영업이익은 얼마야?", "label": "keyword_specific"},
+    {"query": "LG CNS 목표주가는 얼마고 투자의견은?", "label": "keyword_specific"},
+    {"query": "LG CNS 클라우드 AI 사업 27년 매출 성장률 전망은?", "label": "keyword_specific"},
+    {"query": "LG전자와 피지컬 AI 인프라 계약 금액은?", "label": "keyword_specific"},
+    {"query": "이 리포트 작성한 애널리스트 연락처가 뭐야?", "label": "keyword_specific"},
+    {"query": "건설업 수익률이 코스피 대비 얼마나 상회했어?", "label": "keyword_specific"},
+    {"query": "이번 주부터 시작되는 건설사 실적발표 일정은?", "label": "keyword_specific"},
+    {"query": "기준금리 인상 폭과 현재 수준은?", "label": "keyword_specific"},
+    {"query": "TOP PICK으로 추천하는 건설 종목과 이유는?", "label": "keyword_specific"},
+    {"query": "이란 미국 분쟁이 건설업에 미치는 영향은?", "label": "keyword_specific"},
+    {"query": "동해 AI데이터센터 투자 규모는?", "label": "keyword_specific"},
+    {"query": "GTX-C 공사 재개 관련 자금조달 규모는?", "label": "keyword_specific"},
+    {"query": "SMR 원자로 사전검토를 검토 중인 기업은 어디야?", "label": "keyword_specific"},
+    {"query": "5대 은행 가계대출 한도 상황은?", "label": "keyword_specific"},
+    {"query": "신규 원전 추가 건설 계획이 뭐야?", "label": "keyword_specific"},
+    {"query": "이 PDF에 나오는 기업의 이벤트 요약과 투자 인사이트를 도출해줘", "label": "abstract"},
+    {"query": "이 회사 어떻게 봐? 전반적으로 설명해줘", "label": "abstract", "note": "트리거 단어(요약/인사이트/도출) 없이 추상 의도 표현"},
+    {"query": "종합적으로 투자 매력 있는 회사야?", "label": "abstract"},
+    {"query": "이 리포트 전체적으로 브리핑해줘", "label": "abstract", "note": "브리핑은 트리거에 있지만 나머지 표현은 다름"},
+    {"query": "이 기업에 무슨 일이 있었고 앞으로 어떨 것 같아?", "label": "abstract"},
+    {"query": "핵심만 짚어서 설명해줄래", "label": "abstract"},
+    {"query": "이 회사 투자할 만한지 판단해줘", "label": "abstract"},
+    {"query": "삼양식품 26년 영업이익률은 몇 %야?", "label": "keyword_specific", "note": "대조군(신규)"},
+    {"query": "오리온 목표주가 상향했어 하향했어?", "label": "keyword_specific", "note": "대조군(신규)"},
+    {"query": "노바렉스 CAPA 확대 계획이 언제까지야?", "label": "keyword_specific", "note": "대조군(신규)"}
+  ]
+}

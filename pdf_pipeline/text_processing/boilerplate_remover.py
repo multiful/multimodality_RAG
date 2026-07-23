@@ -1,5 +1,22 @@
 """[4] Boilerplate(법적고지/Compliance Notice/Disclaimer) 제거 — Sentence Embedding 기반 채택.
 
+[43] 사용자 지적("저정보량 청크가 필터링을 통과해 검색 결과를 오염시킨다") 반영 — 실측(KWave
+73p)에서 두 가지 저정보량 패턴을 발견해 일반화된 필터로 추가:
+  1) 인용/출처 전용 청크("자료: OO, DS투자증권 리서치센터"류) — 이하 `is_low_information_
+     fragment()`. 임베딩 유사도 대신 구조 규칙(모든 줄이 "자료:"로 시작)만 보므로 임베딩 비용도
+     없고, 브로커/문서마다 표현이 달라도(어느 증권사 리포트든 차트/표 밑에 "자료: 출처" 각주가
+     붙는 건 공통 관례) 일반화된다. "주:"(각주/노트, 회계기준 설명 등 실제 분석 내용을 담을 수
+     있음, 예: "주: K-IFRS 회계기준 개정으로...")는 의도적으로 제외 — "자료:"만 항상 순수 출처
+     표기이고 "주:"는 그렇지 않다는 걸 실측으로 확인.
+  2) Compliance Notice 섹션 전체 — 개별 문장 단위 semantic 유사도 검사(SEED_BOILERPLATE_
+     SENTENCES)는 시드에 없는 새 표현(예: "당사 리서치센터 연구원은 ... 카카오톡 메신저 등으로
+     개별 접촉하지 않습니다")이나 짧은 소제목("- Compliance Notice -", "[ 업종 투자의견 ]")은
+     안 잡는다 — 소제목은 완전한 문장이 아니라서 시드 문장들과 코사인 유사도가 구조적으로 낮게
+     나옴. 문장 단위 판정을 무한정 확장하는 대신, "이 섹션 표지가 한 번 등장하면 문서 끝까지
+     전부 법적/공시 정형 문구뿐"이라는 실제 증권사 리포트 관례를 이용해 `is_boilerplate_
+     section_marker()`로 섹션 진입을 감지하고, 그 뒤로는 개별 문장 유사도와 무관하게 전부
+     제외한다(호출측인 text_extraction.py의 페이지 루프에서 플래그로 적용).
+
 사용자가 제시한 3가지 옵션(SimHash/MinHash/Sentence Embedding) 중 Sentence Embedding을 채택한
 이유: SimHash/MinHash는 "거의 동일한 문자열"(오탈자 수준 차이까지만 허용)이 대량 문서에 걸쳐
 반복될 때 계산 효율이 뛰어나지만(해시 비교라 O(1)에 가까움), 지금 있는 참고 PDF 2건은 서로 다른
@@ -23,6 +40,33 @@ SEED_BOILERPLATE_SENTENCES = [
     "본 자료는 기관투자가 등 제3자에게 사전 제공한 사실이 없습니다.",
     "투자의견의 유효기간은 추천일 이후 12개월을 기준으로 적용하며 목표주가 대비 상승여력에 따라 매수/중립/매도로 구분합니다.",
 ]
+
+
+# [43] 섹션 표지 마커 — 실측(LGCNS/교보증권)으로 확인된, "이 뒤로는 문서 끝까지 법적/공시
+# 정형 문구뿐"임을 알리는 소제목류. 새 증권사 문서에서 다른 마커가 반복 발견되면 계속 추가.
+BOILERPLATE_SECTION_MARKERS = [
+    "compliance notice", "투자의견 비율공시", "업종 투자의견", "투자등급관련사항",
+]
+
+
+def is_boilerplate_section_marker(text: str) -> bool:
+    """[43] 법적고지/투자의견 공시 섹션의 시작을 알리는 제목류인지 판정. 이게 한 번 등장하면
+    그 뒤로는 문서 끝까지 전부 정형화된 법적/공시 문구뿐이라는 게 실측으로 확인됨 — 개별 문장
+    semantic 유사도로는 못 잡는 짧은 소제목까지 구조적으로 잡기 위한 보조 신호."""
+    t = text.strip().lower()
+    return any(marker in t for marker in BOILERPLATE_SECTION_MARKERS)
+
+
+def is_low_information_fragment(text: str) -> bool:
+    """[43] 인용/출처 전용 청크 판정 — 줄바꿈으로 나눈 모든 줄이 "자료:"(또는 "자료 :")로
+    시작하면 순수 출처 표기로 간주(예: "자료: FnGuide, DS투자증권 리서치센터"). "주:"(노트/각주)는
+    실제 분석 내용을 담을 수 있어(예: 회계기준 변경 설명) 제외 — 실측으로 "자료:"만 항상 순수
+    인용이고 "주:"는 아니라는 걸 확인했음. 임베딩 없이 구조만 보는 값싼 필터라 전 페이지에 상시
+    적용 가능(위치 사전필터 불필요)."""
+    lines = [l.strip() for l in text.split("\n") if l.strip()]
+    if not lines:
+        return True
+    return all(l.startswith(("자료:", "자료 :")) for l in lines)
 
 
 _seed_embedding_cache = {}

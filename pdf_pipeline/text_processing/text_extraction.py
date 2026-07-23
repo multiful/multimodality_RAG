@@ -22,7 +22,8 @@ from text_cleanup import (detect_pua_artifact, strip_pua_artifacts,  # noqa: E40
                             normalize_punctuation, normalize_symbols_and_whitespace)
 from header_footer_remover import detect_headers_footers, strip_headers_footers  # noqa: E402
 from yolo_layout import run_yolo_layout  # noqa: E402
-from boilerplate_remover import detect_boilerplate_paragraphs_fast  # noqa: E402
+from boilerplate_remover import (detect_boilerplate_paragraphs_fast, is_low_information_fragment,  # noqa: E402
+                                  is_boilerplate_section_marker)
 from structured_output import extract_text_chunk_metadata  # noqa: E402
 
 
@@ -144,6 +145,7 @@ def process_pdf(pdf_path, model, doc_title: str = None, strip_headers: bool = Tr
         from concurrent.futures import ThreadPoolExecutor
         executor = ThreadPoolExecutor(max_workers=structured_metadata_workers)
 
+    past_boilerplate_marker = False  # [43] Compliance Notice류 섹션 표지 이후엔 문서 끝까지 전부 제외
     try:
         pages = []
         for i in range(n_pages):
@@ -162,11 +164,31 @@ def process_pdf(pdf_path, model, doc_title: str = None, strip_headers: bool = Tr
             if difficulty == "easy":
                 chunks = chunk_contextual_production(model, doc_fitz, i, doc_title=doc_title,
                                                       backend=chunk_backend, cached_boxes=cached_boxes)
-                # boilerplate(Compliance Notice 등)는 실측([4]) 문서 마지막 페이지 근처에만 등장 —
-                # 위치 사전필터로 그 구간 밖의 페이지는 임베딩 호출 자체를 건너뛴다. detect_boilerplate_
-                # paragraphs_fast()의 last_n_pages_only는 "한 문서 전체 배치" 호출을 전제로 최대
-                # 페이지번호를 스스로 계산하므로, 여기처럼 페이지 하나씩 순회하며 부르면 그 계산이
-                # 깨진다 — 그래서 페이지 단위 게이팅은 여기서 직접 계산하고, 함수 자체는 필터 없이 호출.
+
+                # [43] 인용/출처 전용 청크("자료: OO, 리서치센터")는 임베딩 없이 구조 규칙만으로
+                # 상시 제외(위치 무관 — 차트/표는 문서 어디에나 있음).
+                chunks = [c for c in chunks if not is_low_information_fragment(c["raw_chunk"])]
+
+                # [43] Compliance Notice류 섹션 표지가 한 번 나오면 그 뒤로는(같은 페이지의 남은
+                # 청크 포함) 문서 끝까지 전부 제외 — 개별 문장 semantic 유사도가 안 걸리는 소제목/
+                # 새 표현까지 구조적으로 잡기 위함(reading_order 그대로 순회하며 판정).
+                if past_boilerplate_marker:
+                    chunks = []
+                else:
+                    kept = []
+                    for c in chunks:
+                        if is_boilerplate_section_marker(c["raw_chunk"]):
+                            past_boilerplate_marker = True
+                            break
+                        kept.append(c)
+                    chunks = kept
+
+                # boilerplate(Compliance Notice 등) 개별 문장 semantic 판정은 실측([4]) 문서
+                # 마지막 페이지 근처에만 등장 — 위치 사전필터로 그 구간 밖의 페이지는 임베딩 호출
+                # 자체를 건너뛴다. detect_boilerplate_paragraphs_fast()의 last_n_pages_only는
+                # "한 문서 전체 배치" 호출을 전제로 최대 페이지번호를 스스로 계산하므로, 여기처럼
+                # 페이지 하나씩 순회하며 부르면 그 계산이 깨진다 — 그래서 페이지 단위 게이팅은
+                # 여기서 직접 계산하고, 함수 자체는 필터 없이 호출.
                 near_last_pages = i + 1 > n_pages - max(2, n_pages // 3)
                 if remove_boilerplate and chunks and near_last_pages:
                     raw_texts = [c["raw_chunk"] for c in chunks]
@@ -229,6 +251,7 @@ def process_pdf_streaming(pdf_path, model, doc_title: str = None, strip_headers:
     from contextual_chunker import chunk_contextual_production
 
     doc_fitz = fitz.open(str(pdf_path))
+    past_boilerplate_marker = False  # [43] process_pdf()와 동일 — Compliance Notice류 표지 이후 전부 제외
     try:
         header_footer_templates = detect_headers_footers(doc_fitz) if strip_headers else None
         n_pages = doc_fitz.page_count
@@ -248,6 +271,20 @@ def process_pdf_streaming(pdf_path, model, doc_title: str = None, strip_headers:
             if difficulty == "easy":
                 chunks = chunk_contextual_production(model, doc_fitz, i, doc_title=doc_title,
                                                       backend=chunk_backend, cached_boxes=cached_boxes)
+
+                chunks = [c for c in chunks if not is_low_information_fragment(c["raw_chunk"])]
+
+                if past_boilerplate_marker:
+                    chunks = []
+                else:
+                    kept = []
+                    for c in chunks:
+                        if is_boilerplate_section_marker(c["raw_chunk"]):
+                            past_boilerplate_marker = True
+                            break
+                        kept.append(c)
+                    chunks = kept
+
                 near_last_pages = i + 1 > n_pages - max(2, n_pages // 3)
                 if remove_boilerplate and chunks and near_last_pages:
                     raw_texts = [c["raw_chunk"] for c in chunks]
