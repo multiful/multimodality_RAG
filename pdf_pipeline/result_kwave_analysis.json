@@ -1,0 +1,1002 @@
+{
+  "n_pages": 73,
+  "page_classification_s": 7.11,
+  "text": {
+    "elapsed_s": 11.01,
+    "n_chunks": 135,
+    "n_hard_pages": 33
+  },
+  "table": {
+    "baseline": {
+      "n_tables": 104,
+      "total_rows": 796,
+      "zero_row_tables": 15,
+      "elapsed_s": 7.93
+    },
+    "current": {
+      "total_rows": 2045,
+      "n_mapped": 13,
+      "hit_rate": 0.0064,
+      "n_finance_rows_filtered": 809,
+      "elapsed_s": 53.84,
+      "field_counts": {
+        "content_revenue": 2,
+        "direct_participation_revenue": 1,
+        "ip_sales": 1,
+        "concert_revenue": 3,
+        "ad_appearance_revenue": 2,
+        "indirect_participation_revenue": 1,
+        "md_licensing_revenue": 2,
+        "fanclub_revenue": 1
+      }
+    },
+    "n_finance_classified_tables": 55,
+    "structured_output_finance_tables": {
+      "elapsed_s": 115.56,
+      "samples": [
+        {
+          "page": 28,
+          "table_idx": 1,
+          "table_title": "2023-2027 재무 데이터 요약",
+          "entities_mentioned": [],
+          "time_periods_covered": [
+            "2023",
+            "2024",
+            "2025",
+            "2026F",
+            "2027F"
+          ],
+          "table_type_refined": "재무 요약",
+          "unmapped_fields_summary": "세전이익, 지배주주지분순이익, 증감률 정보",
+          "notable_finding": "2025에서 영업이익이 급감하여 적자를 기록함"
+        },
+        {
+          "page": 29,
+          "table_idx": 1,
+          "table_title": "하이브 실적 테이블",
+          "entities_mentioned": [
+            "하이브"
+          ],
+          "time_periods_covered": [
+            "2023",
+            "2024",
+            "2025",
+            "1Q25",
+            "2Q25",
+            "3Q25",
+            "4Q25",
+            "1Q26",
+            "2Q26F",
+            "3Q26F",
+            "4Q26F"
+          ],
+          "table_type_refined": "실적 요약",
+          "unmapped_fields_summary": "매출 비중, YoY 성장률 정보",
+          "notable_finding": "영업이익률이 4.3%에서 시작해 최저 -5.8%로 하락, 이후 회복세"
+        },
+        {
+          "page": 31,
+          "table_idx": 1,
+          "table_title": "손익계산서 및 주요 투자 지표",
+          "entities_mentioned": [],
+          "time_periods_covered": [
+            "2023",
+            "2024",
+            "2025",
+            "2026F",
+            "2027F"
+          ],
+          "table_type_refined": "손익계산서",
+          "unmapped_fields_summary": "회계 항목 및 주요 재무 지표",
+          "notable_finding": "영업이익이 2025년에 급감하고 2026년에 회복 예상"
+        },
+        {
+          "page": 31,
+          "table_idx": 2,
+          "table_title": "재무상태표 및 현금흐름표 개요",
+          "entities_mentioned": [
+            "하이브",
+            "DS투자증권"
+          ],
+          "time_periods_covered": [
+            "2023",
+            "2024",
+            "2025",
+            "2026F",
+            "2027F"
+          ],
+          "table_type_refined": "재무제표",
+          "unmapped_fields_summary": "재무상태표와 현금흐름표의 세부 항목들",
+          "notable_finding": "2025년 영업활동 현금흐름이 -36억원으로 급감"
+        },
+        {
+          "page": 31,
+          "table_idx": 3,
+          "table_title": "현금흐름표 요약",
+          "entities_mentioned": [],
+          "time_periods_covered": [
+            "2023",
+            "2024",
+            "2025",
+            "2026F",
+            "2027F"
+          ],
+          "table_type_refined": "현금흐름표",
+          "unmapped_fields_summary": "현금흐름표의 다양한 항목과 금액 요약",
+          "notable_finding": "영업활동 현금흐름이 2024년에 급감하여 -36억원, 2025년에 다시 큰 변동을 감지함."
+        },
+        {
+          "page": 31,
+          "table_idx": 4,
+          "table_title": "재무상태표",
+          "entities_mentioned": [],
+          "time_periods_covered": [
+            "2023",
+            "2024",
+            "2025",
+            "2026F",
+            "2027F"
+          ],
+          "table_type_refined": "재무제표",
+          "unmapped_fields_summary": "자산, 부채, 자본 항목들이 포함된 재무상태표.",
+          "notable_finding": "유동자산이 2023년 대비 2027년까지 증가하는 추세."
+        },
+        {
+          "page": 32,
+          "table_idx": 1,
+          "table_title": "Financial Data Summary",
+          "entities_mentioned": [],
+          "time_periods_covered": [
+            "2023",
+            "2024",
+            "2025",
+            "2026F",
+            "2027F"
+          ],
+          "table_type_refined": "재무 데이터",
+          "unmapped_fields_summary": "미매핑된 재무 지표",
+          "notable_finding": "2024년 영업이익이 -19억원으로 급감"
+        },
+        {
+          "page": 35,
+          "table_idx": 1,
+          "table_title": "손익계산서 및 주요 투자지표 요약",
+          "entities_mentioned": [],
+          "time_periods_covered": [
+            "2023",
+            "2024",
+            "2025",
+            "2026F",
+            "2027F"
+          ],
+          "table_type_refined": "실적 요약",
+          "unmapped_fields_summary": "손익계산서와 주요 투자지표에 관한 데이터 요약",
+          "notable_finding": "2024년 영업이익이 적자로 전환됨"
+        },
+        {
+          "page": 35,
+          "table_idx": 2,
+          "table_title": "재무상태표 및 현금흐름표",
+          "entities_mentioned": [
+            "와이지엔터테인먼트",
+            "DS투자증권 리서치센터"
+          ],
+          "time_periods_covered": [
+            "2023",
+            "2024",
+            "2025",
+            "2026F",
+            "2027F"
+          ],
+          "table_type_refined": "재무제표 요약",
+          "unmapped_fields_summary": "규칙 기반으로 매칭되지 않은 재무 항목 및 현금흐름 관련 정보 요약",
+          "notable_finding": "2024년 영업활동 현금흐름이 0으로 급감"
+        },
+        {
+          "page": 35,
+          "table_idx": 3,
+          "table_title": "현금흐름표",
+          "entities_mentioned": [],
+          "time_periods_covered": [
+            "2023",
+            "2024",
+            "2025",
+            "2026F",
+            "2027F"
+          ],
+          "table_type_refined": "현금흐름표",
+          "unmapped_fields_summary": "규칙 기반 매칭이 되지 않은 다양한 현금 흐름 관련 항목들",
+          "notable_finding": "2024년 영업활동 현금흐름이 0으로 급감"
+        },
+        {
+          "page": 35,
+          "table_idx": 4,
+          "table_title": "재무상태표",
+          "entities_mentioned": [],
+          "time_periods_covered": [
+            "2023",
+            "2024",
+            "2025",
+            "2026F",
+            "2027F"
+          ],
+          "table_type_refined": "재무상태표",
+          "unmapped_fields_summary": "재무 항목 및 계정별 세부 내역",
+          "notable_finding": null
+        },
+        {
+          "page": 36,
+          "table_idx": 1,
+          "table_title": "향후 5개년 재무 데이터",
+          "entities_mentioned": [],
+          "time_periods_covered": [
+            "2023",
+            "2024",
+            "2025",
+            "2026F",
+            "2027F"
+          ],
+          "table_type_refined": "재무 요약",
+          "unmapped_fields_summary": "규칙 기반 매칭 안 된 행은 세전이익, 지배주주지분순이익, 증감률 등의 재무 지표를 포함함.",
+          "notable_finding": "2024년 영업이익이 78.2% 급감함."
+        },
+        {
+          "page": 37,
+          "table_idx": 1,
+          "table_title": "에스엠 실적 테이블",
+          "entities_mentioned": [
+            "에스엠"
+          ],
+          "time_periods_covered": [
+            "1Q25",
+            "2Q25",
+            "3Q25",
+            "4Q25",
+            "1Q26",
+            "2Q26F",
+            "3Q26F",
+            "4Q26F",
+            "2023",
+            "2024",
+            "2025"
+          ],
+          "table_type_refined": "실적 요약",
+          "unmapped_fields_summary": "다양한 매출 항목과 YoY 변화에 대한 정보",
+          "notable_finding": "순이익의 YoY 변화가 1931.3%로 급증"
+        },
+        {
+          "page": 39,
+          "table_idx": 1,
+          "table_title": "손익계산서 및 주요 투자 지표",
+          "entities_mentioned": [],
+          "time_periods_covered": [
+            "2023",
+            "2024",
+            "2025",
+            "2026F",
+            "2027F"
+          ],
+          "table_type_refined": "실적 요약 및 투자 지표",
+          "unmapped_fields_summary": "손익계산서와 투자지표 관련 데이터",
+          "notable_finding": "당기순이익이 2025년에 급증하여 359억에 달함"
+        },
+        {
+          "page": 39,
+          "table_idx": 2,
+          "table_title": "재무상태표 및 현금흐름표 요약",
+          "entities_mentioned": [
+            "에스엠",
+            "DS투자증권 리서치센터"
+          ],
+          "time_periods_covered": [
+            "2023",
+            "2024",
+            "2025",
+            "2026F",
+            "2027F"
+          ],
+          "table_type_refined": "재무제표 요약",
+          "unmapped_fields_summary": "규칙 기반 매칭 안 된 주제들에 대한 요약",
+          "notable_finding": "2025년 영업활동 현금흐름이 -71억원으로 급감"
+        },
+        {
+          "page": 39,
+          "table_idx": 3,
+          "table_title": "현금흐름표",
+          "entities_mentioned": [],
+          "time_periods_covered": [
+            "2023",
+            "2024",
+            "2025",
+            "2026F",
+            "2027F"
+          ],
+          "table_type_refined": "현금흐름표",
+          "unmapped_fields_summary": "현금흐름표의 다양한 현금활동 항목들이 포함되어 있음",
+          "notable_finding": "2025년 영업활동 현금흐름이 -71로 급감함"
+        },
+        {
+          "page": 40,
+          "table_idx": 1,
+          "table_title": "재무 데이터 요약",
+          "entities_mentioned": [],
+          "time_periods_covered": [
+            "2023",
+            "2024",
+            "2025",
+            "2026F",
+            "2027F"
+          ],
+          "table_type_refined": "재무 실적 요약",
+          "unmapped_fields_summary": "세전이익, 지배주주지분순이익, 증감률 관련 데이터",
+          "notable_finding": "2025년 영업이익률이 급격히 감소하고, EPS 증가율이 64.2%로 급증함."
+        },
+        {
+          "page": 41,
+          "table_idx": 1,
+          "table_title": "2025년 및 2026년 예상 매출 및 수익 분석",
+          "entities_mentioned": [],
+          "time_periods_covered": [
+            "2023",
+            "2024",
+            "2025",
+            "1Q25",
+            "2Q25",
+            "3Q25",
+            "4Q25",
+            "1Q26",
+            "2Q26F",
+            "3Q26F",
+            "4Q26F"
+          ],
+          "table_type_refined": "실적 요약",
+          "unmapped_fields_summary": "규칙 기반 매칭이 안된 행은 다양한 매출 원천 및 순이익 관련 정보.",
+          "notable_finding": "몇 가지 항목에서는 YoY 변동률이 극단적으로 높거나 낮은 수치를 보임."
+        },
+        {
+          "page": 43,
+          "table_idx": 1,
+          "table_title": "손익계산서 및 주요 투자 지표 요약",
+          "entities_mentioned": [],
+          "time_periods_covered": [
+            "2023",
+            "2024",
+            "2025",
+            "2026F",
+            "2027F"
+          ],
+          "table_type_refined": "실적 요약 및 투자 지표",
+          "unmapped_fields_summary": "손익계산서 및 주요 투자 지표 데이터",
+          "notable_finding": "영업이익 및 순이익이 2023년에 비해 2025년에 크게 증가함."
+        },
+        {
+          "page": 43,
+          "table_idx": 2,
+          "table_title": "재무상태표 및 현금흐름표 요약",
+          "entities_mentioned": [
+            "JYP",
+            "DS투자증권"
+          ],
+          "time_periods_covered": [
+            "2023",
+            "2024",
+            "2025",
+            "2026F",
+            "2027F"
+          ],
+          "table_type_refined": "재무제표 요약",
+          "unmapped_fields_summary": "규칙 기반 매칭 안 된 행 관련 재무 항목",
+          "notable_finding": "2025년 영업활동 현금흐름이 121억원으로 급증하다가 2026년에는 166억원으로 또다시 증가."
+        },
+        {
+          "page": 43,
+          "table_idx": 3,
+          "table_title": "현금흐름표",
+          "entities_mentioned": [],
+          "time_periods_covered": [
+            "2023",
+            "2024",
+            "2025",
+            "2026F",
+            "2027F"
+          ],
+          "table_type_refined": "현금흐름표",
+          "unmapped_fields_summary": "규칙 기반 매칭 안 된 행은 다양한 현금흐름 항목과 관련된 정보.",
+          "notable_finding": "2024년에 영업활동 현금흐름이 급감함."
+        },
+        {
+          "page": 43,
+          "table_idx": 4,
+          "table_title": "재무상태표",
+          "entities_mentioned": [],
+          "time_periods_covered": [
+            "2023",
+            "2024",
+            "2025",
+            "2026F",
+            "2027F"
+          ],
+          "table_type_refined": "재무상태표",
+          "unmapped_fields_summary": "재무상태표 항목 및 계정별 세부 내역",
+          "notable_finding": "유동자산과 비유동자산 모두 증가 추세"
+        },
+        {
+          "page": 44,
+          "table_idx": 1,
+          "table_title": "2023-2027 재무 데이터",
+          "entities_mentioned": [],
+          "time_periods_covered": [
+            "2023",
+            "2024",
+            "2025",
+            "2026F",
+            "2027F"
+          ],
+          "table_type_refined": "재무 요약",
+          "unmapped_fields_summary": "기타 재무 지표 및 변동률 관련 정보",
+          "notable_finding": "매출액의 2024년 대비 2025년 급증률 43.2%"
+        },
+        {
+          "page": 47,
+          "table_idx": 1,
+          "table_title": "2023-2027 손익계산서 및 주요 투자지표",
+          "entities_mentioned": [
+            "금융손익",
+            "관계기업",
+            "총차입금"
+          ],
+          "time_periods_covered": [
+            "2023",
+            "2024",
+            "2025",
+            "2026F",
+            "2027F"
+          ],
+          "table_type_refined": "손익계산서 및 주요 투자지표",
+          "unmapped_fields_summary": "손익계산서 및 투자 지표 관련 데이터",
+          "notable_finding": "2024 영업이익률 19.9%로 급증"
+        },
+        {
+          "page": 47,
+          "table_idx": 2,
+          "table_title": "재무상태표 및 현금흐름표",
+          "entities_mentioned": [
+            "삼양식품",
+            "DS투자증권"
+          ],
+          "time_periods_covered": [
+            "2023",
+            "2024",
+            "2025",
+            "2026F",
+            "2027F"
+          ],
+          "table_type_refined": "재무제표",
+          "unmapped_fields_summary": "재무 상태와 현금 흐름에 관련된 항목들로 구성된 표",
+          "notable_finding": "2027F 년도에 유동자산이 1,864억원으로 급증할 것으로 예상됨"
+        },
+        {
+          "page": 47,
+          "table_idx": 3,
+          "table_title": "현금흐름표",
+          "entities_mentioned": [],
+          "time_periods_covered": [
+            "2023",
+            "2024",
+            "2025",
+            "2026F",
+            "2027F"
+          ],
+          "table_type_refined": "현금흐름표",
+          "unmapped_fields_summary": "현금흐름 관련 다양한 항목들",
+          "notable_finding": "영업활동 현금흐름이 2023년 168억에서 2027년 759억으로 급증"
+        },
+        {
+          "page": 48,
+          "table_idx": 1,
+          "table_title": "2023-2027 Financial Projections",
+          "entities_mentioned": [],
+          "time_periods_covered": [
+            "2023",
+            "2024",
+            "2025",
+            "2026F",
+            "2027F"
+          ],
+          "table_type_refined": "재무 데이터",
+          "unmapped_fields_summary": "세전이익, 지배주주지분순이익, 증감률 관련 데이터",
+          "notable_finding": "2024년 영업이익 39.3% 급증"
+        },
+        {
+          "page": 52,
+          "table_idx": 1,
+          "table_title": "손익계산서 및 주요 투자 지표",
+          "entities_mentioned": [],
+          "time_periods_covered": [
+            "2023",
+            "2024",
+            "2025",
+            "2026F",
+            "2027F"
+          ],
+          "table_type_refined": "손익계산서 및 투자지표",
+          "unmapped_fields_summary": "손익계산서 및 주요 투자 지표에 대한 데이터",
+          "notable_finding": "2024년 영업이익 및 당기순이익 급증 예상 (각각 10.4%, 38.5% 증가)"
+        },
+        {
+          "page": 52,
+          "table_idx": 2,
+          "table_title": "재무상태표 및 현금흐름표",
+          "entities_mentioned": [
+            "오리온",
+            "DS투자증권 리서치센터"
+          ],
+          "time_periods_covered": [
+            "2023",
+            "2024",
+            "2025",
+            "2026F",
+            "2027F"
+          ],
+          "table_type_refined": "재무제표",
+          "unmapped_fields_summary": "해당 표는 재무상태표와 현금흐름표의 세부 항목을 포함하고 있음",
+          "notable_finding": "2026F에 비해 2027F에서 자산총계가 5,200억원으로 급증함"
+        },
+        {
+          "page": 52,
+          "table_idx": 3,
+          "table_title": "현금흐름표",
+          "entities_mentioned": [],
+          "time_periods_covered": [
+            "2023",
+            "2024",
+            "2025",
+            "2026F",
+            "2027F"
+          ],
+          "table_type_refined": "현금흐름표",
+          "unmapped_fields_summary": "현금흐름 관련 다양한 항목들에 대한 수치",
+          "notable_finding": "2026F에 영업활동 현금흐름이 급감 후 2027F에 급증"
+        },
+        {
+          "page": 52,
+          "table_idx": 4,
+          "table_title": "재무상태표 요약 (십억원)",
+          "entities_mentioned": [],
+          "time_periods_covered": [
+            "2023",
+            "2024",
+            "2025",
+            "2026F",
+            "2027F"
+          ],
+          "table_type_refined": "재무상태표",
+          "unmapped_fields_summary": "재무상태표에 포함된 주요 항목들",
+          "notable_finding": "유동자산이 2023년 1,628억원에서 2027년 2,077억원으로 증가세를 보임"
+        },
+        {
+          "page": 53,
+          "table_idx": 1,
+          "table_title": "재무 데이터 요약",
+          "entities_mentioned": [],
+          "time_periods_covered": [
+            "2023",
+            "2024",
+            "2025",
+            "2026F",
+            "2027F"
+          ],
+          "table_type_refined": "실적 요약",
+          "unmapped_fields_summary": "세전이익, 지배주주지분순이익, 증감률 관련 정보",
+          "notable_finding": "2026년 이후 영업이익과 순이익의 급증 예상"
+        },
+        {
+          "page": 54,
+          "table_idx": 1,
+          "table_title": "코스맥스엔비티 실적 테이블",
+          "entities_mentioned": [
+            "코스맥스엔비티"
+          ],
+          "time_periods_covered": [
+            "1Q25",
+            "2Q25",
+            "3Q25",
+            "4Q25",
+            "1Q26",
+            "2Q26F",
+            "3Q26F",
+            "4Q26F",
+            "2023",
+            "2024",
+            "2025"
+          ],
+          "table_type_refined": "실적 요약",
+          "unmapped_fields_summary": "규칙 기반 매칭 안 된 행",
+          "notable_finding": "2025년 전체 매출액이 전년 대비 급감할 것으로 예상됨"
+        },
+        {
+          "page": 56,
+          "table_idx": 1,
+          "table_title": "손익계산서 및 주요 투자 지표",
+          "entities_mentioned": [],
+          "time_periods_covered": [
+            "2023",
+            "2024",
+            "2025",
+            "2026F",
+            "2027F"
+          ],
+          "table_type_refined": "실적 요약 및 주요 투자 지표",
+          "unmapped_fields_summary": "규칙 기반 매칭 안 된 행은 손익계산서와 주요 투자지표의 세부 항목들",
+          "notable_finding": "영업이익이 2025년 -59.6% 급감 후 2026F에 775.9% 급증"
+        },
+        {
+          "page": 56,
+          "table_idx": 2,
+          "table_title": "재무상태표 및 현금흐름표 요약",
+          "entities_mentioned": [
+            "코스맥스엔비티",
+            "DS투자증권 리서치센터"
+          ],
+          "time_periods_covered": [
+            "2023",
+            "2024",
+            "2025",
+            "2026F",
+            "2027F"
+          ],
+          "table_type_refined": "재무상태표 및 현금흐름표",
+          "unmapped_fields_summary": "재무상태표 및 현금흐름표에서 다양한 항목의 수치 변동",
+          "notable_finding": "2026년 영업활동 현금흐름이 -6억원으로 급감"
+        },
+        {
+          "page": 56,
+          "table_idx": 3,
+          "table_title": "현금흐름표",
+          "entities_mentioned": [],
+          "time_periods_covered": [
+            "2023",
+            "2024",
+            "2025",
+            "2026F",
+            "2027F"
+          ],
+          "table_type_refined": "현금흐름표",
+          "unmapped_fields_summary": "규칙 기반 매칭 안 된 행이 다수 존재함",
+          "notable_finding": "2026F에 영업활동 현금흐름이 -6으로 급감함"
+        },
+        {
+          "page": 56,
+          "table_idx": 4,
+          "table_title": "재무상태표",
+          "entities_mentioned": [],
+          "time_periods_covered": [
+            "2023",
+            "2024",
+            "2025",
+            "2026F",
+            "2027F"
+          ],
+          "table_type_refined": "재무상태표",
+          "unmapped_fields_summary": "규칙 기반 매칭 안 된 행 목록: 현금 및 현금성자산, 매출채권 및 기타채권, 재고자산 등 여러 자산 및 부채 항목들.",
+          "notable_finding": "이익잉여금의 변화가 눈에 띄게 급감한 후 2027F에 긍정적인 수치를 기록할 것으로 예상됨."
+        },
+        {
+          "page": 57,
+          "table_idx": 1,
+          "table_title": "재무 데이터 요약",
+          "entities_mentioned": [],
+          "time_periods_covered": [
+            "2023",
+            "2024",
+            "2025",
+            "2026F",
+            "2027F"
+          ],
+          "table_type_refined": "실적 요약",
+          "unmapped_fields_summary": "규칙 기반 매칭 안 된 행에 대한 정보",
+          "notable_finding": "2025년 영업이익률이 급증하여 10.6%로 증가"
+        },
+        {
+          "page": 58,
+          "table_idx": 1,
+          "table_title": "노바렉스 실적 테이블",
+          "entities_mentioned": [
+            "노바렉스"
+          ],
+          "time_periods_covered": [
+            "1Q25",
+            "2Q25",
+            "3Q25",
+            "4Q25",
+            "1Q26",
+            "2Q26F",
+            "3Q26F",
+            "4Q26F",
+            "2023",
+            "2024",
+            "2025"
+          ],
+          "table_type_refined": "실적 요약",
+          "unmapped_fields_summary": "노바렉스의 내수 및 수출 실적과 관련된 추가 정보",
+          "notable_finding": "순이익 증가율이 257.2%로 급증"
+        },
+        {
+          "page": 60,
+          "table_idx": 1,
+          "table_title": "손익계산서 및 주요 투자지표 요약",
+          "entities_mentioned": [],
+          "time_periods_covered": [
+            "2023",
+            "2024",
+            "2025",
+            "2026F",
+            "2027F"
+          ],
+          "table_type_refined": "재무 요약",
+          "unmapped_fields_summary": "규칙 기반 매칭 안된 행은 손익계산서 및 주요 투자지표의 세부 내역.",
+          "notable_finding": "2025년 영업이익이 85.6% 증가하며 급격한 성장세를 보임."
+        },
+        {
+          "page": 60,
+          "table_idx": 2,
+          "table_title": "재무상태표 및 현금흐름표 요약",
+          "entities_mentioned": [
+            "노바렉스",
+            "DS투자증권"
+          ],
+          "time_periods_covered": [
+            "2023",
+            "2024",
+            "2025",
+            "2026F",
+            "2027F"
+          ],
+          "table_type_refined": "재무제표",
+          "unmapped_fields_summary": "재무상태표와 현금흐름표의 상세 내역",
+          "notable_finding": "2025년 자산총계가 360억 원으로 크게 증가"
+        },
+        {
+          "page": 60,
+          "table_idx": 3,
+          "table_title": "현금흐름표",
+          "entities_mentioned": [],
+          "time_periods_covered": [
+            "2023",
+            "2024",
+            "2025",
+            "2026F",
+            "2027F"
+          ],
+          "table_type_refined": "현금흐름표",
+          "unmapped_fields_summary": "규칙 기반 매칭 안 된 행: 다양한 현금흐름 항목들",
+          "notable_finding": "영업활동 현금흐름이 2023년 25억에서 2027년 49억으로 증가 예상"
+        },
+        {
+          "page": 60,
+          "table_idx": 4,
+          "table_title": "재무상태표",
+          "entities_mentioned": [],
+          "time_periods_covered": [
+            "2023",
+            "2024",
+            "2025",
+            "2026F",
+            "2027F"
+          ],
+          "table_type_refined": "재무상태표",
+          "unmapped_fields_summary": "규칙 기반 매칭 안 된 행: 재무 항목 관련 정보",
+          "notable_finding": "자산총계와 자본총계가 지속적인 증가세를 보이고 있음"
+        },
+        {
+          "page": 61,
+          "table_idx": 1,
+          "table_title": "Financial Data Summary",
+          "entities_mentioned": [],
+          "time_periods_covered": [
+            "2023",
+            "2024",
+            "2025",
+            "2026F",
+            "2027F"
+          ],
+          "table_type_refined": "실적 요약",
+          "unmapped_fields_summary": "세전이익과 지배주주지분순이익 및 증감률 정보",
+          "notable_finding": "매출액에서 2025년부터 흑전 전환"
+        },
+        {
+          "page": 64,
+          "table_idx": 1,
+          "table_title": "손익계산서 및 주요 투자 지표 요약",
+          "entities_mentioned": [],
+          "time_periods_covered": [
+            "2023",
+            "2024",
+            "2025",
+            "2026F",
+            "2027F"
+          ],
+          "table_type_refined": "손익계산서 및 주요 투자 지표",
+          "unmapped_fields_summary": "양식 안에 여러 손익 및 재무 비율 데이터가 포함됨.",
+          "notable_finding": "2025년 영업이익이 급증하여 133억원을 기록, 이후 소폭 감소 예상."
+        },
+        {
+          "page": 64,
+          "table_idx": 2,
+          "table_title": "재무 상태 및 현금 흐름 분석",
+          "entities_mentioned": [
+            "CJ ENM",
+            "DS투자증권"
+          ],
+          "time_periods_covered": [
+            "2023",
+            "2024",
+            "2025",
+            "2026F",
+            "2027F"
+          ],
+          "table_type_refined": "재무상태표 및 현금흐름표",
+          "unmapped_fields_summary": "표의 재무 상태와 현금 흐름 분석 관련 세부 항목들",
+          "notable_finding": "2024년 영업활동 현금흐름이 1,403억원으로 증가 후 2025년 1,117억원으로 급감"
+        },
+        {
+          "page": 64,
+          "table_idx": 3,
+          "table_title": "현금흐름표",
+          "entities_mentioned": [],
+          "time_periods_covered": [
+            "2023",
+            "2024",
+            "2025",
+            "2026F",
+            "2027F"
+          ],
+          "table_type_refined": "현금흐름표",
+          "unmapped_fields_summary": "현금흐름 관련 다양한 항목의 데이터",
+          "notable_finding": "영업활동 현금흐름이 2023년 1,295억원에서 2027년 739억원으로 감소하는 추세가 두드러짐"
+        },
+        {
+          "page": 64,
+          "table_idx": 4,
+          "table_title": "재무상태표",
+          "entities_mentioned": [],
+          "time_periods_covered": [
+            "2023",
+            "2024",
+            "2025",
+            "2026F",
+            "2027F"
+          ],
+          "table_type_refined": "재무상태",
+          "unmapped_fields_summary": "재무상태표 항목들",
+          "notable_finding": "유동자산이 2026년부터 급증하는 추세"
+        },
+        {
+          "page": 65,
+          "table_idx": 1,
+          "table_title": "재무 데이터 요약",
+          "entities_mentioned": [],
+          "time_periods_covered": [
+            "2023",
+            "2024",
+            "2025",
+            "2026F",
+            "2027F"
+          ],
+          "table_type_refined": "실적 요약",
+          "unmapped_fields_summary": "세전이익, 지배주주지분순이익, 증감률(%) 정보 누락",
+          "notable_finding": "2025년 증감률이 -69.2%로 급감"
+        },
+        {
+          "page": 66,
+          "table_idx": 1,
+          "table_title": "스튜디오드래곤 실적 분석",
+          "entities_mentioned": [
+            "스튜디오드래곤"
+          ],
+          "time_periods_covered": [
+            "1Q25",
+            "2Q25",
+            "3Q25",
+            "4Q25",
+            "1Q26",
+            "2Q26F",
+            "3Q26F",
+            "4Q26F",
+            "2023",
+            "2024",
+            "2025"
+          ],
+          "table_type_refined": "실적 요약",
+          "unmapped_fields_summary": "다양한 재무 실적 항목과 YoY 변화량",
+          "notable_finding": "영업이익률이 4.1%에서 9.8%로 증가하며 흑전 유지"
+        },
+        {
+          "page": 68,
+          "table_idx": 1,
+          "table_title": "손익계산서 및 주요 투자 지표",
+          "entities_mentioned": [],
+          "time_periods_covered": [
+            "2023",
+            "2024",
+            "2025",
+            "2026F",
+            "2027F"
+          ],
+          "table_type_refined": "재무제표 분석",
+          "unmapped_fields_summary": "정리된 위험 및 성장 지표, 그리고 손익 항목들",
+          "notable_finding": "2025년 당기순이익률 급감에 따른 EPS의 급격한 변동"
+        },
+        {
+          "page": 68,
+          "table_idx": 2,
+          "table_title": "재무상태표 및 현금흐름표 요약",
+          "entities_mentioned": [
+            "스튜디오드래곤",
+            "DS투자증권"
+          ],
+          "time_periods_covered": [
+            "2023",
+            "2024",
+            "2025",
+            "2026F",
+            "2027F"
+          ],
+          "table_type_refined": "재무제표",
+          "unmapped_fields_summary": null,
+          "notable_finding": "무형자산이 2026년에는 -132억원으로 이례적으로 큰 감소를 보임."
+        },
+        {
+          "page": 68,
+          "table_idx": 3,
+          "table_title": "현금흐름표",
+          "entities_mentioned": [],
+          "time_periods_covered": [
+            "2023",
+            "2024",
+            "2025",
+            "2026F",
+            "2027F"
+          ],
+          "table_type_refined": "현금흐름표",
+          "unmapped_fields_summary": "현금흐름 관련 다양한 항목과 변동사항",
+          "notable_finding": "2025년 영업활동 현금흐름 급감 -115"
+        },
+        {
+          "page": 68,
+          "table_idx": 4,
+          "table_title": "재무상태표",
+          "entities_mentioned": [],
+          "time_periods_covered": [
+            "2023",
+            "2024",
+            "2025",
+            "2026F",
+            "2027F"
+          ],
+          "table_type_refined": "재무상태표",
+          "unmapped_fields_summary": "재무상태표의 항목들이 나열됨",
+          "notable_finding": "무형자산이 2026F에 -132로 급감함"
+        },
+        {
+          "page": 68,
+          "table_idx": 5,
+          "table_title": "주요 투자 지표 요약",
+          "entities_mentioned": [
+            "n/a"
+          ],
+          "time_periods_covered": [
+            "2023",
+            "2024",
+            "2025",
+            "2026F",
+            "2027F"
+          ],
+          "table_type_refined": "투자지표",
+          "unmapped_fields_summary": "주요 투자 지표 데이터",
+          "notable_finding": "P/CF가 2025년에 급증"
+        }
+      ]
+    }
+  }
+}
