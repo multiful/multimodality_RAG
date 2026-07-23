@@ -1,0 +1,24 @@
+{
+  "source_pdf": "KWave/20260721_industry_65157000.pdf",
+  "note": "DS투자증권 'Beyond K-Wave' 산업 리포트, 73페이지. 다른 섹터(음식료/미디어/엔터)·다른 규모(6p->73p)의 PDF로 page_classification 일반화 검증용. 전체 73페이지가 아니라 다양한 유형(표지/목차/산업분석 텍스트+차트/기업 재무데이터/디스클레이머)을 대표하는 13페이지를 육안 검수로 표본 추출.",
+  "target_entities_from_toc": {
+    "엔터": ["하이브", "와이지엔터테인먼트", "에스엠", "JYP Ent."],
+    "음식료": ["삼양식품", "오리온", "코스맥스엔비티", "노바렉스"],
+    "미디어": ["CJ ENM", "스튜디오드래곤"]
+  },
+  "sampled_pages": {
+    "1":  {"has_text": true,  "has_table": false, "has_image": true,  "desc": "표지"},
+    "2":  {"has_text": true,  "has_table": false, "has_image": true,  "desc": "목차"},
+    "3":  {"has_text": true,  "has_table": false, "has_image": false, "desc": "산업분석 텍스트만"},
+    "5":  {"has_text": true,  "has_table": true,  "has_image": true,  "desc": "텍스트+표+네트워크다이어그램"},
+    "15": {"has_text": true,  "has_table": true,  "has_image": true,  "desc": "텍스트+기획사별IP표+차트+사진"},
+    "21": {"has_text": true,  "has_table": false, "has_image": true,  "desc": "텍스트+차트4개(표 없음, baseline 오탐 포인트)"},
+    "28": {"has_text": true,  "has_table": true,  "has_image": true,  "desc": "하이브 - Stock Data+Financial Data표+주가차트"},
+    "31": {"has_text": true,  "has_table": true,  "has_image": false, "desc": "하이브 - 재무제표 4개 표만(차트 없음)"},
+    "36": {"has_text": true,  "has_table": true,  "has_image": true,  "desc": "에스엠 - Stock Data+Financial Data표+주가차트"},
+    "45": {"has_text": true,  "has_table": true,  "has_image": false, "desc": "삼양식품 - 실적테이블만(전체페이지)"},
+    "58": {"has_text": true,  "has_table": true,  "has_image": true,  "desc": "노바렉스 - 실적테이블+차트2개"},
+    "65": {"has_text": true,  "has_table": true,  "has_image": true,  "desc": "스튜디오드래곤 - Stock Data+Financial Data표+주가차트"},
+    "73": {"has_text": true,  "has_table": true,  "has_image": false, "desc": "디스클레이머 - 표2개+법적고지 텍스트"}
+  }
+}

@@ -1,0 +1,219 @@
+{
+  "n_corpus_chunks": 21,
+  "n_queries": 15,
+  "results": [
+    {
+      "model": "BGE-M3",
+      "recall_at_1": 0.8667,
+      "recall_at_3": 0.9333,
+      "mrr": 0.9074,
+      "n_queries_scored": 15,
+      "corpus_embed_s": 0.855,
+      "query_embed_s": 0.079,
+      "details": [
+        {
+          "query": "LG CNS 2분기 매출액과 영업이익은 얼마야?",
+          "rank": 1
+        },
+        {
+          "query": "LG CNS 목표주가는 얼마고 투자의견은?",
+          "rank": 1
+        },
+        {
+          "query": "LG CNS 클라우드 AI 사업 27년 매출 성장률 전망은?",
+          "rank": 1
+        },
+        {
+          "query": "LG전자와 피지컬 AI 인프라 계약 금액은?",
+          "rank": 1
+        },
+        {
+          "query": "이 리포트 작성한 애널리스트 연락처가 뭐야?",
+          "rank": 9
+        },
+        {
+          "query": "건설업 수익률이 코스피 대비 얼마나 상회했어?",
+          "rank": 1
+        },
+        {
+          "query": "이번 주부터 시작되는 건설사 실적발표 일정은?",
+          "rank": 1
+        },
+        {
+          "query": "기준금리 인상 폭과 현재 수준은?",
+          "rank": 1
+        },
+        {
+          "query": "TOP PICK으로 추천하는 건설 종목과 이유는?",
+          "rank": 1
+        },
+        {
+          "query": "이란 미국 분쟁이 건설업에 미치는 영향은?",
+          "rank": 1
+        },
+        {
+          "query": "동해 AI데이터센터 투자 규모는?",
+          "rank": 1
+        },
+        {
+          "query": "GTX-C 공사 재개 관련 자금조달 규모는?",
+          "rank": 1
+        },
+        {
+          "query": "SMR 원자로 사전검토를 검토 중인 기업은 어디야?",
+          "rank": 1
+        },
+        {
+          "query": "5대 은행 가계대출 한도 상황은?",
+          "rank": 2
+        },
+        {
+          "query": "신규 원전 추가 건설 계획이 뭐야?",
+          "rank": 1
+        }
+      ]
+    },
+    {
+      "model": "BGE-m3-ko",
+      "recall_at_1": 0.8667,
+      "recall_at_3": 1.0,
+      "mrr": 0.9222,
+      "n_queries_scored": 15,
+      "corpus_embed_s": 0.738,
+      "query_embed_s": 0.043,
+      "details": [
+        {
+          "query": "LG CNS 2분기 매출액과 영업이익은 얼마야?",
+          "rank": 1
+        },
+        {
+          "query": "LG CNS 목표주가는 얼마고 투자의견은?",
+          "rank": 1
+        },
+        {
+          "query": "LG CNS 클라우드 AI 사업 27년 매출 성장률 전망은?",
+          "rank": 1
+        },
+        {
+          "query": "LG전자와 피지컬 AI 인프라 계약 금액은?",
+          "rank": 1
+        },
+        {
+          "query": "이 리포트 작성한 애널리스트 연락처가 뭐야?",
+          "rank": 3
+        },
+        {
+          "query": "건설업 수익률이 코스피 대비 얼마나 상회했어?",
+          "rank": 1
+        },
+        {
+          "query": "이번 주부터 시작되는 건설사 실적발표 일정은?",
+          "rank": 1
+        },
+        {
+          "query": "기준금리 인상 폭과 현재 수준은?",
+          "rank": 1
+        },
+        {
+          "query": "TOP PICK으로 추천하는 건설 종목과 이유는?",
+          "rank": 1
+        },
+        {
+          "query": "이란 미국 분쟁이 건설업에 미치는 영향은?",
+          "rank": 1
+        },
+        {
+          "query": "동해 AI데이터센터 투자 규모는?",
+          "rank": 1
+        },
+        {
+          "query": "GTX-C 공사 재개 관련 자금조달 규모는?",
+          "rank": 1
+        },
+        {
+          "query": "SMR 원자로 사전검토를 검토 중인 기업은 어디야?",
+          "rank": 1
+        },
+        {
+          "query": "5대 은행 가계대출 한도 상황은?",
+          "rank": 2
+        },
+        {
+          "query": "신규 원전 추가 건설 계획이 뭐야?",
+          "rank": 1
+        }
+      ]
+    },
+    {
+      "model": "OpenAI-text-embedding-3-small",
+      "recall_at_1": 0.8667,
+      "recall_at_3": 0.9333,
+      "mrr": 0.9111,
+      "n_queries_scored": 15,
+      "corpus_embed_s": 1.305,
+      "query_embed_s": 0.509,
+      "details": [
+        {
+          "query": "LG CNS 2분기 매출액과 영업이익은 얼마야?",
+          "rank": 1
+        },
+        {
+          "query": "LG CNS 목표주가는 얼마고 투자의견은?",
+          "rank": 1
+        },
+        {
+          "query": "LG CNS 클라우드 AI 사업 27년 매출 성장률 전망은?",
+          "rank": 1
+        },
+        {
+          "query": "LG전자와 피지컬 AI 인프라 계약 금액은?",
+          "rank": 1
+        },
+        {
+          "query": "이 리포트 작성한 애널리스트 연락처가 뭐야?",
+          "rank": 6
+        },
+        {
+          "query": "건설업 수익률이 코스피 대비 얼마나 상회했어?",
+          "rank": 1
+        },
+        {
+          "query": "이번 주부터 시작되는 건설사 실적발표 일정은?",
+          "rank": 1
+        },
+        {
+          "query": "기준금리 인상 폭과 현재 수준은?",
+          "rank": 1
+        },
+        {
+          "query": "TOP PICK으로 추천하는 건설 종목과 이유는?",
+          "rank": 1
+        },
+        {
+          "query": "이란 미국 분쟁이 건설업에 미치는 영향은?",
+          "rank": 1
+        },
+        {
+          "query": "동해 AI데이터센터 투자 규모는?",
+          "rank": 1
+        },
+        {
+          "query": "GTX-C 공사 재개 관련 자금조달 규모는?",
+          "rank": 1
+        },
+        {
+          "query": "SMR 원자로 사전검토를 검토 중인 기업은 어디야?",
+          "rank": 1
+        },
+        {
+          "query": "5대 은행 가계대출 한도 상황은?",
+          "rank": 1
+        },
+        {
+          "query": "신규 원전 추가 건설 계획이 뭐야?",
+          "rank": 2
+        }
+      ]
+    }
+  ]
+}

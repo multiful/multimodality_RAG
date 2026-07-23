@@ -1,0 +1,199 @@
+{
+  "tp": 27,
+  "fp": 0,
+  "fn": 0,
+  "precision": 1.0,
+  "recall": 1.0,
+  "f1": 1.0,
+  "details": [
+    {
+      "row": 0,
+      "field": "contract_amount",
+      "status": "TP",
+      "expected": "189,747,247,549",
+      "got": "189,747,247,549"
+    },
+    {
+      "row": 0,
+      "field": "contract_period",
+      "status": "TP",
+      "expected": "2026-08-01~2029-07-31",
+      "got": "2026-08-01~2029-07-31"
+    },
+    {
+      "row": 0,
+      "field": "contract_counterparty",
+      "status": "TP",
+      "expected": "LG전자",
+      "got": "LG전자"
+    },
+    {
+      "row": 1,
+      "field": "contract_amount",
+      "status": "TP",
+      "expected": "603,000,000,000",
+      "got": "603,000,000,000"
+    },
+    {
+      "row": 1,
+      "field": "contract_period",
+      "status": "TP",
+      "expected": "2026-07-01~2035-05-31",
+      "got": "2026-07-01~2035-05-31"
+    },
+    {
+      "row": 1,
+      "field": "contract_counterparty",
+      "status": "TP",
+      "expected": "네이버클라우드주식회사",
+      "got": "네이버클라우드주식회사"
+    },
+    {
+      "row": 2,
+      "field": "contract_amount",
+      "status": "TP",
+      "expected": "182,034,798,000",
+      "got": "182,034,798,000"
+    },
+    {
+      "row": 2,
+      "field": "contract_period",
+      "status": "TP",
+      "expected": "2026-03-01~2035-05-31",
+      "got": "2026-03-01~2035-05-31"
+    },
+    {
+      "row": 2,
+      "field": "contract_counterparty",
+      "status": "TP",
+      "expected": "주식회사 우리은행 외 1",
+      "got": "주식회사우리은행외 1"
+    },
+    {
+      "row": 3,
+      "field": "contract_amount",
+      "status": "TP",
+      "expected": "240,877,169,000",
+      "got": "240,877,169,000"
+    },
+    {
+      "row": 3,
+      "field": "contract_period",
+      "status": "TP",
+      "expected": "2025-12-18~2027-05-31",
+      "got": "2025-12-18~2027-05-31"
+    },
+    {
+      "row": 3,
+      "field": "contract_counterparty",
+      "status": "TP",
+      "expected": "주식회사 우리은행 외 1",
+      "got": "주식회사우리은행외 1"
+    },
+    {
+      "row": 4,
+      "field": "contract_amount",
+      "status": "TP",
+      "expected": "226,178,000,000",
+      "got": "226,178,000,000"
+    },
+    {
+      "row": 4,
+      "field": "contract_period",
+      "status": "TP",
+      "expected": "2025-01-01~2026-12-31",
+      "got": "2025-01-01~2026-12-31"
+    },
+    {
+      "row": 4,
+      "field": "contract_counterparty",
+      "status": "TP",
+      "expected": "LG전자",
+      "got": "LG전자"
+    },
+    {
+      "row": 5,
+      "field": "contract_amount",
+      "status": "TP",
+      "expected": "242,151,000,000",
+      "got": "242,151,000,000"
+    },
+    {
+      "row": 5,
+      "field": "contract_period",
+      "status": "TP",
+      "expected": "2024-01-01~2026-12-31",
+      "got": "2024-01-01~2026-12-31"
+    },
+    {
+      "row": 5,
+      "field": "contract_counterparty",
+      "status": "TP",
+      "expected": "LG전자",
+      "got": "LG전자"
+    },
+    {
+      "row": 6,
+      "field": "contract_amount",
+      "status": "TP",
+      "expected": "-",
+      "got": "-"
+    },
+    {
+      "row": 6,
+      "field": "contract_period",
+      "status": "TP",
+      "expected": "2026-01-05~2028-04-04",
+      "got": "2026-01-05~2028-04-04"
+    },
+    {
+      "row": 6,
+      "field": "contract_counterparty",
+      "status": "TP",
+      "expected": "NH농협은행",
+      "got": "NH농협은행"
+    },
+    {
+      "row": 7,
+      "field": "contract_amount",
+      "status": "TP",
+      "expected": "347,462,730,000",
+      "got": "3(cid:9)47,462,730,000"
+    },
+    {
+      "row": 7,
+      "field": "contract_period",
+      "status": "TP",
+      "expected": "2025-07-01~2028-07-31",
+      "got": "2025-07-01~2028-07-31"
+    },
+    {
+      "row": 7,
+      "field": "contract_counterparty",
+      "status": "TP",
+      "expected": "LG전자",
+      "got": "LG전자"
+    },
+    {
+      "row": 8,
+      "field": "contract_amount",
+      "status": "TP",
+      "expected": "-",
+      "got": "-"
+    },
+    {
+      "row": 8,
+      "field": "contract_period",
+      "status": "TP",
+      "expected": "2025-06-01~2033-05-31",
+      "got": "2025-06-01~2033-05-31"
+    },
+    {
+      "row": 8,
+      "field": "contract_counterparty",
+      "status": "TP",
+      "expected": "네이버클라우드주식회사",
+      "got": "네이버클라우드주식회사"
+    }
+  ]
+}

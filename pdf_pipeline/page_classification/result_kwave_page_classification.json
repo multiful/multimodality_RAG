@@ -1,0 +1,2103 @@
+{
+  "pdf": "20260721_industry_65157000.pdf",
+  "n_pages": 73,
+  "baseline_predictions": {
+    "1": {
+      "has_text": false,
+      "has_table": false,
+      "has_image": true
+    },
+    "2": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": true
+    },
+    "3": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": false
+    },
+    "4": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": true
+    },
+    "5": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "6": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "7": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": true
+    },
+    "8": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "9": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": true
+    },
+    "10": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "11": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "12": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "13": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": false
+    },
+    "14": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "15": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "16": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "17": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "18": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "19": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "20": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": true
+    },
+    "21": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "22": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": true
+    },
+    "23": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": true
+    },
+    "24": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "25": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "26": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "27": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": true
+    },
+    "28": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": false
+    },
+    "29": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "30": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "31": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": false
+    },
+    "32": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": false
+    },
+    "33": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "34": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "35": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": false
+    },
+    "36": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": false
+    },
+    "37": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "38": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "39": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": false
+    },
+    "40": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": false
+    },
+    "41": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "42": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "43": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": false
+    },
+    "44": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": false
+    },
+    "45": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "46": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "47": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": false
+    },
+    "48": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": false
+    },
+    "49": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "50": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "51": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "52": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": false
+    },
+    "53": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": false
+    },
+    "54": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "55": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "56": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": false
+    },
+    "57": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": false
+    },
+    "58": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "59": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": true
+    },
+    "60": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": false
+    },
+    "61": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": false
+    },
+    "62": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "63": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "64": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": false
+    },
+    "65": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": false
+    },
+    "66": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "67": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "68": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": false
+    },
+    "69": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": true
+    },
+    "70": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": false
+    },
+    "71": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": false
+    },
+    "72": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": true
+    },
+    "73": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": false
+    }
+  },
+  "baseline_total_s": 14.14,
+  "yolo_predictions": {
+    "1": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": true
+    },
+    "2": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": true
+    },
+    "3": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": false
+    },
+    "4": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": true
+    },
+    "5": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "6": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": true
+    },
+    "7": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": true
+    },
+    "8": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": true
+    },
+    "9": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": true
+    },
+    "10": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": true
+    },
+    "11": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": true
+    },
+    "12": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": true
+    },
+    "13": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": true
+    },
+    "14": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": true
+    },
+    "15": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "16": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": true
+    },
+    "17": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": true
+    },
+    "18": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": true
+    },
+    "19": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": true
+    },
+    "20": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": true
+    },
+    "21": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": true
+    },
+    "22": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": true
+    },
+    "23": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": true
+    },
+    "24": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": true
+    },
+    "25": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": true
+    },
+    "26": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": true
+    },
+    "27": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": true
+    },
+    "28": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "29": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": false
+    },
+    "30": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": true
+    },
+    "31": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": false
+    },
+    "32": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "33": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": false
+    },
+    "34": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": true
+    },
+    "35": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": false
+    },
+    "36": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "37": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": false
+    },
+    "38": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": true
+    },
+    "39": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": false
+    },
+    "40": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "41": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": false
+    },
+    "42": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": true
+    },
+    "43": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": false
+    },
+    "44": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "45": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": false
+    },
+    "46": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": true
+    },
+    "47": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": false
+    },
+    "48": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "49": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": false
+    },
+    "50": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": false
+    },
+    "51": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": true
+    },
+    "52": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": false
+    },
+    "53": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "54": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": false
+    },
+    "55": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": true
+    },
+    "56": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": false
+    },
+    "57": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "58": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "59": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": true
+    },
+    "60": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": false
+    },
+    "61": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "62": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": false
+    },
+    "63": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": true
+    },
+    "64": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": false
+    },
+    "65": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "66": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "67": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": false
+    },
+    "68": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": false
+    },
+    "69": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": false
+    },
+    "70": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": false
+    },
+    "71": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "72": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": false
+    },
+    "73": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": false
+    }
+  },
+  "yolo_total_s": 8.28,
+  "yolo_detections_log": {
+    "1": {
+      "classes_found": [
+        "Page-footer",
+        "Picture",
+        "Picture",
+        "Text",
+        "Text",
+        "Title"
+      ],
+      "table_crops": []
+    },
+    "2": {
+      "classes_found": [
+        "Picture",
+        "Page-header",
+        "Section-header",
+        "Text",
+        "Page-footer",
+        "Text"
+      ],
+      "table_crops": []
+    },
+    "3": {
+      "classes_found": [
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Page-footer",
+        "Text",
+        "Section-header",
+        "Page-header",
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Text"
+      ],
+      "table_crops": []
+    },
+    "4": {
+      "classes_found": [
+        "Page-header",
+        "Page-header",
+        "Text",
+        "Text",
+        "Text",
+        "Picture",
+        "Text",
+        "Title",
+        "Section-header",
+        "Section-header"
+      ],
+      "table_crops": []
+    },
+    "5": {
+      "classes_found": [
+        "Picture",
+        "Table",
+        "Page-header",
+        "Page-footer",
+        "Text",
+        "Section-header",
+        "Page-footer",
+        "Text",
+        "Text",
+        "Page-footer",
+        "Text"
+      ],
+      "table_crops": [
+        "pdf_pipeline/page_classification/table_crops_kwave/page_5_table_1.png"
+      ]
+    },
+    "6": {
+      "classes_found": [
+        "Picture",
+        "Picture",
+        "Page-header",
+        "Page-footer",
+        "Section-header",
+        "Text",
+        "Text",
+        "Text",
+        "Text"
+      ],
+      "table_crops": []
+    },
+    "7": {
+      "classes_found": [
+        "Picture",
+        "Picture",
+        "Page-header",
+        "Page-footer",
+        "Section-header",
+        "Caption",
+        "Page-footer",
+        "Text",
+        "Text",
+        "Text",
+        "List-item",
+        "List-item",
+        "Text",
+        "List-item",
+        "Text",
+        "Section-header",
+        "Text"
+      ],
+      "table_crops": []
+    },
+    "8": {
+      "classes_found": [
+        "Picture",
+        "Picture",
+        "Page-header",
+        "Page-footer",
+        "Text",
+        "Section-header",
+        "Text",
+        "Page-footer",
+        "Page-footer"
+      ],
+      "table_crops": []
+    },
+    "9": {
+      "classes_found": [
+        "Picture",
+        "Picture",
+        "Picture",
+        "Page-header",
+        "Page-footer",
+        "Section-header",
+        "Page-footer",
+        "Caption"
+      ],
+      "table_crops": []
+    },
+    "10": {
+      "classes_found": [
+        "Picture",
+        "Picture",
+        "Page-header",
+        "Page-footer",
+        "Section-header",
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Text"
+      ],
+      "table_crops": []
+    },
+    "11": {
+      "classes_found": [
+        "Picture",
+        "Picture",
+        "Page-header",
+        "Picture",
+        "Page-footer",
+        "Page-footer",
+        "Section-header",
+        "Text",
+        "Page-footer",
+        "Text",
+        "Text"
+      ],
+      "table_crops": []
+    },
+    "12": {
+      "classes_found": [
+        "Picture",
+        "Picture",
+        "Page-header",
+        "Page-footer",
+        "Section-header",
+        "Caption",
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Text"
+      ],
+      "table_crops": []
+    },
+    "13": {
+      "classes_found": [
+        "Page-header",
+        "Picture",
+        "Page-footer",
+        "Section-header",
+        "Page-footer",
+        "Text"
+      ],
+      "table_crops": []
+    },
+    "14": {
+      "classes_found": [
+        "Picture",
+        "Picture",
+        "Picture",
+        "Page-header",
+        "Page-footer",
+        "List-item",
+        "Text",
+        "List-item",
+        "Section-header",
+        "Text",
+        "Caption",
+        "Caption",
+        "Text",
+        "Page-footer",
+        "List-item",
+        "Text"
+      ],
+      "table_crops": []
+    },
+    "15": {
+      "classes_found": [
+        "Picture",
+        "Table",
+        "Picture",
+        "Page-footer",
+        "Page-header",
+        "Page-footer",
+        "Caption",
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Section-header",
+        "Section-header"
+      ],
+      "table_crops": [
+        "pdf_pipeline/page_classification/table_crops_kwave/page_15_table_1.png"
+      ]
+    },
+    "16": {
+      "classes_found": [
+        "Picture",
+        "Picture",
+        "Picture",
+        "Page-header",
+        "Page-footer",
+        "Caption",
+        "Section-header",
+        "Caption",
+        "Text",
+        "Text"
+      ],
+      "table_crops": []
+    },
+    "17": {
+      "classes_found": [
+        "Picture",
+        "Picture",
+        "Page-header",
+        "Page-footer",
+        "Caption",
+        "Section-header",
+        "Text",
+        "Text"
+      ],
+      "table_crops": []
+    },
+    "18": {
+      "classes_found": [
+        "Picture",
+        "Picture",
+        "Picture",
+        "Page-header",
+        "Page-footer",
+        "Section-header",
+        "Text",
+        "Text"
+      ],
+      "table_crops": []
+    },
+    "19": {
+      "classes_found": [
+        "Picture",
+        "Picture",
+        "Page-header",
+        "Page-footer",
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Section-header",
+        "Caption",
+        "Text",
+        "Text"
+      ],
+      "table_crops": []
+    },
+    "20": {
+      "classes_found": [
+        "Picture",
+        "Picture",
+        "Picture",
+        "Page-header",
+        "Page-footer",
+        "Caption",
+        "Section-header",
+        "Text",
+        "Caption",
+        "Caption"
+      ],
+      "table_crops": []
+    },
+    "21": {
+      "classes_found": [
+        "Picture",
+        "Picture",
+        "Picture",
+        "Page-header",
+        "Page-footer",
+        "Section-header",
+        "Picture",
+        "Caption",
+        "Caption",
+        "Text"
+      ],
+      "table_crops": []
+    },
+    "22": {
+      "classes_found": [
+        "Picture",
+        "Picture",
+        "Picture",
+        "Page-header",
+        "Page-footer",
+        "Section-header",
+        "Text",
+        "List-item",
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Caption"
+      ],
+      "table_crops": []
+    },
+    "23": {
+      "classes_found": [
+        "Picture",
+        "Picture",
+        "Picture",
+        "Page-header",
+        "Page-footer",
+        "List-item",
+        "Section-header",
+        "Caption",
+        "Text",
+        "List-item",
+        "Caption",
+        "List-item",
+        "List-item",
+        "Caption",
+        "Text",
+        "List-item"
+      ],
+      "table_crops": []
+    },
+    "24": {
+      "classes_found": [
+        "Picture",
+        "Picture",
+        "Page-header",
+        "Page-footer",
+        "Section-header",
+        "Page-footer",
+        "Page-footer",
+        "Text"
+      ],
+      "table_crops": []
+    },
+    "25": {
+      "classes_found": [
+        "Picture",
+        "Page-header",
+        "Page-footer",
+        "Section-header",
+        "Caption"
+      ],
+      "table_crops": []
+    },
+    "26": {
+      "classes_found": [
+        "Picture",
+        "Picture",
+        "Page-header",
+        "Page-footer",
+        "Text",
+        "Page-footer",
+        "Page-footer",
+        "Section-header",
+        "Page-header",
+        "Text"
+      ],
+      "table_crops": []
+    },
+    "27": {
+      "classes_found": [
+        "Page-header",
+        "Page-header",
+        "Text",
+        "Text",
+        "Text",
+        "Picture",
+        "Title",
+        "Section-header"
+      ],
+      "table_crops": []
+    },
+    "28": {
+      "classes_found": [
+        "Table",
+        "Text",
+        "Picture",
+        "Page-footer",
+        "Text",
+        "Text",
+        "Section-header",
+        "Section-header",
+        "Text",
+        "Table",
+        "Text",
+        "Text",
+        "Table",
+        "Table",
+        "Section-header",
+        "Text"
+      ],
+      "table_crops": [
+        "pdf_pipeline/page_classification/table_crops_kwave/page_28_table_1.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_28_table_2.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_28_table_3.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_28_table_4.png"
+      ]
+    },
+    "29": {
+      "classes_found": [
+        "Table",
+        "Page-footer",
+        "Page-header",
+        "Text"
+      ],
+      "table_crops": [
+        "pdf_pipeline/page_classification/table_crops_kwave/page_29_table_1.png"
+      ]
+    },
+    "30": {
+      "classes_found": [
+        "Picture",
+        "Picture",
+        "Picture",
+        "Picture",
+        "Page-footer",
+        "Section-header",
+        "Caption",
+        "Caption",
+        "Caption"
+      ],
+      "table_crops": []
+    },
+    "31": {
+      "classes_found": [
+        "Table",
+        "Table",
+        "Page-footer",
+        "Section-header",
+        "Text",
+        "Table",
+        "Table"
+      ],
+      "table_crops": [
+        "pdf_pipeline/page_classification/table_crops_kwave/page_31_table_1.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_31_table_2.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_31_table_3.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_31_table_4.png"
+      ]
+    },
+    "32": {
+      "classes_found": [
+        "Table",
+        "Picture",
+        "Text",
+        "Page-footer",
+        "Text",
+        "Text",
+        "Section-header",
+        "Text",
+        "Text",
+        "Section-header",
+        "Text",
+        "Text",
+        "Table",
+        "Table",
+        "Table",
+        "Text",
+        "Text",
+        "Text",
+        "Text"
+      ],
+      "table_crops": [
+        "pdf_pipeline/page_classification/table_crops_kwave/page_32_table_1.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_32_table_2.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_32_table_3.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_32_table_4.png"
+      ]
+    },
+    "33": {
+      "classes_found": [
+        "Table",
+        "Page-footer",
+        "Text",
+        "Page-header",
+        "Section-header",
+        "Section-header"
+      ],
+      "table_crops": [
+        "pdf_pipeline/page_classification/table_crops_kwave/page_33_table_1.png"
+      ]
+    },
+    "34": {
+      "classes_found": [
+        "Picture",
+        "Picture",
+        "Picture",
+        "Picture",
+        "Page-footer",
+        "Section-header",
+        "Caption",
+        "Caption"
+      ],
+      "table_crops": []
+    },
+    "35": {
+      "classes_found": [
+        "Table",
+        "Page-footer",
+        "Table",
+        "Text",
+        "Section-header",
+        "Table",
+        "Table"
+      ],
+      "table_crops": [
+        "pdf_pipeline/page_classification/table_crops_kwave/page_35_table_1.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_35_table_2.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_35_table_3.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_35_table_4.png"
+      ]
+    },
+    "36": {
+      "classes_found": [
+        "Table",
+        "Picture",
+        "Table",
+        "Page-footer",
+        "Text",
+        "Table",
+        "Text",
+        "Text",
+        "Section-header",
+        "Text",
+        "Section-header",
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Section-header",
+        "Text",
+        "Section-header",
+        "List-item",
+        "Text",
+        "Text"
+      ],
+      "table_crops": [
+        "pdf_pipeline/page_classification/table_crops_kwave/page_36_table_1.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_36_table_2.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_36_table_3.png"
+      ]
+    },
+    "37": {
+      "classes_found": [
+        "Table",
+        "Page-footer",
+        "Page-header",
+        "Text",
+        "Caption"
+      ],
+      "table_crops": [
+        "pdf_pipeline/page_classification/table_crops_kwave/page_37_table_1.png"
+      ]
+    },
+    "38": {
+      "classes_found": [
+        "Picture",
+        "Picture",
+        "Picture",
+        "Picture",
+        "Page-footer",
+        "Section-header",
+        "Caption",
+        "Caption",
+        "Caption",
+        "Caption"
+      ],
+      "table_crops": []
+    },
+    "39": {
+      "classes_found": [
+        "Table",
+        "Page-footer",
+        "Table",
+        "Section-header",
+        "Text",
+        "Table"
+      ],
+      "table_crops": [
+        "pdf_pipeline/page_classification/table_crops_kwave/page_39_table_1.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_39_table_2.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_39_table_3.png"
+      ]
+    },
+    "40": {
+      "classes_found": [
+        "Table",
+        "Picture",
+        "Text",
+        "Page-footer",
+        "Text",
+        "Section-header",
+        "Text",
+        "Section-header",
+        "Text",
+        "Text",
+        "Table",
+        "Table",
+        "Text",
+        "Text",
+        "Text",
+        "Section-header",
+        "Table"
+      ],
+      "table_crops": [
+        "pdf_pipeline/page_classification/table_crops_kwave/page_40_table_1.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_40_table_2.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_40_table_3.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_40_table_4.png"
+      ]
+    },
+    "41": {
+      "classes_found": [
+        "Table",
+        "Page-footer",
+        "Page-header",
+        "Text",
+        "Section-header"
+      ],
+      "table_crops": [
+        "pdf_pipeline/page_classification/table_crops_kwave/page_41_table_1.png"
+      ]
+    },
+    "42": {
+      "classes_found": [
+        "Picture",
+        "Picture",
+        "Picture",
+        "Picture",
+        "Page-footer",
+        "Section-header",
+        "Caption",
+        "Caption",
+        "Caption",
+        "Caption"
+      ],
+      "table_crops": []
+    },
+    "43": {
+      "classes_found": [
+        "Table",
+        "Page-footer",
+        "Table",
+        "Section-header",
+        "Text",
+        "Table",
+        "Table"
+      ],
+      "table_crops": [
+        "pdf_pipeline/page_classification/table_crops_kwave/page_43_table_1.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_43_table_2.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_43_table_3.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_43_table_4.png"
+      ]
+    },
+    "44": {
+      "classes_found": [
+        "Table",
+        "Picture",
+        "Page-footer",
+        "Text",
+        "Text",
+        "Text",
+        "Section-header",
+        "Section-header",
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Table",
+        "Text",
+        "Table",
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Table",
+        "Text"
+      ],
+      "table_crops": [
+        "pdf_pipeline/page_classification/table_crops_kwave/page_44_table_1.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_44_table_2.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_44_table_3.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_44_table_4.png"
+      ]
+    },
+    "45": {
+      "classes_found": [
+        "Table",
+        "Page-footer",
+        "Page-header",
+        "Text",
+        "Section-header"
+      ],
+      "table_crops": [
+        "pdf_pipeline/page_classification/table_crops_kwave/page_45_table_1.png"
+      ]
+    },
+    "46": {
+      "classes_found": [
+        "Picture",
+        "Picture",
+        "Picture",
+        "Picture",
+        "Page-footer",
+        "Section-header",
+        "Caption",
+        "Caption",
+        "Page-footer",
+        "Caption"
+      ],
+      "table_crops": []
+    },
+    "47": {
+      "classes_found": [
+        "Table",
+        "Page-footer",
+        "Table",
+        "Section-header",
+        "Text",
+        "Table"
+      ],
+      "table_crops": [
+        "pdf_pipeline/page_classification/table_crops_kwave/page_47_table_1.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_47_table_2.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_47_table_3.png"
+      ]
+    },
+    "48": {
+      "classes_found": [
+        "Table",
+        "Picture",
+        "Text",
+        "Page-footer",
+        "Text",
+        "Text",
+        "Text",
+        "Section-header",
+        "Page-header",
+        "Text",
+        "Text",
+        "Table",
+        "Table",
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Section-header",
+        "Section-header",
+        "Text",
+        "Text"
+      ],
+      "table_crops": [
+        "pdf_pipeline/page_classification/table_crops_kwave/page_48_table_1.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_48_table_2.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_48_table_3.png"
+      ]
+    },
+    "49": {
+      "classes_found": [
+        "Table",
+        "Page-footer",
+        "Page-header",
+        "Page-footer",
+        "Section-header"
+      ],
+      "table_crops": [
+        "pdf_pipeline/page_classification/table_crops_kwave/page_49_table_1.png"
+      ]
+    },
+    "50": {
+      "classes_found": [
+        "Table",
+        "Page-footer",
+        "Page-footer",
+        "Page-header",
+        "Section-header"
+      ],
+      "table_crops": [
+        "pdf_pipeline/page_classification/table_crops_kwave/page_50_table_1.png"
+      ]
+    },
+    "51": {
+      "classes_found": [
+        "Picture",
+        "Picture",
+        "Picture",
+        "Picture",
+        "Page-footer",
+        "Section-header",
+        "Caption",
+        "Caption",
+        "Caption"
+      ],
+      "table_crops": []
+    },
+    "52": {
+      "classes_found": [
+        "Table",
+        "Table",
+        "Page-footer",
+        "Section-header",
+        "Text",
+        "Table",
+        "Table"
+      ],
+      "table_crops": [
+        "pdf_pipeline/page_classification/table_crops_kwave/page_52_table_1.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_52_table_2.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_52_table_3.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_52_table_4.png"
+      ]
+    },
+    "53": {
+      "classes_found": [
+        "Table",
+        "Picture",
+        "Page-footer",
+        "Text",
+        "Section-header",
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Section-header",
+        "Text",
+        "Table",
+        "Text",
+        "Table",
+        "Table",
+        "Page-header"
+      ],
+      "table_crops": [
+        "pdf_pipeline/page_classification/table_crops_kwave/page_53_table_1.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_53_table_2.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_53_table_3.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_53_table_4.png"
+      ]
+    },
+    "54": {
+      "classes_found": [
+        "Table",
+        "Page-footer",
+        "Page-header",
+        "Text"
+      ],
+      "table_crops": [
+        "pdf_pipeline/page_classification/table_crops_kwave/page_54_table_1.png"
+      ]
+    },
+    "55": {
+      "classes_found": [
+        "Picture",
+        "Picture",
+        "Picture",
+        "Picture",
+        "Page-footer",
+        "Section-header",
+        "Caption",
+        "Caption"
+      ],
+      "table_crops": []
+    },
+    "56": {
+      "classes_found": [
+        "Table",
+        "Page-footer",
+        "Table",
+        "Section-header",
+        "Text",
+        "Table",
+        "Table"
+      ],
+      "table_crops": [
+        "pdf_pipeline/page_classification/table_crops_kwave/page_56_table_1.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_56_table_2.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_56_table_3.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_56_table_4.png"
+      ]
+    },
+    "57": {
+      "classes_found": [
+        "Table",
+        "Picture",
+        "Page-footer",
+        "Text",
+        "Text",
+        "Section-header",
+        "Text",
+        "Table",
+        "Section-header",
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Table",
+        "Text",
+        "Text",
+        "Section-header",
+        "Table",
+        "Text",
+        "Text"
+      ],
+      "table_crops": [
+        "pdf_pipeline/page_classification/table_crops_kwave/page_57_table_1.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_57_table_2.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_57_table_3.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_57_table_4.png"
+      ]
+    },
+    "58": {
+      "classes_found": [
+        "Picture",
+        "Picture",
+        "Table",
+        "Page-footer",
+        "Caption",
+        "Section-header"
+      ],
+      "table_crops": [
+        "pdf_pipeline/page_classification/table_crops_kwave/page_58_table_1.png"
+      ]
+    },
+    "59": {
+      "classes_found": [
+        "Picture",
+        "Picture",
+        "Picture",
+        "Picture",
+        "Page-footer",
+        "Section-header",
+        "Caption",
+        "Caption",
+        "Caption",
+        "Caption"
+      ],
+      "table_crops": []
+    },
+    "60": {
+      "classes_found": [
+        "Table",
+        "Page-footer",
+        "Table",
+        "Section-header",
+        "Text",
+        "Table",
+        "Table"
+      ],
+      "table_crops": [
+        "pdf_pipeline/page_classification/table_crops_kwave/page_60_table_1.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_60_table_2.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_60_table_3.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_60_table_4.png"
+      ]
+    },
+    "61": {
+      "classes_found": [
+        "Table",
+        "Picture",
+        "Page-footer",
+        "Text",
+        "Text",
+        "Section-header",
+        "Section-header",
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Table",
+        "Text",
+        "Table",
+        "Text",
+        "Text",
+        "Text",
+        "Table",
+        "Section-header",
+        "Text",
+        "Text",
+        "Text"
+      ],
+      "table_crops": [
+        "pdf_pipeline/page_classification/table_crops_kwave/page_61_table_1.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_61_table_2.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_61_table_3.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_61_table_4.png"
+      ]
+    },
+    "62": {
+      "classes_found": [
+        "Table",
+        "Page-footer",
+        "Text",
+        "Page-header",
+        "Section-header"
+      ],
+      "table_crops": [
+        "pdf_pipeline/page_classification/table_crops_kwave/page_62_table_1.png"
+      ]
+    },
+    "63": {
+      "classes_found": [
+        "Picture",
+        "Picture",
+        "Picture",
+        "Picture",
+        "Page-footer",
+        "Section-header",
+        "Caption",
+        "Caption"
+      ],
+      "table_crops": []
+    },
+    "64": {
+      "classes_found": [
+        "Table",
+        "Page-footer",
+        "Table",
+        "Section-header",
+        "Text",
+        "Table",
+        "Table"
+      ],
+      "table_crops": [
+        "pdf_pipeline/page_classification/table_crops_kwave/page_64_table_1.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_64_table_2.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_64_table_3.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_64_table_4.png"
+      ]
+    },
+    "65": {
+      "classes_found": [
+        "Table",
+        "Picture",
+        "Page-footer",
+        "Text",
+        "Text",
+        "Section-header",
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Table",
+        "Section-header",
+        "Text",
+        "Table",
+        "Text",
+        "Text",
+        "Text",
+        "Section-header",
+        "Table",
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Section-header",
+        "Text"
+      ],
+      "table_crops": [
+        "pdf_pipeline/page_classification/table_crops_kwave/page_65_table_1.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_65_table_2.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_65_table_3.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_65_table_4.png"
+      ]
+    },
+    "66": {
+      "classes_found": [
+        "Picture",
+        "Picture",
+        "Table",
+        "Page-footer",
+        "Caption",
+        "Page-header",
+        "Section-header",
+        "Caption"
+      ],
+      "table_crops": [
+        "pdf_pipeline/page_classification/table_crops_kwave/page_66_table_1.png"
+      ]
+    },
+    "67": {
+      "classes_found": [
+        "Table",
+        "Page-footer",
+        "Page-header",
+        "Section-header"
+      ],
+      "table_crops": [
+        "pdf_pipeline/page_classification/table_crops_kwave/page_67_table_1.png"
+      ]
+    },
+    "68": {
+      "classes_found": [
+        "Table",
+        "Page-footer",
+        "Table",
+        "Section-header",
+        "Text",
+        "Table",
+        "Table",
+        "Table"
+      ],
+      "table_crops": [
+        "pdf_pipeline/page_classification/table_crops_kwave/page_68_table_1.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_68_table_2.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_68_table_3.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_68_table_4.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_68_table_5.png"
+      ]
+    },
+    "69": {
+      "classes_found": [
+        "Table",
+        "Page-header",
+        "Table",
+        "Table",
+        "Page-footer",
+        "Section-header",
+        "Section-header",
+        "Section-header",
+        "Section-header"
+      ],
+      "table_crops": [
+        "pdf_pipeline/page_classification/table_crops_kwave/page_69_table_1.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_69_table_2.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_69_table_3.png"
+      ]
+    },
+    "70": {
+      "classes_found": [
+        "Table",
+        "Page-header",
+        "Page-footer",
+        "Section-header",
+        "Table",
+        "Table",
+        "Section-header",
+        "Section-header"
+      ],
+      "table_crops": [
+        "pdf_pipeline/page_classification/table_crops_kwave/page_70_table_1.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_70_table_2.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_70_table_3.png"
+      ]
+    },
+    "71": {
+      "classes_found": [
+        "Table",
+        "Table",
+        "Page-header",
+        "Page-footer",
+        "Section-header",
+        "Section-header",
+        "Picture",
+        "Section-header"
+      ],
+      "table_crops": [
+        "pdf_pipeline/page_classification/table_crops_kwave/page_71_table_1.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_71_table_2.png"
+      ]
+    },
+    "72": {
+      "classes_found": [
+        "Table",
+        "Page-header",
+        "Table",
+        "Table",
+        "Page-footer",
+        "Section-header",
+        "Section-header",
+        "Section-header",
+        "Section-header"
+      ],
+      "table_crops": [
+        "pdf_pipeline/page_classification/table_crops_kwave/page_72_table_1.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_72_table_2.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_72_table_3.png"
+      ]
+    },
+    "73": {
+      "classes_found": [
+        "Text",
+        "Page-header",
+        "Text",
+        "Page-footer",
+        "Text",
+        "Section-header",
+        "Section-header",
+        "Text",
+        "Text",
+        "List-item",
+        "Table",
+        "List-item",
+        "Table",
+        "List-item",
+        "Section-header",
+        "Text",
+        "Section-header",
+        "Text"
+      ],
+      "table_crops": [
+        "pdf_pipeline/page_classification/table_crops_kwave/page_73_table_1.png",
+        "pdf_pipeline/page_classification/table_crops_kwave/page_73_table_2.png"
+      ]
+    }
+  },
+  "yolo_per_page_ms": {
+    "1": 134.13,
+    "2": 85.44,
+    "3": 100.44,
+    "4": 104.92,
+    "5": 104.5,
+    "6": 87.92,
+    "7": 109.83,
+    "8": 101.15,
+    "9": 90.96,
+    "10": 87.57,
+    "11": 87.87,
+    "12": 98.49,
+    "13": 86.17,
+    "14": 96.3,
+    "15": 101.14,
+    "16": 102.35,
+    "17": 102.46,
+    "18": 91.1,
+    "19": 90.41,
+    "20": 96.95,
+    "21": 87.81,
+    "22": 103.33,
+    "23": 90.29,
+    "24": 90.23,
+    "25": 105.15,
+    "26": 89.28,
+    "27": 103.37,
+    "28": 97.28,
+    "29": 88.02,
+    "30": 96.69,
+    "31": 93.38,
+    "32": 93.36,
+    "33": 86.23,
+    "34": 101.34,
+    "35": 91.69,
+    "36": 96.06,
+    "37": 85.06,
+    "38": 95.74,
+    "39": 91.35,
+    "40": 92.53,
+    "41": 85.5,
+    "42": 95.77,
+    "43": 92.19,
+    "44": 93.42,
+    "45": 86.43,
+    "46": 90.57,
+    "47": 94.58,
+    "48": 94.71,
+    "49": 87.22,
+    "50": 88.95,
+    "51": 95.62,
+    "52": 93.19,
+    "53": 93.81,
+    "54": 86.67,
+    "55": 89.71,
+    "56": 94.5,
+    "57": 92.74,
+    "58": 83.99,
+    "59": 92.54,
+    "60": 93.23,
+    "61": 93.87,
+    "62": 87.52,
+    "63": 91.47,
+    "64": 98.63,
+    "65": 94.55,
+    "66": 95.57,
+    "67": 88.78,
+    "68": 91.78,
+    "69": 84.75,
+    "70": 82.79,
+    "71": 83.57,
+    "72": 85.3,
+    "73": 83.78
+  },
+  "n_table_crops_found": 104
+}

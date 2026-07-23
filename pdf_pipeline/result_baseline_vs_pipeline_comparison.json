@@ -1,0 +1,120 @@
+{
+  "LGCNS": {
+    "page_classification_s": 0.449,
+    "text": {
+      "baseline": {
+        "elapsed_s": 0.0427,
+        "matched": 22,
+        "total": 22,
+        "recall": 1.0,
+        "per_page": {
+          "1": {
+            "matched": 11,
+            "total": 11
+          },
+          "6": {
+            "matched": 11,
+            "total": 11
+          }
+        }
+      },
+      "current": {
+        "elapsed_s": 5.985,
+        "matched": 22,
+        "total": 22,
+        "recall": 1.0,
+        "per_page": {
+          "1": {
+            "matched": 11,
+            "total": 11
+          },
+          "6": {
+            "matched": 11,
+            "total": 11
+          }
+        },
+        "n_chunks": 17,
+        "n_hard_pages": 0
+      }
+    },
+    "table": {
+      "baseline": {
+        "n_tables": 14,
+        "total_rows": 30,
+        "zero_row_tables": 4,
+        "elapsed_s": 1.017
+      },
+      "current": {
+        "n_tables": 13,
+        "total_rows": 227,
+        "n_mapped": 27,
+        "hit_rate": 0.1189,
+        "n_finance_rows_filtered": 72,
+        "elapsed_s": 7.025
+      }
+    }
+  },
+  "Construct": {
+    "page_classification_s": 0.704,
+    "text": {
+      "baseline": {
+        "elapsed_s": 0.0502,
+        "matched": 47,
+        "total": 47,
+        "recall": 1.0,
+        "per_page": {
+          "1": {
+            "matched": 10,
+            "total": 10
+          },
+          "5": {
+            "matched": 21,
+            "total": 21
+          },
+          "10": {
+            "matched": 16,
+            "total": 16
+          }
+        }
+      },
+      "current": {
+        "elapsed_s": 1.154,
+        "matched": 47,
+        "total": 47,
+        "recall": 1.0,
+        "per_page": {
+          "1": {
+            "matched": 10,
+            "total": 10
+          },
+          "5": {
+            "matched": 21,
+            "total": 21
+          },
+          "10": {
+            "matched": 16,
+            "total": 16
+          }
+        },
+        "n_chunks": 20,
+        "n_hard_pages": 0
+      }
+    },
+    "table": {
+      "baseline": {
+        "n_tables": 15,
+        "total_rows": 47,
+        "zero_row_tables": 2,
+        "elapsed_s": 1.38
+      },
+      "current": {
+        "n_tables": 15,
+        "total_rows": 215,
+        "n_mapped": 9,
+        "hit_rate": 0.0419,
+        "n_finance_rows_filtered": 0,
+        "elapsed_s": 6.389
+      }
+    }
+  }
+}

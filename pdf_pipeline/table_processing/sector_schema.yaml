@@ -1,0 +1,679 @@
+# [20] Sector -> TableType -> Field 계층 스키마 (사용자 설계 반영)
+#
+# 추출 게이팅은 여전히 Field-first(표 하나만 보고 섹터를 못 맞추는 문제, [19]에서 이미 확인)지만,
+# Sector/TableType은 "그 섹터 리포트에서 어떤 표 유형이 나올지 미리 알고 매칭 우선순위를 조정"하는
+# 참고/확장 레이어로 추가한다. 새 섹터·필드 추가가 코드 수정 없이 이 YAML만 고치면 되게 설계.
+#
+# fields의 각 항목:
+#   aliases: 리포트 표기 변형(Canonical Field Normalization)
+#   value_type: numeric_amount | percent | text | date_range  (값 정제 방식 결정)
+#   unit: 이 필드의 기본 단위(추출 시 값에서 실제 단위를 못 읽으면 이 기본값 사용)
+#   category: 참고용 그룹핑
+
+fields:
+  # --- 공용(여러 섹터 재사용) ---
+  order_backlog:
+    aliases: [수주잔고, 수주잔액, 수주잔량, Backlog, Order Backlog, Remaining Orders, 미착공잔고]
+    value_type: numeric_amount
+    unit: KRW
+    category: 수주/계약
+  new_orders:
+    aliases: [신규수주, 수주액, New Orders, 신규 수주, 당기수주, 수주고]
+    value_type: numeric_amount
+    unit: KRW
+    category: 수주/계약
+  contract_counterparty:
+    aliases: [계약상대, 계약상대방, 발주처, Counterparty, 수요처, 공급처, 거래상대방]
+    value_type: text
+    unit: null
+    category: 수주/계약
+  contract_amount:
+    aliases: [계약금액, 수주금액, Contract Amount, 공급계약금액, 총 계약금액]
+    value_type: numeric_amount
+    unit: KRW
+    category: 수주/계약
+  contract_period:
+    aliases: [계약기간, Contract Period, 공급기간, 이행기간, 사업기간]
+    value_type: date_range
+    unit: null
+    category: 수주/계약
+  capex:
+    aliases: [CAPEX, 설비투자, 자본적지출, 투자지출, 설비투자액, 시설투자, 분기별CAPEX]
+    value_type: numeric_amount
+    unit: KRW
+    category: 공용
+  utilization_rate:
+    aliases: [가동률, 이용률, Utilization, 설비가동률, 공장가동률, 반도체가동률, 디스플레이가동률]
+    value_type: percent
+    unit: percent
+    category: 공용
+  capacity:
+    aliases: [생산능력, CAPA, Capacity, 생산CAPA, 설비능력, 연간생산능력]
+    value_type: numeric_amount
+    unit: null
+    category: 공용
+  raw_material_price:
+    aliases: [원자재가격, 원재료가격, 원료가, 원부자재, 원료비, 투입원가, 매입단가]
+    value_type: numeric_amount
+    unit: null
+    category: 공용
+  spread:
+    aliases: [스프레드, Spread, 원료-제품가격차, 제품스프레드, 정제마진]
+    value_type: numeric_amount
+    unit: null
+    category: 공용
+  product_price:
+    aliases: [판가, 판매가, 제품가격, ASP, 평균판매단가, 판매단가]
+    value_type: numeric_amount
+    unit: null
+    category: 공용
+  fx_sensitivity:
+    aliases: [환율민감도, 환헤지, 환율 노출, 환율변동영향, 환율효과]
+    value_type: text
+    unit: null
+    category: 공용
+  product_mix:
+    aliases: [제품별매출비중, 사업부문별매출, 매출구성, 부문별매출, 제품구성비, 지역별매출비중]
+    value_type: percent
+    unit: percent
+    category: 공용
+
+  # --- 건설업 ---
+  unsold_units:
+    aliases: [미분양, 미분양현황, 미분양 세대수, 미분양물량, 준공후미분양]
+    value_type: numeric_amount
+    unit: count
+    category: 건설특화
+  pf_guarantee:
+    aliases: [PF보증, PF보증잔액, PF우발채무, 프로젝트파이낸싱, PF지급보증]
+    value_type: numeric_amount
+    unit: KRW
+    category: 건설특화
+  completion_rate:
+    aliases: [공사진행률, 진행률, 분양률, 공정률]
+    value_type: percent
+    unit: percent
+    category: 건설특화
+  construction_capability_rank:
+    aliases: [시공능력평가순위, 시공능력평가, 시공순위, 시평순위, 시공능력]
+    value_type: text
+    unit: null
+    category: 건설특화
+  cost_ratio:
+    aliases: [원가율, 매출원가율, 공사원가율]
+    value_type: percent
+    unit: percent
+    category: 건설특화
+  # --- [23] Construct(건설 Weekly) PDF 검증에서 실제 발견한 청약/분양 관련 필드(사용자 요청) ---
+  presale_competition_rate:
+    aliases: [청약경쟁률, 경쟁률]
+    value_type: numeric_amount
+    unit: multiple
+    category: 건설특화
+  presale_price:
+    aliases: [분양가, 공급분양가]
+    value_type: numeric_amount
+    unit: null
+    category: 건설특화
+  presale_units:
+    aliases: [분양세대수, 공급세대수]
+    value_type: numeric_amount
+    unit: count
+    category: 건설특화
+  presale_shortfall:
+    aliases: [미달, 청약미달]
+    value_type: numeric_amount
+    unit: count
+    category: 건설특화
+  apartment_price_index:
+    aliases: [아파트매매지수, 아파트전세지수, 매매지수, 전세지수, 아파트지수]
+    value_type: percent
+    unit: percent
+    category: 건설특화
+  real_estate_supply_demand_index:
+    aliases: [매매수급동향, 매매수급지수, 전세수급동향]
+    value_type: numeric_amount
+    unit: null
+    category: 건설특화
+  base_interest_rate:
+    aliases: [기준금리]
+    value_type: percent
+    unit: percent
+    category: 공용
+  household_loan_balance:
+    aliases: [가계대출잔액, 가계대출]
+    value_type: numeric_amount
+    unit: KRW_trillion
+    category: 건설특화
+
+  # --- 화학/철강/비금속 ---
+  naphtha_price:
+    aliases: [나프타가격, Naphtha, 나프타매입가, 기초유분가격]
+    value_type: numeric_amount
+    unit: null
+    category: 화학특화
+  capacity_expansion:
+    aliases: [설비증설, NCC증설, 증설일정, 증설계획]
+    value_type: date_range
+    unit: null
+    category: 화학특화
+  maintenance_schedule:
+    aliases: [정기보수, 정기보수일정, 셧다운, Turnaround]
+    value_type: date_range
+    unit: null
+    category: 화학특화
+  iron_ore_price:
+    aliases: [철광석가격, 원료탄가격, 제철용탄가격, 철광석]
+    value_type: numeric_amount
+    unit: null
+    category: 철강특화
+  china_steel_price:
+    aliases: [중국철강가격, 중국유통가, 중국철강유통가]
+    value_type: numeric_amount
+    unit: null
+    category: 철강특화
+  coal_price:
+    aliases: [유연탄가격, 유연탄]
+    value_type: numeric_amount
+    unit: null
+    category: 비금속특화
+  cement_price:
+    aliases: [시멘트단가, 시멘트가격, 시멘트판가]
+    value_type: numeric_amount
+    unit: null
+    category: 비금속특화
+
+  # --- 음식료/섬유/종이 ---
+  domestic_export_mix:
+    aliases: [내수비중, 수출비중, 내수수출비중]
+    value_type: percent
+    unit: percent
+    category: 음식료특화
+  pricing_power:
+    aliases: [판가인상, 가격전가력, Pricing Power]
+    value_type: text
+    unit: null
+    category: 음식료특화
+  inventory_turnover:
+    aliases: [재고자산회전율, 재고회전율]
+    value_type: text
+    unit: null
+    category: 섬유특화
+  inventory_valuation_loss:
+    aliases: [재고평가손실충당금, 재고자산평가손실]
+    value_type: numeric_amount
+    unit: KRW
+    category: 섬유특화
+  brand_sales_growth:
+    aliases: [브랜드별매출성장률, 브랜드매출성장률]
+    value_type: percent
+    unit: percent
+    category: 섬유특화
+  pulp_price:
+    aliases: [펄프가격, 목재칩원가, 국제펄프가격]
+    value_type: numeric_amount
+    unit: null
+    category: 종이목재특화
+  paper_price:
+    aliases: [지가, 지판가, 종이가격, 골판지가격, 인쇄용지가격]
+    value_type: numeric_amount
+    unit: null
+    category: 종이목재특화
+
+  # --- 의약품/의료정밀 ---
+  clinical_pipeline:
+    aliases: [임상파이프라인, 파이프라인, 임상단계, Pipeline, 개발단계]
+    value_type: text
+    unit: null
+    category: 제약특화
+  licensing_deal:
+    aliases: [기술수출, L/O계약, License Out, 기술수출계약금액]
+    value_type: numeric_amount
+    unit: KRW
+    category: 제약특화
+  rd_expense_treatment:
+    aliases: [연구개발비, R&D비용, 개발비자산화, 경상연구개발비]
+    value_type: numeric_amount
+    unit: KRW
+    category: 제약특화
+  patent_expiry:
+    aliases: [특허만료, 특허만료일정, Patent Expiry, 물질특허만료]
+    value_type: date_range
+    unit: null
+    category: 제약특화
+  approval_status:
+    aliases: [인허가, FDA승인, CE인증, 허가현황, 품목허가, 임상승인]
+    value_type: text
+    unit: null
+    category: 제약특화
+  consumable_sales_ratio:
+    aliases: [소모품매출비중, 소모품비중, Consumable]
+    value_type: percent
+    unit: percent
+    category: 의료정밀특화
+
+  # --- 운수장비(조선/자동차) ---
+  ship_price_index:
+    aliases: [클락슨지수, 선가, 신조선가, Newbuilding Price]
+    value_type: numeric_amount
+    unit: null
+    category: 조선특화
+  heavy_tail_contract:
+    aliases: [헤비테일, 헤비테일계약]
+    value_type: text
+    unit: null
+    category: 조선특화
+  construction_loss_provision:
+    aliases: [공사손실충당금, 예상손실충당금]
+    value_type: numeric_amount
+    unit: KRW
+    category: 조선특화
+  ev_mix:
+    aliases: [친환경차비중, EV비중, 전기차판매비중]
+    value_type: percent
+    unit: percent
+    category: 자동차특화
+  finance_provision:
+    aliases: [금융부문대손충당금, 할부금융충당금]
+    value_type: numeric_amount
+    unit: KRW
+    category: 자동차특화
+
+  # --- 유통업 ---
+  sss_growth:
+    aliases: [기존점성장률, SSSG, 동일점포성장률, 기존점신장률]
+    value_type: percent
+    unit: percent
+    category: 유통특화
+  gmv:
+    aliases: [GMV, 거래액, 총거래액, 온라인매출, 오프라인매출]
+    value_type: numeric_amount
+    unit: KRW
+    category: 유통특화
+  rent_promotion_cost:
+    aliases: [임차료, 판촉비, 판매관리비]
+    value_type: numeric_amount
+    unit: KRW
+    category: 유통특화
+  online_sales_ratio:
+    aliases: [온라인매출비중, 온라인비중, 이커머스매출, 온라인전환율]
+    value_type: percent
+    unit: percent
+    category: 유통특화
+
+  # --- 전기가스업 ---
+  regulated_tariff:
+    aliases: [전기요금, 가스요금, 규제요금]
+    value_type: numeric_amount
+    unit: null
+    category: 전기가스특화
+  smp:
+    aliases: [SMP, 전력도매가격]
+    value_type: numeric_amount
+    unit: null
+    category: 전기가스특화
+  lng_price:
+    aliases: [LNG도입가, LNG가격]
+    value_type: numeric_amount
+    unit: null
+    category: 전기가스특화
+  utility_receivable:
+    aliases: [미수금, 한전미수금, 가스공사미수금]
+    value_type: numeric_amount
+    unit: KRW
+    category: 전기가스특화
+  generation_capacity:
+    aliases: [발전설비용량, 설비용량, 발전용량, 발전설비, 설비CAPA]
+    value_type: numeric_amount
+    unit: null
+    category: 전기가스특화
+
+  # --- 운수창고업 ---
+  freight_index:
+    aliases: [운임지수, BDI, SCFI, 운임, 컨테이너운임지수, 벌크운임]
+    value_type: numeric_amount
+    unit: null
+    category: 운수특화
+  cargo_volume:
+    aliases: [물동량, 화물량, 처리량, 수송량, 적재량]
+    value_type: numeric_amount
+    unit: null
+    category: 운수특화
+  cask_rask:
+    aliases: [CASK, RASK]
+    value_type: numeric_amount
+    unit: null
+    category: 항공특화
+  load_factor:
+    aliases: [탑승률, L/F, 여객L/F, Load Factor]
+    value_type: percent
+    unit: percent
+    category: 항공특화
+
+  # --- 통신업 ---
+  subscribers:
+    aliases: [가입자수, 가입자, Subscribers, MAU, 누적가입자, 총가입자수]
+    value_type: numeric_amount
+    unit: count
+    category: 통신특화
+  arpu:
+    aliases: [ARPU, 가입자당평균매출, 가입자당매출]
+    value_type: numeric_amount
+    unit: KRW
+    category: 통신특화
+  churn_rate:
+    aliases: [해지율, Churn, Churn Rate, 이탈율]
+    value_type: percent
+    unit: percent
+    category: 통신특화
+  penetration_rate:
+    aliases: [침투율, 5G침투율, 6G침투율]
+    value_type: percent
+    unit: percent
+    category: 통신특화
+  marketing_cost:
+    aliases: [마케팅비용, 마케팅비, 공시지원금]
+    value_type: numeric_amount
+    unit: KRW
+    category: 통신특화
+  b2b_growth:
+    aliases: [B2B매출성장률, B2B성장률, IDC매출, 클라우드매출]
+    value_type: percent
+    unit: percent
+    category: 통신특화
+
+  # --- 금융업/은행/증권/보험 ---
+  shareholder_return_ratio:
+    aliases: [주주환원율, 총주주환원율, 배당성향]
+    value_type: percent
+    unit: percent
+    category: 금융지주특화
+  bis_ratio:
+    aliases: [BIS비율, BIS 비율, 자기자본비율, CET1, CET1비율, 총자본비율, 기본자본비율]
+    value_type: percent
+    unit: percent
+    category: 은행특화
+  nim:
+    aliases: [순이자마진, NIM, Net Interest Margin]
+    value_type: percent
+    unit: percent
+    category: 은행특화
+  npl_ratio:
+    aliases: [고정이하여신비율, 부실채권비율, NPL비율, NPL Ratio, 연체율]
+    value_type: percent
+    unit: percent
+    category: 은행특화
+  loan_deposit:
+    aliases: [여신, 수신, 여수신, 여신잔액, 수신잔액, 총여신, 총수신, 예대율, 원화대출금]
+    value_type: numeric_amount
+    unit: KRW
+    category: 은행특화
+  brokerage_fee:
+    aliases: [수탁수수료, 위탁수수료, 브로커리지, 위탁매매수수료]
+    value_type: numeric_amount
+    unit: KRW
+    category: 증권특화
+  trading_income:
+    aliases: [자기매매손익, 트레이딩손익, Trading Income, 유가증권평가손익]
+    value_type: numeric_amount
+    unit: KRW
+    category: 증권특화
+  ib_revenue:
+    aliases: [IB부문, IB수익, 인수주선, IB Revenue, IB부문수익, 기업금융수익]
+    value_type: numeric_amount
+    unit: KRW
+    category: 증권특화
+  margin_loan:
+    aliases: [신용융자잔고, 신용공여잔고, 신용거래융자]
+    value_type: numeric_amount
+    unit: KRW
+    category: 증권특화
+  pf_contingent_liability:
+    aliases: [부동산PF우발채무, PF우발채무, PF충당금]
+    value_type: numeric_amount
+    unit: KRW
+    category: 증권특화
+  solvency_ratio:
+    aliases: [지급여력비율, K-ICS, RBC비율, 지급여력, K-ICS비율]
+    value_type: percent
+    unit: percent
+    category: 보험특화
+  new_business_csm:
+    aliases: [신계약CSM, CSM, 신계약 CSM, 보험계약마진, 신계약CSM확보액]
+    value_type: numeric_amount
+    unit: KRW
+    category: 보험특화
+  csm_balance:
+    aliases: [CSM잔액, CSM잔액변동]
+    value_type: numeric_amount
+    unit: KRW
+    category: 보험특화
+  insurance_profit:
+    aliases: [보험손익, 보험영업손익, 보험서비스손익]
+    value_type: numeric_amount
+    unit: KRW
+    category: 보험특화
+  loss_ratio:
+    aliases: [손해율, 실손손해율]
+    value_type: percent
+    unit: percent
+    category: 보험특화
+  experience_variance:
+    aliases: [예실차, 예상실적차이]
+    value_type: numeric_amount
+    unit: KRW
+    category: 보험특화
+
+  # --- 서비스업(IT/엔터/플랫폼) ---
+  mau:
+    aliases: [MAU, 월간활성사용자, Monthly Active Users]
+    value_type: numeric_amount
+    unit: count
+    category: 서비스특화
+  monetization:
+    aliases: [Monetization, 수익화, 수익화율]
+    value_type: text
+    unit: null
+    category: 서비스특화
+  cost_structure:
+    aliases: [인건비, 서버비, 비용구조]
+    value_type: numeric_amount
+    unit: KRW
+    category: 서비스특화
+  ip_sales:
+    aliases: [음반매출, 음원매출, M&D매출, IP매출, 음원/음반]
+    value_type: numeric_amount
+    unit: KRW
+    category: 엔터특화
+  tour_ticket:
+    aliases: [투어티켓, 공연티켓, 티켓판매량]
+    value_type: numeric_amount
+    unit: count
+    category: 엔터특화
+  # --- [22] K-Wave PDF 검증에서 실제 발견한 엔터 실적테이블 세그먼트 구조 반영(사용자 요청) ---
+  direct_participation_revenue:
+    aliases: [직접참여형, 직접 참여형]
+    value_type: numeric_amount
+    unit: KRW
+    category: 엔터특화
+  indirect_participation_revenue:
+    aliases: [간접참여형, 간접 참여형]
+    value_type: numeric_amount
+    unit: KRW
+    category: 엔터특화
+  concert_revenue:
+    aliases: [공연매출, 콘서트매출, 공연]
+    value_type: numeric_amount
+    unit: KRW
+    category: 엔터특화
+  ad_appearance_revenue:
+    aliases: [광고/출연료, 광고출연료, 출연료매출]
+    value_type: numeric_amount
+    unit: KRW
+    category: 엔터특화
+  md_licensing_revenue:
+    aliases: [MD/라이선싱, MD라이선싱, 라이선싱매출, MD매출]
+    value_type: numeric_amount
+    unit: KRW
+    category: 엔터특화
+  content_revenue:
+    aliases: [콘텐츠매출, 콘텐츠]
+    value_type: numeric_amount
+    unit: KRW
+    category: 엔터특화
+  fanclub_revenue:
+    aliases: [팬클럽/기타, 팬클럽매출, 팬클럽]
+    value_type: numeric_amount
+    unit: KRW
+    category: 엔터특화
+  overseas_ip_expansion:
+    aliases: [해외IP, 해외 IP, 기획사별해외IP, 해외진출IP, 해외IP현황]
+    value_type: text
+    unit: null
+    category: 엔터특화
+
+# --- Sector -> TableType -> Field 매핑(참고/확장용, 추출 게이팅에는 미사용 — [19]에서
+#     "표 하나만 보고 섹터를 못 맞춘다"는 사용자 피드백을 그대로 유지) ---
+sectors:
+  음식료품:
+    table_types:
+      원재료가격: [raw_material_price]
+      판가전략: [product_price, pricing_power, domestic_export_mix]
+  섬유의복:
+    table_types:
+      재고자산: [inventory_turnover, inventory_valuation_loss]
+      수주현황: [order_backlog, brand_sales_growth, utilization_rate]
+  종이목재:
+    table_types:
+      원가: [pulp_price, utilization_rate]
+      판가: [paper_price]
+  화학:
+    table_types:
+      스프레드: [spread, naphtha_price, product_price]
+      설비증설: [capacity_expansion, maintenance_schedule, utilization_rate]
+  의약품:
+    table_types:
+      파이프라인: [clinical_pipeline, rd_expense_treatment, patent_expiry]
+      기술수출: [licensing_deal]
+  비금속광물:
+    table_types:
+      원자재단가: [coal_price, cement_price]
+      전방산업: [product_mix]
+  철강금속:
+    table_types:
+      원자재가격: [iron_ore_price, china_steel_price]
+      판가협상: [spread, product_price]
+  기계:
+    table_types:
+      수주현황: [order_backlog, new_orders, contract_counterparty, contract_amount, contract_period]
+      지역별매출: [product_mix]
+  전기전자:
+    table_types:
+      가동률CAPEX: [utilization_rate, capex]
+      부품단가: [product_price]
+  의료정밀:
+    table_types:
+      소모품매출: [consumable_sales_ratio]
+      인증수출: [approval_status, product_mix]
+  운수장비:
+    table_types:
+      조선수주: [order_backlog, ship_price_index, heavy_tail_contract, construction_loss_provision]
+      자동차판가: [product_price, ev_mix, finance_provision, fx_sensitivity]
+  유통업:
+    table_types:
+      SSSG: [sss_growth]
+      채널별GMV: [gmv, rent_promotion_cost, online_sales_ratio]
+  전기가스업:
+    table_types:
+      규제요금: [regulated_tariff, utility_receivable]
+      도입가: [smp, lng_price, generation_capacity]
+  건설업:
+    table_types:
+      수주잔고: [order_backlog, new_orders, contract_counterparty, contract_amount, contract_period]
+      미분양: [unsold_units, completion_rate]
+      PF: [pf_guarantee]
+      공사진행률: [completion_rate, cost_ratio]
+      청약분양동향: [presale_competition_rate, presale_price, presale_units, presale_shortfall]
+      부동산시황: [apartment_price_index, real_estate_supply_demand_index,
+                base_interest_rate, household_loan_balance]
+  운수창고업:
+    table_types:
+      운임지수: [freight_index]
+      물동량: [cargo_volume, cask_rask, load_factor, fx_sensitivity]
+  통신업:
+    table_types:
+      ARPU: [subscribers, arpu, churn_rate, penetration_rate]
+      마케팅비CAPEX: [marketing_cost, capex, b2b_growth]
+  금융업:
+    table_types:
+      주주환원: [shareholder_return_ratio, bis_ratio]
+      자회사이익: [product_mix]
+  은행:
+    table_types:
+      NIM: [nim, loan_deposit]
+      NPL: [npl_ratio]
+  증권:
+    table_types:
+      수수료손익: [brokerage_fee, ib_revenue]
+      PF트레이딩: [trading_income, pf_contingent_liability]
+  보험:
+    table_types:
+      CSM: [new_business_csm, csm_balance]
+      K-ICS: [solvency_ratio, loss_ratio, experience_variance]
+  서비스업:
+    table_types:
+      MAU_GMV: [mau, gmv, monetization]
+      엔터실적: [ip_sales, tour_ticket]
+      엔터실적세그먼트: [direct_participation_revenue, indirect_participation_revenue,
+                    concert_revenue, ad_appearance_revenue, md_licensing_revenue,
+                    content_revenue, fanclub_revenue, overseas_ip_expansion]
+
+# --- Derived Signal: 필드 트렌드 조합 -> 정성적 투자 시그널(참고 예시, 섹터별 대표 몇 개만
+#     구체화 — 21개 섹터 전부를 정교하게 채우려면 실제 리포트로 룰 검증이 필요해 우선 프레임만) ---
+derived_signals:
+  pricing_power:
+    trigger: {fields: [raw_material_price, product_price], pattern: "raw_up_price_up"}
+    meaning: positive
+    description: "원재료가 오르는데 판가도 같이 올리면(전가력 있음) 마진 유지 -> 긍정적"
+  pf_risk:
+    trigger: {fields: [unsold_units, pf_guarantee], pattern: "both_up"}
+    meaning: negative
+    description: "미분양과 PF보증이 동시 증가 -> 현금흐름 위험 -> 부정적"
+  cycle_bottom:
+    trigger: {field: spread, pattern: "trough"}
+    meaning: neutral_to_positive
+    description: "스프레드가 저점권 -> 업황 바닥 근접 신호"
+  cycle_peak:
+    trigger: {field: spread, pattern: "peak"}
+    meaning: neutral_to_negative
+    description: "스프레드가 고점권 -> 업황 피크아웃 신호"
+  credit_cost_pressure:
+    trigger: {fields: [nim, npl_ratio], pattern: "nim_down_npl_up"}
+    meaning: negative
+    description: "NIM 하락+NPL 상승 -> 충당금 증가 -> 실적 압박"
+  brokerage_sensitivity:
+    trigger: {field: brokerage_fee, pattern: "down"}
+    meaning: negative
+    description: "거래대금 감소로 브로커리지 수익 감소"
+  memory_cycle_down:
+    trigger: {fields: [capex, utilization_rate], pattern: "capex_down_util_down"}
+    meaning: negative
+    description: "CAPEX 축소+가동률 하락 -> 메모리 다운사이클 -> ASP 하락 압력"
+  backlog_growth:
+    trigger: {field: order_backlog, pattern: "up"}
+    meaning: positive
+    description: "수주잔고 증가 -> 향후 매출 가시성 개선"
+  backlog_decline:
+    trigger: {field: order_backlog, pattern: "down"}
+    meaning: negative
+    description: "수주잔고 감소 -> 향후 매출 공백 우려"
+  margin_expansion:
+    trigger: {field: spread, pattern: "up"}
+    meaning: positive
+    description: "스프레드 확대 -> 마진 개선"
+
+investment_meaning:
+  positive: "긍정적 투자 시그널 — 실적/현금흐름 개선 방향"
+  negative: "부정적 투자 시그널 — 실적/현금흐름 악화 방향"
+  neutral_to_positive: "업황 반등 가능성 있는 중립~긍정 신호"
+  neutral_to_negative: "업황 둔화 가능성 있는 중립~부정 신호"

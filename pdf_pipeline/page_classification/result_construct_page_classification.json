@@ -1,0 +1,390 @@
+{
+  "pdf": "20260721_industry_362851000.pdf",
+  "n_pages": 10,
+  "baseline_predictions": {
+    "1": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "2": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "3": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "4": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": true
+    },
+    "5": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "6": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "7": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "8": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "9": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "10": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    }
+  },
+  "baseline_total_s": 1.74,
+  "baseline_score": {
+    "accuracy": 0.8333,
+    "n_correct": 25,
+    "n_total": 30,
+    "mismatches": [
+      {
+        "page": 1,
+        "field": "has_table",
+        "pred": true,
+        "gt": false
+      },
+      {
+        "page": 2,
+        "field": "has_table",
+        "pred": true,
+        "gt": false
+      },
+      {
+        "page": 5,
+        "field": "has_image",
+        "pred": true,
+        "gt": false
+      },
+      {
+        "page": 6,
+        "field": "has_image",
+        "pred": true,
+        "gt": false
+      },
+      {
+        "page": 7,
+        "field": "has_image",
+        "pred": true,
+        "gt": false
+      }
+    ]
+  },
+  "yolo_predictions": {
+    "1": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": true
+    },
+    "2": {
+      "has_text": true,
+      "has_table": false,
+      "has_image": true
+    },
+    "3": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "4": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": false
+    },
+    "5": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": false
+    },
+    "6": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": false
+    },
+    "7": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": false
+    },
+    "8": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "9": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    },
+    "10": {
+      "has_text": true,
+      "has_table": true,
+      "has_image": true
+    }
+  },
+  "yolo_total_s": 1.47,
+  "yolo_score": {
+    "accuracy": 0.9333,
+    "n_correct": 28,
+    "n_total": 30,
+    "mismatches": [
+      {
+        "page": 4,
+        "field": "has_table",
+        "pred": true,
+        "gt": false
+      },
+      {
+        "page": 4,
+        "field": "has_image",
+        "pred": false,
+        "gt": true
+      }
+    ]
+  },
+  "yolo_detections_log": {
+    "1": {
+      "classes_found": [
+        "List-item",
+        "List-item",
+        "List-item",
+        "List-item",
+        "List-item",
+        "List-item",
+        "Picture",
+        "Section-header",
+        "Text",
+        "Page-header",
+        "Page-header",
+        "Text",
+        "Section-header",
+        "Title",
+        "Section-header",
+        "Text",
+        "Section-header"
+      ],
+      "table_crops": []
+    },
+    "2": {
+      "classes_found": [
+        "Page-footer",
+        "Page-header",
+        "Picture",
+        "Picture",
+        "Picture",
+        "Page-footer",
+        "Picture",
+        "Picture",
+        "Section-header",
+        "Caption",
+        "Caption",
+        "Section-header",
+        "Picture",
+        "Section-header",
+        "Caption",
+        "Caption",
+        "Caption"
+      ],
+      "table_crops": []
+    },
+    "3": {
+      "classes_found": [
+        "Page-footer",
+        "Page-header",
+        "Picture",
+        "Caption",
+        "Picture",
+        "Caption",
+        "Picture",
+        "Caption",
+        "Picture",
+        "Caption",
+        "Table",
+        "Text",
+        "Picture",
+        "Caption"
+      ],
+      "table_crops": [
+        "pdf_pipeline/page_classification/table_crops_construct/page_3_table_1.png"
+      ]
+    },
+    "4": {
+      "classes_found": [
+        "Page-footer",
+        "Table",
+        "Page-header",
+        "Page-footer",
+        "Section-header",
+        "Table"
+      ],
+      "table_crops": [
+        "pdf_pipeline/page_classification/table_crops_construct/page_4_table_1.png",
+        "pdf_pipeline/page_classification/table_crops_construct/page_4_table_2.png"
+      ]
+    },
+    "5": {
+      "classes_found": [
+        "Table",
+        "Page-footer",
+        "Page-header",
+        "Section-header",
+        "Section-header",
+        "Section-header",
+        "List-item",
+        "List-item",
+        "List-item",
+        "List-item",
+        "List-item",
+        "List-item",
+        "List-item",
+        "List-item",
+        "Text",
+        "List-item",
+        "Section-header",
+        "Text",
+        "List-item",
+        "List-item",
+        "List-item",
+        "Section-header",
+        "Section-header",
+        "Text",
+        "List-item",
+        "List-item",
+        "List-item",
+        "Section-header",
+        "List-item",
+        "List-item",
+        "List-item"
+      ],
+      "table_crops": [
+        "pdf_pipeline/page_classification/table_crops_construct/page_5_table_1.png"
+      ]
+    },
+    "6": {
+      "classes_found": [
+        "Table",
+        "Table",
+        "Page-footer",
+        "Page-header",
+        "Section-header",
+        "Section-header"
+      ],
+      "table_crops": [
+        "pdf_pipeline/page_classification/table_crops_construct/page_6_table_1.png",
+        "pdf_pipeline/page_classification/table_crops_construct/page_6_table_2.png"
+      ]
+    },
+    "7": {
+      "classes_found": [
+        "Table",
+        "Page-footer",
+        "Page-header",
+        "Section-header"
+      ],
+      "table_crops": [
+        "pdf_pipeline/page_classification/table_crops_construct/page_7_table_1.png"
+      ]
+    },
+    "8": {
+      "classes_found": [
+        "Page-footer",
+        "Page-header",
+        "Table",
+        "Table",
+        "Table",
+        "Picture",
+        "Picture",
+        "Picture",
+        "Section-header",
+        "Section-header",
+        "Section-header"
+      ],
+      "table_crops": [
+        "pdf_pipeline/page_classification/table_crops_construct/page_8_table_1.png",
+        "pdf_pipeline/page_classification/table_crops_construct/page_8_table_2.png",
+        "pdf_pipeline/page_classification/table_crops_construct/page_8_table_3.png"
+      ]
+    },
+    "9": {
+      "classes_found": [
+        "Page-footer",
+        "Page-header",
+        "Table",
+        "Table",
+        "Picture",
+        "Picture",
+        "Picture",
+        "Table",
+        "Section-header",
+        "Section-header"
+      ],
+      "table_crops": [
+        "pdf_pipeline/page_classification/table_crops_construct/page_9_table_1.png",
+        "pdf_pipeline/page_classification/table_crops_construct/page_9_table_2.png",
+        "pdf_pipeline/page_classification/table_crops_construct/page_9_table_3.png"
+      ]
+    },
+    "10": {
+      "classes_found": [
+        "Page-footer",
+        "Page-header",
+        "Section-header",
+        "List-item",
+        "List-item",
+        "List-item",
+        "List-item",
+        "Picture",
+        "Text",
+        "Section-header",
+        "Section-header",
+        "Picture",
+        "Section-header",
+        "Picture",
+        "List-item",
+        "Section-header",
+        "Text",
+        "Section-header",
+        "Table",
+        "Table"
+      ],
+      "table_crops": [
+        "pdf_pipeline/page_classification/table_crops_construct/page_10_table_1.png",
+        "pdf_pipeline/page_classification/table_crops_construct/page_10_table_2.png"
+      ]
+    }
+  },
+  "yolo_per_page_ms": {
+    "1": 101.5,
+    "2": 91.5,
+    "3": 89.65,
+    "4": 98.27,
+    "5": 87.66,
+    "6": 84.29,
+    "7": 82.47,
+    "8": 90.18,
+    "9": 88.06,
+    "10": 90.31
+  },
+  "n_table_crops_found": 15
+}

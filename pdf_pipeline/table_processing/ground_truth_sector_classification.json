@@ -1,0 +1,17 @@
+{
+  "_note": "PDF 섹터(21종) 분류 정답셋. 실제 보유 PDF는 2건뿐(LG CNS, Construct)이라 나머지는 Claude가 실제 증권사 리포트 관행(회사명+업종 특화 용어)을 참고해 구성한 합성(synthetic) 테스트 케이스 — 실제 리포트 원문이 아니며 정직하게 표기함. 각 항목은 'PDF 첫 페이지에 해당하는 텍스트'를 흉내낸 짧은 발췌.",
+  "cases": [
+    {"source": "real_pdf", "text": "LG CNS 064400 엔터프라이즈 AI 전환의 핵심 기업으로 부상 예상. 클라우드&AI 매출, 스마트 엔지니어링, Digital Business Service 부문 실적 프리뷰.", "sector": "서비스업"},
+    {"source": "real_pdf", "text": "건설 Weekly. 삼성E&A, 현대건설, GS건설, 대우건설, DL이앤씨, IPARK현대산업개발, 삼성물산, 아이에스동서 커버리지. 주간 청약 동향, 미분양 현황, 아파트 매매수급동향.", "sector": "건설업"},
+    {"source": "synthetic", "text": "KB금융지주 2분기 실적 프리뷰. 여신 성장률 둔화되나 NIM(순이자마진) 개선 지속. 총여신 및 총수신 잔액 증가, 예대율 안정적 유지.", "sector": "은행"},
+    {"source": "synthetic", "text": "미래에셋증권 분기 실적. IB부문 수익(인수주선, 기업금융수익) 호조, 부동산PF 우발채무 부담은 축소 추세.", "sector": "증권"},
+    {"source": "synthetic", "text": "삼성생명 실적 코멘트. K-ICS(지급여력)비율 안정적, 신계약 CSM 증가로 보험손익 개선 전망.", "sector": "보험"},
+    {"source": "synthetic", "text": "LG화학 실적 프리뷰. 석유화학 스프레드(나프타 대비 제품가격차) 소폭 개선, 정기보수 일정으로 가동률 변동성 존재.", "sector": "화학"},
+    {"source": "synthetic", "text": "SK텔레콤 분기 실적. ARPU(가입자당평균매출) 완만한 상승, 마케팅비용 절감 및 B2B 매출 성장률 개선.", "sector": "통신업"},
+    {"source": "synthetic", "text": "쿠팡 실적 리뷰. GMV(총거래액) 성장 지속, 기존점성장률(SSSG) 개선, 온라인 매출 비중 확대.", "sector": "유통업"},
+    {"source": "synthetic", "text": "삼성전자 반도체 부문 실적. 메모리 가동률 상승, ASP(평균판매단가) 반등 전망, 파운드리 수주 확대.", "sector": "전기전자"},
+    {"source": "synthetic", "text": "한국전력 실적 코멘트. SMP(전력도매가격) 및 LNG 도입가 변동, 미수금 이슈와 전기요금 인상 여부가 관건.", "sector": "전기가스업"},
+    {"source": "synthetic", "text": "HMM 실적 프리뷰. 클락슨지수 및 벌크 운임지수(BDI) 동향, 물동량 처리량 증가로 컨테이너 부문 개선.", "sector": "운수창고업"},
+    {"source": "synthetic", "text": "유한양행 실적 코멘트. 임상 파이프라인 진행 상황 및 R&D비용 증가, 기술수출(라이선싱 딜) 기대감 유효.", "sector": "의약품"}
+  ]
+}
