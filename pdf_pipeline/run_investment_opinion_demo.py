@@ -33,6 +33,7 @@ from page_classifier import classify_pdf  # noqa: E402
 from text_extraction import process_pdf  # noqa: E402
 import run_table_metadata_pipeline as rtmp  # noqa: E402
 from index_text import build_index, hybrid_search  # noqa: E402
+from citation_check import generate_with_citation_check  # noqa: E402
 
 load_dotenv(ROOT / ".env")
 
@@ -140,14 +141,13 @@ def main():
 [사용자 요청]
 {QUERY}
 """
-    resp = client.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=[{"role": "user", "content": prompt}],
-    )
-    answer = resp.choices[0].message.content
+    result = generate_with_citation_check(
+        client, prompt, context=text_context + "\n" + table_context, model="gpt-4o-mini", max_retries=2)
+    answer = result["answer"]
 
     print("\n" + "=" * 60)
-    print("LLM 투자의견 출력")
+    print(f"LLM 투자의견 출력 ({result['attempts']}회 생성"
+          f"{', 미해결 근거없는 숫자: ' + str(result['unsupported_numbers']) if result['unsupported_numbers'] else ''})")
     print("=" * 60)
     print(answer)
 
