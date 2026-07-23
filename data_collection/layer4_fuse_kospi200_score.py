@@ -1,21 +1,25 @@
-"""Layer4: rep/fin/news/tech 4개 소스를 시간 감쇠 가중 평균으로 융합해 최종 점수 S를 낸다.
+"""Layer4: fin/news/tech 3개 소스를 시간 감쇠 가중 평균으로 융합해 최종 점수 S를 낸다.
 
-S = Σ_k α_k e^{-λ_k Δt_k} s_k / Σ_k α_k e^{-λ_k Δt_k},  k ∈ {rep, fin, news, tech}
-(반감기: rep ~30일, fin ~90일, news ~7일, tech ~1일. 계산 로직은 src/finance/layer4_fusion.py)
+S = Σ_k α_k e^{-λ_k Δt_k} s_k / Σ_k α_k e^{-λ_k Δt_k},  k ∈ {fin, news, tech}
+(α: fin 0.45 / news 0.35 / tech 0.20, 반감기: fin ~90일 / news ~7일 / tech ~1일.
+계산 로직은 src/finance/layer4_fusion.py)
+
+애널리스트 리포트(rep)는 점수 융합에서 뺐다 — 리포트를 정량 점수로 바꾸는 파이프라인이
+없고, 앞으로도 리포트는 근거 문장·정성 분석용으로만 쓸 계획이라 숫자 소스로 넣지 않는다.
+원래 rep 몫이었던 가중치 0.40은 fin/news/tech에 재배분됐다 (자세한 근거는
+src/finance/layer4_fusion.py 참고).
 
 소스별 조달 방식:
 - tech: src/finance/layer2_technical_indicators.py로 실시간 계산 (Δt≈0)
 - news: Layer3(select_news)로 실시간 5건 선정 후 src/finance/layer3_news_sentiment.py로 감성 점수 평균
 - fin: KOSPI200_output/kospi200_layer1/{ticker}_layer1_score.md에서 s_fin을 자동 파싱
   (없으면 --fin-score/--fin-age-days로 수동 입력)
-- rep: 애널리스트 리포트 수집·분석 파이프라인이 아직 없어 --rep-score/--rep-age-days
-  수동 입력만 지원 (미지정 시 융합에서 자동 제외 후 나머지 3개 소스로 재정규화)
 
 Usage:
     python data_collection/layer4_fuse_kospi200_score.py \
         --ticker 000100.KS --name "유한양행" --aliases "Yuhan,유한양행" \
         --query "유한양행" --topic "유한양행 실적 및 신약 파이프라인 전망" \
-        [--rep-score 0.3 --rep-age-days 10] [--fin-score -0.02 --fin-age-days 5] [--no-llm]
+        [--fin-score -0.02 --fin-age-days 5] [--no-llm]
 """
 
 from __future__ import annotations
@@ -78,7 +82,7 @@ def render_markdown(
         "## 스코어링 공식",
         "$$",
         r"S = \frac{\sum_k \alpha_k e^{-\lambda_k \Delta t_k} s_k}{\sum_k \alpha_k e^{-\lambda_k \Delta t_k}},"
-        r"\quad k \in \{rep, fin, news, tech\}",
+        r"\quad k \in \{fin, news, tech\}",
         "$$",
         "",
         "## 소스별 기여도",
@@ -126,8 +130,6 @@ def main():
     parser.add_argument("--aliases", default="", help="쉼표로 구분된 별칭/영문명 (뉴스 선정용)")
     parser.add_argument("--query", help="네이버 검색 쿼리 (기본값: --name)")
     parser.add_argument("--topic", help="리포트 핵심 주제 (기본값: --name)")
-    parser.add_argument("--rep-score", type=float, help="애널리스트 리포트 점수 [-1,1] (수동 입력, 파이프라인 미구축)")
-    parser.add_argument("--rep-age-days", type=float, default=0.0, help="리포트 발행 후 경과일")
     parser.add_argument("--fin-score", type=float, help="재무제표 점수 [-1,1] (미지정 시 layer1 파일에서 자동 파싱)")
     parser.add_argument("--fin-age-days", type=float, help="재무제표 점수 산출 후 경과일 (--fin-score와 함께 사용)")
     parser.add_argument("--no-llm", action="store_true", help="뉴스 선정 LLM 검증 생략")
@@ -138,11 +140,6 @@ def main():
     topic = args.topic or args.name
 
     signals: dict[str, SourceSignal] = {}
-
-    if args.rep_score is not None:
-        signals["rep"] = SourceSignal(score=args.rep_score, age_days=args.rep_age_days, note="수동 입력")
-    else:
-        print("[rep] 점수 없음 (리포트 파이프라인 미구축) -> 융합에서 제외")
 
     if args.fin_score is not None:
         signals["fin"] = SourceSignal(
@@ -183,11 +180,7 @@ def main():
     md_path = LAYER4_DIR / f"{args.ticker}_layer4_fusion.md"
     md_path.write_text(render_markdown(args.ticker, args.name, result, sentiments), encoding="utf-8")
 
-    json_path = LAYER4_DIR / f"{args.ticker}_layer4_fusion.json"
-    json_path.write_text(__import__("json").dumps(result.to_dict(), ensure_ascii=False, indent=2), encoding="utf-8")
-
     print(f"\n저장: {md_path}")
-    print(f"저장(structured): {json_path}")
 
 
 if __name__ == "__main__":

@@ -5,6 +5,8 @@ Usage:
     python scripts/download_models.py qwen        # only Qwen2.5-VL-7B-Instruct
     python scripts/download_models.py llava        # only LLaVA-OneVision-7B-OV
     python scripts/download_models.py qwen3        # only Qwen3-0.6B (Layer3 뉴스 선정용)
+    python scripts/download_models.py qwen3-reasoning  # Qwen3-1.7B (Layer3 감성분석 reasoning용)
+    python scripts/download_models.py finbert       # KR-FinBert-SC (Layer3 감성분석 분류용)
 """
 
 import os
@@ -20,6 +22,8 @@ MODELS = {
     "qwen": ("Qwen/Qwen2.5-VL-7B-Instruct", "Qwen2.5-VL-7B-Instruct"),
     "llava": ("llava-hf/llava-onevision-qwen2-7b-ov-hf", "llava-onevision-qwen2-7b-ov-hf"),
     "qwen3": ("Qwen/Qwen3-0.6B", "Qwen3-0.6B"),
+    "qwen3-reasoning": ("Qwen/Qwen3-1.7B", "Qwen3-1.7B"),
+    "finbert": ("snunlp/KR-FinBert-SC", "KR-FinBert-SC"),
 }
 
 
