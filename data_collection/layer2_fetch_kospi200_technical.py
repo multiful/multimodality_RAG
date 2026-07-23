@@ -4,11 +4,11 @@
 investing.com(예: https://www.investing.com/equities/yuhan-technical)을 직접
 스크래핑하는 대신, Cloudflare 봇 차단 검증 결과(Playwright/patchright 모두 차단됨)에
 따라 동일한 지표·판정 기준을 yfinance 실시간 OHLCV에 직접 적용해 재현한다.
-계산 로직은 src/finance/technical_indicators.py 참고.
+계산 로직은 src/finance/layer2_technical_indicators.py 참고.
 
 Usage:
-    python data_collection/fetch_kospi200_technical.py 000100.KS --name "Yuhan Corporation"
-    python data_collection/fetch_kospi200_technical.py --all
+    python data_collection/layer2_fetch_kospi200_technical.py 000100.KS --name "Yuhan Corporation"
+    python data_collection/layer2_fetch_kospi200_technical.py --all
 """
 
 from __future__ import annotations
@@ -23,7 +23,7 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-from src.finance.technical_indicators import TechnicalSummary, analyze  # noqa: E402
+from src.finance.layer2_technical_indicators import TechnicalSummary, analyze  # noqa: E402
 
 TECHNICAL_OUT_DIR = REPO_ROOT / "KOSPI200_output" / "kospi200_technical"
 LAYER2_OUT_DIR = REPO_ROOT / "KOSPI200_output" / "kospi200_layer2"

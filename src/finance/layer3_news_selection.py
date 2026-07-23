@@ -17,8 +17,8 @@ from urllib.parse import urlparse
 import numpy as np
 
 from embeddings.bge_ko_embedder import BGEKoEmbedder
-from src.finance.naver_news import search_news_paged
-from src.finance.qwen3_llm import generate as qwen3_generate
+from src.finance.layer3_naver_news import search_news_paged
+from src.finance.layer3_qwen3_llm import generate as qwen3_generate
 
 # 매체 등급표 (제안 가중치: 통신사·경제지=1.0 / 일반지·방송사=0.7 / 기타=0.4)
 SOURCE_TIERS: dict[str, float] = {
@@ -248,7 +248,7 @@ def _parse_llm_selection(raw_text: str) -> list[dict]:
 def verify_with_llm(
     candidates: list[ScoredArticle], topic: str, name_ko: str, top_n: int = 5
 ) -> list[ScoredArticle]:
-    """LLM reasoning 검증: Qwen3(기본 0.6B, src/finance/qwen3_llm.py)가 규칙 기반 상위 후보를 재검토해 최종 top_n을 선정한다.
+    """LLM reasoning 검증: Qwen3(기본 0.6B, src/finance/layer3_qwen3_llm.py)가 규칙 기반 상위 후보를 재검토해 최종 top_n을 선정한다.
 
     파싱 실패 등 LLM 호출이 실패하면 규칙 기반 상위 top_n으로 안전하게 대체한다.
     """

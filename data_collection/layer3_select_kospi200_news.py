@@ -5,10 +5,10 @@
      → LLM(Qwen3, 기본 0.6B) reasoning 검증 → 최종 5건
 
 .env에 NAVER_CLIENT_ID / NAVER_CLIENT_SECRET 필요 (.env.example 참고).
-계산 로직은 src/finance/news_selection.py 참고.
+계산 로직은 src/finance/layer3_news_selection.py 참고.
 
 Usage:
-    python data_collection/select_kospi200_news.py \
+    python data_collection/layer3_select_kospi200_news.py \
         --ticker 000100.KS --name "유한양행" --aliases "Yuhan,유한양행" \
         --query "유한양행" --topic "유한양행 실적 및 신약 파이프라인 전망"
 """
@@ -24,7 +24,7 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-from src.finance.news_selection import ScoredArticle, select_news  # noqa: E402
+from src.finance.layer3_news_selection import ScoredArticle, select_news  # noqa: E402
 
 OUT_DIR = REPO_ROOT / "KOSPI200_output" / "kospi200_layer3"
 

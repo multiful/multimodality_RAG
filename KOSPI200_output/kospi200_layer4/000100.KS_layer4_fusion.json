@@ -1,0 +1,44 @@
+{
+  "S": 0.37018434314844373,
+  "contributions": [
+    {
+      "key": "fin",
+      "label": "재무제표",
+      "score": -0.02,
+      "age_days": 0.35148493736111114,
+      "decay": 0.997296651829583,
+      "weight_raw": 0.24932416295739576,
+      "weight_norm": 0.42809079584150433,
+      "weighted_score": -0.008561815916830086,
+      "note": "000100.KS_layer1_score.md 자동 파싱"
+    },
+    {
+      "key": "news",
+      "label": "뉴스",
+      "score": 1.0,
+      "age_days": 0.8923840901504629,
+      "decay": 0.9154268790590849,
+      "weight_raw": 0.183085375811817,
+      "weight_norm": 0.31435847736753314,
+      "weighted_score": 0.31435847736753314,
+      "note": "선정 기사 5건 감성 평균"
+    },
+    {
+      "key": "tech",
+      "label": "기술적 분석",
+      "score": 0.25,
+      "age_days": 0.0,
+      "decay": 1.0,
+      "weight_raw": 0.15,
+      "weight_norm": 0.25755072679096247,
+      "weighted_score": 0.06438768169774062,
+      "note": "실시간 yfinance 계산"
+    }
+  ],
+  "excluded": [
+    "rep"
+  ],
+  "conflicts": [
+    "재무제표(-0.02)과(와) 뉴스(+1.00)가 상반된 신호 (차이 1.02) — 교차 검증 필요"
+  ]
+}
