@@ -1,9 +1,10 @@
-"""Download the VLM weights used by this project into models/ (gitignored).
+"""Download the VLM/LLM weights used by this project into models/ (gitignored).
 
 Usage:
     python scripts/download_models.py            # download all
     python scripts/download_models.py qwen        # only Qwen2.5-VL-7B-Instruct
     python scripts/download_models.py llava        # only LLaVA-OneVision-7B-OV
+    python scripts/download_models.py qwen3        # only Qwen3-0.6B (Layer3 뉴스 선정용)
 """
 
 import os
@@ -18,6 +19,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MODELS = {
     "qwen": ("Qwen/Qwen2.5-VL-7B-Instruct", "Qwen2.5-VL-7B-Instruct"),
     "llava": ("llava-hf/llava-onevision-qwen2-7b-ov-hf", "llava-onevision-qwen2-7b-ov-hf"),
+    "qwen3": ("Qwen/Qwen3-0.6B", "Qwen3-0.6B"),
 }
 
 
