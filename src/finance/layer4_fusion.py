@@ -1,9 +1,18 @@
 """Layer4: 최종 가중 융합 모델.
 
-S = Σ_k α_k * e^{-λ_k Δt_k} * s_k / Σ_k α_k * e^{-λ_k Δt_k},  k ∈ {rep, fin, news, tech}
+S = Σ_k α_k * e^{-λ_k Δt_k} * s_k / Σ_k α_k * e^{-λ_k Δt_k},  k ∈ {fin, news, tech}
 
-- 소스별 반감기(half-life)만큼 시간이 지나면 그 소스의 실질 가중치가 절반으로 감쇠한다
-  (rep ~30일, fin ~90일, news ~7일, tech ~1일).
+애널리스트 리포트(rep)는 점수 융합에서 제외한다 — 이 프로젝트에는 리포트를 정량 점수로
+바꾸는 파이프라인이 없고, 앞으로도 리포트는 근거 문장·정성 분석용으로만 쓸 계획이라
+숫자 소스로 억지로 넣지 않는다. 대신 원래 rep에 배정됐던 가중치 0.40을 나머지 3개 소스에
+성격에 비례해 재배분했다:
+- fin: 0.25 -> 0.45 (펀더멘털이 유일한 중장기 앵커가 되므로 최대 가중, Fama-French 계열)
+- news: 0.20 -> 0.35 (리포트가 빠진 자리에서 유일한 "정성적 이벤트" 소스. 단, Tetlock(2007)의
+  단기 소멸 효과 때문에 재무보다는 낮게)
+- tech: 0.15 -> 0.20 (여전히 예측력 논쟁이 있어 최소 비중 유지)
+반감기(half-life)는 그대로 유지한다 (fin ~90일, news ~7일, tech ~1일).
+
+- 소스별 반감기만큼 시간이 지나면 그 소스의 실질 가중치가 절반으로 감쇠한다.
 - score가 없는 소스(None)는 분자·분모 모두에서 제외되고, 나머지 소스끼리 알파 비율 그대로
   자동 재정규화된다.
 - "충돌 검사": 부호가 반대이면서 크게 벌어진(기본 0.5 이상 차이) 소스 쌍을 감지해 경고로 남긴다
@@ -16,17 +25,16 @@ import math
 from dataclasses import dataclass
 from itertools import combinations
 
-ALPHA: dict[str, float] = {"rep": 0.40, "fin": 0.25, "news": 0.20, "tech": 0.15}
-HALF_LIFE_DAYS: dict[str, float] = {"rep": 30.0, "fin": 90.0, "news": 7.0, "tech": 1.0}
+ALPHA: dict[str, float] = {"fin": 0.45, "news": 0.35, "tech": 0.20}
+HALF_LIFE_DAYS: dict[str, float] = {"fin": 90.0, "news": 7.0, "tech": 1.0}
 LAMBDA: dict[str, float] = {k: math.log(2) / h for k, h in HALF_LIFE_DAYS.items()}
 SOURCE_LABELS: dict[str, str] = {
-    "rep": "애널리스트 리포트",
     "fin": "재무제표",
     "news": "뉴스",
     "tech": "기술적 분석",
 }
 CONFLICT_THRESHOLD = 0.5
-SOURCE_KEYS = ("rep", "fin", "news", "tech")
+SOURCE_KEYS = ("fin", "news", "tech")
 
 
 @dataclass
@@ -57,14 +65,6 @@ class FusionResult:
     contributions: list[SourceContribution]
     excluded: list[str]
     conflicts: list[str]
-
-    def to_dict(self) -> dict:
-        return {
-            "S": self.S,
-            "contributions": [c.__dict__ for c in self.contributions],
-            "excluded": self.excluded,
-            "conflicts": self.conflicts,
-        }
 
 
 def fuse(signals: dict[str, SourceSignal]) -> FusionResult:
