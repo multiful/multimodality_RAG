@@ -82,37 +82,55 @@ def fuse(pdf_id: str, text_chunks: list = None, table_records: list = None, imag
             + from_image_cards(pdf_id, image_cards or []))
 
 
-def build_fused_index(pdf_id: str, evidence_items: list, embed_model=None) -> TextIndex:
-    """fuse()가 만든 evidence 리스트로 하이브리드(BM25+dense) 검색 인덱스를 만든다.
-    text_processing.index_text.build_index()와 같은 인터페이스(TextIndex)를 쓰되, 소스가
-    process_pdf() 결과 하나가 아니라 세 브랜치를 합친 evidence이므로 별도 구현 — hybrid_search()는
-    그대로 재사용 가능(TextIndex.chunks에 뭐가 들어있는지 상관 안 함)."""
-    if not evidence_items:
-        return TextIndex(pdf_id=pdf_id)
+def embed_items(items: list, embed_model=None):
+    """evidence 아이템 리스트를 임베딩한다. 반환: (items, embeddings ndarray) — items가 비어있으면
+    (items, None). [40] 브랜치별로 끝나는 즉시 호출해서 store_evidence()로 바로 적재하고, 나중에
+    build_index_from_items()로 그 임베딩을 재사용(재임베딩 없이) 통합 인덱스를 만들기 위해 items/
+    embeddings를 분리된 반환값으로 둔다."""
+    if not items:
+        return items, None
     if embed_model is None:
         from embedding import get_embedding_model
         embed_model = get_embedding_model()
-
     from embedding import embed_texts
-    texts = [it["content"] for it in evidence_items]
-    embeddings = embed_texts(texts)
-    from rank_bm25 import BM25Okapi
-    bm25 = BM25Okapi([_tokenize(t) for t in texts])
+    embeddings = embed_texts([it["content"] for it in items])
+    return items, embeddings
 
+
+def build_index_from_items(pdf_id: str, items: list, embeddings) -> TextIndex:
+    """이미 계산된 (items, embeddings)로 하이브리드(BM25+dense) 검색 인덱스를 만든다 — 재임베딩
+    없음. 여러 브랜치의 embed_items() 결과를 이어붙여서 넘기면 전체 통합 인덱스가 된다."""
+    if not items or embeddings is None or len(embeddings) == 0:
+        return TextIndex(pdf_id=pdf_id)
+    from rank_bm25 import BM25Okapi
+    texts = [it["content"] for it in items]
+    bm25 = BM25Okapi([_tokenize(t) for t in texts])
     return TextIndex(
         pdf_id=pdf_id,
-        chunk_ids=[it["id"] for it in evidence_items],
-        chunks=evidence_items,
+        chunk_ids=[it["id"] for it in items],
+        chunks=items,
         embeddings=embeddings,
         bm25=bm25,
     )
 
 
-def store_evidence(db_url: str, pdf_id: str, index: TextIndex, ticker: str = None) -> int:
-    """build_fused_index()가 만든 인덱스(evidence_items + 이미 계산된 embeddings)를
-    document_evidence 테이블에 적재. 이미 계산된 임베딩을 재사용(재임베딩 안 함).
-    반환: 적재된 행 수."""
-    if not index.chunks:
+def build_fused_index(pdf_id: str, evidence_items: list, embed_model=None) -> TextIndex:
+    """fuse()가 만든 evidence 리스트를 한 번에 임베딩해 인덱스를 만드는 편의 함수(embed_items()+
+    build_index_from_items() 조합). 브랜치별로 이미 임베딩을 따로 계산해뒀다면 그쪽을 직접
+    build_index_from_items()에 넘기는 게 재임베딩을 피할 수 있어 더 낫다."""
+    items, embeddings = embed_items(evidence_items, embed_model)
+    return build_index_from_items(pdf_id, items, embeddings)
+
+
+def store_evidence(db_url: str, pdf_id: str, items: list, embeddings, ticker: str = None) -> int:
+    """embed_items()가 반환한 (items, embeddings)를 document_evidence 테이블에 즉시 적재.
+
+    [40] 사용자 지적("Entity Fusion sync barrier" — 세 브랜치를 다 모은 뒤 한 번에 적재하면,
+    가장 느린 브랜치(이미지/VLM, 문서당 최대 152초+)가 끝날 때까지 몇 초면 끝나는 텍스트/테이블
+    결과까지 DB 적재가 막혀버림) 반영 — 브랜치 하나가 끝나는 즉시 그 브랜치분만 호출해서 저장하도록
+    분리. "엔티티 합성"은 이제 Python 메모리 안에서의 사전 병합이 아니라, 같은 pdf_id/ticker로
+    태그된 채 같은 document_evidence 테이블에 각자 도착하는 것 자체가 합성 지점이 된다."""
+    if not items or embeddings is None or len(embeddings) == 0:
         return 0
     import psycopg2
     from psycopg2.extras import Json, execute_values
@@ -120,7 +138,7 @@ def store_evidence(db_url: str, pdf_id: str, index: TextIndex, ticker: str = Non
     rows = [
         (it["id"], pdf_id, ticker, it["source_type"], it.get("page"), it["content"],
          it.get("weight", 1.0), Json(it.get("metadata") or {}), emb.tolist())
-        for it, emb in zip(index.chunks, index.embeddings)
+        for it, emb in zip(items, embeddings)
     ]
     conn = psycopg2.connect(db_url)
     conn.autocommit = True

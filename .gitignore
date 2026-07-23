@@ -6,4 +6,3 @@ chroma_db/
 models/
 output/*
 !output/financial Statement/
-.venv/
