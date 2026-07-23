@@ -1,0 +1,322 @@
+{
+  "adaptive_padding_dpi300": {
+    "padding": "adaptive_padding",
+    "dpi": 300,
+    "total_usable_rows": 242,
+    "total_elapsed_s": 3.454,
+    "per_table": [
+      {
+        "page": 1,
+        "table_idx": 2,
+        "elapsed_s": 0.562,
+        "usable_rows": 16
+      },
+      {
+        "page": 1,
+        "table_idx": 3,
+        "elapsed_s": 0.096,
+        "usable_rows": 3
+      },
+      {
+        "page": 2,
+        "table_idx": 1,
+        "elapsed_s": 0.35,
+        "usable_rows": 16
+      },
+      {
+        "page": 3,
+        "table_idx": 1,
+        "elapsed_s": 0.205,
+        "usable_rows": 10
+      },
+      {
+        "page": 3,
+        "table_idx": 2,
+        "elapsed_s": 0.153,
+        "usable_rows": 0
+      },
+      {
+        "page": 4,
+        "table_idx": 1,
+        "elapsed_s": 0.747,
+        "usable_rows": 30
+      },
+      {
+        "page": 4,
+        "table_idx": 2,
+        "elapsed_s": 0.203,
+        "usable_rows": 27
+      },
+      {
+        "page": 4,
+        "table_idx": 3,
+        "elapsed_s": 0.219,
+        "usable_rows": 31
+      },
+      {
+        "page": 4,
+        "table_idx": 4,
+        "elapsed_s": 0.142,
+        "usable_rows": 12
+      },
+      {
+        "page": 4,
+        "table_idx": 5,
+        "elapsed_s": 0.228,
+        "usable_rows": 27
+      },
+      {
+        "page": 4,
+        "table_idx": 6,
+        "elapsed_s": 0.361,
+        "usable_rows": 64
+      },
+      {
+        "page": 5,
+        "table_idx": 1,
+        "elapsed_s": 0.188,
+        "usable_rows": 6
+      }
+    ]
+  },
+  "adaptive_padding_dpi400": {
+    "padding": "adaptive_padding",
+    "dpi": 400,
+    "total_usable_rows": 240,
+    "total_elapsed_s": 2.146,
+    "per_table": [
+      {
+        "page": 1,
+        "table_idx": 2,
+        "elapsed_s": 0.167,
+        "usable_rows": 16
+      },
+      {
+        "page": 1,
+        "table_idx": 3,
+        "elapsed_s": 0.087,
+        "usable_rows": 1
+      },
+      {
+        "page": 2,
+        "table_idx": 1,
+        "elapsed_s": 0.155,
+        "usable_rows": 16
+      },
+      {
+        "page": 3,
+        "table_idx": 1,
+        "elapsed_s": 0.112,
+        "usable_rows": 10
+      },
+      {
+        "page": 3,
+        "table_idx": 2,
+        "elapsed_s": 0.15,
+        "usable_rows": 0
+      },
+      {
+        "page": 4,
+        "table_idx": 1,
+        "elapsed_s": 0.225,
+        "usable_rows": 30
+      },
+      {
+        "page": 4,
+        "table_idx": 2,
+        "elapsed_s": 0.206,
+        "usable_rows": 27
+      },
+      {
+        "page": 4,
+        "table_idx": 3,
+        "elapsed_s": 0.222,
+        "usable_rows": 31
+      },
+      {
+        "page": 4,
+        "table_idx": 4,
+        "elapsed_s": 0.144,
+        "usable_rows": 12
+      },
+      {
+        "page": 4,
+        "table_idx": 5,
+        "elapsed_s": 0.219,
+        "usable_rows": 27
+      },
+      {
+        "page": 4,
+        "table_idx": 6,
+        "elapsed_s": 0.366,
+        "usable_rows": 64
+      },
+      {
+        "page": 5,
+        "table_idx": 1,
+        "elapsed_s": 0.093,
+        "usable_rows": 6
+      }
+    ]
+  },
+  "adaptive_padding_dpi500": {
+    "padding": "adaptive_padding",
+    "dpi": 500,
+    "total_usable_rows": 242,
+    "total_elapsed_s": 2.214,
+    "per_table": [
+      {
+        "page": 1,
+        "table_idx": 2,
+        "elapsed_s": 0.166,
+        "usable_rows": 15
+      },
+      {
+        "page": 1,
+        "table_idx": 3,
+        "elapsed_s": 0.092,
+        "usable_rows": 4
+      },
+      {
+        "page": 2,
+        "table_idx": 1,
+        "elapsed_s": 0.161,
+        "usable_rows": 16
+      },
+      {
+        "page": 3,
+        "table_idx": 1,
+        "elapsed_s": 0.116,
+        "usable_rows": 10
+      },
+      {
+        "page": 3,
+        "table_idx": 2,
+        "elapsed_s": 0.15,
+        "usable_rows": 0
+      },
+      {
+        "page": 4,
+        "table_idx": 1,
+        "elapsed_s": 0.232,
+        "usable_rows": 30
+      },
+      {
+        "page": 4,
+        "table_idx": 2,
+        "elapsed_s": 0.212,
+        "usable_rows": 27
+      },
+      {
+        "page": 4,
+        "table_idx": 3,
+        "elapsed_s": 0.234,
+        "usable_rows": 31
+      },
+      {
+        "page": 4,
+        "table_idx": 4,
+        "elapsed_s": 0.146,
+        "usable_rows": 12
+      },
+      {
+        "page": 4,
+        "table_idx": 5,
+        "elapsed_s": 0.224,
+        "usable_rows": 27
+      },
+      {
+        "page": 4,
+        "table_idx": 6,
+        "elapsed_s": 0.385,
+        "usable_rows": 64
+      },
+      {
+        "page": 5,
+        "table_idx": 1,
+        "elapsed_s": 0.096,
+        "usable_rows": 6
+      }
+    ]
+  },
+  "adaptive_padding_dpi600": {
+    "padding": "adaptive_padding",
+    "dpi": 600,
+    "total_usable_rows": 240,
+    "total_elapsed_s": 2.291,
+    "per_table": [
+      {
+        "page": 1,
+        "table_idx": 2,
+        "elapsed_s": 0.175,
+        "usable_rows": 15
+      },
+      {
+        "page": 1,
+        "table_idx": 3,
+        "elapsed_s": 0.092,
+        "usable_rows": 4
+      },
+      {
+        "page": 2,
+        "table_idx": 1,
+        "elapsed_s": 0.169,
+        "usable_rows": 16
+      },
+      {
+        "page": 3,
+        "table_idx": 1,
+        "elapsed_s": 0.124,
+        "usable_rows": 10
+      },
+      {
+        "page": 3,
+        "table_idx": 2,
+        "elapsed_s": 0.153,
+        "usable_rows": 0
+      },
+      {
+        "page": 4,
+        "table_idx": 1,
+        "elapsed_s": 0.238,
+        "usable_rows": 30
+      },
+      {
+        "page": 4,
+        "table_idx": 2,
+        "elapsed_s": 0.219,
+        "usable_rows": 25
+      },
+      {
+        "page": 4,
+        "table_idx": 3,
+        "elapsed_s": 0.236,
+        "usable_rows": 31
+      },
+      {
+        "page": 4,
+        "table_idx": 4,
+        "elapsed_s": 0.151,
+        "usable_rows": 12
+      },
+      {
+        "page": 4,
+        "table_idx": 5,
+        "elapsed_s": 0.23,
+        "usable_rows": 27
+      },
+      {
+        "page": 4,
+        "table_idx": 6,
+        "elapsed_s": 0.403,
+        "usable_rows": 64
+      },
+      {
+        "page": 5,
+        "table_idx": 1,
+        "elapsed_s": 0.101,
+        "usable_rows": 6
+      }
+    ]
+  }
+}

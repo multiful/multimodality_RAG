@@ -1,0 +1,61 @@
+{
+  "method": "PyMuPDF Fast Scan + YOLOv11 Crop + Docling(TableFormer), 페이지 단위 배치(크롭 세로 결합)",
+  "model_ready_s": 5.475,
+  "per_page": [
+    {
+      "page": 1,
+      "n_crops_batched": 3,
+      "elapsed_s": 1.523,
+      "n_tables_detected": 2,
+      "n_rows": 26
+    },
+    {
+      "page": 2,
+      "n_crops_batched": 1,
+      "elapsed_s": 1.895,
+      "n_tables_detected": 1,
+      "n_rows": 14
+    },
+    {
+      "page": 3,
+      "n_crops_batched": 2,
+      "elapsed_s": 1.376,
+      "n_tables_detected": 2,
+      "n_rows": 21
+    },
+    {
+      "page": 4,
+      "n_crops_batched": 6,
+      "elapsed_s": 13.21,
+      "n_tables_detected": 12,
+      "n_rows": 92
+    },
+    {
+      "page": 5,
+      "n_crops_batched": 1,
+      "elapsed_s": 0.741,
+      "n_tables_detected": 1,
+      "n_rows": 3
+    },
+    {
+      "page": 6,
+      "n_crops_batched": 1,
+      "elapsed_s": 0.141,
+      "n_tables_detected": 0,
+      "n_rows": 0
+    }
+  ],
+  "total_docling_time_s": 18.886,
+  "total_rows_extracted": 156,
+  "n_docling_calls": 6,
+  "comparison_vs_per_crop": {
+    "per_crop_total_s": 27.601,
+    "per_crop_n_calls": 14,
+    "per_crop_rows": 240,
+    "batched_total_s": 18.886,
+    "batched_n_calls": 6,
+    "batched_rows": 156,
+    "latency_reduction_s": 8.715,
+    "latency_reduction_pct": 31.6
+  }
+}

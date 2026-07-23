@@ -1,13 +1,36 @@
-mineru[pipeline,vlm]>=3.4.0
-opencv-python>=4.9.0
-pillow>=11.3.0
-numpy
-pandas
-pyarrow
-requests
-python-dotenv
+FlagEmbedding
+sentence-transformers
+openai
+chromadb
 supabase
-huggingface_hub>=0.36.0
+pandas>=2.0.0
+python-dotenv
+requests
+yfinance>=1.4.1
+pykrx
+matplotlib
+tabulate>=0.9.0
 torch>=2.8.0
 torchvision>=0.23.0
 transformers>=4.57.0
+accelerate>=1.10.0
+huggingface_hub>=0.36.0
+hf_transfer>=0.1.9
+pillow>=11.3.0
+pdfplumber
+pymupdf
+rank-bm25
+docling
+ultralytics
+# 아래 3개는 Unstructured(Hi-Res) 비교실험용 — 최종 채택 파이프라인에는 미포함(속도 문제로 탈락).
+# unstructured[pdf] 자체는 pi-heif가 libheif 네이티브 라이브러리 없이 빌드 실패하니, pip install 전에
+# site-packages에 더미 pi_heif 모듈(register_heif_opener 빈 함수)을 만들어 import만 통과시켜야 함.
+unstructured
+paddlepaddle
+unstructured_paddleocr
+
+# 아래는 이미지 파이프라인(pdf_pipeline/image_processing/)용 — 레이아웃탐지·OCR·경량 VLM을
+# MinerU 하나로 처리(CPU 전용 배포 전제로 검증됨). opencv-python은 크롭 OCR 전처리용.
+mineru[pipeline,vlm]>=3.4.0
+opencv-python>=4.9.0
+pyarrow

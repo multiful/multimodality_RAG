@@ -1,0 +1,96 @@
+{
+  "method": "pdfplumber extract_table() on YOLO-confirmed Table bbox (표 위치는 주어진 것으로 가정)",
+  "n_tables": 14,
+  "total_rows_extracted": 30,
+  "zero_row_count": 4,
+  "per_table": [
+    {
+      "page": 1,
+      "table_idx": 1,
+      "n_rows": 12,
+      "height_px": 277.0
+    },
+    {
+      "page": 1,
+      "table_idx": 2,
+      "n_rows": 0,
+      "height_px": 362.8
+    },
+    {
+      "page": 1,
+      "table_idx": 3,
+      "n_rows": 0,
+      "height_px": 84.6
+    },
+    {
+      "page": 2,
+      "table_idx": 1,
+      "n_rows": 8,
+      "height_px": 530.3
+    },
+    {
+      "page": 3,
+      "table_idx": 1,
+      "n_rows": 0,
+      "height_px": 399.3
+    },
+    {
+      "page": 3,
+      "table_idx": 2,
+      "n_rows": 0,
+      "height_px": 313.1
+    },
+    {
+      "page": 4,
+      "table_idx": 1,
+      "n_rows": 1,
+      "height_px": 652.6
+    },
+    {
+      "page": 4,
+      "table_idx": 2,
+      "n_rows": 1,
+      "height_px": 580.0
+    },
+    {
+      "page": 4,
+      "table_idx": 3,
+      "n_rows": 1,
+      "height_px": 672.9
+    },
+    {
+      "page": 4,
+      "table_idx": 4,
+      "n_rows": 1,
+      "height_px": 264.2
+    },
+    {
+      "page": 4,
+      "table_idx": 5,
+      "n_rows": 1,
+      "height_px": 584.1
+    },
+    {
+      "page": 4,
+      "table_idx": 6,
+      "n_rows": 1,
+      "height_px": 1259.8
+    },
+    {
+      "page": 5,
+      "table_idx": 1,
+      "n_rows": 2,
+      "height_px": 340.5
+    },
+    {
+      "page": 6,
+      "table_idx": 1,
+      "n_rows": 2,
+      "height_px": 40.0
+    }
+  ],
+  "comparison": {
+    "pdfplumber_baseline_rows": 30,
+    "docling_tableformer_rows": 240
+  }
+}

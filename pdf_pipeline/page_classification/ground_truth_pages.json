@@ -1,0 +1,18 @@
+{
+  "source_pdf": "20260721_company_279243000.pdf",
+  "note": "6페이지 전부 육안으로 확인해서 정의한 페이지별 실제 라벨. has_image는 '진짜 차트/로고/사진'이 있는지 기준 — 표 테두리선/박스 테두리는 이미지로 안 침.",
+  "pages": [
+    {"page": 1, "has_text": true, "has_table": true, "has_image": true,
+      "note": "표 2개(Company Data, Forecast earnings). 이미지 3개(교보증권 로고, LG CNS 브랜딩, 주가 차트) — 래스터 임베디드"},
+    {"page": 2, "has_text": true, "has_table": true, "has_image": true,
+      "note": "표 1개(도표1 분기실적). 차트 2개(도표2 막대, 도표3 파이) — 전부 벡터 드로잉"},
+    {"page": 3, "has_text": true, "has_table": true, "has_image": true,
+      "note": "표 2개(도표4 수주공시, 도표6 계약공시) — 테두리 약해서 베이스라인이 놓치기 쉬움. 차트 1개(도표5 막대)"},
+    {"page": 4, "has_text": true, "has_table": true, "has_image": false,
+      "note": "표 5개(포괄손익계산서/재무상태표/현금흐름표/주요투자지표/재무비율)뿐, 실제 차트/사진 없음 — 표 격자선이 벡터 드로잉 개수를 부풀려 오탐 가능성 있음"},
+    {"page": 5, "has_text": true, "has_table": true, "has_image": true,
+      "note": "표 1개(목표주가 및 괴리율). 차트 1개(목표주가 변동추이) — 벡터 드로잉"},
+    {"page": 6, "has_text": true, "has_table": true, "has_image": false,
+      "note": "표 1개(투자의견 비율공시)뿐, 컴플라이언스 문구 위주. 실제 차트/사진 없음 — 박스 테두리가 드로잉 개수를 부풀려 오탐 가능성 있음"}
+  ]
+}

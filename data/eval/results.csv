@@ -1,0 +1,16 @@
+model,query_type,recall@5,mrr
+bge-m3,overall,1.0,0.8895833333333332
+bge-m3,financial,1.0,0.825
+bge-m3,news,1.0,0.8916666666666666
+bge-m3,price,1.0,1.0
+bge-m3,trend,1.0,0.8416666666666666
+bge-m3-ko,overall,1.0,0.7895833333333333
+bge-m3-ko,financial,1.0,0.9
+bge-m3-ko,news,1.0,0.4416666666666667
+bge-m3-ko,price,1.0,1.0
+bge-m3-ko,trend,1.0,0.8166666666666667
+text-embedding-3-small,overall,0.9875,0.771875
+text-embedding-3-small,financial,1.0,0.975
+text-embedding-3-small,news,1.0,0.7208333333333333
+text-embedding-3-small,price,1.0,1.0
+text-embedding-3-small,trend,0.95,0.3916666666666666

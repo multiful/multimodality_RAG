@@ -1,0 +1,36 @@
+{
+  "model_load_s": 11.03,
+  "pages": [
+    {
+      "page": 1,
+      "entity_extract_s": 26.282,
+      "context_chars": 3005
+    },
+    {
+      "page": 2,
+      "entity_extract_s": 12.296,
+      "context_chars": 3163
+    },
+    {
+      "page": 3,
+      "entity_extract_s": 6.132,
+      "context_chars": 2075
+    },
+    {
+      "page": 4,
+      "entity_extract_s": 13.526,
+      "context_chars": 4005
+    },
+    {
+      "page": 5,
+      "entity_extract_s": 2.67,
+      "context_chars": 836
+    },
+    {
+      "page": 6,
+      "entity_extract_s": 6.129,
+      "context_chars": 2956
+    }
+  ],
+  "total_entity_extract_s": 67.035
+}

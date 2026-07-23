@@ -1,0 +1,95 @@
+{
+  "method": "PyMuPDF Fast Scan + YOLOv11 Crop + Docling(TableFormer) on crops",
+  "n_crops": 14,
+  "first_call_s_incl_model_load": 7.173,
+  "avg_steady_state_s_per_crop": 1.571,
+  "total_docling_time_s": 27.601,
+  "total_rows_extracted_docling": 240,
+  "total_rows_extracted_pdfplumber_baseline": 51,
+  "per_crop": [
+    {
+      "file": "page_1_table_2.png",
+      "elapsed_s": 7.173,
+      "n_tables": 1,
+      "n_rows": 12
+    },
+    {
+      "file": "page_1_table_23.png",
+      "elapsed_s": 0.243,
+      "n_tables": 0,
+      "n_rows": 0
+    },
+    {
+      "file": "page_1_table_7.png",
+      "elapsed_s": 0.684,
+      "n_tables": 1,
+      "n_rows": 14
+    },
+    {
+      "file": "page_2_table_0.png",
+      "elapsed_s": 1.847,
+      "n_tables": 1,
+      "n_rows": 14
+    },
+    {
+      "file": "page_3_table_0.png",
+      "elapsed_s": 0.844,
+      "n_tables": 1,
+      "n_rows": 9
+    },
+    {
+      "file": "page_3_table_4.png",
+      "elapsed_s": 0.681,
+      "n_tables": 1,
+      "n_rows": 11
+    },
+    {
+      "file": "page_4_table_0.png",
+      "elapsed_s": 1.719,
+      "n_tables": 1,
+      "n_rows": 28
+    },
+    {
+      "file": "page_4_table_10.png",
+      "elapsed_s": 0.853,
+      "n_tables": 1,
+      "n_rows": 10
+    },
+    {
+      "file": "page_4_table_11.png",
+      "elapsed_s": 1.616,
+      "n_tables": 1,
+      "n_rows": 25
+    },
+    {
+      "file": "page_4_table_12.png",
+      "elapsed_s": 6.093,
+      "n_tables": 5,
+      "n_rows": 60
+    },
+    {
+      "file": "page_4_table_2.png",
+      "elapsed_s": 3.111,
+      "n_tables": 1,
+      "n_rows": 25
+    },
+    {
+      "file": "page_4_table_3.png",
+      "elapsed_s": 1.906,
+      "n_tables": 1,
+      "n_rows": 29
+    },
+    {
+      "file": "page_5_table_2.png",
+      "elapsed_s": 0.677,
+      "n_tables": 1,
+      "n_rows": 3
+    },
+    {
+      "file": "page_6_table_4.png",
+      "elapsed_s": 0.154,
+      "n_tables": 0,
+      "n_rows": 0
+    }
+  ]
+}
