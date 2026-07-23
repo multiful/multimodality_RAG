@@ -1,0 +1,1873 @@
+[
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > Contents\n\n산업분석 \n1. K-Wave와 연결 소비 \n2. K-Inbound의 성장 \n3. Beyond K-Wave \n4. 투자전략\n[엔터] 하이브, 와이지엔터테인먼트, 에스엠, JYP Ent. \n[음식료] 삼양식품, 오리온, 코스맥스엔비티, 노바렉스 \n [미디어] CJ ENM, 스튜디오드래곤",
+    "raw_chunk": "산업분석 \n1. K-Wave와 연결 소비 \n2. K-Inbound의 성장 \n3. Beyond K-Wave \n4. 투자전략\n[엔터] 하이브, 와이지엔터테인먼트, 에스엠, JYP Ent. \n[음식료] 삼양식품, 오리온, 코스맥스엔비티, 노바렉스 \n [미디어] CJ ENM, 스튜디오드래곤",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > Contents",
+    "section_path": [
+      "Contents"
+    ],
+    "page": 2
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > Summary\n\n 음식료/건기식",
+    "raw_chunk": " 음식료/건기식",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > Summary",
+    "section_path": [
+      "Summary"
+    ],
+    "page": 3
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > Summary\n\n 엔터/미디어",
+    "raw_chunk": " 엔터/미디어",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > Summary",
+    "section_path": [
+      "Summary"
+    ],
+    "page": 3
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > Summary\n\n Beyond K-Wave",
+    "raw_chunk": " Beyond K-Wave",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > Summary",
+    "section_path": [
+      "Summary"
+    ],
+    "page": 3
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > Summary\n\nK-Wave(한류)는 음악, 드라마와 같은 \n콘텐츠에서 음식, 패션, 뷰티 라이프 스타\n일 소비재와 웹툰, 게임으로 소비 확대",
+    "raw_chunk": "K-Wave(한류)는 음악, 드라마와 같은 \n콘텐츠에서 음식, 패션, 뷰티 라이프 스타\n일 소비재와 웹툰, 게임으로 소비 확대",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > Summary",
+    "section_path": [
+      "Summary"
+    ],
+    "page": 3
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > Summary\n\nK-Pop은 메가 IP의 활약 속 차세대 IP의 \n글로벌 활동 지역 커버리지 확대되며 글\n로벌 음악 시장 내 점유율 상승. 25년 글\n로벌 공연 점유율 7%대",
+    "raw_chunk": "K-Pop은 메가 IP의 활약 속 차세대 IP의 \n글로벌 활동 지역 커버리지 확대되며 글\n로벌 음악 시장 내 점유율 상승. 25년 글\n로벌 공연 점유율 7%대",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > Summary",
+    "section_path": [
+      "Summary"
+    ],
+    "page": 3
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > Summary\n\nK-Food는 수출 지역과 품목이 다변화되",
+    "raw_chunk": "K-Food는 수출 지역과 품목이 다변화되",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > Summary",
+    "section_path": [
+      "Summary"
+    ],
+    "page": 3
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > Summary\n\n며 글로벌 시장 내 침투율 상승 중",
+    "raw_chunk": "며 글로벌 시장 내 침투율 상승 중",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > Summary",
+    "section_path": [
+      "Summary"
+    ],
+    "page": 3
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > Summary\n\n주요 음식료 기업들은 늘어나는 해외 수\n요에 적극적으로 대응하기 위해 CAPA 확\n대. CAPEX 투자 사이클이 짧아지고 있음",
+    "raw_chunk": "주요 음식료 기업들은 늘어나는 해외 수\n요에 적극적으로 대응하기 위해 CAPA 확\n대. CAPEX 투자 사이클이 짧아지고 있음",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > Summary",
+    "section_path": [
+      "Summary"
+    ],
+    "page": 3
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > Summary\n\n한류 산업(콘텐츠)과 한류 연관산업(식\n품, 화장품, 관광 등)의 수출액은 각각 \n149억 달러, 498억 달러로 수출 실적 비\n중을 확대하며 성장",
+    "raw_chunk": "한류 산업(콘텐츠)과 한류 연관산업(식\n품, 화장품, 관광 등)의 수출액은 각각 \n149억 달러, 498억 달러로 수출 실적 비\n중을 확대하며 성장",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > Summary",
+    "section_path": [
+      "Summary"
+    ],
+    "page": 3
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > Summary\n\n또한 국내 주요 엔터사는 K-Pop 시스템\n을 접목한 일본, 중국, 미국, 남미 등에서 \n현지인으로 구성된 해외 IP 투자와 성장 \n→ K-Pop의 시장 범위 확대",
+    "raw_chunk": "또한 국내 주요 엔터사는 K-Pop 시스템\n을 접목한 일본, 중국, 미국, 남미 등에서 \n현지인으로 구성된 해외 IP 투자와 성장 \n→ K-Pop의 시장 범위 확대",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > Summary",
+    "section_path": [
+      "Summary"
+    ],
+    "page": 3
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > Summary\n\nK-Food의 글로벌 위상이 확대되며 주요\n국가 내 메인 유통 채널 입점이 확대됨",
+    "raw_chunk": "K-Food의 글로벌 위상이 확대되며 주요\n국가 내 메인 유통 채널 입점이 확대됨",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > Summary",
+    "section_path": [
+      "Summary"
+    ],
+    "page": 3
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > Summary\n\n특히 K-Wave 경험을 계기로 방한 여행\n을 고려하고 인바운드 증가하면서 한국 \n콘텐츠와 소비재 소비로 연결 강화",
+    "raw_chunk": "특히 K-Wave 경험을 계기로 방한 여행\n을 고려하고 인바운드 증가하면서 한국 \n콘텐츠와 소비재 소비로 연결 강화",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > Summary",
+    "section_path": [
+      "Summary"
+    ],
+    "page": 3
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > Summary\n\n필수 소비재의 선택적 소비. 웰니스 트렌\n드 확장되며 품목별 소비 차별화. 특히 건\n강기능식품에 대한 소비가 늘어나고 있음",
+    "raw_chunk": "필수 소비재의 선택적 소비. 웰니스 트렌\n드 확장되며 품목별 소비 차별화. 특히 건\n강기능식품에 대한 소비가 늘어나고 있음",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > Summary",
+    "section_path": [
+      "Summary"
+    ],
+    "page": 3
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > Summary\n\nK-Pop 엔터사는 강화된 MD 전략을 통\n해 지속 가능한 팬덤 소비 유도",
+    "raw_chunk": "K-Pop 엔터사는 강화된 MD 전략을 통\n해 지속 가능한 팬덤 소비 유도",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > Summary",
+    "section_path": [
+      "Summary"
+    ],
+    "page": 3
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > Summary\n\nK-Inbound는 26년 1-5월 누적 871만\n명으로 전년비 21% 증가. 정부는 26년 \n2,300만명, 28-29년 중 3천만 명 목표",
+    "raw_chunk": "K-Inbound는 26년 1-5월 누적 871만\n명으로 전년비 21% 증가. 정부는 26년 \n2,300만명, 28-29년 중 3천만 명 목표",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > Summary",
+    "section_path": [
+      "Summary"
+    ],
+    "page": 3
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > Summary\n\nK-Contents 역시 드라마, 영화, 예능까\n지 글로벌 시청자의 선호도가 견조하게 \n유지되며 글로벌 OTT 시청 점유율 견조\n하며 플랫폼 강화 중(티빙, 4D PLEX)",
+    "raw_chunk": "K-Contents 역시 드라마, 영화, 예능까\n지 글로벌 시청자의 선호도가 견조하게 \n유지되며 글로벌 OTT 시청 점유율 견조\n하며 플랫폼 강화 중(티빙, 4D PLEX)",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > Summary",
+    "section_path": [
+      "Summary"
+    ],
+    "page": 3
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > Summary\n\n또한 건기식 ODM 기업들은 K-건기식\n인기와 함께 지리적 이점 및 제조 경쟁력\n으로 글로벌 브랜드 아시아 생산기지 역\n할. 해외 매출 비중 확대",
+    "raw_chunk": "또한 건기식 ODM 기업들은 K-건기식\n인기와 함께 지리적 이점 및 제조 경쟁력\n으로 글로벌 브랜드 아시아 생산기지 역\n할. 해외 매출 비중 확대",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > Summary",
+    "section_path": [
+      "Summary"
+    ],
+    "page": 3
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > Summary\n\nK-Wave는 글로벌 커버리지 지역과 사\n업 영역을 확대하며 지속 성장 전망. 관련\n된 엔터/미디어/음식료 업체의 해외 실적 \n성장 및 수익성 개선 전망",
+    "raw_chunk": "K-Wave는 글로벌 커버리지 지역과 사\n업 영역을 확대하며 지속 성장 전망. 관련\n된 엔터/미디어/음식료 업체의 해외 실적 \n성장 및 수익성 개선 전망",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > Summary",
+    "section_path": [
+      "Summary"
+    ],
+    "page": 3
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > Summary\n\n최선호주: 하이브",
+    "raw_chunk": "최선호주: 하이브",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > Summary",
+    "section_path": [
+      "Summary"
+    ],
+    "page": 3
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > Summary\n\n최선호주: 삼양식품, 오리온",
+    "raw_chunk": "최선호주: 삼양식품, 오리온",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > Summary",
+    "section_path": [
+      "Summary"
+    ],
+    "page": 3
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > Summary\n\n관심종목: YG, SM, JYP, CJ ENM",
+    "raw_chunk": "관심종목: YG, SM, JYP, CJ ENM",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > Summary",
+    "section_path": [
+      "Summary"
+    ],
+    "page": 3
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > Summary\n\n관심종목: 코스맥스엔비티, 노바렉스",
+    "raw_chunk": "관심종목: 코스맥스엔비티, 노바렉스",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > Summary",
+    "section_path": [
+      "Summary"
+    ],
+    "page": 3
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 산업분석\n\n1. K-Wave와 연결 소비 \n2. K-Inbound의 성장 \n3. Beyond K-Wave \n4. 투자전략\n장지혜 음식료·미디어·엔터 \n02-709-2336 \njihye.j@ds-sec.co.kr",
+    "raw_chunk": "1. K-Wave와 연결 소비 \n2. K-Inbound의 성장 \n3. Beyond K-Wave \n4. 투자전략\n장지혜 음식료·미디어·엔터 \n02-709-2336 \njihye.j@ds-sec.co.kr",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 산업분석",
+    "section_path": [
+      "산업분석"
+    ],
+    "page": 4
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 1. K-Wave와 연결 소비 (1) K-Wave의 발전\n\nK-Wave(한류): 대한민국의 문화가 해외에서 널리 퍼지거나 이로 인해 문화상품 또는 연관된 상품이 소비되는 현상\n로 주요 지역과 콘텐츠가 확대되며 전세계로 확산. 현재는 전세계를 대상으로 다양한 장르 및 생활 문화 소비재로 한류 콘텐츠 확대 \n권 중심으로 일본 및 동남아 일부 팬 대상으로 한국 드라마와 1세대 아이돌 콘텐츠 소비가 이루어졌음. 2000년대 들어 아시아 전역으로 확대\n으로 확대되기 시작. 영상물, 게임, 웹툰, 아이돌 등 다양한 콘텐츠로 한류 인기가 확산되며 글로벌 플랫폼을 통해 전세계로 유통 \n으로 영상물, 음악에서 화장품, 음식료품 등 생활 문화 소비재까지 한류 콘텐츠 확대. 글로벌 흥행작 및 흥행상품 등장하며 한국 위상 상승\n자료: KOFICE, DS투자증권 리서치센터",
+    "raw_chunk": "K-Wave(한류): 대한민국의 문화가 해외에서 널리 퍼지거나 이로 인해 문화상품 또는 연관된 상품이 소비되는 현상\n로 주요 지역과 콘텐츠가 확대되며 전세계로 확산. 현재는 전세계를 대상으로 다양한 장르 및 생활 문화 소비재로 한류 콘텐츠 확대 \n권 중심으로 일본 및 동남아 일부 팬 대상으로 한국 드라마와 1세대 아이돌 콘텐츠 소비가 이루어졌음. 2000년대 들어 아시아 전역으로 확대\n으로 확대되기 시작. 영상물, 게임, 웹툰, 아이돌 등 다양한 콘텐츠로 한류 인기가 확산되며 글로벌 플랫폼을 통해 전세계로 유통 \n으로 영상물, 음악에서 화장품, 음식료품 등 생활 문화 소비재까지 한류 콘텐츠 확대. 글로벌 흥행작 및 흥행상품 등장하며 한국 위상 상승\n자료: KOFICE, DS투자증권 리서치센터",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 1. K-Wave와 연결 소비 (1) K-Wave의 발전",
+    "section_path": [
+      "1. K-Wave와 연결 소비 (1) K-Wave의 발전"
+    ],
+    "page": 5
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 1. K-Wave와 연결 소비 (2) K가 이끄는 소비 확장\n\n한류산업(방송, 음악, 게임 등 콘텐츠)과 한류 연관산업(식품, 화장품, 의류, 관광, IT 기기 등)의 25년 수출액은 각각 149억 달러,\n－한류 산업: 문화산업진흥 기본법이 정하는 문화산업의 문화상품이 해외에서 널리 퍼지거나 소비되도록 이를 제작 유통하거나 관련 서비스를",
+    "raw_chunk": "한류산업(방송, 음악, 게임 등 콘텐츠)과 한류 연관산업(식품, 화장품, 의류, 관광, IT 기기 등)의 25년 수출액은 각각 149억 달러,\n－한류 산업: 문화산업진흥 기본법이 정하는 문화산업의 문화상품이 해외에서 널리 퍼지거나 소비되도록 이를 제작 유통하거나 관련 서비스를",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 1. K-Wave와 연결 소비 (2) K가 이끄는 소비 확장",
+    "section_path": [
+      "1. K-Wave와 연결 소비 (2) K가 이끄는 소비 확장"
+    ],
+    "page": 6
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 1. K-Wave와 연결 소비 (2) K가 이끄는 소비 확장\n\n송, 음악, 게임 등 콘텐츠)과 한류 연관산업(식품, 화장품, 의류, 관광, IT 기기 등)의 25년 수출액은 각각 149억 달러, 498억 달러\n문화산업진흥 기본법이 정하는 문화산업의 문화상품이 해외에서 널리 퍼지거나 소비되도록 이를 제작 유통하거나 관련 서비스를 제공하는 산업\n업: 한류와 연관된 상품으로서 대통령령으로 정하는 상품이 해외에서 널리 퍼지거나 소비되도록 이를 제작 유통하거나 관련 서비스를 제공하는",
+    "raw_chunk": "송, 음악, 게임 등 콘텐츠)과 한류 연관산업(식품, 화장품, 의류, 관광, IT 기기 등)의 25년 수출액은 각각 149억 달러, 498억 달러\n문화산업진흥 기본법이 정하는 문화산업의 문화상품이 해외에서 널리 퍼지거나 소비되도록 이를 제작 유통하거나 관련 서비스를 제공하는 산업\n업: 한류와 연관된 상품으로서 대통령령으로 정하는 상품이 해외에서 널리 퍼지거나 소비되도록 이를 제작 유통하거나 관련 서비스를 제공하는",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 1. K-Wave와 연결 소비 (2) K가 이끄는 소비 확장",
+    "section_path": [
+      "1. K-Wave와 연결 소비 (2) K가 이끄는 소비 확장"
+    ],
+    "page": 6
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 1. K-Wave와 연결 소비 (2) K가 이끄는 소비 확장\n\n－한류 연관산업: 한류와 연관된 상품으로서 대통령령으로 정하는 상품이 해외에서 널리 퍼지거나 소비되도록 이를 제작 유통하거나 관련 서비",
+    "raw_chunk": "－한류 연관산업: 한류와 연관된 상품으로서 대통령령으로 정하는 상품이 해외에서 널리 퍼지거나 소비되도록 이를 제작 유통하거나 관련 서비",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 1. K-Wave와 연결 소비 (2) K가 이끄는 소비 확장",
+    "section_path": [
+      "1. K-Wave와 연결 소비 (2) K가 이끄는 소비 확장"
+    ],
+    "page": 6
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 1. K-Wave와 연결 소비 (2) K가 이끄는 소비 확장\n\n자료: KATI, 관세청, 관광지식정보시스템, DS투자증권 리서치센터 \n주: 한국콘텐츠진흥원이 정한 한류 연관산업 수출 품목 중 IT기기는 제외하고 그래프 업데이트",
+    "raw_chunk": "자료: KATI, 관세청, 관광지식정보시스템, DS투자증권 리서치센터 \n주: 한국콘텐츠진흥원이 정한 한류 연관산업 수출 품목 중 IT기기는 제외하고 그래프 업데이트",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 1. K-Wave와 연결 소비 (2) K가 이끄는 소비 확장",
+    "section_path": [
+      "1. K-Wave와 연결 소비 (2) K가 이끄는 소비 확장"
+    ],
+    "page": 6
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 1. K-Wave와 연결 소비 (3) K-Wave간 시너지 창출\n\n글로벌 소비자의 한국 콘텐츠 소비 증가는 필연적으로 관광, 식품, 화장품 \n등 생활/소비재 제품 관련 한류 연관상품 소비 증가로 이어지고 있음",
+    "raw_chunk": "글로벌 소비자의 한국 콘텐츠 소비 증가는 필연적으로 관광, 식품, 화장품 \n등 생활/소비재 제품 관련 한류 연관상품 소비 증가로 이어지고 있음",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 1. K-Wave와 연결 소비 (3) K-Wave간 시너지 창출",
+    "section_path": [
+      "1. K-Wave와 연결 소비 (3) K-Wave간 시너지 창출"
+    ],
+    "page": 7
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 1. K-Wave와 연결 소비 (3) K-Wave간 시너지 창출\n\nK-Contents와 K-Food, Beauty, Inbound의 시너지",
+    "raw_chunk": "K-Contents와 K-Food, Beauty, Inbound의 시너지",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 1. K-Wave와 연결 소비 (3) K-Wave간 시너지 창출",
+    "section_path": [
+      "1. K-Wave와 연결 소비 (3) K-Wave간 시너지 창출"
+    ],
+    "page": 7
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 1. K-Wave와 연결 소비 (3) K-Wave간 시너지 창출\n\n실제로 K-Contents 흥행으로 한국어에 대한 관심 및 한국 여행 증가",
+    "raw_chunk": "실제로 K-Contents 흥행으로 한국어에 대한 관심 및 한국 여행 증가",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 1. K-Wave와 연결 소비 (3) K-Wave간 시너지 창출",
+    "section_path": [
+      "1. K-Wave와 연결 소비 (3) K-Wave간 시너지 창출"
+    ],
+    "page": 7
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 1. K-Wave와 연결 소비 (3) K-Wave간 시너지 창출\n\n－한국 드라마를 보고 한국 여행을 결심하거나 한국어 공부가 늘고 있음",
+    "raw_chunk": "－한국 드라마를 보고 한국 여행을 결심하거나 한국어 공부가 늘고 있음",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 1. K-Wave와 연결 소비 (3) K-Wave간 시너지 창출",
+    "section_path": [
+      "1. K-Wave와 연결 소비 (3) K-Wave간 시너지 창출"
+    ],
+    "page": 7
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 1. K-Wave와 연결 소비 (3) K-Wave간 시너지 창출\n\n－넷플릭스 애니메이션 <케이팝 데몬 헌터스>의 흥행으로 한국어를 배우는 미국\n인이 22% 증가했고 한국행 항공권 예약도 25% 증가했다고 발표",
+    "raw_chunk": "－넷플릭스 애니메이션 <케이팝 데몬 헌터스>의 흥행으로 한국어를 배우는 미국\n인이 22% 증가했고 한국행 항공권 예약도 25% 증가했다고 발표",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 1. K-Wave와 연결 소비 (3) K-Wave간 시너지 창출",
+    "section_path": [
+      "1. K-Wave와 연결 소비 (3) K-Wave간 시너지 창출"
+    ],
+    "page": 7
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 1. K-Wave와 연결 소비 (3) K-Wave간 시너지 창출\n\n또한 K-Contents의 인기와 함께 K-Food, Beauty 글로벌 관심 증가",
+    "raw_chunk": "또한 K-Contents의 인기와 함께 K-Food, Beauty 글로벌 관심 증가",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 1. K-Wave와 연결 소비 (3) K-Wave간 시너지 창출",
+    "section_path": [
+      "1. K-Wave와 연결 소비 (3) K-Wave간 시너지 창출"
+    ],
+    "page": 7
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 1. K-Wave와 연결 소비 (3) K-Wave간 시너지 창출\n\n－글로벌 팬데믹 기간 OTT 시청 시간이 늘어나며 K-Contents 소비가 늘었고 \n관련 드라마, 영화에서 등장한 한국 음식에 대한 관심 및 소비도 늘어나는 양상",
+    "raw_chunk": "－글로벌 팬데믹 기간 OTT 시청 시간이 늘어나며 K-Contents 소비가 늘었고 \n관련 드라마, 영화에서 등장한 한국 음식에 대한 관심 및 소비도 늘어나는 양상",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 1. K-Wave와 연결 소비 (3) K-Wave간 시너지 창출",
+    "section_path": [
+      "1. K-Wave와 연결 소비 (3) K-Wave간 시너지 창출"
+    ],
+    "page": 7
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 1. K-Wave와 연결 소비 (3) K-Wave간 시너지 창출\n\n－한편 K-pop 아이돌이나 K-drama 속 배우의 메이크업과 피부표현, 스타일\n링이 주목받으며 K-Beauty 및 패션에 대한 관심도 증가하며 시너지 발생",
+    "raw_chunk": "－한편 K-pop 아이돌이나 K-drama 속 배우의 메이크업과 피부표현, 스타일\n링이 주목받으며 K-Beauty 및 패션에 대한 관심도 증가하며 시너지 발생",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 1. K-Wave와 연결 소비 (3) K-Wave간 시너지 창출",
+    "section_path": [
+      "1. K-Wave와 연결 소비 (3) K-Wave간 시너지 창출"
+    ],
+    "page": 7
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 1. K-Wave와 연결 소비 (4) 인바운드는 K-Wave의 결과이자 마중물\n\n국 인바운드 1,894만명(+16% YoY)으로 직전 최고치 19년 1,750만명 경신. 26년 1-5월 누적 인바운드는 871만명(+21% Yo\n인바운드 Top8 국가는 중국 548만명, 일본 365만명, 대만 189만명, 미국 148만명, 홍콩 62만명, 필리핀 62만명, 베트남 54만명, 싱가포르 \n6년 중국 인바운드는 807만명, 19년 602만명, 25년 548만명으로 전고점을 회복하지 못함. 중국 외 인바운드는 19년 1,147만명, 25년 1,3\n백 공연 등 K-Pop 아티스트 공연과 낮은 원화 환율로 인해 인바운드 증가세",
+    "raw_chunk": "국 인바운드 1,894만명(+16% YoY)으로 직전 최고치 19년 1,750만명 경신. 26년 1-5월 누적 인바운드는 871만명(+21% Yo\n인바운드 Top8 국가는 중국 548만명, 일본 365만명, 대만 189만명, 미국 148만명, 홍콩 62만명, 필리핀 62만명, 베트남 54만명, 싱가포르 \n6년 중국 인바운드는 807만명, 19년 602만명, 25년 548만명으로 전고점을 회복하지 못함. 중국 외 인바운드는 19년 1,147만명, 25년 1,3\n백 공연 등 K-Pop 아티스트 공연과 낮은 원화 환율로 인해 인바운드 증가세",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 1. K-Wave와 연결 소비 (4) 인바운드는 K-Wave의 결과이자 마중물",
+    "section_path": [
+      "1. K-Wave와 연결 소비 (4) 인바운드는 K-Wave의 결과이자 마중물"
+    ],
+    "page": 8
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 1. K-Wave와 연결 소비 (4) 인바운드는 K-Wave의 결과이자 마중물\n\n행에 관심을 가진 계기를 설문조사한 결과 <한류 콘텐츠를 접하고 나서>가 1등으로 해당 비율이 계속 높아지고 있음 \n5년 방한 외래관광객을 대상으로 3년간 설문 조사 결과 한류 콘텐츠를 접하고 방한 여행에 관심을 가졌다고 응답하는 비율이 계속 높아지고 있\nound의 성장이 K-Wave 소비 확장으로 이어질 것. 여행에서 경험한 한국 제품과 서비스에 대한 긍정적 인식이 현지로 돌아가서도 \n앤비에 따르면 한국 방문객의 87%가 재방문 의향이 있으며 Z세대 중 42%가 한국 방문 이후 한국 음악, 드라마, 영화에 대한 관심이 더욱 높아",
+    "raw_chunk": "행에 관심을 가진 계기를 설문조사한 결과 <한류 콘텐츠를 접하고 나서>가 1등으로 해당 비율이 계속 높아지고 있음 \n5년 방한 외래관광객을 대상으로 3년간 설문 조사 결과 한류 콘텐츠를 접하고 방한 여행에 관심을 가졌다고 응답하는 비율이 계속 높아지고 있\nound의 성장이 K-Wave 소비 확장으로 이어질 것. 여행에서 경험한 한국 제품과 서비스에 대한 긍정적 인식이 현지로 돌아가서도 \n앤비에 따르면 한국 방문객의 87%가 재방문 의향이 있으며 Z세대 중 42%가 한국 방문 이후 한국 음악, 드라마, 영화에 대한 관심이 더욱 높아",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 1. K-Wave와 연결 소비 (4) 인바운드는 K-Wave의 결과이자 마중물",
+    "section_path": [
+      "1. K-Wave와 연결 소비 (4) 인바운드는 K-Wave의 결과이자 마중물"
+    ],
+    "page": 8
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 2. K-Inbound의 성장 (2) 인바운드의 Q 성장\n\n문화체육관광부는 26년 방한 관광객 목표로 2,300만명 제시. 또한 기존 2030년 목표였던 3,000만명을 2029년 조기 달성 추\n－방한관광 시장을 핵심(중화권, 일본)/성장(동남아, 중동)/유망(유럽, 미주)시장으로 세분화해 출입국 편의 개선, 지방공항 입국 유치로",
+    "raw_chunk": "문화체육관광부는 26년 방한 관광객 목표로 2,300만명 제시. 또한 기존 2030년 목표였던 3,000만명을 2029년 조기 달성 추\n－방한관광 시장을 핵심(중화권, 일본)/성장(동남아, 중동)/유망(유럽, 미주)시장으로 세분화해 출입국 편의 개선, 지방공항 입국 유치로",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 2. K-Inbound의 성장 (2) 인바운드의 Q 성장",
+    "section_path": [
+      "2. K-Inbound의 성장 (2) 인바운드의 Q 성장"
+    ],
+    "page": 10
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 2. K-Inbound의 성장 (2) 인바운드의 Q 성장\n\n문화체육관광부는 26년 방한 관광객 목표로 2,300만명 제시. 또한 기존 2030년 목표였던 3,000만명을 2029년 조기 달성 추진 \n－방한관광 시장을 핵심(중화권, 일본)/성장(동남아, 중동)/유망(유럽, 미주)시장으로 세분화해  출입국 편의 개선, 지방공항 입국 유치로 지\n－한편 정부는 외래객 총 지출액의 목표를 24년 33조원에서 30년 75조원 확대하는 것을 목표. 방문객 수 증가에 더해 1인당 소비 확대 유도",
+    "raw_chunk": "문화체육관광부는 26년 방한 관광객 목표로 2,300만명 제시. 또한 기존 2030년 목표였던 3,000만명을 2029년 조기 달성 추진 \n－방한관광 시장을 핵심(중화권, 일본)/성장(동남아, 중동)/유망(유럽, 미주)시장으로 세분화해  출입국 편의 개선, 지방공항 입국 유치로 지\n－한편 정부는 외래객 총 지출액의 목표를 24년 33조원에서 30년 75조원 확대하는 것을 목표. 방문객 수 증가에 더해 1인당 소비 확대 유도",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 2. K-Inbound의 성장 (2) 인바운드의 Q 성장",
+    "section_path": [
+      "2. K-Inbound의 성장 (2) 인바운드의 Q 성장"
+    ],
+    "page": 10
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 2. K-Inbound의 성장 (2) 인바운드의 Q 성장\n\n－한편 정부는 외래객 총 지출액의 목표를 24년 33조원에서 30년 75조원 확대하는 것을 목표. 방문객 수 증가에 더해 1인당 소비 확대 유",
+    "raw_chunk": "－한편 정부는 외래객 총 지출액의 목표를 24년 33조원에서 30년 75조원 확대하는 것을 목표. 방문객 수 증가에 더해 1인당 소비 확대 유",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 2. K-Inbound의 성장 (2) 인바운드의 Q 성장",
+    "section_path": [
+      "2. K-Inbound의 성장 (2) 인바운드의 Q 성장"
+    ],
+    "page": 10
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 2. K-Inbound의 성장 (2) 인바운드의 Q 성장\n\n적 다변화가 이루어지고 있는 중. 중국은 아직 코로나 이전 수준을 회복 못했지만 성장이 기대되고 중국 외 관광객 다변화도 긍정적\n년 807만명, 19년 602만명, 25년 548만명으로 전고점 회복 못함. 중국 외 인바운드는 19년 1,147만명에서 25년 1,345만명으로 증가",
+    "raw_chunk": "적 다변화가 이루어지고 있는 중. 중국은 아직 코로나 이전 수준을 회복 못했지만 성장이 기대되고 중국 외 관광객 다변화도 긍정적\n년 807만명, 19년 602만명, 25년 548만명으로 전고점 회복 못함. 중국 외 인바운드는 19년 1,147만명에서 25년 1,345만명으로 증가",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 2. K-Inbound의 성장 (2) 인바운드의 Q 성장",
+    "section_path": [
+      "2. K-Inbound의 성장 (2) 인바운드의 Q 성장"
+    ],
+    "page": 10
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 2. K-Inbound의 성장 (3) 인바운드의 P 상승\n\n－업종별 지출액은 쇼핑업이 44%대로 꾸준히 1등 유지\n－이외에는 의료웰니스업이 19년 9%→25년 21%로 비중 상승하며 성장\n－이에 영향을 받은 영향소비(K-쇼핑, 뷰티웰니스, 패션, 라이프스타일푸드,\n한식 등)는 6.57조원(+59% YoY) 기록",
+    "raw_chunk": "－업종별 지출액은 쇼핑업이 44%대로 꾸준히 1등 유지\n－이외에는 의료웰니스업이 19년 9%→25년 21%로 비중 상승하며 성장\n－이에 영향을 받은 영향소비(K-쇼핑, 뷰티웰니스, 패션, 라이프스타일푸드,\n한식 등)는 6.57조원(+59% YoY) 기록",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 2. K-Inbound의 성장 (3) 인바운드의 P 상승",
+    "section_path": [
+      "2. K-Inbound의 성장 (3) 인바운드의 P 상승"
+    ],
+    "page": 11
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 2. K-Inbound의 성장 (4) K-Wave를 활용한 인바운드 활성화 정책\n\n정부는 관광과 K-콘텐츠를 융합해 K-컬처의 관광콘텐츠化 유도. K-컬처에 대한 관심을 방한 관광으로 전환 목표",
+    "raw_chunk": "정부는 관광과 K-콘텐츠를 융합해 K-컬처의 관광콘텐츠化 유도. K-컬처에 대한 관심을 방한 관광으로 전환 목표",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 2. K-Inbound의 성장 (4) K-Wave를 활용한 인바운드 활성화 정책",
+    "section_path": [
+      "2. K-Inbound의 성장 (4) K-Wave를 활용한 인바운드 활성화 정책"
+    ],
+    "page": 12
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 2. K-Inbound의 성장 (4) K-Wave를 활용한 인바운드 활성화 정책\n\n－2)新 K-컬처 영역으로 확장: 푸드, 뷰티, 등산/트래킹, 교육 등으로 영역을 확장하며 방한 관광객 유도",
+    "raw_chunk": "－2)新 K-컬처 영역으로 확장: 푸드, 뷰티, 등산/트래킹, 교육 등으로 영역을 확장하며 방한 관광객 유도",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 2. K-Inbound의 성장 (4) K-Wave를 활용한 인바운드 활성화 정책",
+    "section_path": [
+      "2. K-Inbound의 성장 (4) K-Wave를 활용한 인바운드 활성화 정책"
+    ],
+    "page": 12
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 2. K-Inbound의 성장 (4) K-Wave를 활용한 인바운드 활성화 정책\n\n방한 관광객의 소비패턴 변화를 활용한 관광 상품 적극 발굴. K-푸드관련 로컬 푸드/미식벨트 상품화, K-뷰티 페스티벌 개최 및 클러\n-푸드 측면에서는 과거 전통식 위주에서 일상 푸드로 소비 패턴 변화 활용. 김치, 불고기, 비빔밥같은 전통식에서 라면, 김밥, 길거리 간식 등 \n-쇼핑 측면에서는 과거 고가·명품 중심에서 벗어나 취향을 반영한 상품, 일상 실용 제품, 자기관리 관련 뷰티·헬스 제품 등으로 소비영역 다변화\n민관 협력으로 문화 관광 확대 유도. 하이브, SM, YG, JYP는 K-Pop 대형 음악 페스티벌을 개최하기 위해 협력하고 정부는 공연장",
+    "raw_chunk": "방한 관광객의 소비패턴 변화를 활용한 관광 상품 적극 발굴. K-푸드관련 로컬 푸드/미식벨트 상품화, K-뷰티 페스티벌 개최 및 클러\n-푸드 측면에서는 과거 전통식 위주에서 일상 푸드로 소비 패턴 변화 활용. 김치, 불고기, 비빔밥같은 전통식에서 라면, 김밥, 길거리 간식 등 \n-쇼핑 측면에서는 과거 고가·명품 중심에서 벗어나 취향을 반영한 상품, 일상 실용 제품, 자기관리 관련 뷰티·헬스 제품 등으로 소비영역 다변화\n민관 협력으로 문화 관광 확대 유도. 하이브, SM, YG, JYP는 K-Pop 대형 음악 페스티벌을 개최하기 위해 협력하고 정부는 공연장",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 2. K-Inbound의 성장 (4) K-Wave를 활용한 인바운드 활성화 정책",
+    "section_path": [
+      "2. K-Inbound의 성장 (4) K-Wave를 활용한 인바운드 활성화 정책"
+    ],
+    "page": 12
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 2. K-Inbound의 성장 (4) K-Wave를 활용한 인바운드 활성화 정책\n\n로 문화 관광 확대 유도. 하이브, SM, YG, JYP는 K-Pop 대형 음악 페스티벌을 개최하기 위해 협력하고 정부는 공연장 인프라 구축",
+    "raw_chunk": "로 문화 관광 확대 유도. 하이브, SM, YG, JYP는 K-Pop 대형 음악 페스티벌을 개최하기 위해 협력하고 정부는 공연장 인프라 구축",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 2. K-Inbound의 성장 (4) K-Wave를 활용한 인바운드 활성화 정책",
+    "section_path": [
+      "2. K-Inbound의 성장 (4) K-Wave를 활용한 인바운드 활성화 정책"
+    ],
+    "page": 12
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 2. K-Inbound의 성장 (4) K-Wave를 활용한 인바운드 활성화 정책\n\n자료: 한국관광데이터랩, DS투자증권 리서치센터\n주: 외국국적 카드사 신용카드 데이터",
+    "raw_chunk": "자료: 한국관광데이터랩, DS투자증권 리서치센터\n주: 외국국적 카드사 신용카드 데이터",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 2. K-Inbound의 성장 (4) K-Wave를 활용한 인바운드 활성화 정책",
+    "section_path": [
+      "2. K-Inbound의 성장 (4) K-Wave를 활용한 인바운드 활성화 정책"
+    ],
+    "page": 12
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 3. Beyond K-Wave\n\nWave의 각 업종은 글로벌 지역 커버리지와 사업 영역을 확장하며 성장 중. 이에 따라 주요 기업들의 해외 실적 기여도도 확대되는 중",
+    "raw_chunk": "Wave의 각 업종은 글로벌 지역 커버리지와 사업 영역을 확장하며 성장 중. 이에 따라 주요 기업들의 해외 실적 기여도도 확대되는 중",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 3. Beyond K-Wave",
+    "section_path": [
+      "3. Beyond K-Wave"
+    ],
+    "page": 13
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 3. Beyond K-Wave (1) Beyond K-Pop: 글로벌 시장 점유율 확대\n\nK-Pop은 메가 IP의 활약 속 신인/성장/고연차 IP의 글로벌 활동이 확대되며 글로벌 음악 시장 내 점유율 상승",
+    "raw_chunk": "K-Pop은 메가 IP의 활약 속 신인/성장/고연차 IP의 글로벌 활동이 확대되며 글로벌 음악 시장 내 점유율 상승",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 3. Beyond K-Wave (1) Beyond K-Pop: 글로벌 시장 점유율 확대",
+    "section_path": [
+      "3. Beyond K-Wave (1) Beyond K-Pop: 글로벌 시장 점유율 확대"
+    ],
+    "page": 14
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 3. Beyond K-Wave (1) Beyond K-Pop: 글로벌 시장 점유율 확대\n\n원 시장 미국 내 온디맨드 오디오 스트리밍에서 미국 제외 아티스트",
+    "raw_chunk": "원 시장 미국 내 온디맨드 오디오 스트리밍에서 미국 제외 아티스트",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 3. Beyond K-Wave (1) Beyond K-Pop: 글로벌 시장 점유율 확대",
+    "section_path": [
+      "3. Beyond K-Wave (1) Beyond K-Pop: 글로벌 시장 점유율 확대"
+    ],
+    "page": 14
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 3. Beyond K-Wave (1) Beyond K-Pop: 글로벌 시장 점유율 확대\n\n2)공연: 빌보드 집계 Top 100 투어 중 K-Pop 투어 비중은 19년 4%→23년 5.1% →24년 2.8% →25년 7.7%까지 상승",
+    "raw_chunk": "2)공연: 빌보드 집계 Top 100 투어 중 K-Pop 투어 비중은 19년 4%→23년 5.1% →24년 2.8% →25년 7.7%까지 상승",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 3. Beyond K-Wave (1) Beyond K-Pop: 글로벌 시장 점유율 확대",
+    "section_path": [
+      "3. Beyond K-Wave (1) Beyond K-Pop: 글로벌 시장 점유율 확대"
+    ],
+    "page": 14
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 3. Beyond K-Wave (1) Beyond K-Pop: 글로벌 시장 점유율 확대\n\n－빌보드에서 집계한 25년(24년 10월~25년 9월) Top100 투어 중 K-Pop 공연은 Stray Kids(1.8억 달러, 130만명), Seventeen(1\nhope(0.8억 달러, 50만명), ENHYPEN(0.76억 달러, 55만명),  ATEEZ(0.7억 달러, 40만명), TXT(0.64억 달러, 48만명), jin(0.4\nSserafim(0.34억 달러, 23만명)의 공연이 포함. 빌보드 Top 100 투어 매출액 기준 K-Pop  시장 점유율 7.7%로 역대 최고 점유율 기록",
+    "raw_chunk": "－빌보드에서 집계한 25년(24년 10월~25년 9월) Top100 투어 중 K-Pop 공연은 Stray Kids(1.8억 달러, 130만명), Seventeen(1\nhope(0.8억 달러, 50만명), ENHYPEN(0.76억 달러, 55만명),  ATEEZ(0.7억 달러, 40만명), TXT(0.64억 달러, 48만명), jin(0.4\nSserafim(0.34억 달러, 23만명)의 공연이 포함. 빌보드 Top 100 투어 매출액 기준 K-Pop  시장 점유율 7.7%로 역대 최고 점유율 기록",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 3. Beyond K-Wave (1) Beyond K-Pop: 글로벌 시장 점유율 확대",
+    "section_path": [
+      "3. Beyond K-Wave (1) Beyond K-Pop: 글로벌 시장 점유율 확대"
+    ],
+    "page": 14
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 3. Beyond K-Wave (1) Beyond K-Pop: 글로벌 시장 점유율 확대\n\n－BTS는 26년 4월부터 글로벌 스타디움 투어 진행, BIGBANG은 26년 8월, Stray Kids는 26년 7월부터 투어를 진행하며 메가 IP의 볼륨 탄",
+    "raw_chunk": "－BTS는 26년 4월부터 글로벌 스타디움 투어 진행, BIGBANG은 26년 8월, Stray Kids는 26년 7월부터 투어를 진행하며 메가 IP의 볼륨 탄",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 3. Beyond K-Wave (1) Beyond K-Pop: 글로벌 시장 점유율 확대",
+    "section_path": [
+      "3. Beyond K-Wave (1) Beyond K-Pop: 글로벌 시장 점유율 확대"
+    ],
+    "page": 14
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 3. Beyond K-Wave (1) Beyond K-Pop: 글로벌 시장 점유율 확대\n\n－메가 IP 외에도 저연차 IP의 공연 시작 및 고연차/성장 IP의 투어 규모 확대로 글로벌 공연 시장 내 K-Pop 점유율은 지속 상승할 전망",
+    "raw_chunk": "－메가 IP 외에도 저연차 IP의 공연 시작 및 고연차/성장 IP의 투어 규모 확대로 글로벌 공연 시장 내 K-Pop 점유율은 지속 상승할 전망",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 3. Beyond K-Wave (1) Beyond K-Pop: 글로벌 시장 점유율 확대",
+    "section_path": [
+      "3. Beyond K-Wave (1) Beyond K-Pop: 글로벌 시장 점유율 확대"
+    ],
+    "page": 14
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 3. Beyond K-Wave (1) Beyond K-Pop: 글로벌 시장 점유율 확대\n\n자료: Luminate, DS투자증권 리서치센터 \n주: 26년은 1분기까지 누적 데이터",
+    "raw_chunk": "자료: Luminate, DS투자증권 리서치센터 \n주: 26년은 1분기까지 누적 데이터",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 3. Beyond K-Wave (1) Beyond K-Pop: 글로벌 시장 점유율 확대",
+    "section_path": [
+      "3. Beyond K-Wave (1) Beyond K-Pop: 글로벌 시장 점유율 확대"
+    ],
+    "page": 14
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > K-Wave (1) Beyond K-Pop: K-Pop 시스템으로 해외 IP 확대 \nBeyond K-Wave_ K가 이끄 > 3. Beyond K-Wave (1) Beyond K-Pop: K-Pop 시스템으로 해외 IP 확대 \nB\n\n국내 주요 엔터사는 K-Pop 시스템을 접목한 일본, 중국, 미국, 남미 등에서 현지인으로 구성된 해외 IP 투자 확대 → K-Pop 시장 범\n－오디션과 연습생 교육 시스템을 통해 IP를 개발하고 성장시키며 활동의 전 영역을 기획해온 K-Pop 엔터 기획사의  시스템을 적용해 해외를\n－장르나 언어 측면에서 한계가 있는 K-Pop에서 나아가 글로벌 음악 시장 전체를 대상으로 엔터 기획사의 시장 점유율 확대 및 실적 성장 기대\nHYBE는 일본, 미국, 남미로 진입 시장을 확대하며 적극적으로 해외 IP 발굴 및 투자. KATSEYE의 가파른 성장이 두드러지며 국내\n－KATSEYE는 데뷔 1년 만인 25년 첫 단독 콘서트(3개국/16회)를 진행하고 26년(10개국/31회) 그 규모를 확대해 진행. Spotify 월간 청\n－하이브는 일본, 미국, 라틴에 이어 중국, 인도에도 현지 법인을 세우고 해외 IP 개발 및 보유 IP의 글로벌 활동 확대 발판을 마련하고 있음 \nSM, JYP, CJ ENM 등 주요 엔터사 역시 일본, 중국, 미국 등에서  해외 IP를 개발하고 수익화 하는 중",
+    "raw_chunk": "국내 주요 엔터사는 K-Pop 시스템을 접목한 일본, 중국, 미국, 남미 등에서 현지인으로 구성된 해외 IP 투자 확대 → K-Pop 시장 범\n－오디션과 연습생 교육 시스템을 통해 IP를 개발하고 성장시키며 활동의 전 영역을 기획해온 K-Pop 엔터 기획사의  시스템을 적용해 해외를\n－장르나 언어 측면에서 한계가 있는 K-Pop에서 나아가 글로벌 음악 시장 전체를 대상으로 엔터 기획사의 시장 점유율 확대 및 실적 성장 기대\nHYBE는 일본, 미국, 남미로 진입 시장을 확대하며 적극적으로 해외 IP 발굴 및 투자. KATSEYE의 가파른 성장이 두드러지며 국내\n－KATSEYE는 데뷔 1년 만인 25년 첫 단독 콘서트(3개국/16회)를 진행하고 26년(10개국/31회) 그 규모를 확대해 진행. Spotify 월간 청\n－하이브는 일본, 미국, 라틴에 이어 중국, 인도에도 현지 법인을 세우고 해외 IP 개발 및 보유 IP의 글로벌 활동 확대 발판을 마련하고 있음 \nSM, JYP, CJ ENM 등 주요 엔터사 역시 일본, 중국, 미국 등에서  해외 IP를 개발하고 수익화 하는 중",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > K-Wave (1) Beyond K-Pop: K-Pop 시스템으로 해외 IP 확대 \nBeyond K-Wave_ K가 이끄 > 3. Beyond K-Wave (1) Beyond K-Pop: K-Pop 시스템으로 해외 IP 확대 \nB",
+    "section_path": [
+      "K-Wave (1) Beyond K-Pop: K-Pop 시스템으로 해외 IP 확대 \nBeyond K-Wave_ K가 이끄",
+      "3. Beyond K-Wave (1) Beyond K-Pop: K-Pop 시스템으로 해외 IP 확대 \nB"
+    ],
+    "page": 15
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > K-Wave (1) Beyond K-Pop: K-Pop 시스템으로 해외 IP 확대 \nBeyond K-Wave_ K가 이끄 > 3. Beyond K-Wave (1) Beyond K-Pop: K-Pop 시스템으로 해외 IP 확대 \nB\n\n엔터사는 K-Pop 시스템을 접목한 일본, 중국, 미국, 남미 등에서 현지인으로 구성된 해외 IP 투자 확대 → K-Pop 시장 범위 확대 \n습생 교육 시스템을 통해 IP를 개발하고 성장시키며 활동의 전 영역을 기획해온 K-Pop 엔터 기획사의  시스템을 적용해 해외를 통해 시장 확대\n 측면에서 한계가 있는 K-Pop에서 나아가 글로벌 음악 시장 전체를 대상으로 엔터 기획사의 시장 점유율 확대 및 실적 성장 기대",
+    "raw_chunk": "엔터사는 K-Pop 시스템을 접목한 일본, 중국, 미국, 남미 등에서 현지인으로 구성된 해외 IP 투자 확대 → K-Pop 시장 범위 확대 \n습생 교육 시스템을 통해 IP를 개발하고 성장시키며 활동의 전 영역을 기획해온 K-Pop 엔터 기획사의  시스템을 적용해 해외를 통해 시장 확대\n 측면에서 한계가 있는 K-Pop에서 나아가 글로벌 음악 시장 전체를 대상으로 엔터 기획사의 시장 점유율 확대 및 실적 성장 기대",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > K-Wave (1) Beyond K-Pop: K-Pop 시스템으로 해외 IP 확대 \nBeyond K-Wave_ K가 이끄 > 3. Beyond K-Wave (1) Beyond K-Pop: K-Pop 시스템으로 해외 IP 확대 \nB",
+    "section_path": [
+      "K-Wave (1) Beyond K-Pop: K-Pop 시스템으로 해외 IP 확대 \nBeyond K-Wave_ K가 이끄",
+      "3. Beyond K-Wave (1) Beyond K-Pop: K-Pop 시스템으로 해외 IP 확대 \nB"
+    ],
+    "page": 15
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > K-Wave (1) Beyond K-Pop: K-Pop 시스템으로 해외 IP 확대 \nBeyond K-Wave_ K가 이끄 > 3. Beyond K-Wave (1) Beyond K-Pop: K-Pop 시스템으로 해외 IP 확대 \nB\n\n미국, 남미로 진입 시장을 확대하며 적극적으로 해외 IP 발굴 및 투자. KATSEYE의 가파른 성장이 두드러지며 국내외 IP 협업도 긍정\n뷔 1년 만인 25년 첫 단독 콘서트(3개국/16회)를 진행하고 26년(10개국/31회) 그 규모를 확대해 진행. Spotify 월간 청취자는 BTS와 유사\n미국, 라틴에 이어 중국, 인도에도 현지 법인을 세우고 해외 IP 개발 및 보유 IP의 글로벌 활동 확대 발판을 마련하고 있음",
+    "raw_chunk": "미국, 남미로 진입 시장을 확대하며 적극적으로 해외 IP 발굴 및 투자. KATSEYE의 가파른 성장이 두드러지며 국내외 IP 협업도 긍정\n뷔 1년 만인 25년 첫 단독 콘서트(3개국/16회)를 진행하고 26년(10개국/31회) 그 규모를 확대해 진행. Spotify 월간 청취자는 BTS와 유사\n미국, 라틴에 이어 중국, 인도에도 현지 법인을 세우고 해외 IP 개발 및 보유 IP의 글로벌 활동 확대 발판을 마련하고 있음",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > K-Wave (1) Beyond K-Pop: K-Pop 시스템으로 해외 IP 확대 \nBeyond K-Wave_ K가 이끄 > 3. Beyond K-Wave (1) Beyond K-Pop: K-Pop 시스템으로 해외 IP 확대 \nB",
+    "section_path": [
+      "K-Wave (1) Beyond K-Pop: K-Pop 시스템으로 해외 IP 확대 \nBeyond K-Wave_ K가 이끄",
+      "3. Beyond K-Wave (1) Beyond K-Pop: K-Pop 시스템으로 해외 IP 확대 \nB"
+    ],
+    "page": 15
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 3. Beyond K-Wave (1) Beyond K-Pop: MD/라이선싱 영역 확대\n\n는 실생활에서도 사용 가능한 MD 개발, 공연 MD SKU 확대, 캐릭터 MD 강화, IP 라이선싱 협업, 팝업스토어, 유통 전략 고도화 등이 있음 \n후 팝업 스토어를 국내외로 개최하고 음반 발매 없이도 캐릭터 상품을 활용한 MD로 IP의 활동 공백기를 보완하고 수익화 하기도 함",
+    "raw_chunk": "는 실생활에서도 사용 가능한 MD 개발, 공연 MD SKU 확대, 캐릭터 MD 강화, IP 라이선싱 협업, 팝업스토어, 유통 전략 고도화 등이 있음 \n후 팝업 스토어를 국내외로 개최하고 음반 발매 없이도 캐릭터 상품을 활용한 MD로 IP의 활동 공백기를 보완하고 수익화 하기도 함",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 3. Beyond K-Wave (1) Beyond K-Pop: MD/라이선싱 영역 확대",
+    "section_path": [
+      "3. Beyond K-Wave (1) Beyond K-Pop: MD/라이선싱 영역 확대"
+    ],
+    "page": 16
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 3. Beyond K-Wave (1) Beyond K-Pop: MD/라이선싱 영역 확대\n\n는 단순한 아이돌 굿즈를 넘어 음식료품으로 라이선싱 영역을 확대하고 게임 및 국내외 캐릭터사와 협력하는 등 라이선싱 확대  \nhy, 팔도와 협업해 글로벌 브랜드 ‘아리(ARIH)’론칭. 누들, 에너지 드링크, 바이오틱 소다 라인업으로 구성되며 미국 월마트에서 선발매 후 일\n브랜드 기획 단계부터 제품 콘셉트, 디자인 참여. 한국 전통 음식과 소스 등을 활용하면서 글로벌 소비자의 건강, 라이프 스타일을 반영해 K-F\n는 PUBG: 배틀그라운드와 콜라보해 게임 캐릭터 아이템과 음원 발매. 또한 asepa X SAMG엔터 티니핑, TWICE X 산리오 캐릭터 협업 MD \n사의 합산 MD 매출은 20년 3,420억원에서 25년 1조원으로 성장. 전체 매출에서 차지하는 비중은 21%까지 확대되며 주요 수익 동",
+    "raw_chunk": "는 단순한 아이돌 굿즈를 넘어 음식료품으로 라이선싱 영역을 확대하고 게임 및 국내외 캐릭터사와 협력하는 등 라이선싱 확대  \nhy, 팔도와 협업해 글로벌 브랜드 ‘아리(ARIH)’론칭. 누들, 에너지 드링크, 바이오틱 소다 라인업으로 구성되며 미국 월마트에서 선발매 후 일\n브랜드 기획 단계부터 제품 콘셉트, 디자인 참여. 한국 전통 음식과 소스 등을 활용하면서 글로벌 소비자의 건강, 라이프 스타일을 반영해 K-F\n는 PUBG: 배틀그라운드와 콜라보해 게임 캐릭터 아이템과 음원 발매. 또한 asepa X SAMG엔터 티니핑, TWICE X 산리오 캐릭터 협업 MD \n사의 합산 MD 매출은 20년 3,420억원에서 25년 1조원으로 성장. 전체 매출에서 차지하는 비중은 21%까지 확대되며 주요 수익 동",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 3. Beyond K-Wave (1) Beyond K-Pop: MD/라이선싱 영역 확대",
+    "section_path": [
+      "3. Beyond K-Wave (1) Beyond K-Pop: MD/라이선싱 영역 확대"
+    ],
+    "page": 16
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 3. Beyond K-Wave (2) Beyond K-Contents: 글로벌 시장 점유율 확대 \nBe\n\n국 드라마, 영화, 예능 등 다양한 K-Contents에 대한 글로벌 시청자의 선호도와 시청 점유율 견조. 콘텐츠 흥행에 따라 점유율 상승\n6년 상반기 넷플릭스의 TV 드라마와 영화 총 시청 시간 976억 시간 중 한국 드라마와 영화 시청 시간은 84억 시간으로 점유율은 8.7% 기록 \n6년 상반기는 <참교육>, <이 사랑 통역 되나요?>,  <레이디 두아>, <사냥개들2> 등의 콘텐츠가 상위권을 차지했고 <BTS 컴백 라이브: ARIRAN\n플릭스의 연간 한국 콘텐츠 투자금액이 전체 콘텐츠 투자 금액의 3-4% 수준임을 감안했을 때 K-Contents 제작 경쟁력 증명하며 글로벌 OT\n제로 디즈니, 아마존, HBO 역시 한국 오리지널 작품 제작 및 글로벌 스트리밍 방영권에 투자하거나 브랜드관을 통해 한국 콘텐츠 라이브러리를\n편 K-Drama의 콘텐츠 경쟁력 외에도 제작 경쟁력이 증명되며 해외에서 현지 드라마 제작 및 K-Drama 리메이크도 늘어나고 있음\n튜디오드래곤은 <내 남편과 결혼해줘>의 일본 리메이크와 자회사 지티스트를 통해 <소울메이트> 제작. 한편 최근 연상호 감독은 일본 IP 드라마\n ENM의 홍콩 법인은 한국 원작 <굿닥터>, <해피니스>, <스타트업>, <김비서가 왜 그럴까>, <시그널>, <블랙독>의 태국 드라마 6편을 인도에 수",
+    "raw_chunk": "국 드라마, 영화, 예능 등 다양한 K-Contents에 대한 글로벌 시청자의 선호도와 시청 점유율 견조. 콘텐츠 흥행에 따라 점유율 상승\n6년 상반기 넷플릭스의 TV 드라마와 영화 총 시청 시간 976억 시간 중 한국 드라마와 영화 시청 시간은 84억 시간으로 점유율은 8.7% 기록 \n6년 상반기는 <참교육>, <이 사랑 통역 되나요?>,  <레이디 두아>, <사냥개들2> 등의 콘텐츠가 상위권을 차지했고 <BTS 컴백 라이브: ARIRAN\n플릭스의 연간 한국 콘텐츠 투자금액이 전체 콘텐츠 투자 금액의 3-4% 수준임을 감안했을 때 K-Contents 제작 경쟁력 증명하며 글로벌 OT\n제로 디즈니, 아마존, HBO 역시 한국 오리지널 작품 제작 및 글로벌 스트리밍 방영권에 투자하거나 브랜드관을 통해 한국 콘텐츠 라이브러리를\n편 K-Drama의 콘텐츠 경쟁력 외에도 제작 경쟁력이 증명되며 해외에서 현지 드라마 제작 및 K-Drama 리메이크도 늘어나고 있음\n튜디오드래곤은 <내 남편과 결혼해줘>의 일본 리메이크와 자회사 지티스트를 통해 <소울메이트> 제작. 한편 최근 연상호 감독은 일본 IP 드라마\n ENM의 홍콩 법인은 한국 원작 <굿닥터>, <해피니스>, <스타트업>, <김비서가 왜 그럴까>, <시그널>, <블랙독>의 태국 드라마 6편을 인도에 수",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 3. Beyond K-Wave (2) Beyond K-Contents: 글로벌 시장 점유율 확대 \nBe",
+    "section_path": [
+      "3. Beyond K-Wave (2) Beyond K-Contents: 글로벌 시장 점유율 확대 \nBe"
+    ],
+    "page": 17
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 3. Beyond K-Wave (2) Beyond K-Contents: 플랫폼 경쟁력 강화\n\n이러한 K-Contents의 흥행에도 불구하고 국내 콘텐츠 기업들의 실적은 부진. 콘텐츠 경쟁력을 수익으로 극대화 할 수 있는 플랫폼",
+    "raw_chunk": "이러한 K-Contents의 흥행에도 불구하고 국내 콘텐츠 기업들의 실적은 부진. 콘텐츠 경쟁력을 수익으로 극대화 할 수 있는 플랫폼",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 3. Beyond K-Wave (2) Beyond K-Contents: 플랫폼 경쟁력 강화",
+    "section_path": [
+      "3. Beyond K-Wave (2) Beyond K-Contents: 플랫폼 경쟁력 강화"
+    ],
+    "page": 18
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 3. Beyond K-Wave (2) Beyond K-Contents: 플랫폼 경쟁력 강화\n\nontents의 흥행에도 불구하고 국내 콘텐츠 기업들의 실적은 부진. 콘텐츠 경쟁력을 수익으로 극대화 할 수 있는 플랫폼 강화 중 \n빙은 드라마와 예능 오리지널 콘텐츠와 KBO 중계로 MAU 증가하며 광고 수익도 확대. 해외 브랜드관 입점으로 플랫폼 경쟁력 강화\n활성이용자수(MAU)는 26년 6월 969만명으로 천만명에 근접한 수준으로 상승. KBO 중계와 오리지널 <취사병 전설이 되다>, tvN 신작 및 예\n 일본 디즈니+와 아시아 태평양 17개 국가  HBO Max 플랫폼에 브랜드관으로 입점. 티빙 오리지널 외에도 국내 방송사 및 제작사의 K-Cont\n은 25년 매출액 4,060억원(-7% YoY), 영업적자 -692억원(OPM -17%) 기록. 1Q26 전년비 적자폭 65억원 축소. 2Q26 실적 개선 전망\nDPLEX는 글로벌 극장 체인향 특별관(4DX, SCREENX 등) 설치를 확대하고 특별관 전용 콘텐츠를 제작/공급하며 플랫폼 경쟁력 강\n로 스크린을 확장하는 것에서 나아가 ‘Shot for ScreenX’ 기술로 처음부터 270도 파노라마 확장을 염두하고 <스파이더맨: 브랜드 뉴 데이> 영\n실적은 25년 매출액 1,464억원(+19% YoY), 영업이익 113억원(-35% YoY, OPM 7.7%) 기록. 26년 실적 턴어라운드 본격화될 전망",
+    "raw_chunk": "ontents의 흥행에도 불구하고 국내 콘텐츠 기업들의 실적은 부진. 콘텐츠 경쟁력을 수익으로 극대화 할 수 있는 플랫폼 강화 중 \n빙은 드라마와 예능 오리지널 콘텐츠와 KBO 중계로 MAU 증가하며 광고 수익도 확대. 해외 브랜드관 입점으로 플랫폼 경쟁력 강화\n활성이용자수(MAU)는 26년 6월 969만명으로 천만명에 근접한 수준으로 상승. KBO 중계와 오리지널 <취사병 전설이 되다>, tvN 신작 및 예\n 일본 디즈니+와 아시아 태평양 17개 국가  HBO Max 플랫폼에 브랜드관으로 입점. 티빙 오리지널 외에도 국내 방송사 및 제작사의 K-Cont\n은 25년 매출액 4,060억원(-7% YoY), 영업적자 -692억원(OPM -17%) 기록. 1Q26 전년비 적자폭 65억원 축소. 2Q26 실적 개선 전망\nDPLEX는 글로벌 극장 체인향 특별관(4DX, SCREENX 등) 설치를 확대하고 특별관 전용 콘텐츠를 제작/공급하며 플랫폼 경쟁력 강\n로 스크린을 확장하는 것에서 나아가 ‘Shot for ScreenX’ 기술로 처음부터 270도 파노라마 확장을 염두하고 <스파이더맨: 브랜드 뉴 데이> 영\n실적은 25년 매출액 1,464억원(+19% YoY), 영업이익 113억원(-35% YoY, OPM 7.7%) 기록. 26년 실적 턴어라운드 본격화될 전망",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 3. Beyond K-Wave (2) Beyond K-Contents: 플랫폼 경쟁력 강화",
+    "section_path": [
+      "3. Beyond K-Wave (2) Beyond K-Contents: 플랫폼 경쟁력 강화"
+    ],
+    "page": 18
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 3. Beyond K-Wave (3) Beyond K-Food: CAPA 확대로 해외 실적 성장 \nBey\n\nK-Food는 수출 지역과 품목이 다변화되며 글로벌 시장 내 침투율 상승 중",
+    "raw_chunk": "K-Food는 수출 지역과 품목이 다변화되며 글로벌 시장 내 침투율 상승 중",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 3. Beyond K-Wave (3) Beyond K-Food: CAPA 확대로 해외 실적 성장 \nBey",
+    "section_path": [
+      "3. Beyond K-Wave (3) Beyond K-Food: CAPA 확대로 해외 실적 성장 \nBey"
+    ],
+    "page": 19
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 3. Beyond K-Wave (3) Beyond K-Food: CAPA 확대로 해외 실적 성장 \nBey\n\n수산식품 수출은 1)1990~2000년대 가까운 일본향으로 수산식품 수출이 집중됐고, 2)2010년대 중국의 경제 성장과 함께 중국을 중심으로\n품 수출이 늘었고, 3)2020년대 들어서는 K-Contents의 확산과 함께 미국을 비롯해 서구권으로 지역이 다변화되고 품목도 다양해지고 있음",
+    "raw_chunk": "수산식품 수출은 1)1990~2000년대 가까운 일본향으로 수산식품 수출이 집중됐고, 2)2010년대 중국의 경제 성장과 함께 중국을 중심으로\n품 수출이 늘었고, 3)2020년대 들어서는 K-Contents의 확산과 함께 미국을 비롯해 서구권으로 지역이 다변화되고 품목도 다양해지고 있음",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 3. Beyond K-Wave (3) Beyond K-Food: CAPA 확대로 해외 실적 성장 \nBey",
+    "section_path": [
+      "3. Beyond K-Wave (3) Beyond K-Food: CAPA 확대로 해외 실적 성장 \nBey"
+    ],
+    "page": 19
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 3. Beyond K-Wave (3) Beyond K-Food: CAPA 확대로 해외 실적 성장 \nBey\n\n－한국 농수산식품 수출 실적은 25년 135억 달러(+5.5% YoY)로 CAGR(20-25) +7%  기록. 특히 최근 5년 CAGR은 유럽 +13%, 미국 +",
+    "raw_chunk": "－한국 농수산식품 수출 실적은 25년 135억 달러(+5.5% YoY)로 CAGR(20-25) +7%  기록. 특히 최근 5년 CAGR은 유럽 +13%, 미국 +",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 3. Beyond K-Wave (3) Beyond K-Food: CAPA 확대로 해외 실적 성장 \nBey",
+    "section_path": [
+      "3. Beyond K-Wave (3) Beyond K-Food: CAPA 확대로 해외 실적 성장 \nBey"
+    ],
+    "page": 19
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 3. Beyond K-Wave (3) Beyond K-Food: CAPA 확대로 해외 실적 성장 \nBey\n\n주요 음식료 기업들은 늘어나는 해외 수요에 적극적으로 대응하기 위해 CAPA 확대. CAPEX 투자 사이클이 짧아지고 있음",
+    "raw_chunk": "주요 음식료 기업들은 늘어나는 해외 수요에 적극적으로 대응하기 위해 CAPA 확대. CAPEX 투자 사이클이 짧아지고 있음",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 3. Beyond K-Wave (3) Beyond K-Food: CAPA 확대로 해외 실적 성장 \nBey",
+    "section_path": [
+      "3. Beyond K-Wave (3) Beyond K-Food: CAPA 확대로 해외 실적 성장 \nBey"
+    ],
+    "page": 19
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 3. Beyond K-Wave (3) Beyond K-Food: CAPA 확대로 해외 실적 성장 \nBey\n\n업체의 투자 사이클이 두드러지게 짧아졌음. 삼양식품은 밀양1공장(22년 5월 준공), 밀양 2공장(25년 6월), 중국 공장(27년 1월)으로 CAPA\nG(인도네시아), CJ제일제당(헝가리), 농심(국내 녹산), 하이트진로(베트남), 오리온(베트남), 27년: 삼양식품(중국), 노바렉스(국내 오송\n 오리온(한국, 러시아), 28년 이후: 코스맥스엔비티(국내 평택), 오뚜기(국내 구미)",
+    "raw_chunk": "업체의 투자 사이클이 두드러지게 짧아졌음. 삼양식품은 밀양1공장(22년 5월 준공), 밀양 2공장(25년 6월), 중국 공장(27년 1월)으로 CAPA\nG(인도네시아), CJ제일제당(헝가리), 농심(국내 녹산), 하이트진로(베트남), 오리온(베트남), 27년: 삼양식품(중국), 노바렉스(국내 오송\n 오리온(한국, 러시아), 28년 이후: 코스맥스엔비티(국내 평택), 오뚜기(국내 구미)",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 3. Beyond K-Wave (3) Beyond K-Food: CAPA 확대로 해외 실적 성장 \nBey",
+    "section_path": [
+      "3. Beyond K-Wave (3) Beyond K-Food: CAPA 확대로 해외 실적 성장 \nBey"
+    ],
+    "page": 19
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 3. Beyond K-Wave (3) Beyond K-Food: CAPA 확대로 해외 실적 성장 \nBey\n\n－특히 라면 업체의 투자 사이클이 두드러지게 짧아졌음. 삼양식품은 밀양1공장(22년 5월 준공), 밀양 2공장(25년 6월), 중국 공장(27년 1",
+    "raw_chunk": "－특히 라면 업체의 투자 사이클이 두드러지게 짧아졌음. 삼양식품은 밀양1공장(22년 5월 준공), 밀양 2공장(25년 6월), 중국 공장(27년 1",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 3. Beyond K-Wave (3) Beyond K-Food: CAPA 확대로 해외 실적 성장 \nBey",
+    "section_path": [
+      "3. Beyond K-Wave (3) Beyond K-Food: CAPA 확대로 해외 실적 성장 \nBey"
+    ],
+    "page": 19
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 3. Beyond K-Wave (3) Beyond K-Food: CAPA 확대로 해외 실적 성장 \nBey\n\n인도네시아), CJ제일제당(헝가리), 농심(국내 녹산), 하이트진로(베트남), 오리온(베트남), 27년: 삼양식품(중국), 노바렉스(국내 오송), C\n리온(한국, 러시아), 28년 이후: 코스맥스엔비티(국내 평택), 오뚜기(국내 구미)",
+    "raw_chunk": "인도네시아), CJ제일제당(헝가리), 농심(국내 녹산), 하이트진로(베트남), 오리온(베트남), 27년: 삼양식품(중국), 노바렉스(국내 오송), C\n리온(한국, 러시아), 28년 이후: 코스맥스엔비티(국내 평택), 오뚜기(국내 구미)",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 3. Beyond K-Wave (3) Beyond K-Food: CAPA 확대로 해외 실적 성장 \nBey",
+    "section_path": [
+      "3. Beyond K-Wave (3) Beyond K-Food: CAPA 확대로 해외 실적 성장 \nBey"
+    ],
+    "page": 19
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 3. Beyond K-Wave (3) Beyond K-Food: CAPA 확대로 해외 실적 성장 \nBey\n\n－26년: KT&G(인도네시아), CJ제일제당(헝가리), 농심(국내 녹산), 하이트진로(베트남), 오리온(베트남), 27년: 삼양식품(중국), 노바렉\n제당(미국), 오리온(한국, 러시아), 28년 이후: 코스맥스엔비티(국내 평택), 오뚜기(국내 구미)",
+    "raw_chunk": "－26년: KT&G(인도네시아), CJ제일제당(헝가리), 농심(국내 녹산), 하이트진로(베트남), 오리온(베트남), 27년: 삼양식품(중국), 노바렉\n제당(미국), 오리온(한국, 러시아), 28년 이후: 코스맥스엔비티(국내 평택), 오뚜기(국내 구미)",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 3. Beyond K-Wave (3) Beyond K-Food: CAPA 확대로 해외 실적 성장 \nBey",
+    "section_path": [
+      "3. Beyond K-Wave (3) Beyond K-Food: CAPA 확대로 해외 실적 성장 \nBey"
+    ],
+    "page": 19
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 3. Beyond K-Wave (3) Beyond K-Food: CAPA 확대로 해외 실적 성장 \nBey\n\n내수 시장 한계 속에서 주요 음식료 기업들의 해외 비중이 확대되며 이익 레버리지 효과도 기대됨",
+    "raw_chunk": "내수 시장 한계 속에서 주요 음식료 기업들의 해외 비중이 확대되며 이익 레버리지 효과도 기대됨",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 3. Beyond K-Wave (3) Beyond K-Food: CAPA 확대로 해외 실적 성장 \nBey",
+    "section_path": [
+      "3. Beyond K-Wave (3) Beyond K-Food: CAPA 확대로 해외 실적 성장 \nBey"
+    ],
+    "page": 19
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 3. Beyond K-Wave (3) Beyond K-Food: 유통 채널 입점 확대\n\nK-Food의 글로벌 위상이 확대되며 주요 국가 내 메인 유통 채널 및 신흥\n유통 채널에서 K-Food에 대한 입점이 수월해지고 SKU도 확대되고 있음\n자료: 언론, DS투자증권 리서치센터\n자료: KOTRA, Euromonitor, DS투자증권 리서치센터\n자료: Google, DS투자증권 리서치센터",
+    "raw_chunk": "K-Food의 글로벌 위상이 확대되며 주요 국가 내 메인 유통 채널 및 신흥\n유통 채널에서 K-Food에 대한 입점이 수월해지고 SKU도 확대되고 있음\n자료: 언론, DS투자증권 리서치센터\n자료: KOTRA, Euromonitor, DS투자증권 리서치센터\n자료: Google, DS투자증권 리서치센터",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 3. Beyond K-Wave (3) Beyond K-Food: 유통 채널 입점 확대",
+    "section_path": [
+      "3. Beyond K-Wave (3) Beyond K-Food: 유통 채널 입점 확대"
+    ],
+    "page": 20
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 3. Beyond K-Wave (3) Beyond K-Food: 웰니스로 카테고리 확장\n\n필수 소비재의 선택적 소비. 웰니스 트렌드 확장되며 품목별 소비 차별화 \n－가구당 월평균 실질 소비지출 금액은 25년 252만원을 기록했고 이중 음식료\n품(식료품과 비주류 음료) 지출 금액은 35만원으로 14.2% 차지하며 하락 \n－건강에 대한 관심 증가, 위고비/마운자로 등 GLP-1계열 비만약 처방 등으로 \n식품 소비 트렌드 변화. Health & Wellness 제품에 대한 수요 증가 \n－품목별로 주류, 담배, 주스류 소비 줄고 건강보조식품에 대한 소비 늘어남 \n－이에 따라 음식료 업체들도 건기식 브랜드 확대 및 건강지향식품 출시 확대 \n특히 건강기능식품에 대한 소비가 늘어나고 있으며 연령대도 어려지는 중 \n－각 연령대별 니즈에 맞는 다양한 기능성 제품들이 출시되며 소비 증가 \n－연평균 건기식 지출 금액은 20대가 29만원으로 19년부터 가장 가파르게 상승 \n－국내 건기식 시장 규모는 25년 5.9조원(+0.2% YoY)기록",
+    "raw_chunk": "필수 소비재의 선택적 소비. 웰니스 트렌드 확장되며 품목별 소비 차별화 \n－가구당 월평균 실질 소비지출 금액은 25년 252만원을 기록했고 이중 음식료\n품(식료품과 비주류 음료) 지출 금액은 35만원으로 14.2% 차지하며 하락 \n－건강에 대한 관심 증가, 위고비/마운자로 등 GLP-1계열 비만약 처방 등으로 \n식품 소비 트렌드 변화. Health & Wellness 제품에 대한 수요 증가 \n－품목별로 주류, 담배, 주스류 소비 줄고 건강보조식품에 대한 소비 늘어남 \n－이에 따라 음식료 업체들도 건기식 브랜드 확대 및 건강지향식품 출시 확대 \n특히 건강기능식품에 대한 소비가 늘어나고 있으며 연령대도 어려지는 중 \n－각 연령대별 니즈에 맞는 다양한 기능성 제품들이 출시되며 소비 증가 \n－연평균 건기식 지출 금액은 20대가 29만원으로 19년부터 가장 가파르게 상승 \n－국내 건기식 시장 규모는 25년 5.9조원(+0.2% YoY)기록",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 3. Beyond K-Wave (3) Beyond K-Food: 웰니스로 카테고리 확장",
+    "section_path": [
+      "3. Beyond K-Wave (3) Beyond K-Food: 웰니스로 카테고리 확장"
+    ],
+    "page": 21
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 3. Beyond K-Wave (3) Beyond K-Food: K-건기식 ODM도 수출 확대\n\n1)올리브영, 다이소, 편의점, 대형 약국 등 건기식 신유통 채널 확대",
+    "raw_chunk": "1)올리브영, 다이소, 편의점, 대형 약국 등 건기식 신유통 채널 확대",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 3. Beyond K-Wave (3) Beyond K-Food: K-건기식 ODM도 수출 확대",
+    "section_path": [
+      "3. Beyond K-Wave (3) Beyond K-Food: K-건기식 ODM도 수출 확대"
+    ],
+    "page": 22
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 3. Beyond K-Wave (3) Beyond K-Food: K-건기식 ODM도 수출 확대\n\n－26년 1월 올리브영은 웰니스 플랫폼 ‘올리브베러’ 광화문 1호점 론칭 후 4월 \n강남 2호점 오픈. 26년 안에 10-15곳으로 점포 확대 전망",
+    "raw_chunk": "－26년 1월 올리브영은 웰니스 플랫폼 ‘올리브베러’ 광화문 1호점 론칭 후 4월 \n강남 2호점 오픈. 26년 안에 10-15곳으로 점포 확대 전망",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 3. Beyond K-Wave (3) Beyond K-Food: K-건기식 ODM도 수출 확대",
+    "section_path": [
+      "3. Beyond K-Wave (3) Beyond K-Food: K-건기식 ODM도 수출 확대"
+    ],
+    "page": 22
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 3. Beyond K-Wave (3) Beyond K-Food: K-건기식 ODM도 수출 확대\n\n－화장품과 함께 건기식 트렌드를 선도하기 위해 PB 상품 확대 및 브랜드 입점",
+    "raw_chunk": "－화장품과 함께 건기식 트렌드를 선도하기 위해 PB 상품 확대 및 브랜드 입점",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 3. Beyond K-Wave (3) Beyond K-Food: K-건기식 ODM도 수출 확대",
+    "section_path": [
+      "3. Beyond K-Wave (3) Beyond K-Food: K-건기식 ODM도 수출 확대"
+    ],
+    "page": 22
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 3. Beyond K-Wave (3) Beyond K-Food: K-건기식 ODM도 수출 확대\n\n－다이소, 편의점, 창고형 약국에 이르는 건기식 신유통 채널의 성장도 두드러짐",
+    "raw_chunk": "－다이소, 편의점, 창고형 약국에 이르는 건기식 신유통 채널의 성장도 두드러짐",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 3. Beyond K-Wave (3) Beyond K-Food: K-건기식 ODM도 수출 확대",
+    "section_path": [
+      "3. Beyond K-Wave (3) Beyond K-Food: K-건기식 ODM도 수출 확대"
+    ],
+    "page": 22
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 3. Beyond K-Wave (3) Beyond K-Food: K-건기식 ODM도 수출 확대\n\n－중국 및 아시아 지역을 타겟한 글로벌 브랜드사 수주 증가. 한국 온/오프라인\n에서 인기있는 건기식의 형태 및 원료에 대한 관심 증가하며 신제품 수주",
+    "raw_chunk": "－중국 및 아시아 지역을 타겟한 글로벌 브랜드사 수주 증가. 한국 온/오프라인\n에서 인기있는 건기식의 형태 및 원료에 대한 관심 증가하며 신제품 수주",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 3. Beyond K-Wave (3) Beyond K-Food: K-건기식 ODM도 수출 확대",
+    "section_path": [
+      "3. Beyond K-Wave (3) Beyond K-Food: K-건기식 ODM도 수출 확대"
+    ],
+    "page": 22
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 3. Beyond K-Wave (3) Beyond K-Food: K-건기식 ODM도 수출 확대\n\n주요 건기식 ODM사는 국내외 늘어나는 수요에 대응해 CAPA 확대",
+    "raw_chunk": "주요 건기식 ODM사는 국내외 늘어나는 수요에 대응해 CAPA 확대",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 3. Beyond K-Wave (3) Beyond K-Food: K-건기식 ODM도 수출 확대",
+    "section_path": [
+      "3. Beyond K-Wave (3) Beyond K-Food: K-건기식 ODM도 수출 확대"
+    ],
+    "page": 22
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 3. Beyond K-Wave (3) Beyond K-Food: K-건기식 ODM도 수출 확대\n\n－노바렉스는 27년 12월 오송 2공장 완공 예정. 코스맥스엔비티 평택 부지 매입",
+    "raw_chunk": "－노바렉스는 27년 12월 오송 2공장 완공 예정. 코스맥스엔비티 평택 부지 매입",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 3. Beyond K-Wave (3) Beyond K-Food: K-건기식 ODM도 수출 확대",
+    "section_path": [
+      "3. Beyond K-Wave (3) Beyond K-Food: K-건기식 ODM도 수출 확대"
+    ],
+    "page": 22
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 4. 투자전략\n\n엔터/미디어, 음식료 업종은 26년 내내 시장 대비 언더퍼폼",
+    "raw_chunk": "엔터/미디어, 음식료 업종은 26년 내내 시장 대비 언더퍼폼",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 4. 투자전략",
+    "section_path": [
+      "4. 투자전략"
+    ],
+    "page": 23
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 4. 투자전략\n\n－7/20 종가 기준 YTD 수익률은 KOSPI +55%, KOSDAQ -19% 기록",
+    "raw_chunk": "－7/20 종가 기준 YTD 수익률은 KOSPI +55%, KOSDAQ -19% 기록",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 4. 투자전략",
+    "section_path": [
+      "4. 투자전략"
+    ],
+    "page": 23
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 4. 투자전략\n\n엔터 업종 주가는 BTS, BIGBANG등 메가 IP 복귀에도 불구하고 27년 실\n적 기저 부담 및 K-Pop 성장에 대한 우려로 밸류에이션 디레이팅",
+    "raw_chunk": "엔터 업종 주가는 BTS, BIGBANG등 메가 IP 복귀에도 불구하고 27년 실\n적 기저 부담 및 K-Pop 성장에 대한 우려로 밸류에이션 디레이팅",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 4. 투자전략",
+    "section_path": [
+      "4. 투자전략"
+    ],
+    "page": 23
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 4. 투자전략\n\n－YTD 수익률 하이브(-38%), JYP(-39%), YG(-45%), SM(-50%) 기록",
+    "raw_chunk": "－YTD 수익률 하이브(-38%), JYP(-39%), YG(-45%), SM(-50%) 기록",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 4. 투자전략",
+    "section_path": [
+      "4. 투자전략"
+    ],
+    "page": 23
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 4. 투자전략\n\n음식료 업종 주가는 반도체 및 성장주 중심 수급 쏠림으로 시장 견조한 가\n운데 환율 상승과 유가, 원부자재 가격 상승 등 방어주 매력도 하락",
+    "raw_chunk": "음식료 업종 주가는 반도체 및 성장주 중심 수급 쏠림으로 시장 견조한 가\n운데 환율 상승과 유가, 원부자재 가격 상승 등 방어주 매력도 하락",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 4. 투자전략",
+    "section_path": [
+      "4. 투자전략"
+    ],
+    "page": 23
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 4. 투자전략\n\n－YTD 수익률 코스맥스엔비티(+126%), KT&G(+26%), 오리온(+20%), 노\n바렉스(-8%), CJ제일제당(-11%), 삼양식품(-14%) 기록",
+    "raw_chunk": "－YTD 수익률 코스맥스엔비티(+126%), KT&G(+26%), 오리온(+20%), 노\n바렉스(-8%), CJ제일제당(-11%), 삼양식품(-14%) 기록",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 4. 투자전략",
+    "section_path": [
+      "4. 투자전략"
+    ],
+    "page": 23
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 4. 투자전략\n\n미디어 업종 주가는 광고는 비교적 방어, 콘텐츠 업체 실적 부진으로 하락",
+    "raw_chunk": "미디어 업종 주가는 광고는 비교적 방어, 콘텐츠 업체 실적 부진으로 하락",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 4. 투자전략",
+    "section_path": [
+      "4. 투자전략"
+    ],
+    "page": 23
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 4. 투자전략 (1) 엔터/미디어: 바닥 다지며 반등 기대\n\n종의 시가총액 가중평균 12M Fwd PER은 22배까지 하락. K-Pop의 시장 점유율 확대 및 실적 성장에도 과거 대비 과도한 하락 \n급 환경 및 27년 약해지는 실적 모멘텀을 고려해 업종 목표배수를 30배에서 20배로 하향. 하이브의 경우 IP 경쟁력 감안해 40배 적\n반기 엔터/미디어 업종 최선호주: 하이브(매수, 35만원/하향), 관심종목 와이지엔터테인먼트, 에스엠, JYP, CJ ENM 제시  \n: 2분기 실적은 BTS 글로벌 투어 및 MD 실적 본격 인식되며 컨센 부합 전망. 메가 IP 성과 외에도 신인/해외 IP 빠른 수익화 K-Pop 점유율 확\n엔터테인먼트: 2분기 실적은 트레저와 베몬 신보 성과에도 공연 공백기로 컨센 하회 전망. 메가 IP 빅뱅의 복귀 속 저연차, 성장 IP 팬덤 확대, 신\n: 2분기 실적은 전년도 기저부담 존재. 탄탄한 IP 라인업과 aespa를 필두로 서구권 팬덤 지역 커버리지 확대와 MD 사업 확대를 통한 실적 성장\n분기 실적은 전년도 기저부담 존재. 2개의 메가 IP의 열정적인 활동으로 지역 커버리지 측면에서도 글로벌 강점 증명. MD 전략 강화도 긍정적\nM: 2분기 실적은 티빙 중심 미디어 플랫폼 실적 개선 기대되나 영화/드라마, 음악 기저 부담으로 컨센 하회 전망. 주요 플랫폼 경쟁력 강화하며",
+    "raw_chunk": "종의 시가총액 가중평균 12M Fwd PER은 22배까지 하락. K-Pop의 시장 점유율 확대 및 실적 성장에도 과거 대비 과도한 하락 \n급 환경 및 27년 약해지는 실적 모멘텀을 고려해 업종 목표배수를 30배에서 20배로 하향. 하이브의 경우 IP 경쟁력 감안해 40배 적\n반기 엔터/미디어 업종 최선호주: 하이브(매수, 35만원/하향), 관심종목 와이지엔터테인먼트, 에스엠, JYP, CJ ENM 제시  \n: 2분기 실적은 BTS 글로벌 투어 및 MD 실적 본격 인식되며 컨센 부합 전망. 메가 IP 성과 외에도 신인/해외 IP 빠른 수익화 K-Pop 점유율 확\n엔터테인먼트: 2분기 실적은 트레저와 베몬 신보 성과에도 공연 공백기로 컨센 하회 전망. 메가 IP 빅뱅의 복귀 속 저연차, 성장 IP 팬덤 확대, 신\n: 2분기 실적은 전년도 기저부담 존재. 탄탄한 IP 라인업과 aespa를 필두로 서구권 팬덤 지역 커버리지 확대와 MD 사업 확대를 통한 실적 성장\n분기 실적은 전년도 기저부담 존재. 2개의 메가 IP의 열정적인 활동으로 지역 커버리지 측면에서도 글로벌 강점 증명. MD 전략 강화도 긍정적\nM: 2분기 실적은 티빙 중심 미디어 플랫폼 실적 개선 기대되나 영화/드라마, 음악 기저 부담으로 컨센 하회 전망. 주요 플랫폼 경쟁력 강화하며",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 4. 투자전략 (1) 엔터/미디어: 바닥 다지며 반등 기대",
+    "section_path": [
+      "4. 투자전략 (1) 엔터/미디어: 바닥 다지며 반등 기대"
+    ],
+    "page": 24
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 4. 투자전략 (2) 음식료: 해외/웰니스 중심 선호. 내수주 반등 모색\n\n의 12M Fwd PER은 12배 수준으로 하락. K-Food의 글로벌 커버리지 확대 감안해 업종 목표배수 12배 유지 \n실적 비중이 높고 실적 성장률에 따라 프리미엄 반영해 15+α배 적용. K-건기식 ODM은 ODM 제조 산업 특성 반영해 목표배수 10배\n업종은 낮은 성장률과 주요 변수 부담(환율, 유가 등)으로 주가 저조했으나 최근 일부 업체 중심으로 판가 인상 이루어지며 부담 완\n기 음식료 업종 최선호주: 삼양식품(매수, 190만원/유지), 오리온(매수, 18만원/유지). 관심종목 코스맥스엔비티, 노바렉스 제시  \n분기 실적은 수출 증가와 달러 강세 속 컨센 부합 전망. 국내 공장 라인 효율화와 중국 공장 CAPA 확대, 불닭 포트폴리오 확대로 장기 성장 동력\n기 실적은 주요 법인별 채널 특화 제품으로 외형 성장 지속하며 컨센 부합 전망. CAPA 확대와 제품력 기반 글로벌 성장이 주주환원 확대로 이어\n비티: 2분기 내수 건기식 수요와 중국향 수출 증가로 실적 호조 전망. 국내 신유통 채널 성장 트렌드 대응과 해외 신규 고객사 확대로 재무구조 개\n수출은 전년도 기저 부담으로 감소하나 내수 건기식 수요 확대로 실적 호조 전망. 중국 주요 고객사 레퍼런스를 바탕으로 신규 고객사 확대 및 C",
+    "raw_chunk": "의 12M Fwd PER은 12배 수준으로 하락. K-Food의 글로벌 커버리지 확대 감안해 업종 목표배수 12배 유지 \n실적 비중이 높고 실적 성장률에 따라 프리미엄 반영해 15+α배 적용. K-건기식 ODM은 ODM 제조 산업 특성 반영해 목표배수 10배\n업종은 낮은 성장률과 주요 변수 부담(환율, 유가 등)으로 주가 저조했으나 최근 일부 업체 중심으로 판가 인상 이루어지며 부담 완\n기 음식료 업종 최선호주: 삼양식품(매수, 190만원/유지), 오리온(매수, 18만원/유지). 관심종목 코스맥스엔비티, 노바렉스 제시  \n분기 실적은 수출 증가와 달러 강세 속 컨센 부합 전망. 국내 공장 라인 효율화와 중국 공장 CAPA 확대, 불닭 포트폴리오 확대로 장기 성장 동력\n기 실적은 주요 법인별 채널 특화 제품으로 외형 성장 지속하며 컨센 부합 전망. CAPA 확대와 제품력 기반 글로벌 성장이 주주환원 확대로 이어\n비티: 2분기 내수 건기식 수요와 중국향 수출 증가로 실적 호조 전망. 국내 신유통 채널 성장 트렌드 대응과 해외 신규 고객사 확대로 재무구조 개\n수출은 전년도 기저 부담으로 감소하나 내수 건기식 수요 확대로 실적 호조 전망. 중국 주요 고객사 레퍼런스를 바탕으로 신규 고객사 확대 및 C",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 4. 투자전략 (2) 음식료: 해외/웰니스 중심 선호. 내수주 반등 모색",
+    "section_path": [
+      "4. 투자전략 (2) 음식료: 해외/웰니스 중심 선호. 내수주 반등 모색"
+    ],
+    "page": 26
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 4. 투자전략 (2) 음식료: 해외/웰니스 중심 선호. 내수주 반등 모색\n\n실적은 수출 증가와 달러 강세 속 컨센 부합 전망. 국내 공장 라인 효율화와 중국 공장 CAPA 확대, 불닭 포트폴리오 확대로 장기 성장 동력 마련\n실적은 주요 법인별 채널 특화 제품으로 외형 성장 지속하며 컨센 부합 전망. CAPA 확대와 제품력 기반 글로벌 성장이 주주환원 확대로 이어질 것\n 2분기 내수 건기식 수요와 중국향 수출 증가로 실적 호조 전망. 국내 신유통 채널 성장 트렌드 대응과 해외 신규 고객사 확대로 재무구조 개선 \n은 전년도 기저 부담으로 감소하나 내수 건기식 수요 확대로 실적 호조 전망. 중국 주요 고객사 레퍼런스를 바탕으로 신규 고객사 확대 및 CAPA",
+    "raw_chunk": "실적은 수출 증가와 달러 강세 속 컨센 부합 전망. 국내 공장 라인 효율화와 중국 공장 CAPA 확대, 불닭 포트폴리오 확대로 장기 성장 동력 마련\n실적은 주요 법인별 채널 특화 제품으로 외형 성장 지속하며 컨센 부합 전망. CAPA 확대와 제품력 기반 글로벌 성장이 주주환원 확대로 이어질 것\n 2분기 내수 건기식 수요와 중국향 수출 증가로 실적 호조 전망. 국내 신유통 채널 성장 트렌드 대응과 해외 신규 고객사 확대로 재무구조 개선 \n은 전년도 기저 부담으로 감소하나 내수 건기식 수요 확대로 실적 호조 전망. 중국 주요 고객사 레퍼런스를 바탕으로 신규 고객사 확대 및 CAPA",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 4. 투자전략 (2) 음식료: 해외/웰니스 중심 선호. 내수주 반등 모색",
+    "section_path": [
+      "4. 투자전략 (2) 음식료: 해외/웰니스 중심 선호. 내수주 반등 모색"
+    ],
+    "page": 26
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > [엔터] 하이브, 와이지엔터테인먼트, 에스엠, JYP Ent. \n[음식료] 삼양식품, 오리온, 코스맥스엔비티, 노바렉스 \n[미디어] CJ ENM, 스튜디오드래곤\n\n장지혜 음식료·미디어·엔터 \n02-709-2336 \njihye.j@ds-sec.co.kr",
+    "raw_chunk": "장지혜 음식료·미디어·엔터 \n02-709-2336 \njihye.j@ds-sec.co.kr",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > [엔터] 하이브, 와이지엔터테인먼트, 에스엠, JYP Ent. \n[음식료] 삼양식품, 오리온, 코스맥스엔비티, 노바렉스 \n[미디어] CJ ENM, 스튜디오드래곤",
+    "section_path": [
+      "[엔터] 하이브, 와이지엔터테인먼트, 에스엠, JYP Ent. \n[음식료] 삼양식품, 오리온, 코스맥스엔비티, 노바렉스 \n[미디어] CJ ENM, 스튜디오드래곤"
+    ],
+    "page": 27
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 하이브 [352820] _ Beyond K-Pop, 전세계로 K-Pop 영역 확대\n\n장지혜  엔터·미디어·음식료\n02-709-2336 \njihye.jang@ds-sec.co.kr\n-음반/음원은 CORTIS 미니 2집이 300만장 이상 판매되며 실적 기여 확대. TXT, 보넥도, TWS 등 신보도 판매 호조를 기록하며 성장\n-공연은 BTS의 한국, 일본에서 미국, 멕시코, 스페인 등 글로벌 투어 24회 인식. 세븐틴, TXT, ENHYPEN, &Team의 팬콘 및 콘서트도 기여\n-당분기 간접참여형 매출도 BTS 응원봉 및 투어MD 판매 호조 기대되며 위버스는 공연 오픈과 ENHYPEN DM서비스 시작으로 호조 전망\n-27년 BTS 실적 기여가 축소되며 발생할 실적 공백을 CORTIS와 KATSEYE의 활동 규모가 확대되며 일부 방어하고 28년 본격 성장 전망",
+    "raw_chunk": "장지혜  엔터·미디어·음식료\n02-709-2336 \njihye.jang@ds-sec.co.kr\n-음반/음원은 CORTIS 미니 2집이 300만장 이상 판매되며 실적 기여 확대. TXT, 보넥도, TWS 등 신보도 판매 호조를 기록하며 성장\n-공연은 BTS의 한국, 일본에서 미국, 멕시코, 스페인 등 글로벌 투어 24회 인식. 세븐틴, TXT, ENHYPEN, &Team의 팬콘 및 콘서트도 기여\n-당분기 간접참여형 매출도 BTS 응원봉 및 투어MD 판매 호조 기대되며 위버스는 공연 오픈과 ENHYPEN DM서비스 시작으로 호조 전망\n-27년 BTS 실적 기여가 축소되며 발생할 실적 공백을 CORTIS와 KATSEYE의 활동 규모가 확대되며 일부 방어하고 28년 본격 성장 전망",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 하이브 [352820] _ Beyond K-Pop, 전세계로 K-Pop 영역 확대",
+    "section_path": [
+      "하이브 [352820] _ Beyond K-Pop, 전세계로 K-Pop 영역 확대"
+    ],
+    "page": 28
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 하이브 [352820] _ Beyond K-Pop, 전세계로 K-Pop 영역 확대 > Financial Data\n\n주가차트\n자료: 하이브, DS투자증권 리서치센터, K-IFRS 연결기준",
+    "raw_chunk": "주가차트\n자료: 하이브, DS투자증권 리서치센터, K-IFRS 연결기준",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 하이브 [352820] _ Beyond K-Pop, 전세계로 K-Pop 영역 확대 > Financial Data",
+    "section_path": [
+      "하이브 [352820] _ Beyond K-Pop, 전세계로 K-Pop 영역 확대",
+      "Financial Data"
+    ],
+    "page": 28
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 테인먼트 [122870] _ Beyond K-Pop, 명불허전 메가 IP와 차세대 IP 팬덤 성장\n\n장지혜  엔터·미디어·음식료\n02-709-2336 \njihye.jang@ds-sec.co.kr",
+    "raw_chunk": "장지혜  엔터·미디어·음식료\n02-709-2336 \njihye.jang@ds-sec.co.kr",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 테인먼트 [122870] _ Beyond K-Pop, 명불허전 메가 IP와 차세대 IP 팬덤 성장",
+    "section_path": [
+      "테인먼트 [122870] _ Beyond K-Pop, 명불허전 메가 IP와 차세대 IP 팬덤 성장"
+    ],
+    "page": 32
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 테인먼트 [122870] _ Beyond K-Pop, 명불허전 메가 IP와 차세대 IP 팬덤 성장\n\n[업데이트]2Q26Pre: 트레저와 베몬 신보 성과 긍정적이나 공연 공백기로 실적 둔화 전망",
+    "raw_chunk": "[업데이트]2Q26Pre: 트레저와 베몬 신보 성과 긍정적이나 공연 공백기로 실적 둔화 전망",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 테인먼트 [122870] _ Beyond K-Pop, 명불허전 메가 IP와 차세대 IP 팬덤 성장",
+    "section_path": [
+      "테인먼트 [122870] _ Beyond K-Pop, 명불허전 메가 IP와 차세대 IP 팬덤 성장"
+    ],
+    "page": 32
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 테인먼트 [122870] _ Beyond K-Pop, 명불허전 메가 IP와 차세대 IP 팬덤 성장\n\n-와이지엔터의 2분기 실적은 연결 매출액 1,119억원(+11% YoY), 영업이익 83억원(-1% YoY, OPM 7.4%)으로 시장기대치 하회 전망\n-음반/음원은 트레저 미니 4집 106만장, 베몬  미니3집 74만장 판매되며 전분기 블랙핑크 200만장과 유사한 수준의 판매량 기록",
+    "raw_chunk": "-와이지엔터의 2분기 실적은 연결 매출액 1,119억원(+11% YoY), 영업이익 83억원(-1% YoY, OPM 7.4%)으로 시장기대치 하회 전망\n-음반/음원은 트레저 미니 4집 106만장, 베몬  미니3집 74만장 판매되며 전분기 블랙핑크 200만장과 유사한 수준의 판매량 기록",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 테인먼트 [122870] _ Beyond K-Pop, 명불허전 메가 IP와 차세대 IP 팬덤 성장",
+    "section_path": [
+      "테인먼트 [122870] _ Beyond K-Pop, 명불허전 메가 IP와 차세대 IP 팬덤 성장"
+    ],
+    "page": 32
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 테인먼트 [122870] _ Beyond K-Pop, 명불허전 메가 IP와 차세대 IP 팬덤 성장\n\n-공연은 트레저 투어와 팬콘 13회, 베몬 월드 투어 중 한국 3회 인식. MD 수익 규모도 축소되나 음반, 공연 제작 비용 일부 반영되며 수익",
+    "raw_chunk": "-공연은 트레저 투어와 팬콘 13회, 베몬 월드 투어 중 한국 3회 인식. MD 수익 규모도 축소되나 음반, 공연 제작 비용 일부 반영되며 수익",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 테인먼트 [122870] _ Beyond K-Pop, 명불허전 메가 IP와 차세대 IP 팬덤 성장",
+    "section_path": [
+      "테인먼트 [122870] _ Beyond K-Pop, 명불허전 메가 IP와 차세대 IP 팬덤 성장"
+    ],
+    "page": 32
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 테인먼트 [122870] _ Beyond K-Pop, 명불허전 메가 IP와 차세대 IP 팬덤 성장\n\n트]3년에 걸친 메가IP 복귀 속 차세대IP의 팬덤 확대와 신인 IP 모멘텀 긍",
+    "raw_chunk": "트]3년에 걸친 메가IP 복귀 속 차세대IP의 팬덤 확대와 신인 IP 모멘텀 긍",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 테인먼트 [122870] _ Beyond K-Pop, 명불허전 메가 IP와 차세대 IP 팬덤 성장",
+    "section_path": [
+      "테인먼트 [122870] _ Beyond K-Pop, 명불허전 메가 IP와 차세대 IP 팬덤 성장"
+    ],
+    "page": 32
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 테인먼트 [122870] _ Beyond K-Pop, 명불허전 메가 IP와 차세대 IP 팬덤 성장\n\n범 연속 밀리언셀러 기록,  음악 방송 1위 달성 등 팬덤 확대. 27년 글로벌 투어를",
+    "raw_chunk": "범 연속 밀리언셀러 기록,  음악 방송 1위 달성 등 팬덤 확대. 27년 글로벌 투어를",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 테인먼트 [122870] _ Beyond K-Pop, 명불허전 메가 IP와 차세대 IP 팬덤 성장",
+    "section_path": [
+      "테인먼트 [122870] _ Beyond K-Pop, 명불허전 메가 IP와 차세대 IP 팬덤 성장"
+    ],
+    "page": 32
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 테인먼트 [122870] _ Beyond K-Pop, 명불허전 메가 IP와 차세대 IP 팬덤 성장\n\n[밸류에이션] 투자의견 매수, 목표주가 6만원으로 하향. 빅뱅 컴백과 차세대 IP의 기여로 하반기 실적 성장 본격화",
+    "raw_chunk": "[밸류에이션] 투자의견 매수, 목표주가 6만원으로 하향. 빅뱅 컴백과 차세대 IP의 기여로 하반기 실적 성장 본격화",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 테인먼트 [122870] _ Beyond K-Pop, 명불허전 메가 IP와 차세대 IP 팬덤 성장",
+    "section_path": [
+      "테인먼트 [122870] _ Beyond K-Pop, 명불허전 메가 IP와 차세대 IP 팬덤 성장"
+    ],
+    "page": 32
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 테인먼트 [122870] _ Beyond K-Pop, 명불허전 메가 IP와 차세대 IP 팬덤 성장\n\n-와이지엔터의 목표주가 하향은 27년 실적으로 기간 조정 및 목표 배수를 기존 30배에서 20배로 하향한데 기인",
+    "raw_chunk": "-와이지엔터의 목표주가 하향은 27년 실적으로 기간 조정 및 목표 배수를 기존 30배에서 20배로 하향한데 기인",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 테인먼트 [122870] _ Beyond K-Pop, 명불허전 메가 IP와 차세대 IP 팬덤 성장",
+    "section_path": [
+      "테인먼트 [122870] _ Beyond K-Pop, 명불허전 메가 IP와 차세대 IP 팬덤 성장"
+    ],
+    "page": 32
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 이지엔터테인먼트 [122870] _ Beyond K-Pop, 명불허전 메가 IP와 차세대 IP 팬\n\n와이지엔터테인먼트 실적 테이블\n자료: 와이지엔터테인먼트, DS투자증권 리서치센터 추정",
+    "raw_chunk": "와이지엔터테인먼트 실적 테이블\n자료: 와이지엔터테인먼트, DS투자증권 리서치센터 추정",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 이지엔터테인먼트 [122870] _ Beyond K-Pop, 명불허전 메가 IP와 차세대 IP 팬",
+    "section_path": [
+      "이지엔터테인먼트 [122870] _ Beyond K-Pop, 명불허전 메가 IP와 차세대 IP 팬"
+    ],
+    "page": 33
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 에스엠 [041510] _ Beyond K-Pop, MD와 공연 커버리지 확대\n\n장지혜  엔터·미디어·음식료\n02-709-2336 \njihye.jang@ds-sec.co.kr",
+    "raw_chunk": "장지혜  엔터·미디어·음식료\n02-709-2336 \njihye.jang@ds-sec.co.kr",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 에스엠 [041510] _ Beyond K-Pop, MD와 공연 커버리지 확대",
+    "section_path": [
+      "에스엠 [041510] _ Beyond K-Pop, MD와 공연 커버리지 확대"
+    ],
+    "page": 36
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 에스엠 [041510] _ Beyond K-Pop, MD와 공연 커버리지 확대\n\n[업데이트]2Q26Pre: 전년도 기저부담 있지만 음반 성과 호조와 공연 회차 확대",
+    "raw_chunk": "[업데이트]2Q26Pre: 전년도 기저부담 있지만 음반 성과 호조와 공연 회차 확대",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 에스엠 [041510] _ Beyond K-Pop, MD와 공연 커버리지 확대",
+    "section_path": [
+      "에스엠 [041510] _ Beyond K-Pop, MD와 공연 커버리지 확대"
+    ],
+    "page": 36
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 에스엠 [041510] _ Beyond K-Pop, MD와 공연 커버리지 확대\n\n의 2분기 실적은 연결 매출액 3,342억원(+10% YoY), 영업이익 507억원(+6%",
+    "raw_chunk": "의 2분기 실적은 연결 매출액 3,342억원(+10% YoY), 영업이익 507억원(+6%",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 에스엠 [041510] _ Beyond K-Pop, MD와 공연 커버리지 확대",
+    "section_path": [
+      "에스엠 [041510] _ Beyond K-Pop, MD와 공연 커버리지 확대"
+    ],
+    "page": 36
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 에스엠 [041510] _ Beyond K-Pop, MD와 공연 커버리지 확대\n\n-음반/음원은 RIIZE, aespa, NCT WISH의 신보가 모두 100만장 이상 판매됐고 하투하의 신보도 60만장 판매 기록. 음원 실적도 호조 전망",
+    "raw_chunk": "-음반/음원은 RIIZE, aespa, NCT WISH의 신보가 모두 100만장 이상 판매됐고 하투하의 신보도 60만장 판매 기록. 음원 실적도 호조 전망",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 에스엠 [041510] _ Beyond K-Pop, MD와 공연 커버리지 확대",
+    "section_path": [
+      "에스엠 [041510] _ Beyond K-Pop, MD와 공연 커버리지 확대"
+    ],
+    "page": 36
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 에스엠 [041510] _ Beyond K-Pop, MD와 공연 커버리지 확대\n\n-공연은 EXO 컴백 후 아시아 지역 19회, aespa 일본 돔 공연 포함 5회, 동방신기, 슈주, 샤이니와 같은 레거시 IP의 공연 실적도 기여 전망",
+    "raw_chunk": "-공연은 EXO 컴백 후 아시아 지역 19회, aespa 일본 돔 공연 포함 5회, 동방신기, 슈주, 샤이니와 같은 레거시 IP의 공연 실적도 기여 전망",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 에스엠 [041510] _ Beyond K-Pop, MD와 공연 커버리지 확대",
+    "section_path": [
+      "에스엠 [041510] _ Beyond K-Pop, MD와 공연 커버리지 확대"
+    ],
+    "page": 36
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 에스엠 [041510] _ Beyond K-Pop, MD와 공연 커버리지 확대\n\n-당분기 MD/라이선싱은 전년도 높은 기저부담에도 음반 발매 후 국내외 팝업 스토어 진행, 공연 MD, NCT 10주년 팝업 등으로 방어 전망",
+    "raw_chunk": "-당분기 MD/라이선싱은 전년도 높은 기저부담에도 음반 발매 후 국내외 팝업 스토어 진행, 공연 MD, NCT 10주년 팝업 등으로 방어 전망",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 에스엠 [041510] _ Beyond K-Pop, MD와 공연 커버리지 확대",
+    "section_path": [
+      "에스엠 [041510] _ Beyond K-Pop, MD와 공연 커버리지 확대"
+    ],
+    "page": 36
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 에스엠 [041510] _ Beyond K-Pop, MD와 공연 커버리지 확대\n\n6년 연간 실적은 연결 매출액 1.2조원(+2% YoY), 영업이익 1,840억원(+1% Y",
+    "raw_chunk": "6년 연간 실적은 연결 매출액 1.2조원(+2% YoY), 영업이익 1,840억원(+1% Y",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 에스엠 [041510] _ Beyond K-Pop, MD와 공연 커버리지 확대",
+    "section_path": [
+      "에스엠 [041510] _ Beyond K-Pop, MD와 공연 커버리지 확대"
+    ],
+    "page": 36
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 에스엠 [041510] _ Beyond K-Pop, MD와 공연 커버리지 확대\n\n-1) 탄탄한 IP 라인업 보유: 동방신기와 같은 레거시 IP의 견조한 활동 속 RIIZE, aespa의 음반 및 글로벌 투어 확대. 특히 aespa는 이번 글로\n벌 투어는 기존 아시아 위주에서 미주, 유럽으로 다변화되며 지역 커버리지 확대 긍정적. 또한 하투하와 올해 데뷔할 신인 남돌 추가도 기대",
+    "raw_chunk": "-1) 탄탄한 IP 라인업 보유: 동방신기와 같은 레거시 IP의 견조한 활동 속 RIIZE, aespa의 음반 및 글로벌 투어 확대. 특히 aespa는 이번 글로\n벌 투어는 기존 아시아 위주에서 미주, 유럽으로 다변화되며 지역 커버리지 확대 긍정적. 또한 하투하와 올해 데뷔할 신인 남돌 추가도 기대",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 에스엠 [041510] _ Beyond K-Pop, MD와 공연 커버리지 확대",
+    "section_path": [
+      "에스엠 [041510] _ Beyond K-Pop, MD와 공연 커버리지 확대"
+    ],
+    "page": 36
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 에스엠 [041510] _ Beyond K-Pop, MD와 공연 커버리지 확대\n\n-2) MD/라이선싱 전략 강화: 동사는 탄탄한 IP라인업의 활동에 기반한 음반, 공연 MD 외에도 다양한 팝업, 이종 산업과 라이선싱 확대 중",
+    "raw_chunk": "-2) MD/라이선싱 전략 강화: 동사는 탄탄한 IP라인업의 활동에 기반한 음반, 공연 MD 외에도 다양한 팝업, 이종 산업과 라이선싱 확대 중",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 에스엠 [041510] _ Beyond K-Pop, MD와 공연 커버리지 확대",
+    "section_path": [
+      "에스엠 [041510] _ Beyond K-Pop, MD와 공연 커버리지 확대"
+    ],
+    "page": 36
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 에스엠 [041510] _ Beyond K-Pop, MD와 공연 커버리지 확대\n\n-Aespa의 게임(PUBG:배틀그라운드), 캐릭터(SAMG엔터 티니핑) 협업, NCT WISH의 베이커리 팝업스토어 등 MD 영역 확대",
+    "raw_chunk": "-Aespa의 게임(PUBG:배틀그라운드), 캐릭터(SAMG엔터 티니핑) 협업, NCT WISH의 베이커리 팝업스토어 등 MD 영역 확대",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 에스엠 [041510] _ Beyond K-Pop, MD와 공연 커버리지 확대",
+    "section_path": [
+      "에스엠 [041510] _ Beyond K-Pop, MD와 공연 커버리지 확대"
+    ],
+    "page": 36
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 에스엠 [041510] _ Beyond K-Pop, MD와 공연 커버리지 확대\n\n주가추이 및 상대강도",
+    "raw_chunk": "주가추이 및 상대강도",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 에스엠 [041510] _ Beyond K-Pop, MD와 공연 커버리지 확대",
+    "section_path": [
+      "에스엠 [041510] _ Beyond K-Pop, MD와 공연 커버리지 확대"
+    ],
+    "page": 36
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 에스엠 [041510] _ Beyond K-Pop, MD와 공연 커버리지 확대 > Financial Data\n\n주가차트\n자료: 에스엠, DS투자증권 리서치센터, K-IFRS 연결기준",
+    "raw_chunk": "주가차트\n자료: 에스엠, DS투자증권 리서치센터, K-IFRS 연결기준",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 에스엠 [041510] _ Beyond K-Pop, MD와 공연 커버리지 확대 > Financial Data",
+    "section_path": [
+      "에스엠 [041510] _ Beyond K-Pop, MD와 공연 커버리지 확대",
+      "Financial Data"
+    ],
+    "page": 36
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > JYP Ent. [035900] _ Beyond K-Pop, 강력한 메가 IP 활동 기반 MD 강화\n\n장지혜  엔터·미디어·음식료\n02-709-2336 \njihye.jang@ds-sec.co.kr",
+    "raw_chunk": "장지혜  엔터·미디어·음식료\n02-709-2336 \njihye.jang@ds-sec.co.kr",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > JYP Ent. [035900] _ Beyond K-Pop, 강력한 메가 IP 활동 기반 MD 강화",
+    "section_path": [
+      "JYP Ent. [035900] _ Beyond K-Pop, 강력한 메가 IP 활동 기반 MD 강화"
+    ],
+    "page": 40
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > JYP Ent. [035900] _ Beyond K-Pop, 강력한 메가 IP 활동 기반 MD 강화\n\n-음반/음원은 ITZY, KickFlip, NMIXX 등의 신보와 Stray Kids 구보 실적 반영되며 성장 전망. 각 음반별 판매량 규모는 제한적으로 비용 부담",
+    "raw_chunk": "-음반/음원은 ITZY, KickFlip, NMIXX 등의 신보와 Stray Kids 구보 실적 반영되며 성장 전망. 각 음반별 판매량 규모는 제한적으로 비용 부담",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > JYP Ent. [035900] _ Beyond K-Pop, 강력한 메가 IP 활동 기반 MD 강화",
+    "section_path": [
+      "JYP Ent. [035900] _ Beyond K-Pop, 강력한 메가 IP 활동 기반 MD 강화"
+    ],
+    "page": 40
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > JYP Ent. [035900] _ Beyond K-Pop, 강력한 메가 IP 활동 기반 MD 강화\n\n-공연은 TWICE의 미국, 유럽 등 월드 투어 23회, NMIXX 6회, ITZY 7회, DAY6 8회 등이 반영되나 전년 동기 Stray Kids 기저 부담 존재",
+    "raw_chunk": "-공연은 TWICE의 미국, 유럽 등 월드 투어 23회, NMIXX 6회, ITZY 7회, DAY6 8회 등이 반영되나 전년 동기 Stray Kids 기저 부담 존재",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > JYP Ent. [035900] _ Beyond K-Pop, 강력한 메가 IP 활동 기반 MD 강화",
+    "section_path": [
+      "JYP Ent. [035900] _ Beyond K-Pop, 강력한 메가 IP 활동 기반 MD 강화"
+    ],
+    "page": 40
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > JYP Ent. [035900] _ Beyond K-Pop, 강력한 메가 IP 활동 기반 MD 강화\n\n-당분기 MD/라이선싱은 각 공연별 MD와 Stray Kids 캐릭터 스키주 글로벌 팝업 등으로 견조하나 기저 부담 존재. 블루개러지 실적은 기대",
+    "raw_chunk": "-당분기 MD/라이선싱은 각 공연별 MD와 Stray Kids 캐릭터 스키주 글로벌 팝업 등으로 견조하나 기저 부담 존재. 블루개러지 실적은 기대",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > JYP Ent. [035900] _ Beyond K-Pop, 강력한 메가 IP 활동 기반 MD 강화",
+    "section_path": [
+      "JYP Ent. [035900] _ Beyond K-Pop, 강력한 메가 IP 활동 기반 MD 강화"
+    ],
+    "page": 40
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > JYP Ent. [035900] _ Beyond K-Pop, 강력한 메가 IP 활동 기반 MD 강화\n\ny Kids는  2024-25년 10월까지 57회 공연 후 8월 미니 음반 발매 및 7월부터 글",
+    "raw_chunk": "y Kids는  2024-25년 10월까지 57회 공연 후 8월 미니 음반 발매 및 7월부터 글",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > JYP Ent. [035900] _ Beyond K-Pop, 강력한 메가 IP 활동 기반 MD 강화",
+    "section_path": [
+      "JYP Ent. [035900] _ Beyond K-Pop, 강력한 메가 IP 활동 기반 MD 강화"
+    ],
+    "page": 40
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > JYP Ent. [035900] _ Beyond K-Pop, 강력한 메가 IP 활동 기반 MD 강화\n\nCE는 2025-26년 7월까지 81회 공연 진행하며 미국, 유럽, 아시아 전반 견조한",
+    "raw_chunk": "CE는 2025-26년 7월까지 81회 공연 진행하며 미국, 유럽, 아시아 전반 견조한",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > JYP Ent. [035900] _ Beyond K-Pop, 강력한 메가 IP 활동 기반 MD 강화",
+    "section_path": [
+      "JYP Ent. [035900] _ Beyond K-Pop, 강력한 메가 IP 활동 기반 MD 강화"
+    ],
+    "page": 40
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > JYP Ent. [035900] _ Beyond K-Pop, 강력한 메가 IP 활동 기반 MD 강화\n\n-2) MD/라이선싱 전략 강화:. MD 판매 채널과 상품 카테고리 확대와 글로벌 IP 라이선싱 강화로 실적 개선. 자회사 블루개러지 수익성 개선",
+    "raw_chunk": "-2) MD/라이선싱 전략 강화:. MD 판매 채널과 상품 카테고리 확대와 글로벌 IP 라이선싱 강화로 실적 개선. 자회사 블루개러지 수익성 개선",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > JYP Ent. [035900] _ Beyond K-Pop, 강력한 메가 IP 활동 기반 MD 강화",
+    "section_path": [
+      "JYP Ent. [035900] _ Beyond K-Pop, 강력한 메가 IP 활동 기반 MD 강화"
+    ],
+    "page": 40
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > JYP Ent. [035900] _ Beyond K-Pop, 강력한 메가 IP 활동 기반 MD 강화 > Financial Data\n\n주가차트\n자료: JYP, DS투자증권 리서치센터, K-IFRS 연결기준",
+    "raw_chunk": "주가차트\n자료: JYP, DS투자증권 리서치센터, K-IFRS 연결기준",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > JYP Ent. [035900] _ Beyond K-Pop, 강력한 메가 IP 활동 기반 MD 강화 > Financial Data",
+    "section_path": [
+      "JYP Ent. [035900] _ Beyond K-Pop, 강력한 메가 IP 활동 기반 MD 강화",
+      "Financial Data"
+    ],
+    "page": 40
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 삼양식품 [003230] _ Beyond K-라면, 국내외 CAPA 확대로 글로벌 성장 지속\n\n장지혜  음식료·미디어·엔터\n02-709-2336 \njihye.jang@ds-sec.co.kr",
+    "raw_chunk": "장지혜  음식료·미디어·엔터\n02-709-2336 \njihye.jang@ds-sec.co.kr",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 삼양식품 [003230] _ Beyond K-라면, 국내외 CAPA 확대로 글로벌 성장 지속",
+    "section_path": [
+      "삼양식품 [003230] _ Beyond K-라면, 국내외 CAPA 확대로 글로벌 성장 지속"
+    ],
+    "page": 44
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 삼양식품 [003230] _ Beyond K-라면, 국내외 CAPA 확대로 글로벌 성장 지속\n\n[업데이트] 2Q26Pre: 수출 성장과 달러 상승으로 호실적 이어갈 전망",
+    "raw_chunk": "[업데이트] 2Q26Pre: 수출 성장과 달러 상승으로 호실적 이어갈 전망",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 삼양식품 [003230] _ Beyond K-라면, 국내외 CAPA 확대로 글로벌 성장 지속",
+    "section_path": [
+      "삼양식품 [003230] _ Beyond K-라면, 국내외 CAPA 확대로 글로벌 성장 지속"
+    ],
+    "page": 44
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 삼양식품 [003230] _ Beyond K-라면, 국내외 CAPA 확대로 글로벌 성장 지속\n\n의 2분기 실적은 연결 매출액 7,449억원(+35% YoY), 영업이익 1,756억원(+4",
+    "raw_chunk": "의 2분기 실적은 연결 매출액 7,449억원(+35% YoY), 영업이익 1,756억원(+4",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 삼양식품 [003230] _ Beyond K-라면, 국내외 CAPA 확대로 글로벌 성장 지속",
+    "section_path": [
+      "삼양식품 [003230] _ Beyond K-라면, 국내외 CAPA 확대로 글로벌 성장 지속"
+    ],
+    "page": 44
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 삼양식품 [003230] _ Beyond K-라면, 국내외 CAPA 확대로 글로벌 성장 지속\n\n-삼양식품의 2분기 실적은 연결 매출액 7,449억원(+35% YoY), 영업이익 1,756억원(+46% YoY, OPM 24%)으로 시장기대치 부합 전\n-2분기 삼양식품으로 추정되는 라면 수출 금액은 3.3억 달러(+22% YoY)로 중국을 비롯해 미국, 동남아, 유럽 등 전 지역 고른 성장",
+    "raw_chunk": "-삼양식품의 2분기 실적은 연결 매출액 7,449억원(+35% YoY), 영업이익 1,756억원(+46% YoY, OPM 24%)으로 시장기대치 부합 전\n-2분기 삼양식품으로 추정되는 라면 수출 금액은 3.3억 달러(+22% YoY)로 중국을 비롯해 미국, 동남아, 유럽 등 전 지역 고른 성장",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 삼양식품 [003230] _ Beyond K-라면, 국내외 CAPA 확대로 글로벌 성장 지속",
+    "section_path": [
+      "삼양식품 [003230] _ Beyond K-라면, 국내외 CAPA 확대로 글로벌 성장 지속"
+    ],
+    "page": 44
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 삼양식품 [003230] _ Beyond K-라면, 국내외 CAPA 확대로 글로벌 성장 지속\n\n-미국과 중국 법인은 각각 유통 채널 침투를 확대하며 실적 성장. 유럽 역시 커버리지 확대하며 실적 호조 이어갈 전망",
+    "raw_chunk": "-미국과 중국 법인은 각각 유통 채널 침투를 확대하며 실적 성장. 유럽 역시 커버리지 확대하며 실적 호조 이어갈 전망",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 삼양식품 [003230] _ Beyond K-라면, 국내외 CAPA 확대로 글로벌 성장 지속",
+    "section_path": [
+      "삼양식품 [003230] _ Beyond K-라면, 국내외 CAPA 확대로 글로벌 성장 지속"
+    ],
+    "page": 44
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 삼양식품 [003230] _ Beyond K-라면, 국내외 CAPA 확대로 글로벌 성장 지속\n\n-수출 성장과 원/달러 환율 상승(2Q26 평균 1,502원 +7% YoY)으로 실적 호조 기대되나 광고 판촉비용 증가로 수익성은 보수적으로 추정",
+    "raw_chunk": "-수출 성장과 원/달러 환율 상승(2Q26 평균 1,502원 +7% YoY)으로 실적 호조 기대되나 광고 판촉비용 증가로 수익성은 보수적으로 추정",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 삼양식품 [003230] _ Beyond K-라면, 국내외 CAPA 확대로 글로벌 성장 지속",
+    "section_path": [
+      "삼양식품 [003230] _ Beyond K-라면, 국내외 CAPA 확대로 글로벌 성장 지속"
+    ],
+    "page": 44
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 삼양식품 [003230] _ Beyond K-라면, 국내외 CAPA 확대로 글로벌 성장 지속\n\n인트] CAPA 확대와 불닭 브랜드 포트폴리오 확대로 장기 성장 동력 마련",
+    "raw_chunk": "인트] CAPA 확대와 불닭 브랜드 포트폴리오 확대로 장기 성장 동력 마련",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 삼양식품 [003230] _ Beyond K-라면, 국내외 CAPA 확대로 글로벌 성장 지속",
+    "section_path": [
+      "삼양식품 [003230] _ Beyond K-라면, 국내외 CAPA 확대로 글로벌 성장 지속"
+    ],
+    "page": 44
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 삼양식품 [003230] _ Beyond K-라면, 국내외 CAPA 확대로 글로벌 성장 지속\n\n연결 매출액 3조원(+30% YoY), 영업이익 7,203억원(+37% YoY, OPM 23.",
+    "raw_chunk": "연결 매출액 3조원(+30% YoY), 영업이익 7,203억원(+37% YoY, OPM 23.",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 삼양식품 [003230] _ Beyond K-라면, 국내외 CAPA 확대로 글로벌 성장 지속",
+    "section_path": [
+      "삼양식품 [003230] _ Beyond K-라면, 국내외 CAPA 확대로 글로벌 성장 지속"
+    ],
+    "page": 44
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 삼양식품 [003230] _ Beyond K-라면, 국내외 CAPA 확대로 글로벌 성장 지속\n\n국내 공장은  밀양 2공장 램프업과 기존 공장 라인 효율화로 CAPA 확대 중. 27년",
+    "raw_chunk": "국내 공장은  밀양 2공장 램프업과 기존 공장 라인 효율화로 CAPA 확대 중. 27년",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 삼양식품 [003230] _ Beyond K-라면, 국내외 CAPA 확대로 글로벌 성장 지속",
+    "section_path": [
+      "삼양식품 [003230] _ Beyond K-라면, 국내외 CAPA 확대로 글로벌 성장 지속"
+    ],
+    "page": 44
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 삼양식품 [003230] _ Beyond K-라면, 국내외 CAPA 확대로 글로벌 성장 지속\n\n-동사의 전체 CAPA는 연간 생산량 기준 원주+익산+밀양1공장으로 24.5억개에서 밀양2공장 7억개, 27년 1월 중국 공장 11.3억개 추가",
+    "raw_chunk": "-동사의 전체 CAPA는 연간 생산량 기준 원주+익산+밀양1공장으로 24.5억개에서 밀양2공장 7억개, 27년 1월 중국 공장 11.3억개 추가",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 삼양식품 [003230] _ Beyond K-라면, 국내외 CAPA 확대로 글로벌 성장 지속",
+    "section_path": [
+      "삼양식품 [003230] _ Beyond K-라면, 국내외 CAPA 확대로 글로벌 성장 지속"
+    ],
+    "page": 44
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 삼양식품 [003230] _ Beyond K-라면, 국내외 CAPA 확대로 글로벌 성장 지속\n\n-동사의 전체 CAPA는 연간 생산량 기준 원주+익산+밀양1공장으로 24.5억개에서 밀양2공장 7억개, 27년 1월 중국 공장 11.3억개 추가",
+    "raw_chunk": "-동사의 전체 CAPA는 연간 생산량 기준 원주+익산+밀양1공장으로 24.5억개에서 밀양2공장 7억개, 27년 1월 중국 공장 11.3억개 추가",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 삼양식품 [003230] _ Beyond K-라면, 국내외 CAPA 확대로 글로벌 성장 지속",
+    "section_path": [
+      "삼양식품 [003230] _ Beyond K-라면, 국내외 CAPA 확대로 글로벌 성장 지속"
+    ],
+    "page": 44
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 삼양식품 [003230] _ Beyond K-라면, 국내외 CAPA 확대로 글로벌 성장 지속\n\n-2) 불닭 브랜드 포트폴리오 확대: 소스 매출은 20년 211억원에서 25년 706억원으로 성장했고 26년 1,000억원으로 성장 목표",
+    "raw_chunk": "-2) 불닭 브랜드 포트폴리오 확대: 소스 매출은 20년 211억원에서 25년 706억원으로 성장했고 26년 1,000억원으로 성장 목표",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 삼양식품 [003230] _ Beyond K-라면, 국내외 CAPA 확대로 글로벌 성장 지속",
+    "section_path": [
+      "삼양식품 [003230] _ Beyond K-라면, 국내외 CAPA 확대로 글로벌 성장 지속"
+    ],
+    "page": 44
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 삼양식품 [003230] _ Beyond K-라면, 국내외 CAPA 확대로 글로벌 성장 지속\n\n-이외에도 불닭 브랜드 마케팅을 강화하며  소스, 떡볶이, 감자칩 등 SKU 확대를 통해 불닭 포트폴리오 확대로 장기 성장 동력 마련 긍정적",
+    "raw_chunk": "-이외에도 불닭 브랜드 마케팅을 강화하며  소스, 떡볶이, 감자칩 등 SKU 확대를 통해 불닭 포트폴리오 확대로 장기 성장 동력 마련 긍정적",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 삼양식품 [003230] _ Beyond K-라면, 국내외 CAPA 확대로 글로벌 성장 지속",
+    "section_path": [
+      "삼양식품 [003230] _ Beyond K-라면, 국내외 CAPA 확대로 글로벌 성장 지속"
+    ],
+    "page": 44
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 삼양식품 [003230] _ Beyond K-라면, 국내외 CAPA 확대로 글로벌 성장 지속\n\n투자의견 매수, 목표주가 190만원 유지. 음식료 업종 최선호주 의견 유",
+    "raw_chunk": "투자의견 매수, 목표주가 190만원 유지. 음식료 업종 최선호주 의견 유",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 삼양식품 [003230] _ Beyond K-라면, 국내외 CAPA 확대로 글로벌 성장 지속",
+    "section_path": [
+      "삼양식품 [003230] _ Beyond K-라면, 국내외 CAPA 확대로 글로벌 성장 지속"
+    ],
+    "page": 44
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave\n\n장지혜  음식료·미디어·엔터\n02-709-2336 \njihye.jang@ds-sec.co.kr",
+    "raw_chunk": "장지혜  음식료·미디어·엔터\n02-709-2336 \njihye.jang@ds-sec.co.kr",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave",
+    "section_path": [],
+    "page": 48
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave\n\n[업데이트] 2Q26Pre: 주요 법인별 채널 특화 제품 및 신제품 등 제품력과 채널 경쟁력 기반 실적 호조 전망",
+    "raw_chunk": "[업데이트] 2Q26Pre: 주요 법인별 채널 특화 제품 및 신제품 등 제품력과 채널 경쟁력 기반 실적 호조 전망",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave",
+    "section_path": [],
+    "page": 48
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave\n\n출액 8,971억원(+15% YoY), 영업이익 1,329억원(+9% YoY, OPM 14.8%)",
+    "raw_chunk": "출액 8,971억원(+15% YoY), 영업이익 1,329억원(+9% YoY, OPM 14.8%)",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave",
+    "section_path": [],
+    "page": 48
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave\n\n-26년 4~6월 합산 매출액은 한국 3,001억원(+3% YoY)으로 일부 할인점향 납품 중단 방어 했으나  일회성 비용 반영되며 이익 둔화",
+    "raw_chunk": "-26년 4~6월 합산 매출액은 한국 3,001억원(+3% YoY)으로 일부 할인점향 납품 중단 방어 했으나  일회성 비용 반영되며 이익 둔화",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave",
+    "section_path": [],
+    "page": 48
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave\n\n-중국 3,780억원(+24% YoY) 기록. 간식점 채널 전용 특화 신제품 입점 확대 및 온라인 벌크 제품 확대하며 실적 성장 지속",
+    "raw_chunk": "-중국 3,780억원(+24% YoY) 기록. 간식점 채널 전용 특화 신제품 입점 확대 및 온라인 벌크 제품 확대하며 실적 성장 지속",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave",
+    "section_path": [],
+    "page": 48
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave\n\n-베트남 1,164억원(+13% YoY) 기록. 회계 조정으로 매출 차감 반영 및 경쟁사의 공격적인 프로모션 영향으로 성장률 둔화",
+    "raw_chunk": "-베트남 1,164억원(+13% YoY) 기록. 회계 조정으로 매출 차감 반영 및 경쟁사의 공격적인 프로모션 영향으로 성장률 둔화",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave",
+    "section_path": [],
+    "page": 48
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave\n\n-러시아 1,050억원(+30% YoY)기록. 주요 MT 채널 내 파이 및 젤리, 비스킷 신제품 확대로 전 카테고리 고성장. 주변국가로 수출 확대",
+    "raw_chunk": "-러시아 1,050억원(+30% YoY)기록. 주요 MT 채널 내 파이 및 젤리, 비스킷 신제품 확대로 전 카테고리 고성장. 주변국가로 수출 확대",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave",
+    "section_path": [],
+    "page": 48
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave\n\nCAPA 확대와 제품력 기반 글로벌 실적 성장이 주주환원 확대로 선순환",
+    "raw_chunk": "CAPA 확대와 제품력 기반 글로벌 실적 성장이 주주환원 확대로 선순환",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave",
+    "section_path": [],
+    "page": 48
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave\n\n결 실적은 매출액 3.8조원(+13% YoY), 영업이익 6,413억원(+15% YoY, OPM",
+    "raw_chunk": "결 실적은 매출액 3.8조원(+13% YoY), 영업이익 6,413억원(+15% YoY, OPM",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave",
+    "section_path": [],
+    "page": 48
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave\n\n-1) 국내외 CAPA 확대: 국내는 진천 통합센터에 4,600억원을 투자해 해외 수출 물량 대응 생산능력 확대 및 생산/포장/물류 통합으로 효율\n화. 해외는 베트남 하노이 3공장과 러시아 트베르 공장 증축에 각각 1,300억원, 2,400억원 투자. 그룹기준 생산 능력 +20% 확대",
+    "raw_chunk": "-1) 국내외 CAPA 확대: 국내는 진천 통합센터에 4,600억원을 투자해 해외 수출 물량 대응 생산능력 확대 및 생산/포장/물류 통합으로 효율\n화. 해외는 베트남 하노이 3공장과 러시아 트베르 공장 증축에 각각 1,300억원, 2,400억원 투자. 그룹기준 생산 능력 +20% 확대",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave",
+    "section_path": [],
+    "page": 48
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave\n\n-2) 주주 환원 확대: 25년 DPS를 3,500원으로 전년비 +40% 증액하며 배당성향 36%로 상승. 26년 최초로 중간 배당 1,750원 실시",
+    "raw_chunk": "-2) 주주 환원 확대: 25년 DPS를 3,500원으로 전년비 +40% 증액하며 배당성향 36%로 상승. 26년 최초로 중간 배당 1,750원 실시",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave",
+    "section_path": [],
+    "page": 48
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave\n\n-주주가치제고 계획을 통해 발표한 배당정책은 연결 배당성향 20%이상이나 최근 점진적 상향 중이며 분리과세 요건 고려해 추가 증액 기대",
+    "raw_chunk": "-주주가치제고 계획을 통해 발표한 배당정책은 연결 배당성향 20%이상이나 최근 점진적 상향 중이며 분리과세 요건 고려해 추가 증액 기대",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave",
+    "section_path": [],
+    "page": 48
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 주가추이 및 상대강도 > Financial Data\n\n주가차트\n자료: 오리온, DS투자증권 리서치센터, K-IFRS 연결기준",
+    "raw_chunk": "주가차트\n자료: 오리온, DS투자증권 리서치센터, K-IFRS 연결기준",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 주가추이 및 상대강도 > Financial Data",
+    "section_path": [
+      "주가추이 및 상대강도",
+      "Financial Data"
+    ],
+    "page": 48
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 코스맥스엔비티 [222040] _ Beyond K-건기식, 웰니스 트렌드와 함께 성장\n\n장지혜  음식료·미디어·엔터 \n02-709-2336 \njihye.jang@ds-sec.co.kr",
+    "raw_chunk": "장지혜  음식료·미디어·엔터 \n02-709-2336 \njihye.jang@ds-sec.co.kr",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 코스맥스엔비티 [222040] _ Beyond K-건기식, 웰니스 트렌드와 함께 성장",
+    "section_path": [
+      "코스맥스엔비티 [222040] _ Beyond K-건기식, 웰니스 트렌드와 함께 성장"
+    ],
+    "page": 53
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 코스맥스엔비티 [222040] _ Beyond K-건기식, 웰니스 트렌드와 함께 성장\n\n[업데이트] 2Q26Pre: 내수 건기식 트렌드와 중국향 수출 증가로 한국, 호주 법인 실적 호조 지속",
+    "raw_chunk": "[업데이트] 2Q26Pre: 내수 건기식 트렌드와 중국향 수출 증가로 한국, 호주 법인 실적 호조 지속",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 코스맥스엔비티 [222040] _ Beyond K-건기식, 웰니스 트렌드와 함께 성장",
+    "section_path": [
+      "코스맥스엔비티 [222040] _ Beyond K-건기식, 웰니스 트렌드와 함께 성장"
+    ],
+    "page": 53
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 코스맥스엔비티 [222040] _ Beyond K-건기식, 웰니스 트렌드와 함께 성장\n\n엔비티의 2분기 실적은 연결기준 매출액 970억원(+28% YoY), 영업이익 88억",
+    "raw_chunk": "엔비티의 2분기 실적은 연결기준 매출액 970억원(+28% YoY), 영업이익 88억",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 코스맥스엔비티 [222040] _ Beyond K-건기식, 웰니스 트렌드와 함께 성장",
+    "section_path": [
+      "코스맥스엔비티 [222040] _ Beyond K-건기식, 웰니스 트렌드와 함께 성장"
+    ],
+    "page": 53
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 코스맥스엔비티 [222040] _ Beyond K-건기식, 웰니스 트렌드와 함께 성장\n\n-한국(별도) 법인 실적은 매출액 754억원(+45% YoY)으로 내수 341억원(+30% YoY), 수출 414억원(+60% YoY) 전망",
+    "raw_chunk": "-한국(별도) 법인 실적은 매출액 754억원(+45% YoY)으로 내수 341억원(+30% YoY), 수출 414억원(+60% YoY) 전망",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 코스맥스엔비티 [222040] _ Beyond K-건기식, 웰니스 트렌드와 함께 성장",
+    "section_path": [
+      "코스맥스엔비티 [222040] _ Beyond K-건기식, 웰니스 트렌드와 함께 성장"
+    ],
+    "page": 53
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 코스맥스엔비티 [222040] _ Beyond K-건기식, 웰니스 트렌드와 함께 성장\n\n-내수 실적은 국내 건기식 소비 증가와 올리브영, 다이소, 편의점, 대형 약국체인 등 신유통 채널의 성장에 기인하며 상위 고객 중심 성장 지속",
+    "raw_chunk": "-내수 실적은 국내 건기식 소비 증가와 올리브영, 다이소, 편의점, 대형 약국체인 등 신유통 채널의 성장에 기인하며 상위 고객 중심 성장 지속",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 코스맥스엔비티 [222040] _ Beyond K-건기식, 웰니스 트렌드와 함께 성장",
+    "section_path": [
+      "코스맥스엔비티 [222040] _ Beyond K-건기식, 웰니스 트렌드와 함께 성장"
+    ],
+    "page": 53
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 코스맥스엔비티 [222040] _ Beyond K-건기식, 웰니스 트렌드와 함께 성장\n\n-수출 실적은 중국향 온라인 고객사 신제품 및 신규 고객사 확보로 성장세 견조할 전망. 판매 법인으로 전환한 미국 법인향 수출 물량도 기여",
+    "raw_chunk": "-수출 실적은 중국향 온라인 고객사 신제품 및 신규 고객사 확보로 성장세 견조할 전망. 판매 법인으로 전환한 미국 법인향 수출 물량도 기여",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 코스맥스엔비티 [222040] _ Beyond K-건기식, 웰니스 트렌드와 함께 성장",
+    "section_path": [
+      "코스맥스엔비티 [222040] _ Beyond K-건기식, 웰니스 트렌드와 함께 성장"
+    ],
+    "page": 53
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 코스맥스엔비티 [222040] _ Beyond K-건기식, 웰니스 트렌드와 함께 성장\n\n-호주 법인 실적은 매출액 205억원(+55% YoY)으로 기존 고객사 중심 외형 성장 지속하며 비용 절감 통한 영업이익 흑자 전환 기대",
+    "raw_chunk": "-호주 법인 실적은 매출액 205억원(+55% YoY)으로 기존 고객사 중심 외형 성장 지속하며 비용 절감 통한 영업이익 흑자 전환 기대",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 코스맥스엔비티 [222040] _ Beyond K-건기식, 웰니스 트렌드와 함께 성장",
+    "section_path": [
+      "코스맥스엔비티 [222040] _ Beyond K-건기식, 웰니스 트렌드와 함께 성장"
+    ],
+    "page": 53
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 코스맥스엔비티 [222040] _ Beyond K-건기식, 웰니스 트렌드와 함께 성장\n\n[투자포인트] 국내 신유통 채널 성장 트렌드 적극 대응하며 글로벌 신규 고객사 확대. 재무구조 개선도 긍정적",
+    "raw_chunk": "[투자포인트] 국내 신유통 채널 성장 트렌드 적극 대응하며 글로벌 신규 고객사 확대. 재무구조 개선도 긍정적",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 코스맥스엔비티 [222040] _ Beyond K-건기식, 웰니스 트렌드와 함께 성장",
+    "section_path": [
+      "코스맥스엔비티 [222040] _ Beyond K-건기식, 웰니스 트렌드와 함께 성장"
+    ],
+    "page": 53
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 코스맥스엔비티 [222040] _ Beyond K-건기식, 웰니스 트렌드와 함께 성장\n\n-코스맥스엔비티의 26년 실적은 연결기준 매출액 3,765억원(+31% YoY), 영업이익 351억원(+776% YoY, OPM 9.3%) 전망",
+    "raw_chunk": "-코스맥스엔비티의 26년 실적은 연결기준 매출액 3,765억원(+31% YoY), 영업이익 351억원(+776% YoY, OPM 9.3%) 전망",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 코스맥스엔비티 [222040] _ Beyond K-건기식, 웰니스 트렌드와 함께 성장",
+    "section_path": [
+      "코스맥스엔비티 [222040] _ Beyond K-건기식, 웰니스 트렌드와 함께 성장"
+    ],
+    "page": 53
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 코스맥스엔비티 [222040] _ Beyond K-건기식, 웰니스 트렌드와 함께 성장\n\n-1) 신유통 트렌드 적극 대응: 특히 올리브영의 경우 건기식 특화 매장 올리브 배러 매장 확대와 동사가 제조하는 PB제품 SKU도 증가",
+    "raw_chunk": "-1) 신유통 트렌드 적극 대응: 특히 올리브영의 경우 건기식 특화 매장 올리브 배러 매장 확대와 동사가 제조하는 PB제품 SKU도 증가",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 코스맥스엔비티 [222040] _ Beyond K-건기식, 웰니스 트렌드와 함께 성장",
+    "section_path": [
+      "코스맥스엔비티 [222040] _ Beyond K-건기식, 웰니스 트렌드와 함께 성장"
+    ],
+    "page": 53
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 코스맥스엔비티 [222040] _ Beyond K-건기식, 웰니스 트렌드와 함께 성장\n\n-2) 글로벌 신규 고객사 확대: 국내에서 잘 팔리는 건기식 ODM 경험과 역량, 한국과 호주 공장 인프라를 바탕 글로벌 신규 고객사 확대",
+    "raw_chunk": "-2) 글로벌 신규 고객사 확대: 국내에서 잘 팔리는 건기식 ODM 경험과 역량, 한국과 호주 공장 인프라를 바탕 글로벌 신규 고객사 확대",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 코스맥스엔비티 [222040] _ Beyond K-건기식, 웰니스 트렌드와 함께 성장",
+    "section_path": [
+      "코스맥스엔비티 [222040] _ Beyond K-건기식, 웰니스 트렌드와 함께 성장"
+    ],
+    "page": 53
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 코스맥스엔비티 [222040] _ Beyond K-건기식, 웰니스 트렌드와 함께 성장\n\n-3) 재무구조 개선: 미국 공장 매각, 전법인 수익성 개선에 따른 부채 감소로 순이익 개선은 더욱 가파를 전망",
+    "raw_chunk": "-3) 재무구조 개선: 미국 공장 매각, 전법인 수익성 개선에 따른 부채 감소로 순이익 개선은 더욱 가파를 전망",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 코스맥스엔비티 [222040] _ Beyond K-건기식, 웰니스 트렌드와 함께 성장",
+    "section_path": [
+      "코스맥스엔비티 [222040] _ Beyond K-건기식, 웰니스 트렌드와 함께 성장"
+    ],
+    "page": 53
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 코스맥스엔비티 [222040] _ Beyond K-건기식, 웰니스 트렌드와 함께 성장\n\n-최근 건기식 수요 증가와 해외 실적 성장 긍정적이나 ODM의 특성 반영해 적정 목표배수 10배 유지. 추가 성장성 확인 시 상향 가능성 있음",
+    "raw_chunk": "-최근 건기식 수요 증가와 해외 실적 성장 긍정적이나 ODM의 특성 반영해 적정 목표배수 10배 유지. 추가 성장성 확인 시 상향 가능성 있음",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 코스맥스엔비티 [222040] _ Beyond K-건기식, 웰니스 트렌드와 함께 성장",
+    "section_path": [
+      "코스맥스엔비티 [222040] _ Beyond K-건기식, 웰니스 트렌드와 함께 성장"
+    ],
+    "page": 53
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 노바렉스 [194700] _ Beyond K-건기식, 고객사 레퍼런스와 CAPA 확대로 성장\n\n장지혜  음식료·미디어·엔터\n02-709-2336 \njihye.jang@ds-sec.co.kr",
+    "raw_chunk": "장지혜  음식료·미디어·엔터\n02-709-2336 \njihye.jang@ds-sec.co.kr",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 노바렉스 [194700] _ Beyond K-건기식, 고객사 레퍼런스와 CAPA 확대로 성장",
+    "section_path": [
+      "노바렉스 [194700] _ Beyond K-건기식, 고객사 레퍼런스와 CAPA 확대로 성장"
+    ],
+    "page": 57
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 노바렉스 [194700] _ Beyond K-건기식, 고객사 레퍼런스와 CAPA 확대로 성장\n\n[업데이트] 2Q26Pre: 국내 ODM 물량 확대되며 실적 호조 지속 전망",
+    "raw_chunk": "[업데이트] 2Q26Pre: 국내 ODM 물량 확대되며 실적 호조 지속 전망",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 노바렉스 [194700] _ Beyond K-건기식, 고객사 레퍼런스와 CAPA 확대로 성장",
+    "section_path": [
+      "노바렉스 [194700] _ Beyond K-건기식, 고객사 레퍼런스와 CAPA 확대로 성장"
+    ],
+    "page": 57
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 노바렉스 [194700] _ Beyond K-건기식, 고객사 레퍼런스와 CAPA 확대로 성장\n\n분기 실적은 연결기준 매출액 1,194억원(+32% YoY), 영업이익 131억원(+19",
+    "raw_chunk": "분기 실적은 연결기준 매출액 1,194억원(+32% YoY), 영업이익 131억원(+19",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 노바렉스 [194700] _ Beyond K-건기식, 고객사 레퍼런스와 CAPA 확대로 성장",
+    "section_path": [
+      "노바렉스 [194700] _ Beyond K-건기식, 고객사 레퍼런스와 CAPA 확대로 성장"
+    ],
+    "page": 57
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 노바렉스 [194700] _ Beyond K-건기식, 고객사 레퍼런스와 CAPA 확대로 성장\n\n-내수 실적은 매출액 796억원(+50% YoY)으로 국내 건기식 소비 증가와 신유통 채널 성장에 기인하며 상위 고객사 중심 성장 전망",
+    "raw_chunk": "-내수 실적은 매출액 796억원(+50% YoY)으로 국내 건기식 소비 증가와 신유통 채널 성장에 기인하며 상위 고객사 중심 성장 전망",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 노바렉스 [194700] _ Beyond K-건기식, 고객사 레퍼런스와 CAPA 확대로 성장",
+    "section_path": [
+      "노바렉스 [194700] _ Beyond K-건기식, 고객사 레퍼런스와 CAPA 확대로 성장"
+    ],
+    "page": 57
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 노바렉스 [194700] _ Beyond K-건기식, 고객사 레퍼런스와 CAPA 확대로 성장\n\n-수출 실적은 매출액 398억원(-13% YoY)으로  전년도 기저부담. 노바렉스 추정 지역 수출 실적은 2,058억달러(-41% YoY) 기록",
+    "raw_chunk": "-수출 실적은 매출액 398억원(-13% YoY)으로  전년도 기저부담. 노바렉스 추정 지역 수출 실적은 2,058억달러(-41% YoY) 기록",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 노바렉스 [194700] _ Beyond K-건기식, 고객사 레퍼런스와 CAPA 확대로 성장",
+    "section_path": [
+      "노바렉스 [194700] _ Beyond K-건기식, 고객사 레퍼런스와 CAPA 확대로 성장"
+    ],
+    "page": 57
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 노바렉스 [194700] _ Beyond K-건기식, 고객사 레퍼런스와 CAPA 확대로 성장\n\n-환율 상승과 내수 중심 매출 성장에 따른 고정비 부담 축소로 견조한 수익성 이어갈 전망",
+    "raw_chunk": "-환율 상승과 내수 중심 매출 성장에 따른 고정비 부담 축소로 견조한 수익성 이어갈 전망",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 노바렉스 [194700] _ Beyond K-건기식, 고객사 레퍼런스와 CAPA 확대로 성장",
+    "section_path": [
+      "노바렉스 [194700] _ Beyond K-건기식, 고객사 레퍼런스와 CAPA 확대로 성장"
+    ],
+    "page": 57
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 노바렉스 [194700] _ Beyond K-건기식, 고객사 레퍼런스와 CAPA 확대로 성장\n\n26년 실적은 연결기준 매출액 4,732억원(+17% YoY), 영업이익 529억원(+2",
+    "raw_chunk": "26년 실적은 연결기준 매출액 4,732억원(+17% YoY), 영업이익 529억원(+2",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 노바렉스 [194700] _ Beyond K-건기식, 고객사 레퍼런스와 CAPA 확대로 성장",
+    "section_path": [
+      "노바렉스 [194700] _ Beyond K-건기식, 고객사 레퍼런스와 CAPA 확대로 성장"
+    ],
+    "page": 57
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 노바렉스 [194700] _ Beyond K-건기식, 고객사 레퍼런스와 CAPA 확대로 성장\n\n-1) 국내외 신규 고객사 확대: 국내외 주요 고객사 ODM 경험과 역량을 바탕으로 신규 고객사 확대",
+    "raw_chunk": "-1) 국내외 신규 고객사 확대: 국내외 주요 고객사 ODM 경험과 역량을 바탕으로 신규 고객사 확대",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 노바렉스 [194700] _ Beyond K-건기식, 고객사 레퍼런스와 CAPA 확대로 성장",
+    "section_path": [
+      "노바렉스 [194700] _ Beyond K-건기식, 고객사 레퍼런스와 CAPA 확대로 성장"
+    ],
+    "page": 57
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 노바렉스 [194700] _ Beyond K-건기식, 고객사 레퍼런스와 CAPA 확대로 성장\n\n-노바렉스의 중국향 주요 고객사 매출은 22년 160억원에서 25년 1,157억원으로 확대. 이러한 레퍼런스를 바탕으로 신규 고객사 확대 전망",
+    "raw_chunk": "-노바렉스의 중국향 주요 고객사 매출은 22년 160억원에서 25년 1,157억원으로 확대. 이러한 레퍼런스를 바탕으로 신규 고객사 확대 전망",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 노바렉스 [194700] _ Beyond K-건기식, 고객사 레퍼런스와 CAPA 확대로 성장",
+    "section_path": [
+      "노바렉스 [194700] _ Beyond K-건기식, 고객사 레퍼런스와 CAPA 확대로 성장"
+    ],
+    "page": 57
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 노바렉스 [194700] _ Beyond K-건기식, 고객사 레퍼런스와 CAPA 확대로 성장\n\n-수출 실적에서 주요 고객사를 제외한 매출은 22년 172억원에서 25년 360억원으로 확대되었으며 26년 1분기 114억원(+55% YoY) 기록",
+    "raw_chunk": "-수출 실적에서 주요 고객사를 제외한 매출은 22년 172억원에서 25년 360억원으로 확대되었으며 26년 1분기 114억원(+55% YoY) 기록",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 노바렉스 [194700] _ Beyond K-건기식, 고객사 레퍼런스와 CAPA 확대로 성장",
+    "section_path": [
+      "노바렉스 [194700] _ Beyond K-건기식, 고객사 레퍼런스와 CAPA 확대로 성장"
+    ],
+    "page": 57
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 노바렉스 [194700] _ Beyond K-건기식, 고객사 레퍼런스와 CAPA 확대로 성장\n\n-2) CAPA확대로 실적 성장 기반 마련: 오송 2공장 신축 및 1공장 라인 효율성 제고 투자로 CAPA 27년말 1조원까지 확대될 전망",
+    "raw_chunk": "-2) CAPA확대로 실적 성장 기반 마련: 오송 2공장 신축 및 1공장 라인 효율성 제고 투자로 CAPA 27년말 1조원까지 확대될 전망",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 노바렉스 [194700] _ Beyond K-건기식, 고객사 레퍼런스와 CAPA 확대로 성장",
+    "section_path": [
+      "노바렉스 [194700] _ Beyond K-건기식, 고객사 레퍼런스와 CAPA 확대로 성장"
+    ],
+    "page": 57
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 노바렉스 [194700] _ Beyond K-건기식, 고객사 레퍼런스와 CAPA 확대로 성장\n\n의 목표주가 상향은 12M Fwd EPS로 실적 기간 조정에 기인하며 목표배수 10배",
+    "raw_chunk": "의 목표주가 상향은 12M Fwd EPS로 실적 기간 조정에 기인하며 목표배수 10배",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 노바렉스 [194700] _ Beyond K-건기식, 고객사 레퍼런스와 CAPA 확대로 성장",
+    "section_path": [
+      "노바렉스 [194700] _ Beyond K-건기식, 고객사 레퍼런스와 CAPA 확대로 성장"
+    ],
+    "page": 57
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 노바렉스 [194700] _ Beyond K-건기식, 고객사 레퍼런스와 CAPA 확대로 성장\n\n-최근 건기식 수요 증가와 해외 실적 성장 긍정적이나 ODM의 특성 반영해 목표배수 10배 유지. 추가 성장성 확인 시 상향 가능성 있음",
+    "raw_chunk": "-최근 건기식 수요 증가와 해외 실적 성장 긍정적이나 ODM의 특성 반영해 목표배수 10배 유지. 추가 성장성 확인 시 상향 가능성 있음",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 노바렉스 [194700] _ Beyond K-건기식, 고객사 레퍼런스와 CAPA 확대로 성장",
+    "section_path": [
+      "노바렉스 [194700] _ Beyond K-건기식, 고객사 레퍼런스와 CAPA 확대로 성장"
+    ],
+    "page": 57
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 노바렉스 [194700] _ Beyond K-건기식, 고객사 레퍼런스와 CAPA 확대로 성장 > Financial Data\n\n주가차트\n자료: 노바렉스, DS투자증권 리서치센터, K-IFRS 연결기준",
+    "raw_chunk": "주가차트\n자료: 노바렉스, DS투자증권 리서치센터, K-IFRS 연결기준",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 노바렉스 [194700] _ Beyond K-건기식, 고객사 레퍼런스와 CAPA 확대로 성장 > Financial Data",
+    "section_path": [
+      "노바렉스 [194700] _ Beyond K-건기식, 고객사 레퍼런스와 CAPA 확대로 성장",
+      "Financial Data"
+    ],
+    "page": 57
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > CJ ENM [035760] _ Beyond K-Contents, 플랫폼 사업자로 성장\n\n장지혜  미디어·엔터·음식료\n02-709-2336 \njihye.jang@ds-sec.co.kr",
+    "raw_chunk": "장지혜  미디어·엔터·음식료\n02-709-2336 \njihye.jang@ds-sec.co.kr",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > CJ ENM [035760] _ Beyond K-Contents, 플랫폼 사업자로 성장",
+    "section_path": [
+      "CJ ENM [035760] _ Beyond K-Contents, 플랫폼 사업자로 성장"
+    ],
+    "page": 61
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > CJ ENM [035760] _ Beyond K-Contents, 플랫폼 사업자로 성장\n\n-미디어 플랫폼은 TV광고 수익 감소가 이어지는 가운데 티빙 가입자수 증가, 광고 수익 확대, 해외 브랜드관 수익 인식되며 이익 개선 전망",
+    "raw_chunk": "-미디어 플랫폼은 TV광고 수익 감소가 이어지는 가운데 티빙 가입자수 증가, 광고 수익 확대, 해외 브랜드관 수익 인식되며 이익 개선 전망",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > CJ ENM [035760] _ Beyond K-Contents, 플랫폼 사업자로 성장",
+    "section_path": [
+      "CJ ENM [035760] _ Beyond K-Contents, 플랫폼 사업자로 성장"
+    ],
+    "page": 61
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > CJ ENM [035760] _ Beyond K-Contents, 플랫폼 사업자로 성장\n\n-영화/드라마는 스튜디오드래곤 실적 호조에도 피프스 시즌 제작 축소로 실적 부진 전망하며 커머스는 MLC 중심 성장과 수익성 개선 전망",
+    "raw_chunk": "-영화/드라마는 스튜디오드래곤 실적 호조에도 피프스 시즌 제작 축소로 실적 부진 전망하며 커머스는 MLC 중심 성장과 수익성 개선 전망",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > CJ ENM [035760] _ Beyond K-Contents, 플랫폼 사업자로 성장",
+    "section_path": [
+      "CJ ENM [035760] _ Beyond K-Contents, 플랫폼 사업자로 성장"
+    ],
+    "page": 61
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > CJ ENM [035760] _ Beyond K-Contents, 플랫폼 사업자로 성장\n\n-음악은 전년비 라포네 아티스트 활동 시점 차이로 기저 부담. 다만 제베원, 모디세이, INI 등 자체 아티스트 앨범 판매 호조와 KCON 재팬 호조",
+    "raw_chunk": "-음악은 전년비 라포네 아티스트 활동 시점 차이로 기저 부담. 다만 제베원, 모디세이, INI 등 자체 아티스트 앨범 판매 호조와 KCON 재팬 호조",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > CJ ENM [035760] _ Beyond K-Contents, 플랫폼 사업자로 성장",
+    "section_path": [
+      "CJ ENM [035760] _ Beyond K-Contents, 플랫폼 사업자로 성장"
+    ],
+    "page": 61
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > CJ ENM [035760] _ Beyond K-Contents, 플랫폼 사업자로 성장\n\n[투자포인트] K-콘텐츠(티빙), K-Pop(엠넷플러스), 커머스(CJ온스타일) 플랫폼 경쟁력 강화하며 플랫폼 사업자로 성장 \n-26년 연간 실적은 연결 매출액 5.4조원(+5% YoY), 영업이익 1,284억원(-3% YoY, OPM 2.4%) 전망",
+    "raw_chunk": "[투자포인트] K-콘텐츠(티빙), K-Pop(엠넷플러스), 커머스(CJ온스타일) 플랫폼 경쟁력 강화하며 플랫폼 사업자로 성장 \n-26년 연간 실적은 연결 매출액 5.4조원(+5% YoY), 영업이익 1,284억원(-3% YoY, OPM 2.4%) 전망",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > CJ ENM [035760] _ Beyond K-Contents, 플랫폼 사업자로 성장",
+    "section_path": [
+      "CJ ENM [035760] _ Beyond K-Contents, 플랫폼 사업자로 성장"
+    ],
+    "page": 61
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > CJ ENM [035760] _ Beyond K-Contents, 플랫폼 사업자로 성장\n\n의 콘텐츠 경쟁력 강화, 웨이브 통합, 광고 수익 확대로 실적 개선을 이어갈 것. 글로",
+    "raw_chunk": "의 콘텐츠 경쟁력 강화, 웨이브 통합, 광고 수익 확대로 실적 개선을 이어갈 것. 글로",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > CJ ENM [035760] _ Beyond K-Contents, 플랫폼 사업자로 성장",
+    "section_path": [
+      "CJ ENM [035760] _ Beyond K-Contents, 플랫폼 사업자로 성장"
+    ],
+    "page": 61
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > CJ ENM [035760] _ Beyond K-Contents, 플랫폼 사업자로 성장\n\n-티빙은 KBO 중계 및 오리지널 콘텐츠 흥행, 웨이브와 통합 요금제 출시하며 유료 가입자 증가 및 6월 MAU는 969만명으로 상승 기조 유지",
+    "raw_chunk": "-티빙은 KBO 중계 및 오리지널 콘텐츠 흥행, 웨이브와 통합 요금제 출시하며 유료 가입자 증가 및 6월 MAU는 969만명으로 상승 기조 유지",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > CJ ENM [035760] _ Beyond K-Contents, 플랫폼 사업자로 성장",
+    "section_path": [
+      "CJ ENM [035760] _ Beyond K-Contents, 플랫폼 사업자로 성장"
+    ],
+    "page": 61
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > CJ ENM [035760] _ Beyond K-Contents, 플랫폼 사업자로 성장\n\n-2) 음악: 일본과 중국, 한국 자체 아티스트 확대와 엠넷플러스의 오리지널 콘텐츠 강화로 트래픽을 확대하며 성장 기대",
+    "raw_chunk": "-2) 음악: 일본과 중국, 한국 자체 아티스트 확대와 엠넷플러스의 오리지널 콘텐츠 강화로 트래픽을 확대하며 성장 기대",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > CJ ENM [035760] _ Beyond K-Contents, 플랫폼 사업자로 성장",
+    "section_path": [
+      "CJ ENM [035760] _ Beyond K-Contents, 플랫폼 사업자로 성장"
+    ],
+    "page": 61
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > CJ ENM [035760] _ Beyond K-Contents, 플랫폼 사업자로 성장\n\n-3) 커머스: CJ온스타일의 MD, 숏폼 콘텐츠, 인플루언서 풀 강화하며 MLC 성장 및 수익성 개선을 이어갈 것으로 전망",
+    "raw_chunk": "-3) 커머스: CJ온스타일의 MD, 숏폼 콘텐츠, 인플루언서 풀 강화하며 MLC 성장 및 수익성 개선을 이어갈 것으로 전망",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > CJ ENM [035760] _ Beyond K-Contents, 플랫폼 사업자로 성장",
+    "section_path": [
+      "CJ ENM [035760] _ Beyond K-Contents, 플랫폼 사업자로 성장"
+    ],
+    "page": 61
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > CJ ENM [035760] _ Beyond K-Contents, 플랫폼 사업자로 성장\n\n목표주가 하향은 실적 추정치 하향에 기인하며 영화/드라마 목표 배수도 30배에",
+    "raw_chunk": "목표주가 하향은 실적 추정치 하향에 기인하며 영화/드라마 목표 배수도 30배에",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > CJ ENM [035760] _ Beyond K-Contents, 플랫폼 사업자로 성장",
+    "section_path": [
+      "CJ ENM [035760] _ Beyond K-Contents, 플랫폼 사업자로 성장"
+    ],
+    "page": 61
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > CJ ENM [035760] _ Beyond K-Contents, 플랫폼 사업자로 성장\n\n션을 활용하여 27년 실적에 미디어 플랫폼 15배, 영화/드라마 20배, 음악 25배,",
+    "raw_chunk": "션을 활용하여 27년 실적에 미디어 플랫폼 15배, 영화/드라마 20배, 음악 25배,",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > CJ ENM [035760] _ Beyond K-Contents, 플랫폼 사업자로 성장",
+    "section_path": [
+      "CJ ENM [035760] _ Beyond K-Contents, 플랫폼 사업자로 성장"
+    ],
+    "page": 61
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > CJ ENM [035760] _ Beyond K-Contents, 플랫폼 사업자로 성장 > Financial Data\n\n주가차트\n자료: CJ ENM, DS투자증권 리서치센터, K-IFRS 연결기준",
+    "raw_chunk": "주가차트\n자료: CJ ENM, DS투자증권 리서치센터, K-IFRS 연결기준",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > CJ ENM [035760] _ Beyond K-Contents, 플랫폼 사업자로 성장 > Financial Data",
+    "section_path": [
+      "CJ ENM [035760] _ Beyond K-Contents, 플랫폼 사업자로 성장",
+      "Financial Data"
+    ],
+    "page": 61
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 스튜디오드래곤 [253450] _ Beyond K-Drama, IP 사업자로 성장\n\n장지혜  미디어·엔터·음식료\n02-709-2336 \njihye.jang@ds-sec.co.kr",
+    "raw_chunk": "장지혜  미디어·엔터·음식료\n02-709-2336 \njihye.jang@ds-sec.co.kr",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 스튜디오드래곤 [253450] _ Beyond K-Drama, IP 사업자로 성장",
+    "section_path": [
+      "스튜디오드래곤 [253450] _ Beyond K-Drama, IP 사업자로 성장"
+    ],
+    "page": 65
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 스튜디오드래곤 [253450] _ Beyond K-Drama, IP 사업자로 성장\n\n[업데이트] 2Q26Pre: 전년비 넌캡티브 중심 제작 물량 확대와 수익 극대화",
+    "raw_chunk": "[업데이트] 2Q26Pre: 전년비 넌캡티브 중심 제작 물량 확대와 수익 극대화",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 스튜디오드래곤 [253450] _ Beyond K-Drama, IP 사업자로 성장",
+    "section_path": [
+      "스튜디오드래곤 [253450] _ Beyond K-Drama, IP 사업자로 성장"
+    ],
+    "page": 65
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 스튜디오드래곤 [253450] _ Beyond K-Drama, IP 사업자로 성장\n\n래곤 2분기 실적은 연결 매출액 1,478억원(+29% YoY), 영업이익 145억원(흑",
+    "raw_chunk": "래곤 2분기 실적은 연결 매출액 1,478억원(+29% YoY), 영업이익 145억원(흑",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 스튜디오드래곤 [253450] _ Beyond K-Drama, IP 사업자로 성장",
+    "section_path": [
+      "스튜디오드래곤 [253450] _ Beyond K-Drama, IP 사업자로 성장"
+    ],
+    "page": 65
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 스튜디오드래곤 [253450] _ Beyond K-Drama, IP 사업자로 성장\n\n-스튜디오드래곤 2분기 실적은 연결 매출액 1,478억원(+29% YoY), 영업이익 145억원(흑전, OPM 9.8%)으로 시장기대치 부합 전망 \n-당분기 방영 회차는 77회(TV 50+OTT 27) 중 캡티브 24회. 총 회차는 2Q25 41회 대비 +36회 YoY, 1Q26 91회 대비 -15회 QoQ 기록",
+    "raw_chunk": "-스튜디오드래곤 2분기 실적은 연결 매출액 1,478억원(+29% YoY), 영업이익 145억원(흑전, OPM 9.8%)으로 시장기대치 부합 전망 \n-당분기 방영 회차는 77회(TV 50+OTT 27) 중 캡티브 24회. 총 회차는 2Q25 41회 대비 +36회 YoY, 1Q26 91회 대비 -15회 QoQ 기록",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 스튜디오드래곤 [253450] _ Beyond K-Drama, IP 사업자로 성장",
+    "section_path": [
+      "스튜디오드래곤 [253450] _ Beyond K-Drama, IP 사업자로 성장"
+    ],
+    "page": 65
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 스튜디오드래곤 [253450] _ Beyond K-Drama, IP 사업자로 성장\n\n-주요 인식 작품은 은밀한 감사(tvN), 멋진 신세계(SBS), 유미의 세포들3(Tving), 취사병 전설이 되다(Tving), 골드랜드(Disney+) 등",
+    "raw_chunk": "-주요 인식 작품은 은밀한 감사(tvN), 멋진 신세계(SBS), 유미의 세포들3(Tving), 취사병 전설이 되다(Tving), 골드랜드(Disney+) 등",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 스튜디오드래곤 [253450] _ Beyond K-Drama, IP 사업자로 성장",
+    "section_path": [
+      "스튜디오드래곤 [253450] _ Beyond K-Drama, IP 사업자로 성장"
+    ],
+    "page": 65
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 스튜디오드래곤 [253450] _ Beyond K-Drama, IP 사업자로 성장\n\n-선판매는 아마존향으로 <세이렌>, <내일도 출근> 각각 2회, 4회로 총 6회차에 불과. 맨 끝줄 소년(Neflix) 6회차는 순매출로 인식",
+    "raw_chunk": "-선판매는 아마존향으로 <세이렌>, <내일도 출근> 각각 2회, 4회로 총 6회차에 불과. 맨 끝줄 소년(Neflix) 6회차는 순매출로 인식",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 스튜디오드래곤 [253450] _ Beyond K-Drama, IP 사업자로 성장",
+    "section_path": [
+      "스튜디오드래곤 [253450] _ Beyond K-Drama, IP 사업자로 성장"
+    ],
+    "page": 65
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 스튜디오드래곤 [253450] _ Beyond K-Drama, IP 사업자로 성장\n\n-다만 수익 면에서 제작비 효율화 기조가 이어지고 은밀한 감사와 같은 작품이 지역별 판매가 호조를 기록하며 이익 견조할 것으로 기",
+    "raw_chunk": "-다만 수익 면에서 제작비 효율화 기조가 이어지고 은밀한 감사와 같은 작품이 지역별 판매가 호조를 기록하며 이익 견조할 것으로 기",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 스튜디오드래곤 [253450] _ Beyond K-Drama, IP 사업자로 성장",
+    "section_path": [
+      "스튜디오드래곤 [253450] _ Beyond K-Drama, IP 사업자로 성장"
+    ],
+    "page": 65
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 스튜디오드래곤 [253450] _ Beyond K-Drama, IP 사업자로 성장\n\n라마 본업은 제작비 효율화와 판매 채널 다각화로 수익 극대화 및 IP 신",
+    "raw_chunk": "라마 본업은 제작비 효율화와 판매 채널 다각화로 수익 극대화 및 IP 신",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 스튜디오드래곤 [253450] _ Beyond K-Drama, IP 사업자로 성장",
+    "section_path": [
+      "스튜디오드래곤 [253450] _ Beyond K-Drama, IP 사업자로 성장"
+    ],
+    "page": 65
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 스튜디오드래곤 [253450] _ Beyond K-Drama, IP 사업자로 성장\n\n매출액 5,891억원(+11% YoY), 영업이익 451억원(+49% YoY, OPM 7.7%) 전",
+    "raw_chunk": "매출액 5,891억원(+11% YoY), 영업이익 451억원(+49% YoY, OPM 7.7%) 전",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 스튜디오드래곤 [253450] _ Beyond K-Drama, IP 사업자로 성장",
+    "section_path": [
+      "스튜디오드래곤 [253450] _ Beyond K-Drama, IP 사업자로 성장"
+    ],
+    "page": 65
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 스튜디오드래곤 [253450] _ Beyond K-Drama, IP 사업자로 성장\n\n화 및 판매 전략 강화;  AI 활용 및 실비 정산 등 드라마 제작 비용 효율화와 작품 경",
+    "raw_chunk": "화 및 판매 전략 강화;  AI 활용 및 실비 정산 등 드라마 제작 비용 효율화와 작품 경",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 스튜디오드래곤 [253450] _ Beyond K-Drama, IP 사업자로 성장",
+    "section_path": [
+      "스튜디오드래곤 [253450] _ Beyond K-Drama, IP 사업자로 성장"
+    ],
+    "page": 65
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 스튜디오드래곤 [253450] _ Beyond K-Drama, IP 사업자로 성장\n\n-동사는 커머스, 디지털, 캐릭터, 휴먼IP 4가지 영역으로 IP사업 다각화. IP 매출 비중 22-25년 평균 3%에서 중장기적 30%까지 확대 계획",
+    "raw_chunk": "-동사는 커머스, 디지털, 캐릭터, 휴먼IP 4가지 영역으로 IP사업 다각화. IP 매출 비중 22-25년 평균 3%에서 중장기적 30%까지 확대 계획",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 스튜디오드래곤 [253450] _ Beyond K-Drama, IP 사업자로 성장",
+    "section_path": [
+      "스튜디오드래곤 [253450] _ Beyond K-Drama, IP 사업자로 성장"
+    ],
+    "page": 65
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 스튜디오드래곤 [253450] _ Beyond K-Drama, IP 사업자로 성장\n\n래곤의 목표주가 하향은 12M Fwd EPS로 실적 기간 조정 및 목표배수 PER 20배",
+    "raw_chunk": "래곤의 목표주가 하향은 12M Fwd EPS로 실적 기간 조정 및 목표배수 PER 20배",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 스튜디오드래곤 [253450] _ Beyond K-Drama, IP 사업자로 성장",
+    "section_path": [
+      "스튜디오드래곤 [253450] _ Beyond K-Drama, IP 사업자로 성장"
+    ],
+    "page": 65
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 스튜디오드래곤 [253450] _ Beyond K-Drama, IP 사업자로 성장\n\n한 목표주가 산출 방식에서 비교 편의성과 수익화 확대 전략을 감안해 PER 20배 적",
+    "raw_chunk": "한 목표주가 산출 방식에서 비교 편의성과 수익화 확대 전략을 감안해 PER 20배 적",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 스튜디오드래곤 [253450] _ Beyond K-Drama, IP 사업자로 성장",
+    "section_path": [
+      "스튜디오드래곤 [253450] _ Beyond K-Drama, IP 사업자로 성장"
+    ],
+    "page": 65
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 스튜디오드래곤 [253450] _ Beyond K-Drama, IP 사업자로 성장 > Financial Data\n\n주가차트\n자료: 스튜디오드래곤, DS투자증권 리서치센터, K-IFRS 연결기준",
+    "raw_chunk": "주가차트\n자료: 스튜디오드래곤, DS투자증권 리서치센터, K-IFRS 연결기준",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 스튜디오드래곤 [253450] _ Beyond K-Drama, IP 사업자로 성장 > Financial Data",
+    "section_path": [
+      "스튜디오드래곤 [253450] _ Beyond K-Drama, IP 사업자로 성장",
+      "Financial Data"
+    ],
+    "page": 65
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 투자의견 및 목표주가 변동추이 > Compliance Notice\n\n물로서 모든 저작권은 당사에게 있으며 어떠한 경우에도 당사의 동의 없이 복제, 배포, 전송, 변",
+    "raw_chunk": "물로서 모든 저작권은 당사에게 있으며 어떠한 경우에도 당사의 동의 없이 복제, 배포, 전송, 변",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 투자의견 및 목표주가 변동추이 > Compliance Notice",
+    "section_path": [
+      "투자의견 및 목표주가 변동추이",
+      "Compliance Notice"
+    ],
+    "page": 73
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 투자의견 및 목표주가 변동추이 > Compliance Notice\n\n권은 당사에게 있으며 어떠한 경우에도 당사의 동의 없이 복제, 배포, 전송, 변형될 수 없습니다",
+    "raw_chunk": "권은 당사에게 있으며 어떠한 경우에도 당사의 동의 없이 복제, 배포, 전송, 변형될 수 없습니다",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 투자의견 및 목표주가 변동추이 > Compliance Notice",
+    "section_path": [
+      "투자의견 및 목표주가 변동추이",
+      "Compliance Notice"
+    ],
+    "page": 73
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 투자의견 및 목표주가 변동추이 > Compliance Notice\n\n동 자료의 추천종목은 전일 기준 현재 당사의 조사분석 담당자 및 그 배우자 등 관련자가 보유하고 있지 않습니다.",
+    "raw_chunk": "동 자료의 추천종목은 전일 기준 현재 당사의 조사분석 담당자 및 그 배우자 등 관련자가 보유하고 있지 않습니다.",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 투자의견 및 목표주가 변동추이 > Compliance Notice",
+    "section_path": [
+      "투자의견 및 목표주가 변동추이",
+      "Compliance Notice"
+    ],
+    "page": 73
+  },
+  {
+    "text": "이 chunk는 다음 문맥에 속합니다: KWave > 투자의견 및 목표주가 변동추이 > Compliance Notice\n\n동 자료의 추천종목에 해당하는 회사는 당사와 계열회사 관계에 있지 않습니다.",
+    "raw_chunk": "동 자료의 추천종목에 해당하는 회사는 당사와 계열회사 관계에 있지 않습니다.",
+    "context_prefix": "이 chunk는 다음 문맥에 속합니다: KWave > 투자의견 및 목표주가 변동추이 > Compliance Notice",
+    "section_path": [
+      "투자의견 및 목표주가 변동추이",
+      "Compliance Notice"
+    ],
+    "page": 73
+  }
+]

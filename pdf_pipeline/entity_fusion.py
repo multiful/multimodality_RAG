@@ -6,6 +6,12 @@ ERD의 "엔티티 합성: PDF 객체 비율 가중치 정제" 반영 — "가중
 차이를 가중치로 표현한 것: 표(canonical field 매칭)/이미지(구조화 추출)처럼 이미 한 번 구조화를
 거친 근거는 자유 텍스트 청크보다 수치가 명확하므로 기본 가중치를 더 준다. 이 가중치는
 hybrid_search()의 fused score에 곱해져 검색 순위에 반영된다.
+
+[48] 사용자 지적("정적으로 고정하면 안 되겠지?") 반영 — 표 evidence를 소스 타입 하나로만
+뭉뚱그려 항상 고정 가중치를 주던 걸, canonical_field 매칭 여부(이미 계산돼 있는 품질 신호)로
+행마다 동적 결정하도록 변경(`from_table_records()`). 가중치 학습(경사하강법 등)은 채택 안 함 —
+학습 데이터가 없고, 이 관계는 이미 실측(C밴드.pdf)으로 확인된 이산 신호라 학습 없이 규칙으로
+바로 반영 가능. `실험_pipeline_baseline_비교.md`/text_processing 실험.md [48] 참고.
 """
 from __future__ import annotations
 
@@ -23,33 +29,58 @@ SOURCE_WEIGHTS = {
     "text": 1.0,    # 자유 텍스트 청크(기준)
 }
 
+# [48] 사용자 지적("정적으로 고정하면 안 되겠지?") 반영 — 표 evidence를 소스 타입 하나로만
+# 뭉뚱그려 항상 1.3을 주면 안 됨을 실측으로 확인(C밴드.pdf: "투자의견 변동 내역"류 표 8개,
+# 64행 전부 canonical_field 매칭 0% — 표준 필드로 확인 안 된 행은 회사명 등 식별자가 아예
+# 없이 "24.12.18: [BUY,40000,...]"만 남는데, 이게 검색 상위에 뜨면 LLM이 엉뚱한 회사에
+# 갖다붙이는 실제 오답을 냄, [47] 참고). canonical_field가 실제로 매칭된 행만 "구조화 확인
+# 완료"로 보고 기존 가중치(1.3)를 주고, 매칭 안 된 행은 text 기준(1.0)보다도 낮게(0.6) —
+# 학습이 아니라 이미 계산된 품질 신호(canonical_field 매칭 여부)로 조건부 결정하는 규칙
+# 기반 접근(학습 데이터도 없고, 이 관계는 이미 실측으로 확인된 이산 신호라 학습이 불필요).
+UNMATCHED_TABLE_WEIGHT = 0.6
+
 
 def from_text_chunks(pdf_id: str, chunks: list) -> list:
     """text_processing.text_extraction.process_pdf() 결과의 chunk들(process_pdf_result["pages"][i]
-    ["chunks"]를 모은 것)을 evidence 아이템으로 변환."""
-    return [
-        {
+    ["chunks"]를 모은 것)을 evidence 아이템으로 변환.
+
+    [49] 사용자 지적("구조화 메타데이터가 정말 병렬/비동기로 붙는 거 맞아?") 검증 중 발견 —
+    이 함수가 chunk의 structured_metadata(entities/sector_mentioned/sentiment 등)를 metadata에
+    안 담고 있었음. process_pdf_streaming()의 설계 의도(구조화 출력은 별도 느린 백그라운드 잡)를
+    실제로 쓰려면 나중에 이 필드가 채워진 chunk로 다시 부를 때 그걸 저장 스키마에 실어야 하는데,
+    그 통로 자체가 없었던 것 — 있으면 담고, 없으면(아직 안 끝난 경우) 생략."""
+    items = []
+    for i, c in enumerate(chunks):
+        metadata = {"section_path": c.get("section_path")}
+        if c.get("structured_metadata"):
+            metadata["structured_metadata"] = c["structured_metadata"]
+        items.append({
             "id": f"{pdf_id}_text_{i}", "pdf_id": pdf_id, "source_type": "text",
             "page": c.get("page"), "content": c["text"], "weight": SOURCE_WEIGHTS["text"],
-            "metadata": {"section_path": c.get("section_path")},
-        }
-        for i, c in enumerate(chunks)
-    ]
+            "metadata": metadata,
+        })
+    return items
 
 
 def from_table_records(pdf_id: str, row_records: list) -> list:
     """table_processing.run_table_metadata_pipeline.build_records()가 반환한 row_records(순수
     재무항목 필터 통과한 모든 행, canonical 매칭 여부 무관)를 evidence 아이템으로 변환. 한 행 =
-    "라벨: 값들" 짧은 문장으로 직렬화해 임베딩 대상 텍스트를 만든다."""
+    "라벨: 값들" 짧은 문장으로 직렬화해 임베딩 대상 텍스트를 만든다.
+
+    [48] 가중치를 행마다 canonical_field 매칭 여부로 동적 결정 — 매칭된 행은 표준 필드로
+    확인된 만큼 기존대로 신뢰(SOURCE_WEIGHTS["table"]=1.3), 매칭 안 된 행은 UNMATCHED_TABLE_
+    WEIGHT(0.6, text 기준 1.0보다 낮음)로 강등. 모든 행에 소스 하나로 뭉뚱그린 고정값을 주지
+    않는다."""
     items = []
     for i, r in enumerate(row_records):
         cells = r.get("cells") or r.get("numeric_values") or []
         if not cells:
             continue
+        weight = SOURCE_WEIGHTS["table"] if r.get("canonical_field") else UNMATCHED_TABLE_WEIGHT
         items.append({
             "id": f"{pdf_id}_table_{i}", "pdf_id": pdf_id, "source_type": "table",
             "page": r.get("page"), "content": f"{r['raw_label']}: {cells}",
-            "weight": SOURCE_WEIGHTS["table"],
+            "weight": weight,
             "metadata": {"canonical_field": r.get("canonical_field"), "table_idx": r.get("table_idx")},
         })
     return items

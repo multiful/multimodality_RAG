@@ -88,7 +88,11 @@ class TextChunkMetadata(BaseModel):
     time_period: Optional[str]
     sentiment: Literal["positive", "neutral", "negative"]
     contains_forward_looking_statement: bool
-    summary: str
+    # [47] 사용자 지적("지연/토큰 병목 잡아줘") 반영 — summary 필드 제거. 실측(C밴드.pdf 1페이지
+    # 23청크)으로 completion_tokens 1829->1407(-23%), 호출시간 16.71s->12.95s(-22%)로 확인 —
+    # 이 필드가 chunk당 가장 비싼 출력이었는데, raw_chunk 자체가 이미 짧고 인용 가능한 단위라
+    # 별도 1문장 요약의 실익이 낮다고 판단(원래 이 필드들은 "초안"이라 사용자가 가감할 예정이라고
+    # 모듈 docstring에 명시돼 있었음).
 
 
 class _TextChunkMetadataBatch(BaseModel):
@@ -104,22 +108,21 @@ _TEXT_METADATA_PROMPT = (
     "- metric_mentions: 언급된 재무/수치 지표명(라벨만, 값은 이미 별도 파이프라인에서 추출되므로 값은 적지 말 것)\n"
     "- time_period: 언급된 시점/기간(예: 2026E, 3Q25, 없으면 null)\n"
     "- sentiment: 투자 관점에서 이 chunk의 논조(positive/neutral/negative)\n"
-    "- contains_forward_looking_statement: 전망/추정 문장 포함 여부\n"
-    "- summary: 1문장 요약\n\n"
+    "- contains_forward_looking_statement: 전망/추정 문장 포함 여부\n\n"
     "{doc_title_line}{chunks_block}"
 )
 
+# [47] 한 페이지의 청크 수가 이보다 많으면 이 크기로 쪼개 ThreadPoolExecutor로 동시 호출.
+# 실측(C밴드.pdf 1페이지 23청크, 이례적으로 많은 케이스 — Top Picks 11종목이 각자 한 줄씩
+# 청크가 돼서 발생)으로 한 번에 몰아치면 출력 토큰이 커져 생성 자체가 느려짐(단일 호출
+# 12.95s) — 8개씩 3배치로 쪼개 동시 호출하니 8.22s로 단축(총 토큰은 배치당 반복되는 지시문
+# 오버헤드 때문에 오히려 소폭 늘었지만, 여러 호출이 동시에 진행되니 벽시계 기준 지연은 줆).
+_TEXT_METADATA_BATCH_SIZE = 8
 
-def extract_text_chunk_metadata(chunks: list, doc_title: str = None, client=None,
-                                 model_name: str = _DEFAULT_MODEL, sector: str = None) -> list:
-    """텍스트 라우팅 끝에서 호출 — 한 페이지의 chunk들(raw_chunk + section_path)을 한 번의 API
-    호출로 배치 처리(청크마다 호출하면 페이지당 API 호출 수가 너무 많아짐). 반환은 입력 chunks와
-    같은 길이/순서의 dict 리스트(항목별 병합은 호출측이 수행 — chunk_index로 정렬해 매칭하므로
-    LLM이 순서를 안 지켜도 안전). sector: [37] `sector_classifier.classify_pdf_sector()`로 이미
-    판별한 섹터명을 넘기면 그 섹터에 특화된 지표 힌트를 프롬프트에 주입(선택, 없어도 동작)."""
-    if not chunks:
-        return []
-    client = _get_client(client)
+
+def _extract_text_chunk_metadata_single_call(chunks: list, doc_title: str, client, model_name: str,
+                                              sector: str) -> list:
+    """단일 API 호출로 처리 가능한 크기(<=_TEXT_METADATA_BATCH_SIZE)의 청크 배치 하나를 처리."""
     chunks_block = "\n\n".join(
         f"[chunk_index={i}] (섹션: {' > '.join(c.get('section_path') or []) or '없음'})\n{c['raw_chunk']}"
         for i, c in enumerate(chunks)
@@ -133,6 +136,34 @@ def extract_text_chunk_metadata(chunks: list, doc_title: str = None, client=None
     parsed = resp.choices[0].message.parsed
     by_index = {item.chunk_index: item for item in parsed.items}
     return [by_index[i].model_dump() if i in by_index else None for i in range(len(chunks))]
+
+
+def extract_text_chunk_metadata(chunks: list, doc_title: str = None, client=None,
+                                 model_name: str = _DEFAULT_MODEL, sector: str = None) -> list:
+    """텍스트 라우팅 끝에서 호출 — 한 페이지의 chunk들(raw_chunk + section_path)을 API 호출로
+    배치 처리(청크마다 호출하면 페이지당 API 호출 수가 너무 많아짐). 반환은 입력 chunks와 같은
+    길이/순서의 dict 리스트(항목별 병합은 호출측이 수행 — chunk_index로 정렬해 매칭하므로 LLM이
+    순서를 안 지켜도 안전). sector: [37] `sector_classifier.classify_pdf_sector()`로 이미 판별한
+    섹터명을 넘기면 그 섹터에 특화된 지표 힌트를 프롬프트에 주입(선택, 없어도 동작).
+
+    [47] 청크 수가 `_TEXT_METADATA_BATCH_SIZE`(8) 이하면 기존처럼 1회 호출. 그보다 많으면(예:
+    Top Picks 여러 종목이 각자 청크가 되는 산업분석 리포트 1페이지처럼 청크가 몰리는 경우)
+    배치로 쪼개 `concurrent.futures.ThreadPoolExecutor`로 동시 호출 — 실측 지연 12.95s->8.22s."""
+    if not chunks:
+        return []
+    client = _get_client(client)
+
+    if len(chunks) <= _TEXT_METADATA_BATCH_SIZE:
+        return _extract_text_chunk_metadata_single_call(chunks, doc_title, client, model_name, sector)
+
+    from concurrent.futures import ThreadPoolExecutor
+    batches = [chunks[i:i + _TEXT_METADATA_BATCH_SIZE]
+               for i in range(0, len(chunks), _TEXT_METADATA_BATCH_SIZE)]
+    with ThreadPoolExecutor(max_workers=len(batches)) as executor:
+        batch_results = list(executor.map(
+            lambda b: _extract_text_chunk_metadata_single_call(b, doc_title, client, model_name, sector),
+            batches))
+    return [meta for batch in batch_results for meta in batch]
 
 
 # ---------- 표 라우팅 끝: 표 단위 구조화 메타데이터 ----------

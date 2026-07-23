@@ -1,0 +1,309 @@
+{
+  "query": "이 PDF에 나오는 기업의 이벤트 요약과 투자 인사이트를 도출해줘",
+  "top_k": 10,
+  "results": {
+    "KWave": {
+      "dense-only": {
+        "ndcg@k": 0.2891,
+        "map@k": 0.0053,
+        "mrr": 0.1,
+        "recall@k": 0.0526,
+        "precision@k": 0.1,
+        "f1@k": 0.069,
+        "n_gold_found_in_top_k": 1,
+        "n_gold_total": 19,
+        "latency_s": 0.101
+      },
+      "dense+BM25(weighted_sum)": {
+        "ndcg@k": 0.0,
+        "map@k": 0.0,
+        "mrr": 0.0,
+        "recall@k": 0.0,
+        "precision@k": 0.0,
+        "f1@k": 0.0,
+        "n_gold_found_in_top_k": 0,
+        "n_gold_total": 19,
+        "latency_s": 0.022
+      },
+      "dense+BM25(RRF)": {
+        "ndcg@k": 0.0,
+        "map@k": 0.0,
+        "mrr": 0.0,
+        "recall@k": 0.0,
+        "precision@k": 0.0,
+        "f1@k": 0.0,
+        "n_gold_found_in_top_k": 0,
+        "n_gold_total": 19,
+        "latency_s": 0.014
+      },
+      "MQE": {
+        "ndcg@k": 0.8385,
+        "map@k": 0.1053,
+        "mrr": 1.0,
+        "recall@k": 0.1579,
+        "precision@k": 0.3,
+        "f1@k": 0.2069,
+        "n_gold_found_in_top_k": 3,
+        "n_gold_total": 19,
+        "latency_s": 1.46
+      },
+      "MQE(BM25 제외)": {
+        "ndcg@k": 0.8989,
+        "map@k": 0.1579,
+        "mrr": 1.0,
+        "recall@k": 0.2105,
+        "precision@k": 0.4,
+        "f1@k": 0.2759,
+        "n_gold_found_in_top_k": 4,
+        "n_gold_total": 19,
+        "latency_s": 1.937
+      },
+      "HyDE": {
+        "ndcg@k": 0.3155,
+        "map@k": 0.0066,
+        "mrr": 0.125,
+        "recall@k": 0.0526,
+        "precision@k": 0.1,
+        "f1@k": 0.069,
+        "n_gold_found_in_top_k": 1,
+        "n_gold_total": 19,
+        "latency_s": 5.235
+      },
+      "HyDE(BM25 제외)": {
+        "ndcg@k": 0.7316,
+        "map@k": 0.1281,
+        "mrr": 0.5,
+        "recall@k": 0.2105,
+        "precision@k": 0.4,
+        "f1@k": 0.2759,
+        "n_gold_found_in_top_k": 4,
+        "n_gold_total": 19,
+        "latency_s": 4.124
+      },
+      "쿼리타입 라우팅(구, 항상 MQE)": {
+        "ndcg@k": 0.906,
+        "map@k": 0.1272,
+        "mrr": 1.0,
+        "recall@k": 0.1579,
+        "precision@k": 0.3,
+        "f1@k": 0.2069,
+        "n_gold_found_in_top_k": 3,
+        "n_gold_total": 19,
+        "latency_s": 1.51
+      },
+      "쿼리타입 라우팅(신, 엔티티인식)": {
+        "ndcg@k": 0.8711,
+        "map@k": 0.114,
+        "mrr": 1.0,
+        "recall@k": 0.1579,
+        "precision@k": 0.3,
+        "f1@k": 0.2069,
+        "n_gold_found_in_top_k": 3,
+        "n_gold_total": 19,
+        "latency_s": 1.531
+      }
+    },
+    "LGCNS": {
+      "dense-only": {
+        "ndcg@k": 0.7336,
+        "map@k": 0.5867,
+        "mrr": 0.5,
+        "recall@k": 1.0,
+        "precision@k": 0.5,
+        "f1@k": 0.6667,
+        "n_gold_found_in_top_k": 5,
+        "n_gold_total": 5,
+        "latency_s": 0.021
+      },
+      "dense+BM25(weighted_sum)": {
+        "ndcg@k": 0.6476,
+        "map@k": 0.481,
+        "mrr": 0.3333,
+        "recall@k": 1.0,
+        "precision@k": 0.5,
+        "f1@k": 0.6667,
+        "n_gold_found_in_top_k": 5,
+        "n_gold_total": 5,
+        "latency_s": 0.015
+      },
+      "dense+BM25(RRF)": {
+        "ndcg@k": 0.6125,
+        "map@k": 0.4302,
+        "mrr": 0.3333,
+        "recall@k": 1.0,
+        "precision@k": 0.5,
+        "f1@k": 0.6667,
+        "n_gold_found_in_top_k": 5,
+        "n_gold_total": 5,
+        "latency_s": 0.015
+      },
+      "MQE": {
+        "ndcg@k": 0.5701,
+        "map@k": 0.3924,
+        "mrr": 0.2,
+        "recall@k": 1.0,
+        "precision@k": 0.5,
+        "f1@k": 0.6667,
+        "n_gold_found_in_top_k": 5,
+        "n_gold_total": 5,
+        "latency_s": 1.372
+      },
+      "MQE(BM25 제외)": {
+        "ndcg@k": 0.7336,
+        "map@k": 0.5867,
+        "mrr": 0.5,
+        "recall@k": 1.0,
+        "precision@k": 0.5,
+        "f1@k": 0.6667,
+        "n_gold_found_in_top_k": 5,
+        "n_gold_total": 5,
+        "latency_s": 2.652
+      },
+      "HyDE": {
+        "ndcg@k": 0.6307,
+        "map@k": 0.4578,
+        "mrr": 0.3333,
+        "recall@k": 1.0,
+        "precision@k": 0.5,
+        "f1@k": 0.6667,
+        "n_gold_found_in_top_k": 5,
+        "n_gold_total": 5,
+        "latency_s": 3.933
+      },
+      "HyDE(BM25 제외)": {
+        "ndcg@k": 0.9668,
+        "map@k": 0.9,
+        "mrr": 1.0,
+        "recall@k": 1.0,
+        "precision@k": 0.5,
+        "f1@k": 0.6667,
+        "n_gold_found_in_top_k": 5,
+        "n_gold_total": 5,
+        "latency_s": 4.757
+      },
+      "쿼리타입 라우팅(구, 항상 MQE)": {
+        "ndcg@k": 0.7485,
+        "map@k": 0.6167,
+        "mrr": 0.5,
+        "recall@k": 1.0,
+        "precision@k": 0.5,
+        "f1@k": 0.6667,
+        "n_gold_found_in_top_k": 5,
+        "n_gold_total": 5,
+        "latency_s": 1.387
+      },
+      "쿼리타입 라우팅(신, 엔티티인식)": {
+        "ndcg@k": 0.9668,
+        "map@k": 0.9,
+        "mrr": 1.0,
+        "recall@k": 1.0,
+        "precision@k": 0.5,
+        "f1@k": 0.6667,
+        "n_gold_found_in_top_k": 5,
+        "n_gold_total": 5,
+        "latency_s": 5.275
+      }
+    },
+    "납기": {
+      "dense-only": {
+        "ndcg@k": 0.5724,
+        "map@k": 0.1889,
+        "mrr": 0.3333,
+        "recall@k": 0.5,
+        "precision@k": 0.3,
+        "f1@k": 0.375,
+        "n_gold_found_in_top_k": 3,
+        "n_gold_total": 6,
+        "latency_s": 0.014
+      },
+      "dense+BM25(weighted_sum)": {
+        "ndcg@k": 0.6241,
+        "map@k": 0.15,
+        "mrr": 0.5,
+        "recall@k": 0.3333,
+        "precision@k": 0.2,
+        "f1@k": 0.25,
+        "n_gold_found_in_top_k": 2,
+        "n_gold_total": 6,
+        "latency_s": 0.014
+      },
+      "dense+BM25(RRF)": {
+        "ndcg@k": 0.525,
+        "map@k": 0.1111,
+        "mrr": 0.3333,
+        "recall@k": 0.3333,
+        "precision@k": 0.2,
+        "f1@k": 0.25,
+        "n_gold_found_in_top_k": 2,
+        "n_gold_total": 6,
+        "latency_s": 0.014
+      },
+      "MQE": {
+        "ndcg@k": 0.6189,
+        "map@k": 0.2056,
+        "mrr": 0.5,
+        "recall@k": 0.5,
+        "precision@k": 0.3,
+        "f1@k": 0.375,
+        "n_gold_found_in_top_k": 3,
+        "n_gold_total": 6,
+        "latency_s": 1.426
+      },
+      "MQE(BM25 제외)": {
+        "ndcg@k": 0.5798,
+        "map@k": 0.175,
+        "mrr": 0.5,
+        "recall@k": 0.5,
+        "precision@k": 0.3,
+        "f1@k": 0.375,
+        "n_gold_found_in_top_k": 3,
+        "n_gold_total": 6,
+        "latency_s": 1.63
+      },
+      "HyDE": {
+        "ndcg@k": 0.5013,
+        "map@k": 0.1083,
+        "mrr": 0.25,
+        "recall@k": 0.3333,
+        "precision@k": 0.2,
+        "f1@k": 0.25,
+        "n_gold_found_in_top_k": 2,
+        "n_gold_total": 6,
+        "latency_s": 3.517
+      },
+      "HyDE(BM25 제외)": {
+        "ndcg@k": 0.5013,
+        "map@k": 0.1083,
+        "mrr": 0.25,
+        "recall@k": 0.3333,
+        "precision@k": 0.2,
+        "f1@k": 0.25,
+        "n_gold_found_in_top_k": 2,
+        "n_gold_total": 6,
+        "latency_s": 3.049
+      },
+      "쿼리타입 라우팅(구, 항상 MQE)": {
+        "ndcg@k": 0.6241,
+        "map@k": 0.15,
+        "mrr": 0.5,
+        "recall@k": 0.3333,
+        "precision@k": 0.2,
+        "f1@k": 0.25,
+        "n_gold_found_in_top_k": 2,
+        "n_gold_total": 6,
+        "latency_s": 1.377
+      },
+      "쿼리타입 라우팅(신, 엔티티인식)": {
+        "ndcg@k": 0.672,
+        "map@k": 0.25,
+        "mrr": 0.5,
+        "recall@k": 0.5,
+        "precision@k": 0.3,
+        "f1@k": 0.375,
+        "n_gold_found_in_top_k": 3,
+        "n_gold_total": 6,
+        "latency_s": 1.697
+      }
+    }
+  }
+}

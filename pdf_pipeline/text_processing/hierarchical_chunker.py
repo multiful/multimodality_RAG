@@ -45,6 +45,46 @@ def _dedupe_overlapping(items: list, tol_pt: float = 5.0) -> list:
     return kept
 
 
+def _rect_containment_ratio(inner: tuple, outer: tuple) -> float:
+    """inner 박스 면적 중 outer 박스와 겹치는 비율(0~1) — inner가 outer 안에 완전히 들어있으면 1.0."""
+    ix0, iy0, ix1, iy1 = inner
+    ox0, oy0, ox1, oy1 = outer
+    x0, y0 = max(ix0, ox0), max(iy0, oy0)
+    x1, y1 = min(ix1, ox1), min(iy1, oy1)
+    if x1 <= x0 or y1 <= y0:
+        return 0.0
+    inter = (x1 - x0) * (y1 - y0)
+    inner_area = (ix1 - ix0) * (iy1 - iy0)
+    return inter / inner_area if inner_area > 0 else 0.0
+
+
+def _dedupe_contained_fragments(items: list, containment_ratio: float = 0.9) -> list:
+    """[48] 사용자 지적("실제 pdf에서 텍스트를 잘 뽑아내는지 봐줘")으로 실측 발견 — YOLO가 같은
+    텍스트 영역에 대해 "전체를 담은 큰 박스"와 "그 안의 한 줄만 담은 작은 박스"를 동시에
+    검출하는 경우가 있음(NMS가 포함관계 박스는 IoU 낮아서 잘 못 잡음). 실측(C밴드.pdf "Top
+    Picks" 목록): "쏠리드(050890)\nBUY | TP 30,000원 | CP 9,100원"(전체 박스)과 "쏠리드(050890)"
+    (부분 박스), "BUY | TP 30,000원 | CP 9,100원"(부분 박스)이 각각 3개 Text 클래스로 검출됨 —
+    _dedupe_overlapping()은 텍스트가 정확히 같아야만 중복으로 보므로(부분 문자열은 안 잡음)
+    이 경우를 못 거름. 그 결과 회사명 없이 "BUY | TP..."만 있는 청크가 따로 생겨서, 검색이
+    그 청크를 회사명 청크와 별도로 반환하면 LLM이 엉뚱한 회사에 갖다붙이는 실제 오답으로
+    이어짐(실험.md [48] 참고).
+
+    한 박스의 텍스트가 다른 박스 텍스트의 부분 문자열이고, 박스 영역도 containment_ratio(0.9)
+    이상 겹치면 "같은 내용의 부분집합"으로 보고 작은(부분) 박스를 버리고 큰(전체) 박스만 남긴다."""
+    to_drop = set()
+    for i, a in enumerate(items):
+        if i in to_drop:
+            continue
+        for j, b in enumerate(items):
+            if i == j or j in to_drop or len(b["text"]) >= len(a["text"]):
+                continue
+            if b["text"] not in a["text"]:
+                continue
+            if _rect_containment_ratio(b["rect"], a["rect"]) >= containment_ratio:
+                to_drop.add(j)
+    return [it for i, it in enumerate(items) if i not in to_drop]
+
+
 def _get_boxes_with_text(model, doc_fitz, page_idx: int, cached_boxes: list = None):
     """YOLO로 페이지의 Text/Title/Section-header/List-item/Caption 박스를 찾고, 각 박스 안의
     텍스트를 get_textbox()로 통째로(여러 줄 자동 결합) 추출한 뒤 `text_cleanup.
@@ -66,8 +106,10 @@ def _get_boxes_with_text(model, doc_fitz, page_idx: int, cached_boxes: list = No
             continue
         text = clean_extracted_text(page.get_textbox(rect).strip())
         if text:
-            items.append({"text": text, "y0": rect.y0, "x0": rect.x0, "cls": cls_name})
+            items.append({"text": text, "y0": rect.y0, "x0": rect.x0, "cls": cls_name,
+                          "rect": (rect.x0, rect.y0, rect.x1, rect.y1)})
     items = _dedupe_overlapping(items)
+    items = _dedupe_contained_fragments(items)  # [48] 포함관계 부분 박스 제거
     items.sort(key=lambda t: t["y0"])
     return items
 
