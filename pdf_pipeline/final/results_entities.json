@@ -1,0 +1,426 @@
+{
+  "target_set_size": 46,
+  "axes": {
+    "baseline": {
+      "axis": "baseline",
+      "latency": {
+        "extract_latency_s": 47.45,
+        "n_windows": 35,
+        "n_api_calls": 5
+      },
+      "recall_overall": 1.0,
+      "recall_hit": "46/46",
+      "recall_by_branch": {
+        "text": {
+          "recall": 1.0,
+          "hit": 9,
+          "n": 9,
+          "miss": []
+        },
+        "table": {
+          "recall": 1.0,
+          "hit": 40,
+          "n": 40,
+          "miss": []
+        },
+        "image": {
+          "recall": 1.0,
+          "hit": 7,
+          "n": 7,
+          "miss": []
+        }
+      },
+      "precision_strict": 0.273,
+      "precision_lenient": 0.979,
+      "f1_strict": 0.429,
+      "f1_lenient": 0.99,
+      "n_extracted": 242,
+      "tp": 66,
+      "out_of_scope(imprecise)": 171,
+      "non_entity_fp": 5,
+      "fp_examples": [
+        "하나증권",
+        "Vera Rubin",
+        "DRAMeXchange",
+        "Trend Force",
+        "TrendForce"
+      ],
+      "out_of_scope_examples": [
+        "UMC",
+        "MediaTek",
+        "Powertech",
+        "티에스이",
+        "코미코",
+        "후성",
+        "하나머티리얼즈",
+        "에스앤에스텍",
+        "레이크머티리얼즈",
+        "이엔에프테크놀로지",
+        "에프에스티",
+        "티에프이"
+      ],
+      "metadata": {
+        "sentiment_dist": {
+          "negative": 16,
+          "neutral": 13,
+          "positive": 6
+        },
+        "sector_detected": [
+          "반도체",
+          "서버 및 모바일",
+          "스마트폰",
+          "반도체 및 소부장"
+        ],
+        "time_periods": [
+          "2026.6.29",
+          "2026E",
+          "2026",
+          "2026년 06월 26일"
+        ],
+        "n_metric_mentions": 36
+      }
+    },
+    "enhanced": {
+      "axis": "enhanced",
+      "latency": {
+        "extract_latency_s": 54.58,
+        "n_windows": 36,
+        "n_api_calls": 5
+      },
+      "recall_overall": 0.957,
+      "recall_hit": "44/46",
+      "recall_by_branch": {
+        "text": {
+          "recall": 0.889,
+          "hit": 8,
+          "n": 9,
+          "miss": [
+            "Google"
+          ]
+        },
+        "table": {
+          "recall": 1.0,
+          "hit": 40,
+          "n": 40,
+          "miss": []
+        },
+        "image": {
+          "recall": 0.857,
+          "hit": 6,
+          "n": 7,
+          "miss": [
+            "MSI"
+          ]
+        }
+      },
+      "precision_strict": 0.305,
+      "precision_lenient": 0.985,
+      "f1_strict": 0.463,
+      "f1_lenient": 0.971,
+      "n_extracted": 203,
+      "tp": 62,
+      "out_of_scope(imprecise)": 138,
+      "non_entity_fp": 3,
+      "fp_examples": [
+        "하나증권",
+        "NAND",
+        "DRAM"
+      ],
+      "out_of_scope_examples": [
+        "Wistron",
+        "Realtek",
+        "King Yuan",
+        "PSMC",
+        "Nanya",
+        "Winbond",
+        "Chipmos",
+        "Faraday",
+        "Formosa",
+        "Walton",
+        "한미반도체",
+        "이오테크닉스"
+      ],
+      "metadata": {
+        "sentiment_dist": {
+          "positive": 1,
+          "neutral": 24,
+          "negative": 11
+        },
+        "sector_detected": [
+          "반도체",
+          "화학",
+          "IT",
+          "전자기기",
+          "세전이익",
+          "산업용/연구용 전자기기"
+        ],
+        "time_periods": [
+          "2026E",
+          "7월 23일",
+          "2026.6.29",
+          "2026F, 27F",
+          "26F, 27F",
+          "25F, 26F",
+          "27F",
+          "2026F",
+          "2025F, 2026F"
+        ],
+        "n_metric_mentions": 24
+      }
+    },
+    "enhanced_v2": {
+      "axis": "enhanced_v2",
+      "latency": {
+        "extract_latency_s": 62.44,
+        "n_windows": 36,
+        "n_api_calls": 5
+      },
+      "recall_overall": 0.957,
+      "recall_hit": "44/46",
+      "recall_by_branch": {
+        "text": {
+          "recall": 0.889,
+          "hit": 8,
+          "n": 9,
+          "miss": [
+            "Google"
+          ]
+        },
+        "table": {
+          "recall": 1.0,
+          "hit": 40,
+          "n": 40,
+          "miss": []
+        },
+        "image": {
+          "recall": 0.857,
+          "hit": 6,
+          "n": 7,
+          "miss": [
+            "MSI"
+          ]
+        }
+      },
+      "precision_strict": 0.3,
+      "precision_lenient": 0.991,
+      "f1_strict": 0.456,
+      "f1_lenient": 0.973,
+      "n_extracted": 217,
+      "tp": 65,
+      "out_of_scope(imprecise)": 150,
+      "non_entity_fp": 2,
+      "fp_examples": [
+        "하나증권",
+        "필라델피아 반도체지수"
+      ],
+      "out_of_scope_examples": [
+        "UMC",
+        "ASE",
+        "PSMC",
+        "MediaTek",
+        "Nanya",
+        "Winbond",
+        "Global Unichip",
+        "Wistron",
+        "Realtek",
+        "King Yuan",
+        "MXIC",
+        "Alchip"
+      ],
+      "metadata": {
+        "sentiment_dist": {
+          "neutral": 16,
+          "negative": 17,
+          "positive": 3
+        },
+        "sector_detected": [
+          "반도체",
+          "화학",
+          "반도체 및 소부장",
+          "IT 하드웨어",
+          "소비자 전자기기"
+        ],
+        "time_periods": [
+          "2026E",
+          "2025"
+        ],
+        "n_metric_mentions": 28
+      }
+    },
+    "docling": {
+      "axis": "docling",
+      "latency": {
+        "extract_latency_s": 99.39,
+        "n_windows": 69,
+        "n_api_calls": 9
+      },
+      "recall_overall": 0.957,
+      "recall_hit": "44/46",
+      "recall_by_branch": {
+        "text": {
+          "recall": 0.889,
+          "hit": 8,
+          "n": 9,
+          "miss": [
+            "Google"
+          ]
+        },
+        "table": {
+          "recall": 1.0,
+          "hit": 40,
+          "n": 40,
+          "miss": []
+        },
+        "image": {
+          "recall": 0.857,
+          "hit": 6,
+          "n": 7,
+          "miss": [
+            "MSI"
+          ]
+        }
+      },
+      "precision_strict": 0.299,
+      "precision_lenient": 0.98,
+      "f1_strict": 0.456,
+      "f1_lenient": 0.968,
+      "n_extracted": 204,
+      "tp": 61,
+      "out_of_scope(imprecise)": 139,
+      "non_entity_fp": 4,
+      "fp_examples": [
+        "하나증권",
+        "Trend Force",
+        "DRAMeXchange",
+        "MOPS"
+      ],
+      "out_of_scope_examples": [
+        "UMC",
+        "MediaTek",
+        "Powertech",
+        "Winbond",
+        "Global Unichip",
+        "Wistron",
+        "Realtek",
+        "King Yuan",
+        "PSMC",
+        "MXIC",
+        "Alchip",
+        "Inventec"
+      ],
+      "metadata": {
+        "sentiment_dist": {
+          "neutral": 37,
+          "negative": 26,
+          "positive": 6
+        },
+        "sector_detected": [
+          "반도체",
+          "반도체 장비",
+          "글로벌 반도체 장비 산업",
+          "조립 제조업",
+          "모바일",
+          "PC",
+          "null",
+          "디스플레이"
+        ],
+        "time_periods": [
+          "2026.6.29",
+          "2026",
+          "2027",
+          "26F",
+          "null",
+          "2025",
+          "1Q25",
+          "2024",
+          "2026F"
+        ],
+        "n_metric_mentions": 41
+      }
+    },
+    "mineru": {
+      "axis": "mineru",
+      "latency": {
+        "extract_latency_s": 69.72,
+        "n_windows": 61,
+        "n_api_calls": 8
+      },
+      "recall_overall": 0.978,
+      "recall_hit": "45/46",
+      "recall_by_branch": {
+        "text": {
+          "recall": 1.0,
+          "hit": 9,
+          "n": 9,
+          "miss": []
+        },
+        "table": {
+          "recall": 1.0,
+          "hit": 40,
+          "n": 40,
+          "miss": []
+        },
+        "image": {
+          "recall": 0.857,
+          "hit": 6,
+          "n": 7,
+          "miss": [
+            "MSI"
+          ]
+        }
+      },
+      "precision_strict": 0.306,
+      "precision_lenient": 0.969,
+      "f1_strict": 0.466,
+      "f1_lenient": 0.974,
+      "n_extracted": 193,
+      "tp": 59,
+      "out_of_scope(imprecise)": 128,
+      "non_entity_fp": 6,
+      "fp_examples": [
+        "하나증권",
+        "DRAMeXchange",
+        "Vera Rubin",
+        "Trend Force",
+        "TrendForce",
+        "MOPS"
+      ],
+      "out_of_scope_examples": [
+        "UMC",
+        "MediaTek",
+        "MXIC",
+        "Alchip",
+        "Powertech",
+        "Inventec",
+        "Pegatron",
+        "Compal",
+        "Greatek",
+        "Chipmos",
+        "Faraday",
+        "Formosa"
+      ],
+      "metadata": {
+        "sentiment_dist": {
+          "negative": 28,
+          "neutral": 31,
+          "positive": 2
+        },
+        "sector_detected": [
+          "반도체"
+        ],
+        "time_periods": [
+          "2026.6.29",
+          "2026E",
+          "2024, 2025F, 2026F",
+          "2025, 2026F",
+          "2024, 2025, 2026F",
+          "1Q25",
+          "26.6.26",
+          "26.5.14",
+          "26.2.24"
+        ],
+        "n_metric_mentions": 27
+      }
+    }
+  }
+}
