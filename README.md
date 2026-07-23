@@ -6,21 +6,47 @@
 세 갈래로 병렬 처리 → 근거를 통합해 인덱싱 → 질의에 대해 근거 기반 투자 인사이트를 생성하는
 멀티모달 RAG 파이프라인입니다.
 
+```mermaid
+flowchart TD
+    A["PDF 입력"]:::inputFill --> B["페이지 분류 (YOLOv11n)"]:::processFill
+    B --> C{"페이지 유형"}:::branchFill
+    C --> TXT["텍스트"]:::textFill
+    C --> TAB["테이블"]:::tableFill
+    C --> IMG["이미지 (구현 진행 중)"]:::visionFill
+
+    TXT --> SCAN{"스캔본?"}:::branchFill
+    SCAN -->|Yes| MU["MinerU로 텍스트 전량 대체<br/>(로그 경고)"]:::textFill
+    SCAN -->|No| RO{"리딩오더 판정"}:::branchFill
+    RO -->|"material_overlaps AND<br/>interleaving_excess≥2"| HARD["컬럼 재정렬 필요"]:::textFill
+    RO -->|"그 외(그룹화됨)"| PM["PyMuPDF 추출 그대로 사용"]:::textFill
+    MU --> CHUNK["계층적 청킹 ∥ 구조화 출력"]:::textFill
+    HARD --> CHUNK
+    PM --> CHUNK
+    CHUNK --> IDX["BM25 + BGE-m3-ko<br/>하이브리드 인덱스"]:::textFill
+
+    TAB --> TATR["TATR 셀 구조 인식"]:::tableFill --> PLB["pdfplumber 재구성"]:::tableFill --> TABSO["구조화 출력<br/>(canonical field)"]:::tableFill
+
+    IMG --> IMGSO["차트 분류 → VLM/OCR → 구조화 출력"]:::visionFill
+
+    IDX --> FUSION["엔티티 합성<br/>(source-weight: table>image>text)"]:::processFill
+    TABSO --> FUSION
+    IMGSO --> FUSION
+    FUSION --> DB["Supabase"]:::dbFill
+    DB --> SEARCH["Hybrid Search + Rank Fusion"]:::processFill
+    SEARCH --> LLM["LLM 투자 Insight<br/>(citation check)"]:::outputFill
+
+    classDef inputFill fill:#E1F5FE,stroke:#0288D1,color:#01579B
+    classDef branchFill fill:#FFF3E0,stroke:#F57C00,color:#E65100
+    classDef processFill fill:#F3E5F5,stroke:#8E24AA,color:#4A148C
+    classDef visionFill fill:#E8F5E9,stroke:#388E3C,color:#1B5E20
+    classDef tableFill fill:#FFF8E1,stroke:#FFA000,color:#FF6F00
+    classDef textFill fill:#E0F2F1,stroke:#00897B,color:#004D40
+    classDef dbFill fill:#EDE7F6,stroke:#5E35B1,color:#311B92
+    classDef outputFill fill:#FFEBEE,stroke:#E53935,color:#B71C1C
 ```
-PDF 입력
-  └─ 페이지 분류 (YOLOv11n)               → 페이지별 has_text/has_table/has_image 판정
-       ├─ 스캔본 감지                     → 감지되면 MinerU 결과로 텍스트 전량 대체(로그 경고)
-       └─ 난이도 라우팅(리딩오더)         → "컬럼이 겹친다" ≠ "실제로 헷갈린다"를 구분해 판정
-  └─ 텍스트 브랜치
-       PyMuPDF 추출 → 계층적 청킹(rule-based) ∥ 구조화 출력(섹터별 힌트) 병렬 실행
-  └─ 테이블 브랜치
-       YOLO 표 영역 검출 → TATR 셀 구조 인식 → pdfplumber 재구성 → 구조화 출력(canonical field 매칭)
-  └─ 이미지 브랜치 (구현 진행 중)
-       차트/일반 이미지 분류 → MinerU 기반 파싱 → 구조화 출력
-  └─ 엔티티 합성 (source-weight: table > image > text)
-  └─ 인덱싱 (BM25 + BGE-m3-ko 하이브리드, rank fusion)
-  └─ 검색 → LLM 투자 인사이트 생성 (숫자 근거 검증 + 재생성)
-```
+
+> 위 다이어그램은 현재 구현 상태 기준입니다. 팀에서 설계한 원본 아키텍처 다이어그램은
+> [`pdf_pipeline/reference/ERD.png`](pdf_pipeline/reference/ERD.png) 참고.
 
 ## 단계별 핵심 내용
 
