@@ -158,6 +158,59 @@ def store_evidence(db_url: str, pdf_id: str, items: list, embeddings, ticker: st
     return len(rows)
 
 
+def load_evidence_from_db(db_url: str, pdf_id: str = None, ticker: str = None) -> TextIndex:
+    """[41] 사용자 지적("질의 시점에 저장소에서 다시 읽어오는 경로가 없음") 반영 — store_evidence()가
+    document_evidence에 적재해둔 임베딩을 재계산 없이 그대로 읽어와 TextIndex(BM25+dense)를
+    재구성한다. 이 함수가 있으면 검색은 수집(ingest)과 같은 프로세스/실행일 필요가 없다 — 문서를
+    한 번 적재해두면, 그 뒤로는 이 함수 하나만 호출해서 매 질의마다 PDF 3브랜치를 재실행하지 않고
+    바로 검색할 수 있다.
+
+    pdf_id/ticker 중 최소 하나는 지정해야 함(의도치 않은 전체 테이블 스캔 방지). 반환된 TextIndex는
+    build_index_from_items()가 만든 것과 동일한 구조라 weighted_hybrid_search()에 그대로 넘기면 됨.
+
+    psycopg2는 pgvector 어댑터가 없으면 embedding 컬럼을 '[0.1,0.2,...]' 문자열로 반환하므로
+    (image_processing/common.py의 vec_to_pg()와 반대 방향 변환) 여기서 직접 파싱한다."""
+    if not pdf_id and not ticker:
+        raise ValueError("pdf_id 또는 ticker 중 하나는 지정해야 합니다(전체 스캔 방지).")
+
+    import psycopg2
+
+    conditions, params = [], []
+    if pdf_id:
+        conditions.append("pdf_id = %s")
+        params.append(pdf_id)
+    if ticker:
+        conditions.append("ticker = %s")
+        params.append(ticker)
+    where = " and ".join(conditions)
+
+    conn = psycopg2.connect(db_url)
+    try:
+        with conn.cursor() as cur:
+            cur.execute(
+                f"select id, source_type, page, content, weight, metadata, embedding "
+                f"from document_evidence where {where} order by id",
+                params,
+            )
+            rows = cur.fetchall()
+    finally:
+        conn.close()
+
+    index_id = pdf_id or ticker
+    if not rows:
+        return TextIndex(pdf_id=index_id)
+
+    items = [
+        {"id": row_id, "pdf_id": index_id, "source_type": source_type, "page": page,
+         "content": content, "weight": weight, "metadata": metadata}
+        for row_id, source_type, page, content, weight, metadata, _ in rows
+    ]
+    embeddings = np.asarray([
+        np.fromstring(embedding_str.strip("[]"), sep=",") for *_, embedding_str in rows
+    ])
+    return build_index_from_items(index_id, items, embeddings)
+
+
 def weighted_hybrid_search(index: TextIndex, query: str, top_k: int = 5,
                             dense_weight: float = 0.7, bm25_weight: float = 0.3) -> list:
     """index_text.hybrid_search()와 동일한 min-max 정규화 + 가중합 융합에, evidence 아이템별
