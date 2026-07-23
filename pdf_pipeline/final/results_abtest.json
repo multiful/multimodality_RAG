@@ -1,0 +1,348 @@
+{
+  "B": "enhanced_v2",
+  "matchups": {
+    "baseline": {
+      "ret@5": {
+        "n": 30,
+        "B_win": 1,
+        "A_win": 2,
+        "tie": 27,
+        "net": -1,
+        "p": 1.0,
+        "B_win_ids": [
+          "V08"
+        ],
+        "A_win_ids": [
+          "F04",
+          "T10"
+        ]
+      },
+      "ret@10": {
+        "n": 30,
+        "B_win": 0,
+        "A_win": 3,
+        "tie": 27,
+        "net": -3,
+        "p": 0.25,
+        "B_win_ids": [],
+        "A_win_ids": [
+          "F04",
+          "T10",
+          "T12"
+        ]
+      },
+      "cov": {
+        "n": 30,
+        "B_win": 0,
+        "A_win": 2,
+        "tie": 28,
+        "net": -2,
+        "p": 0.5,
+        "B_win_ids": [],
+        "A_win_ids": [
+          "F04",
+          "T10"
+        ]
+      },
+      "entity_exhaustive": {
+        "n": 46,
+        "B_win": 0,
+        "A_win": 2,
+        "tie": 44,
+        "net": -2,
+        "p": 0.5,
+        "B_win_ents": [],
+        "A_win_ents": [
+          "Google",
+          "MSI"
+        ]
+      },
+      "entity_sidefield": {
+        "n": 46,
+        "B_win": 18,
+        "A_win": 2,
+        "tie": 26,
+        "net": 16,
+        "p": 0.0004,
+        "B_win_ents": [
+          "ASML",
+          "Acer",
+          "Apple",
+          "Applied Materials",
+          "Asus",
+          "Gigabyte",
+          "Globalfoundries",
+          "Intel",
+          "KLA",
+          "Lam Research",
+          "MACOM",
+          "Microchip",
+          "Nova",
+          "Qorvo",
+          "Rambus",
+          "Skyworks",
+          "Texas Instruments",
+          "브이엠"
+        ],
+        "A_win_ents": [
+          "Arm",
+          "씨엠티엑스"
+        ]
+      },
+      "lat_B": 30.09,
+      "lat_A": 0.157,
+      "speedup": 0.01,
+      "verdict": "A 우세"
+    },
+    "enhanced": {
+      "ret@5": {
+        "n": 30,
+        "B_win": 1,
+        "A_win": 0,
+        "tie": 29,
+        "net": 1,
+        "p": 1.0,
+        "B_win_ids": [
+          "C02"
+        ],
+        "A_win_ids": []
+      },
+      "ret@10": {
+        "n": 30,
+        "B_win": 1,
+        "A_win": 0,
+        "tie": 29,
+        "net": 1,
+        "p": 1.0,
+        "B_win_ids": [
+          "C02"
+        ],
+        "A_win_ids": []
+      },
+      "cov": {
+        "n": 30,
+        "B_win": 1,
+        "A_win": 0,
+        "tie": 29,
+        "net": 1,
+        "p": 1.0,
+        "B_win_ids": [
+          "C02"
+        ],
+        "A_win_ids": []
+      },
+      "entity_exhaustive": {
+        "n": 46,
+        "B_win": 0,
+        "A_win": 0,
+        "tie": 46,
+        "net": 0,
+        "p": 1.0,
+        "B_win_ents": [],
+        "A_win_ents": []
+      },
+      "entity_sidefield": {
+        "n": 46,
+        "B_win": 7,
+        "A_win": 7,
+        "tie": 32,
+        "net": 0,
+        "p": 1.0,
+        "B_win_ents": [
+          "ASML",
+          "Applied Materials",
+          "Intel",
+          "KLA",
+          "Lam Research",
+          "브이엠",
+          "파크시스템스"
+        ],
+        "A_win_ents": [
+          "AMD",
+          "Astera Labs",
+          "Broadcom",
+          "Credo",
+          "MPS",
+          "Marvell",
+          "Nvidia"
+        ]
+      },
+      "lat_B": 30.09,
+      "lat_A": 47.601,
+      "speedup": 1.58,
+      "verdict": "B 우세"
+    },
+    "docling": {
+      "ret@5": {
+        "n": 30,
+        "B_win": 4,
+        "A_win": 2,
+        "tie": 24,
+        "net": 2,
+        "p": 0.6875,
+        "B_win_ids": [
+          "T08",
+          "V01",
+          "V02",
+          "V03"
+        ],
+        "A_win_ids": [
+          "T10",
+          "T12"
+        ]
+      },
+      "ret@10": {
+        "n": 30,
+        "B_win": 0,
+        "A_win": 2,
+        "tie": 28,
+        "net": -2,
+        "p": 0.5,
+        "B_win_ids": [],
+        "A_win_ids": [
+          "T10",
+          "T12"
+        ]
+      },
+      "cov": {
+        "n": 30,
+        "B_win": 0,
+        "A_win": 1,
+        "tie": 29,
+        "net": -1,
+        "p": 1.0,
+        "B_win_ids": [],
+        "A_win_ids": [
+          "T10"
+        ]
+      },
+      "entity_exhaustive": {
+        "n": 46,
+        "B_win": 0,
+        "A_win": 0,
+        "tie": 46,
+        "net": 0,
+        "p": 1.0,
+        "B_win_ents": [],
+        "A_win_ents": []
+      },
+      "entity_sidefield": {
+        "n": 46,
+        "B_win": 4,
+        "A_win": 5,
+        "tie": 37,
+        "net": -1,
+        "p": 1.0,
+        "B_win_ents": [
+          "Globalfoundries",
+          "Intel",
+          "MACOM",
+          "Rambus"
+        ],
+        "A_win_ents": [
+          "AMD",
+          "Arm",
+          "Broadcom",
+          "Marvell",
+          "Nvidia"
+        ]
+      },
+      "lat_B": 30.09,
+      "lat_A": 401.631,
+      "speedup": 13.35,
+      "verdict": "A 우세"
+    },
+    "mineru": {
+      "ret@5": {
+        "n": 30,
+        "B_win": 5,
+        "A_win": 2,
+        "tie": 23,
+        "net": 3,
+        "p": 0.4531,
+        "B_win_ids": [
+          "F01",
+          "F02",
+          "F03",
+          "F05",
+          "V01"
+        ],
+        "A_win_ids": [
+          "T10",
+          "T12"
+        ]
+      },
+      "ret@10": {
+        "n": 30,
+        "B_win": 4,
+        "A_win": 2,
+        "tie": 24,
+        "net": 2,
+        "p": 0.6875,
+        "B_win_ids": [
+          "F01",
+          "F02",
+          "F03",
+          "F05"
+        ],
+        "A_win_ids": [
+          "T10",
+          "T12"
+        ]
+      },
+      "cov": {
+        "n": 30,
+        "B_win": 2,
+        "A_win": 1,
+        "tie": 27,
+        "net": 1,
+        "p": 1.0,
+        "B_win_ids": [
+          "F03",
+          "F05"
+        ],
+        "A_win_ids": [
+          "T10"
+        ]
+      },
+      "entity_exhaustive": {
+        "n": 46,
+        "B_win": 0,
+        "A_win": 1,
+        "tie": 45,
+        "net": -1,
+        "p": 1.0,
+        "B_win_ents": [],
+        "A_win_ents": [
+          "Google"
+        ]
+      },
+      "entity_sidefield": {
+        "n": 46,
+        "B_win": 4,
+        "A_win": 6,
+        "tie": 36,
+        "net": -2,
+        "p": 0.7539,
+        "B_win_ents": [
+          "Globalfoundries",
+          "MACOM",
+          "Microchip",
+          "Rambus"
+        ],
+        "A_win_ents": [
+          "AMD",
+          "Arm",
+          "Broadcom",
+          "Nvidia",
+          "TSMC",
+          "씨엠티엑스"
+        ]
+      },
+      "lat_B": 30.09,
+      "lat_A": 236.462,
+      "speedup": 7.86,
+      "verdict": "B 우세"
+    }
+  }
+}
