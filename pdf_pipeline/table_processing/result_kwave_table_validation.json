@@ -1,0 +1,737 @@
+{
+  "pdf": "20260721_industry_65157000.pdf",
+  "n_tables": 104,
+  "n_simple": 12,
+  "n_complex": 92,
+  "route_decision_s": 21.03,
+  "baseline_pdfplumber": {
+    "total_rows": 796,
+    "zero_row_tables": 15,
+    "elapsed_s": 8.25
+  },
+  "adaptive_pipeline": {
+    "total_rows": 2854,
+    "elapsed_s": 30.21,
+    "n_finance_rows_filtered": 809,
+    "per_table_rows": [
+      {
+        "page": 5,
+        "table_idx": 1,
+        "complexity": "complex",
+        "n_rows": 5
+      },
+      {
+        "page": 15,
+        "table_idx": 1,
+        "complexity": "complex",
+        "n_rows": 11
+      },
+      {
+        "page": 28,
+        "table_idx": 1,
+        "complexity": "complex",
+        "n_rows": 12
+      },
+      {
+        "page": 28,
+        "table_idx": 2,
+        "complexity": "complex",
+        "n_rows": 4
+      },
+      {
+        "page": 28,
+        "table_idx": 3,
+        "complexity": "complex",
+        "n_rows": 34
+      },
+      {
+        "page": 28,
+        "table_idx": 4,
+        "complexity": "complex",
+        "n_rows": 18
+      },
+      {
+        "page": 29,
+        "table_idx": 1,
+        "complexity": "simple",
+        "n_rows": 31
+      },
+      {
+        "page": 31,
+        "table_idx": 1,
+        "complexity": "complex",
+        "n_rows": 61
+      },
+      {
+        "page": 31,
+        "table_idx": 2,
+        "complexity": "complex",
+        "n_rows": 66
+      },
+      {
+        "page": 31,
+        "table_idx": 3,
+        "complexity": "complex",
+        "n_rows": 27
+      },
+      {
+        "page": 31,
+        "table_idx": 4,
+        "complexity": "complex",
+        "n_rows": 26
+      },
+      {
+        "page": 32,
+        "table_idx": 1,
+        "complexity": "complex",
+        "n_rows": 12
+      },
+      {
+        "page": 32,
+        "table_idx": 2,
+        "complexity": "complex",
+        "n_rows": 33
+      },
+      {
+        "page": 32,
+        "table_idx": 3,
+        "complexity": "complex",
+        "n_rows": 4
+      },
+      {
+        "page": 32,
+        "table_idx": 4,
+        "complexity": "complex",
+        "n_rows": 18
+      },
+      {
+        "page": 33,
+        "table_idx": 1,
+        "complexity": "simple",
+        "n_rows": 30
+      },
+      {
+        "page": 35,
+        "table_idx": 1,
+        "complexity": "complex",
+        "n_rows": 61
+      },
+      {
+        "page": 35,
+        "table_idx": 2,
+        "complexity": "complex",
+        "n_rows": 66
+      },
+      {
+        "page": 35,
+        "table_idx": 3,
+        "complexity": "complex",
+        "n_rows": 28
+      },
+      {
+        "page": 35,
+        "table_idx": 4,
+        "complexity": "complex",
+        "n_rows": 26
+      },
+      {
+        "page": 36,
+        "table_idx": 1,
+        "complexity": "complex",
+        "n_rows": 12
+      },
+      {
+        "page": 36,
+        "table_idx": 2,
+        "complexity": "complex",
+        "n_rows": 20
+      },
+      {
+        "page": 36,
+        "table_idx": 3,
+        "complexity": "complex",
+        "n_rows": 4
+      },
+      {
+        "page": 37,
+        "table_idx": 1,
+        "complexity": "simple",
+        "n_rows": 27
+      },
+      {
+        "page": 39,
+        "table_idx": 1,
+        "complexity": "complex",
+        "n_rows": 61
+      },
+      {
+        "page": 39,
+        "table_idx": 2,
+        "complexity": "complex",
+        "n_rows": 66
+      },
+      {
+        "page": 39,
+        "table_idx": 3,
+        "complexity": "complex",
+        "n_rows": 28
+      },
+      {
+        "page": 40,
+        "table_idx": 1,
+        "complexity": "complex",
+        "n_rows": 12
+      },
+      {
+        "page": 40,
+        "table_idx": 2,
+        "complexity": "complex",
+        "n_rows": 30
+      },
+      {
+        "page": 40,
+        "table_idx": 3,
+        "complexity": "complex",
+        "n_rows": 5
+      },
+      {
+        "page": 40,
+        "table_idx": 4,
+        "complexity": "complex",
+        "n_rows": 18
+      },
+      {
+        "page": 41,
+        "table_idx": 1,
+        "complexity": "simple",
+        "n_rows": 26
+      },
+      {
+        "page": 43,
+        "table_idx": 1,
+        "complexity": "complex",
+        "n_rows": 61
+      },
+      {
+        "page": 43,
+        "table_idx": 2,
+        "complexity": "complex",
+        "n_rows": 66
+      },
+      {
+        "page": 43,
+        "table_idx": 3,
+        "complexity": "complex",
+        "n_rows": 28
+      },
+      {
+        "page": 43,
+        "table_idx": 4,
+        "complexity": "complex",
+        "n_rows": 26
+      },
+      {
+        "page": 44,
+        "table_idx": 1,
+        "complexity": "complex",
+        "n_rows": 12
+      },
+      {
+        "page": 44,
+        "table_idx": 2,
+        "complexity": "complex",
+        "n_rows": 27
+      },
+      {
+        "page": 44,
+        "table_idx": 3,
+        "complexity": "complex",
+        "n_rows": 5
+      },
+      {
+        "page": 44,
+        "table_idx": 4,
+        "complexity": "complex",
+        "n_rows": 18
+      },
+      {
+        "page": 45,
+        "table_idx": 1,
+        "complexity": "simple",
+        "n_rows": 25
+      },
+      {
+        "page": 47,
+        "table_idx": 1,
+        "complexity": "complex",
+        "n_rows": 61
+      },
+      {
+        "page": 47,
+        "table_idx": 2,
+        "complexity": "complex",
+        "n_rows": 66
+      },
+      {
+        "page": 47,
+        "table_idx": 3,
+        "complexity": "complex",
+        "n_rows": 27
+      },
+      {
+        "page": 48,
+        "table_idx": 1,
+        "complexity": "complex",
+        "n_rows": 12
+      },
+      {
+        "page": 48,
+        "table_idx": 2,
+        "complexity": "complex",
+        "n_rows": 4
+      },
+      {
+        "page": 48,
+        "table_idx": 3,
+        "complexity": "complex",
+        "n_rows": 33
+      },
+      {
+        "page": 49,
+        "table_idx": 1,
+        "complexity": "simple",
+        "n_rows": 31
+      },
+      {
+        "page": 50,
+        "table_idx": 1,
+        "complexity": "simple",
+        "n_rows": 33
+      },
+      {
+        "page": 52,
+        "table_idx": 1,
+        "complexity": "complex",
+        "n_rows": 61
+      },
+      {
+        "page": 52,
+        "table_idx": 2,
+        "complexity": "complex",
+        "n_rows": 66
+      },
+      {
+        "page": 52,
+        "table_idx": 3,
+        "complexity": "complex",
+        "n_rows": 28
+      },
+      {
+        "page": 52,
+        "table_idx": 4,
+        "complexity": "complex",
+        "n_rows": 26
+      },
+      {
+        "page": 53,
+        "table_idx": 1,
+        "complexity": "complex",
+        "n_rows": 12
+      },
+      {
+        "page": 53,
+        "table_idx": 2,
+        "complexity": "complex",
+        "n_rows": 30
+      },
+      {
+        "page": 53,
+        "table_idx": 3,
+        "complexity": "complex",
+        "n_rows": 4
+      },
+      {
+        "page": 53,
+        "table_idx": 4,
+        "complexity": "complex",
+        "n_rows": 18
+      },
+      {
+        "page": 54,
+        "table_idx": 1,
+        "complexity": "simple",
+        "n_rows": 31
+      },
+      {
+        "page": 56,
+        "table_idx": 1,
+        "complexity": "complex",
+        "n_rows": 61
+      },
+      {
+        "page": 56,
+        "table_idx": 2,
+        "complexity": "complex",
+        "n_rows": 66
+      },
+      {
+        "page": 56,
+        "table_idx": 3,
+        "complexity": "complex",
+        "n_rows": 28
+      },
+      {
+        "page": 56,
+        "table_idx": 4,
+        "complexity": "complex",
+        "n_rows": 26
+      },
+      {
+        "page": 57,
+        "table_idx": 1,
+        "complexity": "complex",
+        "n_rows": 12
+      },
+      {
+        "page": 57,
+        "table_idx": 2,
+        "complexity": "complex",
+        "n_rows": 4
+      },
+      {
+        "page": 57,
+        "table_idx": 3,
+        "complexity": "complex",
+        "n_rows": 18
+      },
+      {
+        "page": 57,
+        "table_idx": 4,
+        "complexity": "complex",
+        "n_rows": 30
+      },
+      {
+        "page": 58,
+        "table_idx": 1,
+        "complexity": "simple",
+        "n_rows": 14
+      },
+      {
+        "page": 60,
+        "table_idx": 1,
+        "complexity": "complex",
+        "n_rows": 61
+      },
+      {
+        "page": 60,
+        "table_idx": 2,
+        "complexity": "complex",
+        "n_rows": 66
+      },
+      {
+        "page": 60,
+        "table_idx": 3,
+        "complexity": "complex",
+        "n_rows": 28
+      },
+      {
+        "page": 60,
+        "table_idx": 4,
+        "complexity": "complex",
+        "n_rows": 24
+      },
+      {
+        "page": 61,
+        "table_idx": 1,
+        "complexity": "complex",
+        "n_rows": 12
+      },
+      {
+        "page": 61,
+        "table_idx": 2,
+        "complexity": "complex",
+        "n_rows": 5
+      },
+      {
+        "page": 61,
+        "table_idx": 3,
+        "complexity": "complex",
+        "n_rows": 32
+      },
+      {
+        "page": 61,
+        "table_idx": 4,
+        "complexity": "complex",
+        "n_rows": 18
+      },
+      {
+        "page": 62,
+        "table_idx": 1,
+        "complexity": "simple",
+        "n_rows": 31
+      },
+      {
+        "page": 64,
+        "table_idx": 1,
+        "complexity": "complex",
+        "n_rows": 61
+      },
+      {
+        "page": 64,
+        "table_idx": 2,
+        "complexity": "complex",
+        "n_rows": 66
+      },
+      {
+        "page": 64,
+        "table_idx": 3,
+        "complexity": "complex",
+        "n_rows": 28
+      },
+      {
+        "page": 64,
+        "table_idx": 4,
+        "complexity": "complex",
+        "n_rows": 26
+      },
+      {
+        "page": 65,
+        "table_idx": 1,
+        "complexity": "complex",
+        "n_rows": 12
+      },
+      {
+        "page": 65,
+        "table_idx": 2,
+        "complexity": "complex",
+        "n_rows": 4
+      },
+      {
+        "page": 65,
+        "table_idx": 3,
+        "complexity": "complex",
+        "n_rows": 33
+      },
+      {
+        "page": 65,
+        "table_idx": 4,
+        "complexity": "complex",
+        "n_rows": 18
+      },
+      {
+        "page": 66,
+        "table_idx": 1,
+        "complexity": "simple",
+        "n_rows": 16
+      },
+      {
+        "page": 67,
+        "table_idx": 1,
+        "complexity": "simple",
+        "n_rows": 30
+      },
+      {
+        "page": 68,
+        "table_idx": 1,
+        "complexity": "complex",
+        "n_rows": 62
+      },
+      {
+        "page": 68,
+        "table_idx": 2,
+        "complexity": "complex",
+        "n_rows": 66
+      },
+      {
+        "page": 68,
+        "table_idx": 3,
+        "complexity": "complex",
+        "n_rows": 28
+      },
+      {
+        "page": 68,
+        "table_idx": 4,
+        "complexity": "complex",
+        "n_rows": 26
+      },
+      {
+        "page": 68,
+        "table_idx": 5,
+        "complexity": "complex",
+        "n_rows": 27
+      },
+      {
+        "page": 69,
+        "table_idx": 1,
+        "complexity": "complex",
+        "n_rows": 7
+      },
+      {
+        "page": 69,
+        "table_idx": 2,
+        "complexity": "complex",
+        "n_rows": 9
+      },
+      {
+        "page": 69,
+        "table_idx": 3,
+        "complexity": "complex",
+        "n_rows": 7
+      },
+      {
+        "page": 70,
+        "table_idx": 1,
+        "complexity": "complex",
+        "n_rows": 19
+      },
+      {
+        "page": 70,
+        "table_idx": 2,
+        "complexity": "complex",
+        "n_rows": 7
+      },
+      {
+        "page": 70,
+        "table_idx": 3,
+        "complexity": "complex",
+        "n_rows": 20
+      },
+      {
+        "page": 71,
+        "table_idx": 1,
+        "complexity": "complex",
+        "n_rows": 10
+      },
+      {
+        "page": 71,
+        "table_idx": 2,
+        "complexity": "complex",
+        "n_rows": 13
+      },
+      {
+        "page": 72,
+        "table_idx": 1,
+        "complexity": "complex",
+        "n_rows": 9
+      },
+      {
+        "page": 72,
+        "table_idx": 2,
+        "complexity": "complex",
+        "n_rows": 7
+      },
+      {
+        "page": 72,
+        "table_idx": 3,
+        "complexity": "complex",
+        "n_rows": 10
+      },
+      {
+        "page": 73,
+        "table_idx": 1,
+        "complexity": "complex",
+        "n_rows": 3
+      },
+      {
+        "page": 73,
+        "table_idx": 2,
+        "complexity": "complex",
+        "n_rows": 1
+      }
+    ]
+  },
+  "canonical_field_metadata": {
+    "n_records": 13,
+    "n_mapped": 13,
+    "field_counts": {
+      "content_revenue": 2,
+      "direct_participation_revenue": 1,
+      "ip_sales": 1,
+      "concert_revenue": 3,
+      "ad_appearance_revenue": 2,
+      "indirect_participation_revenue": 1,
+      "md_licensing_revenue": 2,
+      "fanclub_revenue": 1
+    },
+    "records": [
+      {
+        "page": 5,
+        "table_idx": 1,
+        "canonical_field": "content_revenue",
+        "value": "1세대 아이돌"
+      },
+      {
+        "page": 29,
+        "table_idx": 1,
+        "canonical_field": "direct_participation_revenue",
+        "value": "322.5 447.9 477.4 436.3 403.7 791.5 859.7 676.7 1,471.5 1,445.3 1,684.1 2,7"
+      },
+      {
+        "page": 29,
+        "table_idx": 1,
+        "canonical_field": "ip_sales",
+        "value": "136.5 228.6 189.8 218.0 271.5 281.0 191.1 210.3 970.5 861.0 773.0 9"
+      },
+      {
+        "page": 29,
+        "table_idx": 1,
+        "canonical_field": "concert_revenue",
+        "value": "155.2 188.7 245.0 175.1 88.7 467.6 613.3 414.7 359.1 450.9 763.9 1,5"
+      },
+      {
+        "page": 29,
+        "table_idx": 1,
+        "canonical_field": "ad_appearance_revenue",
+        "value": "30.8 30.6 42.6 43.1 43.4 42.8 55.3 51.8 141.9 133.4 147.2 1"
+      },
+      {
+        "page": 29,
+        "table_idx": 1,
+        "canonical_field": "indirect_participation_revenue",
+        "value": "178.1 257.8 249.8 280.1 294.7 396.0 430.0 382.7 706.6 809.3 965.8 1,5"
+      },
+      {
+        "page": 29,
+        "table_idx": 1,
+        "canonical_field": "md_licensing_revenue",
+        "value": "106.4 152.9 168.3 142.9 137.4 284.5 305.6 250.0 325.6 420.2 570.6 9"
+      },
+      {
+        "page": 29,
+        "table_idx": 1,
+        "canonical_field": "content_revenue",
+        "value": "41.2 70.2 46.8 100.6 105.9 52.7 65.6 70.4 289.9 287.3 258.8 2"
+      },
+      {
+        "page": 29,
+        "table_idx": 1,
+        "canonical_field": "fanclub_revenue",
+        "value": "30.5 34.6 34.6 36.7 51.3 58.9 58.8 62.4 91.2 101.8 136.4 2"
+      },
+      {
+        "page": 37,
+        "table_idx": 1,
+        "canonical_field": "concert_revenue",
+        "value": "39.0 33.6 52.5 34.5 60.8 46.5 28.0 39.4 76.8 122.6 159.6 1"
+      },
+      {
+        "page": 37,
+        "table_idx": 1,
+        "canonical_field": "md_licensing_revenue",
+        "value": "39.4 63.9 50.3 78.1 47.4 63.0 39.6 68.4 134.6 169.5 231.6 2"
+      },
+      {
+        "page": 41,
+        "table_idx": 1,
+        "canonical_field": "concert_revenue",
+        "value": "21.7 62.0 63.3 41.8 40.9 47.0 44.3 66.1 63.2 103.6 188.9 1"
+      },
+      {
+        "page": 41,
+        "table_idx": 1,
+        "canonical_field": "ad_appearance_revenue",
+        "value": "17.8 21.0 23.9 17.7 18.9 21.5 24.4 19.6 42.6 61.5 80.4"
+      }
+    ]
+  }
+}

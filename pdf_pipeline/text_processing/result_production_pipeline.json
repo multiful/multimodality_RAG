@@ -1,0 +1,75 @@
+{
+  "extraction_accuracy": {
+    "LGCNS": {
+      "elapsed_s": 1.01,
+      "pages": {
+        "1": {
+          "matched": 11,
+          "total": 11
+        },
+        "6": {
+          "matched": 11,
+          "total": 11
+        }
+      }
+    },
+    "Construct": {
+      "elapsed_s": 1.205,
+      "pages": {
+        "1": {
+          "matched": 10,
+          "total": 10
+        },
+        "5": {
+          "matched": 18,
+          "total": 21
+        },
+        "10": {
+          "matched": 16,
+          "total": 16
+        }
+      }
+    }
+  },
+  "chunking_recall": {
+    "lgcns_p1": {
+      "n_chunks": 11,
+      "chunk_construction_s": 0.375,
+      "extraction_total_s": 73.736,
+      "total_latency_s": 74.11,
+      "entity_recall": 1.0,
+      "fact_recall": 0.8,
+      "entity_misses": [],
+      "fact_misses": [
+        "OPM 8.6%"
+      ]
+    },
+    "construct_p1": {
+      "n_chunks": 7,
+      "chunk_construction_s": 0.578,
+      "extraction_total_s": 61.75,
+      "total_latency_s": 62.327,
+      "entity_recall": 0.875,
+      "fact_recall": 0.75,
+      "entity_misses": [
+        "삼성E&A"
+      ],
+      "fact_misses": [
+        "건설업 수익률이 코스피 대비 0.6%p 상회"
+      ]
+    },
+    "construct_p5": {
+      "n_chunks": 5,
+      "chunk_construction_s": 0.487,
+      "extraction_total_s": 34.861,
+      "total_latency_s": 35.347,
+      "entity_recall": 1.0,
+      "fact_recall": 0.5,
+      "entity_misses": [],
+      "fact_misses": [
+        "동해 AI데이터센터 3개 구역에 120조 투자",
+        "GTX-C 자금조달 4조3000억원"
+      ]
+    }
+  }
+}

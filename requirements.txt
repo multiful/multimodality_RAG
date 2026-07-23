@@ -28,3 +28,9 @@ ultralytics
 unstructured
 paddlepaddle
 unstructured_paddleocr
+
+# 아래는 이미지 파이프라인(pdf_pipeline/image_processing/)용 — 레이아웃탐지·OCR·경량 VLM을
+# MinerU 하나로 처리(CPU 전용 배포 전제로 검증됨). opencv-python은 크롭 OCR 전처리용.
+mineru[pipeline,vlm]>=3.4.0
+opencv-python>=4.9.0
+pyarrow

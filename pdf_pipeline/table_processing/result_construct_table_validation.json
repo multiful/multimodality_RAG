@@ -1,0 +1,175 @@
+{
+  "pdf": "20260721_industry_362851000.pdf",
+  "n_tables": 15,
+  "n_simple": 1,
+  "n_complex": 14,
+  "route_decision_s": 2.53,
+  "baseline_pdfplumber": {
+    "total_rows": 47,
+    "zero_row_tables": 2,
+    "elapsed_s": 1.15
+  },
+  "adaptive_pipeline": {
+    "total_rows": 201,
+    "elapsed_s": 4.07,
+    "n_finance_rows_filtered": 0,
+    "per_table_rows": [
+      {
+        "page": 3,
+        "table_idx": 1,
+        "complexity": "complex",
+        "n_rows": 4
+      },
+      {
+        "page": 4,
+        "table_idx": 1,
+        "complexity": "complex",
+        "n_rows": 63
+      },
+      {
+        "page": 4,
+        "table_idx": 2,
+        "complexity": "complex",
+        "n_rows": 4
+      },
+      {
+        "page": 5,
+        "table_idx": 1,
+        "complexity": "complex",
+        "n_rows": 8
+      },
+      {
+        "page": 6,
+        "table_idx": 1,
+        "complexity": "simple",
+        "n_rows": 14
+      },
+      {
+        "page": 6,
+        "table_idx": 2,
+        "complexity": "complex",
+        "n_rows": 13
+      },
+      {
+        "page": 7,
+        "table_idx": 1,
+        "complexity": "complex",
+        "n_rows": 24
+      },
+      {
+        "page": 8,
+        "table_idx": 1,
+        "complexity": "complex",
+        "n_rows": 10
+      },
+      {
+        "page": 8,
+        "table_idx": 2,
+        "complexity": "complex",
+        "n_rows": 10
+      },
+      {
+        "page": 8,
+        "table_idx": 3,
+        "complexity": "complex",
+        "n_rows": 10
+      },
+      {
+        "page": 9,
+        "table_idx": 1,
+        "complexity": "complex",
+        "n_rows": 10
+      },
+      {
+        "page": 9,
+        "table_idx": 2,
+        "complexity": "complex",
+        "n_rows": 7
+      },
+      {
+        "page": 9,
+        "table_idx": 3,
+        "complexity": "complex",
+        "n_rows": 8
+      },
+      {
+        "page": 10,
+        "table_idx": 1,
+        "complexity": "complex",
+        "n_rows": 7
+      },
+      {
+        "page": 10,
+        "table_idx": 2,
+        "complexity": "complex",
+        "n_rows": 9
+      }
+    ]
+  },
+  "canonical_field_metadata": {
+    "n_records": 9,
+    "n_mapped": 9,
+    "field_counts": {
+      "presale_price": 3,
+      "presale_units": 3,
+      "presale_shortfall": 2,
+      "presale_competition_rate": 1
+    },
+    "records": [
+      {
+        "page": 3,
+        "table_idx": 1,
+        "canonical_field": "presale_price",
+        "value": "1,206"
+      },
+      {
+        "page": 3,
+        "table_idx": 1,
+        "canonical_field": "presale_units",
+        "value": "74"
+      },
+      {
+        "page": 3,
+        "table_idx": 1,
+        "canonical_field": "presale_shortfall",
+        "value": "68"
+      },
+      {
+        "page": 3,
+        "table_idx": 1,
+        "canonical_field": "presale_price",
+        "value": "1,532"
+      },
+      {
+        "page": 3,
+        "table_idx": 1,
+        "canonical_field": "presale_units",
+        "value": "83"
+      },
+      {
+        "page": 3,
+        "table_idx": 1,
+        "canonical_field": "presale_shortfall",
+        "value": "47"
+      },
+      {
+        "page": 3,
+        "table_idx": 1,
+        "canonical_field": "presale_price",
+        "value": "6,557"
+      },
+      {
+        "page": 3,
+        "table_idx": 1,
+        "canonical_field": "presale_units",
+        "value": "72"
+      },
+      {
+        "page": 3,
+        "table_idx": 1,
+        "canonical_field": "presale_competition_rate",
+        "value": "114.8"
+      }
+    ]
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "_note": "Construct(건설 Weekly, 하나증권, 10페이지) PDF 육안 검수 기반 정답. 10페이지 전부 렌더링(150dpi)해서 직접 확인(샘플링 아님, 전수 검수) — has_table은 pdfplumber find_tables()가 아니라 실제 격자형 데이터 표가 있는지 시각 확인 기준(도표/차트/히트맵은 has_table=false, has_image=true로 판정).",
+  "pages": {
+    "1": {"has_text": true, "has_table": false, "has_image": true, "note": "주간 동향 및 이슈(서술형 텍스트) + 우측 상단 장식용 아이콘 그래픽. 표 없음."},
+    "2": {"has_text": true, "has_table": false, "has_image": true, "note": "도표1-4: KOSPI/건설섹터 수익률, 커버리지 종목 주가차트, 건설업종/건자재업종 주간수익률(막대차트). 전부 벡터 차트, 실제 데이터표 아님."},
+    "3": {"has_text": true, "has_table": true, "has_image": true, "note": "도표5-8: 매매/전세가격 wow차트, 매매/전세수급동향(라인차트) + 하단 '주간 청약 동향' 실제 표(청약마감일/지역/아파트명/공급분양가/분양세대수/경쟁률/미달, 3행)."},
+    "4": {"has_text": true, "has_table": false, "has_image": true, "note": "도표9: 전국 주간 아파트지수 WoW차트 — 지역별 히트맵(격자형이지만 지도 시각화, 데이터표 아님)."},
+    "5": {"has_text": true, "has_table": true, "has_image": false, "note": "주간 뉴스 점검(서술형) + 하단 '주간 수주 공시' 실제 표(날짜/건설사/수주프로젝트/계약금액/세대수/세대당금액/비고, 6행). 차트/이미지 없음."},
+    "6": {"has_text": true, "has_table": true, "has_image": false, "note": "밸류에이션 테이블(종가/시가총액/수익률/P·E/P·B) + 수급동향 테이블(기관/연기금/외국인/개인 순매수). 표 2개, 차트 없음."},
+    "7": {"has_text": true, "has_table": true, "has_image": false, "note": "KOSPI 초과 수익률 테이블(20개 종목). 표 1개, 차트 없음."},
+    "8": {"has_text": true, "has_table": true, "has_image": true, "note": "삼성E&A/현대건설/GS건설 3개 기업 각각 목표주가 히스토리 차트 + 투자의견 변동내역 표."},
+    "9": {"has_text": true, "has_table": true, "has_image": true, "note": "대우건설/DL이앤씨/IPARK현대산업개발 3개 기업 각각 목표주가 히스토리 차트 + 투자의견 변동내역 표."},
+    "10": {"has_text": true, "has_table": true, "has_image": true, "note": "삼성물산/아이에스동서 목표주가 히스토리 차트+표 + 하단 Compliance Notice(텍스트) + 투자등급 비율공시 표."}
+  },
+  "target_entities": [
+    "삼성E&A", "현대건설", "GS건설", "대우건설", "DL이앤씨", "LX하우시스",
+    "IPARK현대산업개발", "삼성물산", "아이에스동서"
+  ],
+  "target_entities_note": "페이지6 밸류에이션 테이블(하나증권 커버리지 기준)에 등장하는 9개 종목 전체 — 리포트 전반에 걸쳐 반복 언급되는 핵심 대상. 코오롱글로벌/금호건설/HL D&I/KCC글라스/한샘 등은 페이지7 KOSPI초과수익률 표에만 1회 등장하는 비교군(건자재/시멘트 등 타업종)이라 핵심 타겟에서 제외."
+}

@@ -1,0 +1,604 @@
+{
+  "pdf": "/Users/baiohelseu/Desktop/Project/multimodality_RAG/pdf_pipeline/reference/KWave/20260721_industry_65157000.pdf",
+  "n_pages": 73,
+  "divergence_threshold": 0.15,
+  "layoutreader_inference_total_s": 4.7,
+  "n_rule_hard": 34,
+  "n_gt_needed_reorder": 69,
+  "confusion_matrix": {
+    "tp": 33,
+    "fp": 1,
+    "fn": 36,
+    "tn": 3
+  },
+  "precision": 0.9706,
+  "recall": 0.4783,
+  "f1": 0.6408,
+  "accuracy": 0.4932,
+  "per_page": [
+    {
+      "page": 1,
+      "n_text_blocks": 0,
+      "rule_based_difficulty": "easy",
+      "rule_based_score": 0.085,
+      "layoutreader_divergence": 0.0,
+      "gt_needed_reorder": false
+    },
+    {
+      "page": 2,
+      "n_text_blocks": 11,
+      "rule_based_difficulty": "hard",
+      "rule_based_score": 0.4272,
+      "layoutreader_divergence": 0.1818,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 3,
+      "n_text_blocks": 54,
+      "rule_based_difficulty": "hard",
+      "rule_based_score": 0.4921,
+      "layoutreader_divergence": 0.0964,
+      "gt_needed_reorder": false
+    },
+    {
+      "page": 4,
+      "n_text_blocks": 7,
+      "rule_based_difficulty": "easy",
+      "rule_based_score": 0.267,
+      "layoutreader_divergence": 0.0,
+      "gt_needed_reorder": false
+    },
+    {
+      "page": 5,
+      "n_text_blocks": 13,
+      "rule_based_difficulty": "hard",
+      "rule_based_score": 0.4953,
+      "layoutreader_divergence": 0.3974,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 6,
+      "n_text_blocks": 13,
+      "rule_based_difficulty": "hard",
+      "rule_based_score": 0.4848,
+      "layoutreader_divergence": 0.5,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 7,
+      "n_text_blocks": 17,
+      "rule_based_difficulty": "hard",
+      "rule_based_score": 0.4998,
+      "layoutreader_divergence": 0.2279,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 8,
+      "n_text_blocks": 13,
+      "rule_based_difficulty": "hard",
+      "rule_based_score": 0.4899,
+      "layoutreader_divergence": 0.3974,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 9,
+      "n_text_blocks": 17,
+      "rule_based_difficulty": "hard",
+      "rule_based_score": 0.5326,
+      "layoutreader_divergence": 0.2206,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 10,
+      "n_text_blocks": 13,
+      "rule_based_difficulty": "hard",
+      "rule_based_score": 0.4911,
+      "layoutreader_divergence": 0.5,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 11,
+      "n_text_blocks": 15,
+      "rule_based_difficulty": "hard",
+      "rule_based_score": 0.5018,
+      "layoutreader_divergence": 0.5238,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 12,
+      "n_text_blocks": 13,
+      "rule_based_difficulty": "hard",
+      "rule_based_score": 0.496,
+      "layoutreader_divergence": 0.5,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 13,
+      "n_text_blocks": 13,
+      "rule_based_difficulty": "hard",
+      "rule_based_score": 0.4516,
+      "layoutreader_divergence": 0.2949,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 14,
+      "n_text_blocks": 14,
+      "rule_based_difficulty": "hard",
+      "rule_based_score": 0.5958,
+      "layoutreader_divergence": 0.5275,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 15,
+      "n_text_blocks": 13,
+      "rule_based_difficulty": "hard",
+      "rule_based_score": 0.5956,
+      "layoutreader_divergence": 0.2821,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 16,
+      "n_text_blocks": 14,
+      "rule_based_difficulty": "hard",
+      "rule_based_score": 0.5968,
+      "layoutreader_divergence": 0.5275,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 17,
+      "n_text_blocks": 13,
+      "rule_based_difficulty": "hard",
+      "rule_based_score": 0.4935,
+      "layoutreader_divergence": 0.2821,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 18,
+      "n_text_blocks": 14,
+      "rule_based_difficulty": "hard",
+      "rule_based_score": 0.5931,
+      "layoutreader_divergence": 0.2637,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 19,
+      "n_text_blocks": 14,
+      "rule_based_difficulty": "hard",
+      "rule_based_score": 0.4889,
+      "layoutreader_divergence": 0.2747,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 20,
+      "n_text_blocks": 17,
+      "rule_based_difficulty": "hard",
+      "rule_based_score": 0.4965,
+      "layoutreader_divergence": 0.4779,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 21,
+      "n_text_blocks": 6,
+      "rule_based_difficulty": "hard",
+      "rule_based_score": 0.5174,
+      "layoutreader_divergence": 0.7333,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 22,
+      "n_text_blocks": 17,
+      "rule_based_difficulty": "hard",
+      "rule_based_score": 0.4975,
+      "layoutreader_divergence": 0.4779,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 23,
+      "n_text_blocks": 17,
+      "rule_based_difficulty": "hard",
+      "rule_based_score": 0.4946,
+      "layoutreader_divergence": 0.4779,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 24,
+      "n_text_blocks": 13,
+      "rule_based_difficulty": "hard",
+      "rule_based_score": 0.5283,
+      "layoutreader_divergence": 0.5,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 25,
+      "n_text_blocks": 7,
+      "rule_based_difficulty": "hard",
+      "rule_based_score": 0.417,
+      "layoutreader_divergence": 0.619,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 26,
+      "n_text_blocks": 13,
+      "rule_based_difficulty": "hard",
+      "rule_based_score": 0.5442,
+      "layoutreader_divergence": 0.5,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 27,
+      "n_text_blocks": 3,
+      "rule_based_difficulty": "easy",
+      "rule_based_score": 0.1257,
+      "layoutreader_divergence": 0.0,
+      "gt_needed_reorder": false
+    },
+    {
+      "page": 28,
+      "n_text_blocks": 20,
+      "rule_based_difficulty": "easy",
+      "rule_based_score": 0.2968,
+      "layoutreader_divergence": 0.2684,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 29,
+      "n_text_blocks": 4,
+      "rule_based_difficulty": "easy",
+      "rule_based_score": 0.2873,
+      "layoutreader_divergence": 0.6667,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 30,
+      "n_text_blocks": 6,
+      "rule_based_difficulty": "hard",
+      "rule_based_score": 0.4044,
+      "layoutreader_divergence": 0.8667,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 31,
+      "n_text_blocks": 2,
+      "rule_based_difficulty": "easy",
+      "rule_based_score": 0.2593,
+      "layoutreader_divergence": 1.0,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 32,
+      "n_text_blocks": 19,
+      "rule_based_difficulty": "easy",
+      "rule_based_score": 0.2969,
+      "layoutreader_divergence": 0.2807,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 33,
+      "n_text_blocks": 4,
+      "rule_based_difficulty": "easy",
+      "rule_based_score": 0.2851,
+      "layoutreader_divergence": 0.6667,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 34,
+      "n_text_blocks": 6,
+      "rule_based_difficulty": "hard",
+      "rule_based_score": 0.4053,
+      "layoutreader_divergence": 0.8667,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 35,
+      "n_text_blocks": 2,
+      "rule_based_difficulty": "easy",
+      "rule_based_score": 0.2593,
+      "layoutreader_divergence": 1.0,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 36,
+      "n_text_blocks": 22,
+      "rule_based_difficulty": "hard",
+      "rule_based_score": 0.4082,
+      "layoutreader_divergence": 0.368,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 37,
+      "n_text_blocks": 4,
+      "rule_based_difficulty": "easy",
+      "rule_based_score": 0.2783,
+      "layoutreader_divergence": 0.6667,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 38,
+      "n_text_blocks": 6,
+      "rule_based_difficulty": "hard",
+      "rule_based_score": 0.4051,
+      "layoutreader_divergence": 0.8667,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 39,
+      "n_text_blocks": 2,
+      "rule_based_difficulty": "easy",
+      "rule_based_score": 0.2399,
+      "layoutreader_divergence": 1.0,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 40,
+      "n_text_blocks": 20,
+      "rule_based_difficulty": "easy",
+      "rule_based_score": 0.2966,
+      "layoutreader_divergence": 0.2684,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 41,
+      "n_text_blocks": 4,
+      "rule_based_difficulty": "easy",
+      "rule_based_score": 0.2772,
+      "layoutreader_divergence": 0.6667,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 42,
+      "n_text_blocks": 6,
+      "rule_based_difficulty": "hard",
+      "rule_based_score": 0.4053,
+      "layoutreader_divergence": 0.8667,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 43,
+      "n_text_blocks": 2,
+      "rule_based_difficulty": "easy",
+      "rule_based_score": 0.2593,
+      "layoutreader_divergence": 1.0,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 44,
+      "n_text_blocks": 20,
+      "rule_based_difficulty": "easy",
+      "rule_based_score": 0.2976,
+      "layoutreader_divergence": 0.2684,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 45,
+      "n_text_blocks": 4,
+      "rule_based_difficulty": "easy",
+      "rule_based_score": 0.2814,
+      "layoutreader_divergence": 0.6667,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 46,
+      "n_text_blocks": 6,
+      "rule_based_difficulty": "hard",
+      "rule_based_score": 0.4044,
+      "layoutreader_divergence": 0.9333,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 47,
+      "n_text_blocks": 2,
+      "rule_based_difficulty": "easy",
+      "rule_based_score": 0.2397,
+      "layoutreader_divergence": 1.0,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 48,
+      "n_text_blocks": 20,
+      "rule_based_difficulty": "easy",
+      "rule_based_score": 0.2871,
+      "layoutreader_divergence": 0.2684,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 49,
+      "n_text_blocks": 4,
+      "rule_based_difficulty": "easy",
+      "rule_based_score": 0.2884,
+      "layoutreader_divergence": 0.6667,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 50,
+      "n_text_blocks": 4,
+      "rule_based_difficulty": "easy",
+      "rule_based_score": 0.2912,
+      "layoutreader_divergence": 0.6667,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 51,
+      "n_text_blocks": 6,
+      "rule_based_difficulty": "hard",
+      "rule_based_score": 0.4037,
+      "layoutreader_divergence": 0.8667,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 52,
+      "n_text_blocks": 2,
+      "rule_based_difficulty": "easy",
+      "rule_based_score": 0.2593,
+      "layoutreader_divergence": 1.0,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 53,
+      "n_text_blocks": 20,
+      "rule_based_difficulty": "easy",
+      "rule_based_score": 0.2973,
+      "layoutreader_divergence": 0.2684,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 54,
+      "n_text_blocks": 3,
+      "rule_based_difficulty": "easy",
+      "rule_based_score": 0.1882,
+      "layoutreader_divergence": 0.6667,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 55,
+      "n_text_blocks": 6,
+      "rule_based_difficulty": "hard",
+      "rule_based_score": 0.4025,
+      "layoutreader_divergence": 0.6,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 56,
+      "n_text_blocks": 2,
+      "rule_based_difficulty": "easy",
+      "rule_based_score": 0.2593,
+      "layoutreader_divergence": 1.0,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 57,
+      "n_text_blocks": 20,
+      "rule_based_difficulty": "easy",
+      "rule_based_score": 0.298,
+      "layoutreader_divergence": 0.2684,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 58,
+      "n_text_blocks": 5,
+      "rule_based_difficulty": "easy",
+      "rule_based_score": 0.2953,
+      "layoutreader_divergence": 0.5,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 59,
+      "n_text_blocks": 6,
+      "rule_based_difficulty": "hard",
+      "rule_based_score": 0.4051,
+      "layoutreader_divergence": 0.6667,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 60,
+      "n_text_blocks": 2,
+      "rule_based_difficulty": "easy",
+      "rule_based_score": 0.2593,
+      "layoutreader_divergence": 1.0,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 61,
+      "n_text_blocks": 20,
+      "rule_based_difficulty": "easy",
+      "rule_based_score": 0.2971,
+      "layoutreader_divergence": 0.2684,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 62,
+      "n_text_blocks": 3,
+      "rule_based_difficulty": "easy",
+      "rule_based_score": 0.1891,
+      "layoutreader_divergence": 0.6667,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 63,
+      "n_text_blocks": 6,
+      "rule_based_difficulty": "hard",
+      "rule_based_score": 0.4059,
+      "layoutreader_divergence": 0.8667,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 64,
+      "n_text_blocks": 2,
+      "rule_based_difficulty": "easy",
+      "rule_based_score": 0.2593,
+      "layoutreader_divergence": 1.0,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 65,
+      "n_text_blocks": 20,
+      "rule_based_difficulty": "easy",
+      "rule_based_score": 0.2964,
+      "layoutreader_divergence": 0.2684,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 66,
+      "n_text_blocks": 5,
+      "rule_based_difficulty": "easy",
+      "rule_based_score": 0.296,
+      "layoutreader_divergence": 0.7,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 67,
+      "n_text_blocks": 4,
+      "rule_based_difficulty": "easy",
+      "rule_based_score": 0.2873,
+      "layoutreader_divergence": 0.6667,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 68,
+      "n_text_blocks": 2,
+      "rule_based_difficulty": "easy",
+      "rule_based_score": 0.2593,
+      "layoutreader_divergence": 1.0,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 69,
+      "n_text_blocks": 6,
+      "rule_based_difficulty": "easy",
+      "rule_based_score": 0.3251,
+      "layoutreader_divergence": 0.5333,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 70,
+      "n_text_blocks": 5,
+      "rule_based_difficulty": "easy",
+      "rule_based_score": 0.2772,
+      "layoutreader_divergence": 0.6,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 71,
+      "n_text_blocks": 5,
+      "rule_based_difficulty": "easy",
+      "rule_based_score": 0.3134,
+      "layoutreader_divergence": 0.6,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 72,
+      "n_text_blocks": 7,
+      "rule_based_difficulty": "easy",
+      "rule_based_score": 0.3954,
+      "layoutreader_divergence": 0.4762,
+      "gt_needed_reorder": true
+    },
+    {
+      "page": 73,
+      "n_text_blocks": 11,
+      "rule_based_difficulty": "easy",
+      "rule_based_score": 0.2757,
+      "layoutreader_divergence": 0.3273,
+      "gt_needed_reorder": true
+    }
+  ]
+}

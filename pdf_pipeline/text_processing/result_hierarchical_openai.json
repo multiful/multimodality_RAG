@@ -1,0 +1,41 @@
+{
+  "lgcns_p1": {
+    "n_chunks": 11,
+    "chunk_construction_s": 24.252,
+    "extraction_total_s": 69.828,
+    "total_latency_s": 94.08,
+    "entity_recall": 1.0,
+    "fact_recall": 0.8,
+    "sample_contexts": [
+      "이 chunk는 '인터넷/게임' 섹션에 해당하며, LG CNS에 대한 기업 분석 및 투자 전망과 관련한 내용을 담고 있는 문서의 일부입니다.",
+      "이 chunk는 LG CNS(주식 코드: 064400)에 대한 내용을 포함하고 있으며, 해당 회사의 기업 분석과 투자 의견이 담긴 증권사 리포트의 일부이다.",
+      "이 chunk는 LG CNS에 대한 분석 리포트의 일부분으로, 회사가 엔터프라이즈 AI 전환의 핵심 기업으로 부상할 것이라는 전망을 담고 있다."
+    ]
+  },
+  "construct_p1": {
+    "n_chunks": 7,
+    "chunk_construction_s": 10.905,
+    "extraction_total_s": 63.787,
+    "total_latency_s": 74.692,
+    "entity_recall": 0.875,
+    "fact_recall": 0.75,
+    "sample_contexts": [
+      "이 chunk는 건설업 분야에 대한 주간 리포트의 제목과 분석가 정보를 포함하고 있으며, 전체 문서에서는 건설사의 실적 발표 및 시장 동향에 대한 내용이 다루어지고 있다.",
+      "이 chunk는 건설업의 주간 수익률과 관련된 내용으로, 기관과 외인의 매매 동향 및 IPARK현대산업개발의 2분기 실적 기대감을 다루고 있다.",
+      "이 chunk는 전국의 부동산 매매 및 전세 수급 동향에 대한 내용을 담고 있으며, 전체 문서에서는 건설업과 관련된 주간 동향 및 실적 발표에 대한 논의가 이루어지고 있다."
+    ]
+  },
+  "construct_p5": {
+    "n_chunks": 5,
+    "chunk_construction_s": 8.715,
+    "extraction_total_s": 40.531,
+    "total_latency_s": 49.246,
+    "entity_recall": 1.0,
+    "fact_recall": 0.5,
+    "sample_contexts": [
+      "이 chunk는 정부의 원전 건설 계획과 재생에너지 보급 추진 방침에 대한 내용으로, 하나증권의 건설 산업 관련 주간 리포트의 일환이다.",
+      "이 chunk는 GS그룹의 동해 AI데이터센터 프로젝트에 대한 내용으로, 해당 프로젝트의 단계별 개발 로드맵과 예상되는 지방세 수입에 대해 설명하고 있다.",
+      "이 chunk는 원자력안전위원회가 신설한 사전검토 제도에 대한 내용으로, SMR(소형모듈원자로) 개발에 관심을 보이는 기업들의 현황과 2030년까지의 인허가 법체계 구축 로드맵을 다루고 있습니다."
+    ]
+  }
+}

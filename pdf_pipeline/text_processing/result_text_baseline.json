@@ -1,0 +1,210 @@
+{
+  "LGCNS": {
+    "1": {
+      "content_type": "narrative(애널리스트 본문)",
+      "whole_page": {
+        "recall": 1.0,
+        "n_matched": 11,
+        "n_total": 11,
+        "order_violations": 0,
+        "purity": 0.5709,
+        "extracted_char_count": 1988,
+        "pua_artifact_detected": false,
+        "unmatched_units": [],
+        "latency_ms": 18.31
+      },
+      "yolo_filtered": {
+        "recall": 1.0,
+        "n_matched": 11,
+        "n_total": 11,
+        "order_violations": 0,
+        "purity": 0.8909,
+        "extracted_char_count": 1274,
+        "pua_artifact_detected": false,
+        "unmatched_units": [],
+        "latency_ms": 328.45
+      },
+      "whole_page_masked": {
+        "recall": 1.0,
+        "n_matched": 11,
+        "n_total": 11,
+        "order_violations": 0,
+        "purity": 0.9273,
+        "extracted_char_count": 1224,
+        "pua_artifact_detected": false,
+        "unmatched_units": [],
+        "latency_ms": 108.11
+      }
+    },
+    "6": {
+      "content_type": "법적 고지(Compliance Notice)",
+      "whole_page": {
+        "recall": 1.0,
+        "n_matched": 11,
+        "n_total": 11,
+        "order_violations": 1,
+        "purity": 0.6264,
+        "extracted_char_count": 827,
+        "pua_artifact_detected": false,
+        "unmatched_units": [],
+        "latency_ms": 4.23
+      },
+      "yolo_filtered": {
+        "recall": 0.8182,
+        "n_matched": 9,
+        "n_total": 11,
+        "order_violations": 0,
+        "purity": 0.5646,
+        "extracted_char_count": 790,
+        "pua_artifact_detected": false,
+        "unmatched_units": [
+          "동 자료는 제공시점 현재 기관투자가 또는 제3자에게 사전 제공한 사실이 없습니다.",
+          "추천종목은 전일기준 조사분석 담당자 및 그 배우자 등 관련자가 보유하고 있지 않습니다."
+        ],
+        "latency_ms": 161.62
+      },
+      "whole_page_masked": {
+        "recall": 1.0,
+        "n_matched": 11,
+        "n_total": 11,
+        "order_violations": 1,
+        "purity": 0.6736,
+        "extracted_char_count": 769,
+        "pua_artifact_detected": false,
+        "unmatched_units": [],
+        "latency_ms": 89.61
+      }
+    }
+  },
+  "Construct": {
+    "1": {
+      "content_type": "narrative(주간 투자 전략 및 이슈 점검, 불릿 6개)",
+      "whole_page": {
+        "recall": 1.0,
+        "n_matched": 10,
+        "n_total": 10,
+        "order_violations": 0,
+        "purity": 0.9575,
+        "extracted_char_count": 1459,
+        "pua_artifact_detected": true,
+        "unmatched_units": [],
+        "latency_ms": 12.86
+      },
+      "yolo_filtered": {
+        "recall": 1.0,
+        "n_matched": 10,
+        "n_total": 10,
+        "order_violations": 0,
+        "purity": 0.9503,
+        "extracted_char_count": 1470,
+        "pua_artifact_detected": true,
+        "unmatched_units": [],
+        "latency_ms": 268.24
+      },
+      "whole_page_masked": {
+        "recall": 1.0,
+        "n_matched": 10,
+        "n_total": 10,
+        "order_violations": 0,
+        "purity": 0.9575,
+        "extracted_char_count": 1459,
+        "pua_artifact_detected": true,
+        "unmatched_units": [],
+        "latency_ms": 100.28
+      }
+    },
+    "5": {
+      "content_type": "narrative(주간 뉴스 점검, 뉴스 5건 + 각 서브불릿)",
+      "whole_page": {
+        "recall": 1.0,
+        "n_matched": 21,
+        "n_total": 21,
+        "order_violations": 0,
+        "purity": 0.6615,
+        "extracted_char_count": 1217,
+        "pua_artifact_detected": true,
+        "unmatched_units": [],
+        "latency_ms": 7.0
+      },
+      "yolo_filtered": {
+        "recall": 0.7619,
+        "n_matched": 16,
+        "n_total": 21,
+        "order_violations": 0,
+        "purity": 0.5994,
+        "extracted_char_count": 1011,
+        "pua_artifact_detected": true,
+        "unmatched_units": [
+          "다만 정부는 원전 확대와 함께 재생에너지 보급도 동시에 추진하겠다는 방침",
+          "총 3개 구역(SITE)으로 나눠 2028년까지 1단계(1.2GW)를 구축하는 계획으로, 연간 약 100억원...",
+          "SMR 건설 빨라지나…원안위 \"사전검토 신청 의향 기업 3곳\"",
+          "관련 업계에 따르면 사전검토 신청을 검토하는 기업은 한국 업체 비즈, 미국 테라파워, 덴마크 솔트포스 에너지...",
+          "서울에선 특히 창동역 일대 개발사업과 맞물리면 파급효과가 클 것으로 전망"
+        ],
+        "latency_ms": 347.51
+      },
+      "whole_page_masked": {
+        "recall": 1.0,
+        "n_matched": 21,
+        "n_total": 21,
+        "order_violations": 0,
+        "purity": 0.92,
+        "extracted_char_count": 875,
+        "pua_artifact_detected": true,
+        "unmatched_units": [],
+        "latency_ms": 90.37
+      }
+    },
+    "10": {
+      "content_type": "법적 고지(Compliance Notice) + 투자등급 관련사항",
+      "whole_page": {
+        "recall": 1.0,
+        "n_matched": 16,
+        "n_total": 16,
+        "order_violations": 1,
+        "purity": 0.5499,
+        "extracted_char_count": 1153,
+        "pua_artifact_detected": true,
+        "unmatched_units": [],
+        "latency_ms": 5.01
+      },
+      "yolo_filtered": {
+        "recall": 0.75,
+        "n_matched": 12,
+        "n_total": 16,
+        "order_violations": 1,
+        "purity": 0.8637,
+        "extracted_char_count": 565,
+        "pua_artifact_detected": true,
+        "unmatched_units": [
+          "당사는 2026년 7월 21일 현재 해당회사의 지분을 1%이상 보유 하고 있지 않습니다",
+          "Overweight(비중확대)_업종지수가 현재지수 대비 15% 이상 상승 여력",
+          "Neutral(중립)_업종지수가 현재지수 대비 -15%~15% 등락",
+          "Underweight(비중축소)_업종지수가 현재지수 대비 -15%~15% 등락"
+        ],
+        "latency_ms": 215.56
+      },
+      "whole_page_masked": {
+        "recall": 0.4375,
+        "n_matched": 7,
+        "n_total": 16,
+        "order_violations": 1,
+        "purity": 0.8924,
+        "extracted_char_count": 446,
+        "pua_artifact_detected": true,
+        "unmatched_units": [
+          "투자의견의 유효기간은 추천일 이후 12개월을 기준으로 적용",
+          "기업의 분류",
+          "BUY(매수)_목표주가가 현주가 대비 15% 이상 상승 여력",
+          "Neutral(중립)_목표주가가 현주가 대비 -15%~15% 등락",
+          "Reduce(비중축소)_목표주가가 현주가 대비 15% 이상 하락 가능",
+          "산업의 분류",
+          "Overweight(비중확대)_업종지수가 현재지수 대비 15% 이상 상승 여력",
+          "Neutral(중립)_업종지수가 현재지수 대비 -15%~15% 등락",
+          "Underweight(비중축소)_업종지수가 현재지수 대비 -15%~15% 등락"
+        ],
+        "latency_ms": 94.09
+      }
+    }
+  }
+}

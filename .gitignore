@@ -8,3 +8,4 @@ output/*
 !output/financial Statement/
 !output/kospi200_financials/
 logos/
+.venv/

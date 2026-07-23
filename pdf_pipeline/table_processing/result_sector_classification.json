@@ -1,0 +1,183 @@
+{
+  "n_cases": 12,
+  "embedding": {
+    "accuracy": 0.9167,
+    "total_time_s": 145.601,
+    "avg_time_s": 12.1334
+  },
+  "llm": {
+    "accuracy": 0.5833,
+    "total_time_s": 749.982,
+    "avg_time_s": 62.4985
+  },
+  "details": [
+    {
+      "source": "real_pdf",
+      "gt_sector": "서비스업",
+      "embedding": {
+        "pred": "통신업",
+        "correct": false,
+        "confidence": 0.3878
+      },
+      "llm": {
+        "pred": "기계",
+        "correct": false,
+        "raw": "기계"
+      }
+    },
+    {
+      "source": "real_pdf",
+      "gt_sector": "건설업",
+      "embedding": {
+        "pred": "건설업",
+        "correct": true,
+        "confidence": 0.5118
+      },
+      "llm": {
+        "pred": "증권",
+        "correct": false,
+        "raw": "증권"
+      }
+    },
+    {
+      "source": "synthetic",
+      "gt_sector": "은행",
+      "embedding": {
+        "pred": "은행",
+        "correct": true,
+        "confidence": 0.4915
+      },
+      "llm": {
+        "pred": "증권",
+        "correct": false,
+        "raw": "증권"
+      }
+    },
+    {
+      "source": "synthetic",
+      "gt_sector": "증권",
+      "embedding": {
+        "pred": "증권",
+        "correct": true,
+        "confidence": 0.5773
+      },
+      "llm": {
+        "pred": "증권",
+        "correct": true,
+        "raw": "증권"
+      }
+    },
+    {
+      "source": "synthetic",
+      "gt_sector": "보험",
+      "embedding": {
+        "pred": "보험",
+        "correct": true,
+        "confidence": 0.6231
+      },
+      "llm": {
+        "pred": "증권",
+        "correct": false,
+        "raw": "증권"
+      }
+    },
+    {
+      "source": "synthetic",
+      "gt_sector": "화학",
+      "embedding": {
+        "pred": "화학",
+        "correct": true,
+        "confidence": 0.5026
+      },
+      "llm": {
+        "pred": "화학",
+        "correct": true,
+        "raw": "화학"
+      }
+    },
+    {
+      "source": "synthetic",
+      "gt_sector": "통신업",
+      "embedding": {
+        "pred": "통신업",
+        "correct": true,
+        "confidence": 0.5479
+      },
+      "llm": {
+        "pred": "통신업",
+        "correct": true,
+        "raw": "통신업"
+      }
+    },
+    {
+      "source": "synthetic",
+      "gt_sector": "유통업",
+      "embedding": {
+        "pred": "유통업",
+        "correct": true,
+        "confidence": 0.5758
+      },
+      "llm": {
+        "pred": "유통업",
+        "correct": true,
+        "raw": "유통업"
+      }
+    },
+    {
+      "source": "synthetic",
+      "gt_sector": "전기전자",
+      "embedding": {
+        "pred": "전기전자",
+        "correct": true,
+        "confidence": 0.5679
+      },
+      "llm": {
+        "pred": "전기전자",
+        "correct": true,
+        "raw": "전기전자"
+      }
+    },
+    {
+      "source": "synthetic",
+      "gt_sector": "전기가스업",
+      "embedding": {
+        "pred": "전기가스업",
+        "correct": true,
+        "confidence": 0.6186
+      },
+      "llm": {
+        "pred": "전기전자",
+        "correct": false,
+        "raw": "전기전자"
+      }
+    },
+    {
+      "source": "synthetic",
+      "gt_sector": "운수창고업",
+      "embedding": {
+        "pred": "운수창고업",
+        "correct": true,
+        "confidence": 0.4898
+      },
+      "llm": {
+        "pred": "운수창고업",
+        "correct": true,
+        "raw": "운수창고업"
+      }
+    },
+    {
+      "source": "synthetic",
+      "gt_sector": "의약품",
+      "embedding": {
+        "pred": "의약품",
+        "correct": true,
+        "confidence": 0.4962
+      },
+      "llm": {
+        "pred": "의약품",
+        "correct": true,
+        "raw": "의약품"
+      }
+    }
+  ]
+}
