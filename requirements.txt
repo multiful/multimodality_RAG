@@ -3,6 +3,7 @@ sentence-transformers
 openai
 chromadb
 supabase
+streamlit
 psycopg2-binary  # Supabase 직접 Postgres 연결(DDL 실행, document_evidence 등 벌크 upsert)용 —
                  # supabase 클라이언트(REST/PostgREST)로는 CREATE TABLE 등 DDL을 못 돌려서 필요
 pandas>=2.0.0
