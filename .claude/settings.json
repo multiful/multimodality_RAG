@@ -12,7 +12,10 @@
       "Read(//tmp/**)",
       "Read(//private/tmp/**)",
       "Bash(ls -la ~/Desktop/연습용)",
-      "Read(//Users/parkminsung45/Desktop/연습용/**)"
+      "Read(//Users/parkminsung45/Desktop/연습용/**)",
+      "Bash(python3 -c \"import yfinance; print\\(yfinance.__version__\\)\")",
+      "Bash(python3 -c ' *)",
+      "Bash(python3 -m src.finance.yahoo_profile 005930.KS 000660.KS)"
     ]
   }
 }
