@@ -1,7 +1,13 @@
+mineru[pipeline,vlm]>=3.4.0
+opencv-python>=4.9.0
+pillow>=11.3.0
+numpy
+pandas
+pyarrow
+requests
+python-dotenv
+supabase
+huggingface_hub>=0.36.0
 torch>=2.8.0
 torchvision>=0.23.0
 transformers>=4.57.0
-accelerate>=1.10.0
-huggingface_hub>=0.36.0
-hf_transfer>=0.1.9
-pillow>=11.3.0
