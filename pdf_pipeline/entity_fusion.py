@@ -82,37 +82,55 @@ def fuse(pdf_id: str, text_chunks: list = None, table_records: list = None, imag
             + from_image_cards(pdf_id, image_cards or []))
 
 
-def build_fused_index(pdf_id: str, evidence_items: list, embed_model=None) -> TextIndex:
-    """fuse()가 만든 evidence 리스트로 하이브리드(BM25+dense) 검색 인덱스를 만든다.
-    text_processing.index_text.build_index()와 같은 인터페이스(TextIndex)를 쓰되, 소스가
-    process_pdf() 결과 하나가 아니라 세 브랜치를 합친 evidence이므로 별도 구현 — hybrid_search()는
-    그대로 재사용 가능(TextIndex.chunks에 뭐가 들어있는지 상관 안 함)."""
-    if not evidence_items:
-        return TextIndex(pdf_id=pdf_id)
+def embed_items(items: list, embed_model=None):
+    """evidence 아이템 리스트를 임베딩한다. 반환: (items, embeddings ndarray) — items가 비어있으면
+    (items, None). [40] 브랜치별로 끝나는 즉시 호출해서 store_evidence()로 바로 적재하고, 나중에
+    build_index_from_items()로 그 임베딩을 재사용(재임베딩 없이) 통합 인덱스를 만들기 위해 items/
+    embeddings를 분리된 반환값으로 둔다."""
+    if not items:
+        return items, None
     if embed_model is None:
         from embedding import get_embedding_model
         embed_model = get_embedding_model()
-
     from embedding import embed_texts
-    texts = [it["content"] for it in evidence_items]
-    embeddings = embed_texts(texts)
-    from rank_bm25 import BM25Okapi
-    bm25 = BM25Okapi([_tokenize(t) for t in texts])
+    embeddings = embed_texts([it["content"] for it in items])
+    return items, embeddings
 
+
+def build_index_from_items(pdf_id: str, items: list, embeddings) -> TextIndex:
+    """이미 계산된 (items, embeddings)로 하이브리드(BM25+dense) 검색 인덱스를 만든다 — 재임베딩
+    없음. 여러 브랜치의 embed_items() 결과를 이어붙여서 넘기면 전체 통합 인덱스가 된다."""
+    if not items or embeddings is None or len(embeddings) == 0:
+        return TextIndex(pdf_id=pdf_id)
+    from rank_bm25 import BM25Okapi
+    texts = [it["content"] for it in items]
+    bm25 = BM25Okapi([_tokenize(t) for t in texts])
     return TextIndex(
         pdf_id=pdf_id,
-        chunk_ids=[it["id"] for it in evidence_items],
-        chunks=evidence_items,
+        chunk_ids=[it["id"] for it in items],
+        chunks=items,
         embeddings=embeddings,
         bm25=bm25,
     )
 
 
-def store_evidence(db_url: str, pdf_id: str, index: TextIndex, ticker: str = None) -> int:
-    """build_fused_index()가 만든 인덱스(evidence_items + 이미 계산된 embeddings)를
-    document_evidence 테이블에 적재. 이미 계산된 임베딩을 재사용(재임베딩 안 함).
-    반환: 적재된 행 수."""
-    if not index.chunks:
+def build_fused_index(pdf_id: str, evidence_items: list, embed_model=None) -> TextIndex:
+    """fuse()가 만든 evidence 리스트를 한 번에 임베딩해 인덱스를 만드는 편의 함수(embed_items()+
+    build_index_from_items() 조합). 브랜치별로 이미 임베딩을 따로 계산해뒀다면 그쪽을 직접
+    build_index_from_items()에 넘기는 게 재임베딩을 피할 수 있어 더 낫다."""
+    items, embeddings = embed_items(evidence_items, embed_model)
+    return build_index_from_items(pdf_id, items, embeddings)
+
+
+def store_evidence(db_url: str, pdf_id: str, items: list, embeddings, ticker: str = None) -> int:
+    """embed_items()가 반환한 (items, embeddings)를 document_evidence 테이블에 즉시 적재.
+
+    [40] 사용자 지적("Entity Fusion sync barrier" — 세 브랜치를 다 모은 뒤 한 번에 적재하면,
+    가장 느린 브랜치(이미지/VLM, 문서당 최대 152초+)가 끝날 때까지 몇 초면 끝나는 텍스트/테이블
+    결과까지 DB 적재가 막혀버림) 반영 — 브랜치 하나가 끝나는 즉시 그 브랜치분만 호출해서 저장하도록
+    분리. "엔티티 합성"은 이제 Python 메모리 안에서의 사전 병합이 아니라, 같은 pdf_id/ticker로
+    태그된 채 같은 document_evidence 테이블에 각자 도착하는 것 자체가 합성 지점이 된다."""
+    if not items or embeddings is None or len(embeddings) == 0:
         return 0
     import psycopg2
     from psycopg2.extras import Json, execute_values
@@ -120,7 +138,7 @@ def store_evidence(db_url: str, pdf_id: str, index: TextIndex, ticker: str = Non
     rows = [
         (it["id"], pdf_id, ticker, it["source_type"], it.get("page"), it["content"],
          it.get("weight", 1.0), Json(it.get("metadata") or {}), emb.tolist())
-        for it, emb in zip(index.chunks, index.embeddings)
+        for it, emb in zip(items, embeddings)
     ]
     conn = psycopg2.connect(db_url)
     conn.autocommit = True
@@ -138,6 +156,59 @@ def store_evidence(db_url: str, pdf_id: str, index: TextIndex, ticker: str = Non
     finally:
         conn.close()
     return len(rows)
+
+
+def load_evidence_from_db(db_url: str, pdf_id: str = None, ticker: str = None) -> TextIndex:
+    """[41] 사용자 지적("질의 시점에 저장소에서 다시 읽어오는 경로가 없음") 반영 — store_evidence()가
+    document_evidence에 적재해둔 임베딩을 재계산 없이 그대로 읽어와 TextIndex(BM25+dense)를
+    재구성한다. 이 함수가 있으면 검색은 수집(ingest)과 같은 프로세스/실행일 필요가 없다 — 문서를
+    한 번 적재해두면, 그 뒤로는 이 함수 하나만 호출해서 매 질의마다 PDF 3브랜치를 재실행하지 않고
+    바로 검색할 수 있다.
+
+    pdf_id/ticker 중 최소 하나는 지정해야 함(의도치 않은 전체 테이블 스캔 방지). 반환된 TextIndex는
+    build_index_from_items()가 만든 것과 동일한 구조라 weighted_hybrid_search()에 그대로 넘기면 됨.
+
+    psycopg2는 pgvector 어댑터가 없으면 embedding 컬럼을 '[0.1,0.2,...]' 문자열로 반환하므로
+    (image_processing/common.py의 vec_to_pg()와 반대 방향 변환) 여기서 직접 파싱한다."""
+    if not pdf_id and not ticker:
+        raise ValueError("pdf_id 또는 ticker 중 하나는 지정해야 합니다(전체 스캔 방지).")
+
+    import psycopg2
+
+    conditions, params = [], []
+    if pdf_id:
+        conditions.append("pdf_id = %s")
+        params.append(pdf_id)
+    if ticker:
+        conditions.append("ticker = %s")
+        params.append(ticker)
+    where = " and ".join(conditions)
+
+    conn = psycopg2.connect(db_url)
+    try:
+        with conn.cursor() as cur:
+            cur.execute(
+                f"select id, source_type, page, content, weight, metadata, embedding "
+                f"from document_evidence where {where} order by id",
+                params,
+            )
+            rows = cur.fetchall()
+    finally:
+        conn.close()
+
+    index_id = pdf_id or ticker
+    if not rows:
+        return TextIndex(pdf_id=index_id)
+
+    items = [
+        {"id": row_id, "pdf_id": index_id, "source_type": source_type, "page": page,
+         "content": content, "weight": weight, "metadata": metadata}
+        for row_id, source_type, page, content, weight, metadata, _ in rows
+    ]
+    embeddings = np.asarray([
+        np.fromstring(embedding_str.strip("[]"), sep=",") for *_, embedding_str in rows
+    ])
+    return build_index_from_items(index_id, items, embeddings)
 
 
 def weighted_hybrid_search(index: TextIndex, query: str, top_k: int = 5,

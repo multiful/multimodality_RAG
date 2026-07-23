@@ -9,7 +9,27 @@
 
 import re
 
+from tenacity import retry, retry_if_exception_type, stop_after_attempt, wait_random_exponential
+
 NUMBER_RE = re.compile(r"\d[\d,]*\.?\d*")
+
+
+def _retryable_create(client, **kwargs):
+    """[41] structured_output._retryable_parse()와 동일한 tenacity 재시도(429/5xx/연결오류/타임아웃만,
+    스키마 오류 같은 4xx는 즉시 실패) — 사용자가 실제로 보는 최종 답변 생성 호출에는 이 보호가
+    빠져 있어서 일시적 API 오류 한 번에 전체 요청이 그냥 실패하던 것을 수정."""
+    from openai import APIConnectionError, APITimeoutError, InternalServerError, RateLimitError
+
+    @retry(
+        retry=retry_if_exception_type((RateLimitError, InternalServerError, APIConnectionError, APITimeoutError)),
+        wait=wait_random_exponential(min=1, max=30),
+        stop=stop_after_attempt(5),
+        reraise=True,
+    )
+    def _call():
+        return client.chat.completions.create(**kwargs)
+
+    return _call()
 
 
 def extract_numbers(text: str, min_digits: int = 3) -> set:

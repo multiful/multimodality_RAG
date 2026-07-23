@@ -2,6 +2,13 @@
 테이블/이미지 세 브랜치 -> 엔티티 합성(가중치 정제) -> 통합 Supabase 테이블 적재 -> 하이브리드
 검색(BM25+BGE-m3-ko, 소스 가중치 반영) -> citation-check 포함 LLM 투자의견 생성까지 한 번에 돈다.
 
+[40] 사용자 지적("Entity Fusion sync barrier" — 세 브랜치를 다 모은 뒤 한 번에 DB 적재하면, 가장
+느린 브랜치(이미지/VLM, 문서당 최대 152초+)가 끝날 때까지 몇 초면 끝나는 텍스트/테이블 결과까지
+적재가 막힘) 반영 — 브랜치가 끝나는 즉시 그 브랜치분만 임베딩+Supabase 적재하도록 분리했다.
+"엔티티 합성"은 이제 사전에 메모리에서 셋을 합친 뒤 쓰는 게 아니라, 같은 pdf_id/ticker로 태그된
+채 같은 document_evidence 테이블에 각자 도착하는 것 자체가 합성 지점이다(entity_fusion.py 참고).
+통합 하이브리드 인덱스는 각 브랜치에서 이미 계산한 임베딩을 재사용해서 만들어 재임베딩 비용도 없앴다.
+
 범위 제한:
     - 리랭킹: 의도적으로 보류(사용자 확인 완료 — 오버엔지니어링 방지, index_text.py 자체 설계
       원칙과도 일치)
@@ -49,10 +56,13 @@ PDF_PATH = ROOT / "pdf_pipeline" / "reference" / "LGCNS" / "20260721_company_279
 PDF_ID = "LGCNS"
 TICKER = "064400.KS"
 QUERY = "이 PDF 내용을 바탕으로 이 회사에 대한 투자 의견을 제공해줘"
-DB_URL = os.environ.get(
-    "SUPABASE_DIRECT_DB_URL",
-    "postgresql://postgres.itkxhdutnxircvbzwpon:SuperTeam24ever@aws-0-ap-northeast-1.pooler.supabase.com:5432/postgres",
-)
+DB_URL = os.environ.get("SUPABASE_DIRECT_DB_URL")
+if not DB_URL:
+    raise RuntimeError(
+        "SUPABASE_DIRECT_DB_URL 환경변수가 없습니다. .env에 설정하세요 "
+        "(비밀번호를 코드에 하드코딩하지 않음 — 과거 하드코딩된 값은 유출된 것으로 간주하고 "
+        "Supabase 대시보드에서 반드시 회전(rotate)할 것)."
+    )
 ONESTOP_CARDS_PATH = ROOT / "data" / "onestop" / PDF_ID / "onestop_cards.jsonl"
 
 # MinerU 미설치 환경에서 이미지 브랜치 나머지 단계(합성/저장/검색/생성)를 검증하기 위한 대표
@@ -101,68 +111,71 @@ def main():
     print(f"   {cls_result['n_pages']}페이지 분류 완료")
     timings["1_yolo_load_and_classify"] = time.perf_counter() - t0
 
+    import numpy as np
+
     t0 = time.perf_counter()
-    print("2) 텍스트 브랜치: 추출 + 청킹")
+    print("2) 텍스트 브랜치: 추출 + 청킹 -> 임베딩 -> 즉시 적재")
     text_result = process_pdf(PDF_PATH, yolo_model, page_boxes=page_boxes,
                                chunk_backend="rulebased", remove_boilerplate=True,
                                add_structured_metadata=False)
     text_chunks = [c for page in text_result["pages"] for c in page["chunks"]]
-    print(f"   {len(text_chunks)}개 청크 생성")
+    text_items, text_emb = entity_fusion.embed_items(entity_fusion.from_text_chunks(PDF_ID, text_chunks))
+    n = entity_fusion.store_evidence(DB_URL, PDF_ID, text_items, text_emb, ticker=TICKER)
+    print(f"   {len(text_chunks)}개 청크 생성 -> {n}개 즉시 적재 (테이블/이미지 브랜치 대기 안 함)")
     timings["2_text_branch"] = time.perf_counter() - t0
 
     t0 = time.perf_counter()
-    print("3) 테이블 브랜치: TATR + canonical 매칭")
+    print("3) 테이블 브랜치: TATR + canonical 매칭 -> 임베딩 -> 즉시 적재")
     rtmp.PDF_PATH = PDF_PATH
     table_records, n_finance_filtered, n_cid = rtmp.build_records(
         PDF_ID, page_boxes=page_boxes, yolo_model=yolo_model)
     row_records = [r for r in table_records if r.get("record_type") != "table_metadata"]
     mapped = [r for r in row_records if r.get("canonical_field")]
-    print(f"   {len(row_records)}행 파싱, canonical 매칭 {len(mapped)}개")
+    table_items, table_emb = entity_fusion.embed_items(entity_fusion.from_table_records(PDF_ID, row_records))
+    n = entity_fusion.store_evidence(DB_URL, PDF_ID, table_items, table_emb, ticker=TICKER)
+    print(f"   {len(row_records)}행 파싱, canonical 매칭 {len(mapped)}개 -> {n}개 즉시 적재")
     timings["3_table_branch"] = time.perf_counter() - t0
 
     t0 = time.perf_counter()
-    print("4) 이미지 브랜치: image_processing 카드 로드")
+    print("4) 이미지 브랜치: image_processing 카드 로드 -> 임베딩 -> 즉시 적재")
     if ONESTOP_CARDS_PATH.exists():
         image_cards = [json.loads(line) for line in ONESTOP_CARDS_PATH.read_text(encoding="utf-8").splitlines() if line.strip()]
         print(f"   실제 onestop_cards.jsonl {len(image_cards)}건 로드: {ONESTOP_CARDS_PATH}")
     else:
         image_cards = FALLBACK_IMAGE_CARDS
         print(f"   ⚠ {ONESTOP_CARDS_PATH} 없음(MinerU 미실행) — 대표 예시 카드 {len(image_cards)}건으로 대체")
+    image_items, image_emb = entity_fusion.embed_items(entity_fusion.from_image_cards(PDF_ID, image_cards))
+    n = entity_fusion.store_evidence(DB_URL, PDF_ID, image_items, image_emb, ticker=TICKER)
+    print(f"   {n}개 즉시 적재 (이 브랜치가 훨씬 오래 걸려도 텍스트/테이블은 이미 DB에 반영된 뒤였음)")
     timings["4_image_branch"] = time.perf_counter() - t0
 
     t0 = time.perf_counter()
-    print("5) 엔티티 합성 (텍스트+테이블+이미지 -> 통합 evidence, 소스 가중치 부여)")
-    evidence = entity_fusion.fuse(PDF_ID, text_chunks=text_chunks, table_records=row_records,
-                                   image_cards=image_cards)
+    print("5) 엔티티 합성 완료 확인 (세 브랜치가 각자 적재한 evidence 수 집계 — 추가 대기 없음)")
+    all_items = text_items + table_items + image_items
+    all_embeddings = np.concatenate([e for e in (text_emb, table_emb, image_emb) if e is not None])
     by_source = {}
-    for it in evidence:
+    for it in all_items:
         by_source[it["source_type"]] = by_source.get(it["source_type"], 0) + 1
-    print(f"   총 {len(evidence)}개 evidence ({by_source})")
+    print(f"   총 {len(all_items)}개 evidence ({by_source}) — 전부 document_evidence(ticker={TICKER})에 있음")
     timings["5_entity_fusion"] = time.perf_counter() - t0
 
     t0 = time.perf_counter()
-    print("6) 통합 하이브리드 인덱스 구축 (BGE-m3-ko dense + BM25)")
-    index = entity_fusion.build_fused_index(PDF_ID, evidence)
+    print("6) 통합 하이브리드 인덱스 구축 (이미 계산된 임베딩 재사용 — 재임베딩 없음)")
+    index = entity_fusion.build_index_from_items(PDF_ID, all_items, all_embeddings)
     dim = index.embeddings.shape[1]
     print(f"   임베딩 차원: {dim}, evidence 수: {len(index.chunks)}")
     timings["6_build_fused_index"] = time.perf_counter() - t0
 
     t0 = time.perf_counter()
-    print("7) 통합 Supabase 테이블(document_evidence) 적재")
-    n_stored = entity_fusion.store_evidence(DB_URL, PDF_ID, index, ticker=TICKER)
-    print(f"   {n_stored}개 evidence -> document_evidence 적재 완료 (ticker={TICKER})")
-    timings["7_supabase_store"] = time.perf_counter() - t0
-
-    t0 = time.perf_counter()
-    print("8) 가중 하이브리드 검색 (BM25 + BGE-m3-ko + 소스 가중치)")
+    print("7) 가중 하이브리드 검색 (BM25 + BGE-m3-ko + 소스 가중치)")
     hits = entity_fusion.weighted_hybrid_search(index, QUERY, top_k=8)
     for h in hits:
         print(f"   - [{h['source_type']}] page{h['chunk'].get('page')} score={h['score']:.3f} "
               f"(dense={h['dense_score']:.3f}, bm25={h['bm25_score']:.3f})")
-    timings["8_hybrid_search"] = time.perf_counter() - t0
+    timings["7_hybrid_search"] = time.perf_counter() - t0
 
     t0 = time.perf_counter()
-    print("9) LLM 투자의견 생성 (gpt-4o-mini, citation-check 포함)")
+    print("8) LLM 투자의견 생성 (gpt-4o-mini, citation-check 포함)")
     evidence_context = "\n\n".join(
         f"[{h['source_type']} / p{h['chunk'].get('page')}] {h['chunk']['content']}" for h in hits
     )
@@ -189,7 +202,7 @@ def main():
     result = generate_with_citation_check(
         client, prompt, context=evidence_context, model="gpt-4o-mini", max_retries=2)
     answer = result["answer"]
-    timings["9_llm_generation"] = time.perf_counter() - t0
+    timings["8_llm_generation"] = time.perf_counter() - t0
 
     print("\n" + "=" * 60)
     print(f"LLM 투자의견 출력 ({result['attempts']}회 생성"
