@@ -12,7 +12,6 @@ flowchart TD
     B --> C{"페이지 유형"}:::branchFill
     C --> TXT["텍스트"]:::textFill
     C --> TAB["테이블"]:::tableFill
-    C --> IMG["이미지 (구현 진행 중)"]:::visionFill
 
     TXT --> SCAN{"스캔본?"}:::branchFill
     SCAN -->|Yes| MU["MinerU로 텍스트 전량 대체<br/>(로그 경고)"]:::textFill
