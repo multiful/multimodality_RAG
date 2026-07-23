@@ -182,14 +182,12 @@ def extract_table_metadata(table_text: str, mapped_records: list, unmapped_label
     return resp.choices[0].message.parsed.model_dump()
 
 
-# ---------- 이미지 라우팅 끝: 이미지 단위 구조화 메타데이터(초안, 아직 미배선) ----------
+# ---------- 이미지 라우팅 끝: 이미지 단위 구조화 메타데이터 ----------
 #
-# 팀원 이미지 모듈 통합 전에 스키마만 먼저 설계(사용자 요청: "테이블, 이미지, 텍스트 별로
-# 설정하는게 좋지 않나"). 표/텍스트와 마찬가지로 이미지도 내용 유형이 아예 다르므로(차트/로고/
-# 사진) 별도 스키마가 필요하다고 판단해 미리 틀만 잡아둔다. **주의**: 아래 함수는 "이미지에
-# 대한 캡션/설명 텍스트가 이미 있다"는 가정으로 짠 텍스트 전용 프롬프트다 — 팀원 모듈이 실제로
-# 캡션 문자열을 주는지, 아니면 이미지 자체(bytes)를 던지는지에 따라 프롬프트/입력 방식(vision
-# 멀티모달 메시지로 교체 필요할 수 있음)을 다시 맞춰야 한다. 그 전까지는 호출하지 말 것.
+# [39] 팀원 이미지 모듈(pdf_pipeline/image_processing/, onestop_cards.jsonl 카드 스키마)이
+# 실제로 merge된 뒤 배선. 카드는 이미 캡션/각주/OCR텍스트/(선택)차트표+서술형해석까지 채워진
+# 상태로 들어오므로(README §5 카드 스키마), "이미지 자체(bytes)"가 아니라 이 텍스트 필드들을
+# 입력으로 쓴다 — vision API 호출 불필요, 텍스트 전용 구조화 출력으로 충분.
 
 class ImageMetadata(BaseModel):
     image_type: Literal["chart", "logo", "photo", "diagram", "other"]
@@ -201,27 +199,73 @@ class ImageMetadata(BaseModel):
 
 
 _IMAGE_METADATA_PROMPT = (
-    "다음은 증권사 리포트에 포함된 이미지 하나에 대한 설명(캡션 또는 VLM이 생성한 이미지 설명)"
-    "입니다. 아래 항목을 채우세요.\n\n"
+    "다음은 증권사 리포트에 포함된 이미지/차트 블록 하나에 대한 정보입니다(MinerU 탐지 타입, "
+    "캡션/각주, OCR로 읽은 크롭 내부 텍스트, 있다면 차트에서 추출한 데이터표와 서술형 해석 포함). "
+    "이 정보만 근거로 아래 항목을 채우세요 — 여기 없는 내용은 추측하지 마세요.\n\n"
     "- image_type: chart(차트/그래프) / logo(로고) / photo(사진) / diagram(도식) / other 중 하나\n"
     "- caption_or_title: 원문에 캡션/제목이 있으면 그대로, 없으면 null\n"
-    "- entities_mentioned: 이미지에 등장/언급된 기업/기관명(범례, 라벨 등)\n"
+    "- entities_mentioned: 등장/언급된 기업/기관명(범례, OCR 텍스트, 캡션 등에서)\n"
     "- described_content: 이 이미지가 무엇을 보여주는지 1~2문장 설명\n"
     "- key_values_or_trend: 차트라면 읽을 수 있는 핵심 수치나 추세(급등/급락 등, 없으면 null)\n"
     "- time_period: 시계열 차트라면 다루는 기간(없으면 null)\n\n"
-    "<이미지 설명>\n{image_description}\n</이미지 설명>"
+    "<MinerU 탐지 타입>\n{block_type}\n</MinerU 탐지 타입>\n\n"
+    "<캡션>\n{caption}\n</캡션>\n\n"
+    "<각주>\n{footnote}\n</각주>\n\n"
+    "<OCR 텍스트>\n{ocr_text}\n</OCR 텍스트>\n\n"
+    "<차트 추출표(MinerU VLM, 있는 경우만)>\n{chart_table}\n</차트 추출표>\n\n"
+    "<서술형 해석(참고용 — §3.4에 따라 근거는 항상 위 차트표를 우선할 것)>\n{narrative}\n</서술형 해석>"
 )
 
 
-def extract_image_metadata(image_description: str, client=None, model_name: str = _DEFAULT_MODEL) -> dict:
-    """[미배선] 이미지 캡션/설명 텍스트 하나를 받아 구조화 메타데이터로 변환 — 팀원의 이미지
-    추출 모듈이 캡션 텍스트를 주는 경우를 가정한 초안. 실제 입력 형태가 확정되면 프롬프트나
-    호출 방식(vision API 등)을 다시 맞출 것."""
+def extract_image_metadata(card: dict, client=None, model_name: str = _DEFAULT_MODEL) -> dict:
+    """이미지/차트 카드(onestop_cards.jsonl의 행 하나) -> 구조화 메타데이터. status="useful"인
+    카드에만 호출할 것(호출측에서 가드) — discarded/handoff/skipped 카드는 내용이 비어있거나
+    표 파트 소관이라 이 함수 대상이 아니다."""
     client = _get_client(client)
-    prompt = _IMAGE_METADATA_PROMPT.format(image_description=image_description)
-    resp = client.chat.completions.parse(
-        model=model_name,
-        messages=[{"role": "user", "content": prompt}],
-        response_format=ImageMetadata,
+    ocr_text = (card.get("ocr") or {}).get("text") or ""
+    prompt = _IMAGE_METADATA_PROMPT.format(
+        block_type=card.get("block_type") or "(알수없음)",
+        caption=card.get("caption") or "(없음)",
+        footnote=card.get("footnote") or "(없음)",
+        ocr_text=ocr_text or "(없음)",
+        chart_table=card.get("chart_table") or "(없음 — 차트분석 미실행)",
+        narrative=card.get("narrative") or "(없음)",
     )
+    resp = _retryable_parse(client, model=model_name, messages=[{"role": "user", "content": prompt}],
+                             response_format=ImageMetadata)
     return resp.choices[0].message.parsed.model_dump()
+
+
+def add_structured_metadata_to_cards(cards: list, openai_client=None, model_name: str = _DEFAULT_MODEL,
+                                      workers: int = 8) -> list:
+    """cards(onestop_cards.jsonl을 읽은 dict 리스트) 중 status="useful"인 것만 골라 구조화
+    메타데이터를 뽑아 각 카드에 `structured_metadata` 필드로 채워 반환(원본 리스트는 그대로,
+    새 리스트 반환). run_table_metadata_pipeline.py의 [29]와 동일하게 로컬 연산은 이미 끝난
+    카드들이므로 API 호출만 ThreadPoolExecutor로 한꺼번에 병렬 디스패치."""
+    if openai_client is None:
+        import os
+        from openai import OpenAI
+        openai_client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
+
+    targets = [c for c in cards if c.get("status") == "useful"]
+    if not targets:
+        return cards
+
+    from concurrent.futures import ThreadPoolExecutor, as_completed
+    results = {}
+    with ThreadPoolExecutor(max_workers=workers) as executor:
+        future_to_id = {
+            executor.submit(extract_image_metadata, card, openai_client, model_name): card["image_id"]
+            for card in targets
+        }
+        for future in as_completed(future_to_id):
+            image_id = future_to_id[future]
+            try:
+                results[image_id] = future.result()
+            except Exception as e:  # noqa: BLE001 — 카드 하나 실패해도 나머지는 계속 진행
+                results[image_id] = {"error": str(e)}
+
+    return [
+        {**c, "structured_metadata": results[c["image_id"]]} if c["image_id"] in results else c
+        for c in cards
+    ]
