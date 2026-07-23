@@ -75,7 +75,7 @@ def _finalize_value(raw_value: str, cf) -> dict:
 
 def build_records(pdf_id: str, add_structured_metadata: bool = False, openai_client=None,
                    page_boxes: dict = None, yolo_model=None, structured_metadata_workers: int = 8,
-                   sector: str = None):
+                   sector: str = None, tatr_model=None, tatr_processor=None):
     """page_boxes: [26] page_classification 등 앞단에서 이미 같은 PDF에 YOLO를 돌린 결과가 있으면
     `{page_number(1-based): [(cls_name, fitz.Rect), ...]}` 형태로 넘겨 표 라우터가 YOLO를 다시
     호출하지 않게 함(`page_classification.page_classifier.classify_pdf()`가 반환하는 cached_boxes를
@@ -83,9 +83,19 @@ def build_records(pdf_id: str, add_structured_metadata: bool = False, openai_cli
 
     [29] add_structured_metadata=True일 때 표마다 순차로 API를 부르면 표가 많은 문서(K-Wave 104개
     표에서 실측 +115초/finance 표 55개만으로)에서 병목이 커서, 표 파싱(로컬 연산)을 모두 끝낸 뒤
-    구조화 출력 호출만 `concurrent.futures.ThreadPoolExecutor`로 한꺼번에 병렬 디스패치한다."""
+    구조화 출력 호출만 `concurrent.futures.ThreadPoolExecutor`로 한꺼번에 병렬 디스패치한다.
+
+    [38] tatr_model/tatr_processor: yolo_model과 동일한 이유로 외부에서 재사용 가능하게 노출.
+    여러 PDF를 루프로 처리할 때 이 함수가 매번 새로 HuggingFace 체크포인트를 로드하던 것이
+    실측 병목(LGCNS PDF 기준 표 브랜치 6.88초 중 상당 부분)이었음 — 한 번 로드해서 넘기면
+    COMPLEX 표가 있는 PDF에서만 그 비용을 내부적으로 지불(None이면 기존처럼 내부에서 로드)."""
     import fitz
-    routed = detect_and_route(RouterThresholds(), yolo_model=yolo_model, page_boxes=page_boxes)
+    import pdfplumber
+    # [39] detect_and_route()와 이 함수가 각자 pdfplumber.open()을 하던 것을 하나로 합침
+    # (pdfminer 콘텐츠 스트림 페이지당 2회 해석 -> 1회, 실측 ~3s 절감). 아래 row-parsing
+    # 루프에서도 같은 pdf_pp를 재사용.
+    pdf_pp = pdfplumber.open(str(PDF_PATH))
+    routed = detect_and_route(RouterThresholds(), yolo_model=yolo_model, page_boxes=page_boxes, pdf_pp=pdf_pp)
     print(f"[router] 표 {len(routed)}개(SIMPLE {sum(1 for r in routed if r['complexity']=='simple')} / "
           f"COMPLEX {sum(1 for r in routed if r['complexity']=='complex')})", flush=True)
 
@@ -103,15 +113,15 @@ def build_records(pdf_id: str, add_structured_metadata: bool = False, openai_cli
     # 9%는 크진 않지만 손해는 없어 유지. 표 처리가 텍스트 처리와 동시에(병렬) 돌아가는 구조가
     # 되면 BGE-m3-ko와 MPS 자원을 경합할 수 있음(sector_classifier 조사에서 실측한 문제, [24]
     # 참고) — 지금은 순차 실행 구조라 이 위험은 없음.
-    model = AutoModelForObjectDetection.from_pretrained("microsoft/table-transformer-structure-recognition")
-    processor = AutoImageProcessor.from_pretrained("microsoft/table-transformer-structure-recognition")
-    model.eval()
-    tatr_device = "mps" if torch.backends.mps.is_available() else "cpu"
-    model = model.to(tatr_device)
+    if tatr_model is not None and tatr_processor is not None:
+        model, processor = tatr_model, tatr_processor
+    else:
+        model = AutoModelForObjectDetection.from_pretrained("microsoft/table-transformer-structure-recognition")
+        processor = AutoImageProcessor.from_pretrained("microsoft/table-transformer-structure-recognition")
+        model.eval()
+        tatr_device = "mps" if torch.backends.mps.is_available() else "cpu"
+        model = model.to(tatr_device)
     doc_fitz = fitz.open(str(PDF_PATH))
-
-    import pdfplumber
-    pdf_pp = pdfplumber.open(str(PDF_PATH))
 
     records = []
     n_finance_rows_filtered = 0  # 표 전체 스킵이 아니라 "행" 단위로 걸러낸 순수 재무항목 개수([22])

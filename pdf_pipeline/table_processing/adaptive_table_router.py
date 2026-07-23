@@ -108,7 +108,7 @@ def classify_table(quick_table, bbox_height_pt: float, median_line_height_pt: fl
 
 
 def detect_and_route(thresholds: RouterThresholds = RouterThresholds(), crop_dir: Path = None,
-                      yolo_model=None, page_boxes: dict = None):
+                      yolo_model=None, page_boxes: dict = None, pdf_pp=None):
     """PDF 전체에서 YOLO로 표를 찾고, 표마다 SIMPLE/COMPLEX를 판정한다.
     SIMPLE 표는 pdfplumber 결과(마크다운 포함)까지 바로 채워서 반환하고,
     COMPLEX 표는 크롭 이미지 경로만 반환(Docling은 호출측에서 병렬 처리).
@@ -118,13 +118,21 @@ def detect_and_route(thresholds: RouterThresholds = RouterThresholds(), crop_dir
     별개로 중복 호출) 수정. page_boxes({1-based page: [(cls_name, fitz.Rect), ...]}, 예를 들어
     `page_classification.page_classifier.classify_pdf()`가 반환하는 cached_boxes를 모은 것)를
     넘기면 그 페이지는 YOLO를 아예 다시 안 부른다. page_boxes에 없는 페이지만 `run_yolo_layout()`
-    (공유 유틸)로 새로 추론하며, 이때만 yolo_model이 필요(안 주면 여기서 1회 로드)."""
+    (공유 유틸)로 새로 추론하며, 이때만 yolo_model이 필요(안 주면 여기서 1회 로드).
+
+    [39] pdf_pp: 호출측(build_records())이 이미 같은 PDF를 pdfplumber로 열어뒀으면 그 객체를
+    넘겨 재사용 — 이 함수와 build_records()가 각자 pdfplumber.open()을 불러 pdfminer가 페이지당
+    콘텐츠 스트림을 두 번 해석하던 것(LGCNS 6페이지 기준 측정 ~3s)이 실측 병목이었음. None이면
+    기존처럼 이 함수가 열고 닫는다(하위호환) — 넘겨받은 경우엔 호출측이 lifecycle을 소유하므로
+    여기서 닫지 않는다."""
     doc_fitz = fitz.open(str(PDF_PATH))
     if crop_dir:
         crop_dir.mkdir(exist_ok=True, parents=True)
 
     routed = []
-    with pdfplumber.open(str(PDF_PATH)) as pdf:
+    _owns_pdf_pp = pdf_pp is None
+    pdf = pdf_pp if pdf_pp is not None else pdfplumber.open(str(PDF_PATH))
+    try:
         for i, (page_pp, page_fz) in enumerate(zip(pdf.pages, doc_fitz), start=1):
             median_lh = page_median_line_height(page_pp)
             # [33] 성능 수정: img는 COMPLEX 표를 크롭 저장할 때(crop_dir 지정 시)만 실제로
@@ -187,5 +195,8 @@ def detect_and_route(thresholds: RouterThresholds = RouterThresholds(), crop_dir
                         crop.save(crop_path)
                     entry["crop_path"] = str(crop_path) if crop_path else None
                 routed.append(entry)
-    doc_fitz.close()
+    finally:
+        if _owns_pdf_pp:
+            pdf.close()
+        doc_fitz.close()
     return routed
