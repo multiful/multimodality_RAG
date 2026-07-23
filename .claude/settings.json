@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__figma__use_figma",
+      "mcp__figma__get_screenshot",
+      "Bash(git remote *)",
+      "Bash(pip show *)",
+      "Bash(pip install *)",
+      "Bash(python3 -m py_compile data_collection/kospi200_tickers.py data_collection/fetch_kospi200_financials.py)",
+      "Bash(pkill -f fetch_kospi200_financials.py)",
+      "Bash(python3 data_collection/fetch_kospi200_financials.py)",
+      "Read(//tmp/**)",
+      "Read(//private/tmp/**)",
+      "Bash(ls -la ~/Desktop/연습용)",
+      "Read(//Users/parkminsung45/Desktop/연습용/**)"
+    ]
+  }
+}
