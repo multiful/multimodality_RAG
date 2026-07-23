@@ -1,0 +1,65 @@
+{
+  "doc": "20260629_industry_47868000.pdf",
+  "title": "스마트폰 수요 우려는 예견된 수순 (반도체 및 소부장 Weekly, 하나증권, 2026.6.29, 김록호)",
+  "n_pages": 31,
+  "note": "모든 answer_keys는 원문(PyMuPDF 추출 텍스트)에서 직접 검증함. 값 매칭은 공백/콤마 정규화 후 수행.",
+  "page_types": {
+    "_doc": "각 페이지의 정답 콘텐츠 라벨(멀티라벨). text=본문서술, table=정형표, chart=도표/차트. 페이지 분류/라우팅 평가용.",
+    "1":  ["text","table","chart"],
+    "2":  ["text","table"],
+    "3":  ["table"],
+    "4":  ["table"],
+    "5":  ["table"],
+    "6":  ["table"],
+    "7":  ["chart"], "8": ["chart"], "9": ["chart"], "10": ["chart"], "11": ["chart"],
+    "12": ["chart"], "13": ["chart"], "14": ["chart"], "15": ["chart"], "16": ["chart"],
+    "17": ["chart"], "18": ["chart"], "19": ["chart"], "20": ["chart"], "21": ["chart"],
+    "22": ["chart"],
+    "23": ["table","text"], "24": ["table"], "25": ["table"], "26": ["table"],
+    "27": ["table"], "28": ["table"], "29": ["table"], "30": ["table"], "31": ["table"]
+  },
+  "structure_expectations": {
+    "n_valuation_tables": 11,
+    "valuation_table_pages": [1,2,3,4,5,6],
+    "n_charts": 93,
+    "chart_pages": [7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22],
+    "finance_estimate_table_pages": [23,24,25,26,27,28,29,30,31],
+    "expected_hard_pages": [],
+    "comment": "전 페이지 디지털 텍스트 레이어 보유(스캔 아님). 텍스트 난이도 기준 hard 페이지 0개가 정상. 도표는 벡터드로잉이라 텍스트 난이도가 아니라 image 라우팅 대상."
+  },
+  "qa": [
+    {"id":"T01","type":"text_thesis","page":1,"q":"Micron 실적에서 DRAM 가격은 얼마나 상승했나?","answer":"60% 이상","answer_keys":["DRAM","60%"]},
+    {"id":"T02","type":"text_thesis","page":1,"q":"Micron 실적에서 NAND 가격은 얼마나 상승했나?","answer":"80% 이상","answer_keys":["NAND","80%"]},
+    {"id":"T03","type":"text_thesis","page":1,"q":"Micron의 다음 분기 매출액 가이던스는?","answer":"전분기대비 약 20% 증가","answer_keys":["가이던스","20%"]},
+    {"id":"T04","type":"text_thesis","page":1,"q":"이번 주 코스피 지수 주간 수익률은?","answer":"-7.1%","answer_keys":["코스피","7.1"]},
+    {"id":"T05","type":"text_thesis","page":1,"q":"이번 주 코스닥 지수 주간 수익률은?","answer":"-11.9%","answer_keys":["코스닥","11.9"]},
+    {"id":"T06","type":"text_thesis","page":1,"q":"Micron이 다음 분기에 집행할 Capex 규모는?","answer":"100억 달러","answer_keys":["Capex","100억"]},
+    {"id":"T07","type":"text_thesis","page":1,"q":"하나증권의 2026년 글로벌 스마트폰·PC 출하량 전망은?","answer":"전년대비 10% 감소","answer_keys":["출하량","10% 감소"]},
+    {"id":"T08","type":"text_thesis","page":1,"q":"워스트 시나리오에서 가정한 출하량 감소폭은?","answer":"20% 감소","answer_keys":["워스트","20%"]},
+    {"id":"T09","type":"text_thesis","page":2,"q":"Arm 주가는 이번 주 얼마나 하락했나?","answer":"24% 하락","answer_keys":["Arm","24%"]},
+    {"id":"T10","type":"text_thesis","page":2,"q":"ON Semiconductor 주가는 이번 주 얼마나 하락했나?","answer":"26% 하락","answer_keys":["ON Semiconductor","26%"]},
+    {"id":"T11","type":"text_thesis","page":2,"q":"Qualcomm 주가는 이번 주 얼마나 하락했나?","answer":"16% 하락","answer_keys":["Qualcomm","16%"]},
+    {"id":"T12","type":"text_thesis","page":1,"q":"반도체 업종에 대한 투자전략(비중)은?","answer":"비중확대 유지","answer_keys":["비중확대"]},
+
+    {"id":"V01","type":"valuation_table","page":1,"q":"SK하이닉스의 26F PER은?","answer":"8.7","answer_keys":["SK하이닉스","8.7"]},
+    {"id":"V02","type":"valuation_table","page":1,"q":"삼성전자의 26F PER은?","answer":"7.6","answer_keys":["삼성전자","7.6"]},
+    {"id":"V03","type":"valuation_table","page":1,"q":"SK하이닉스의 26F PBR은?","answer":"5.6","answer_keys":["SK하이닉스","5.6"]},
+    {"id":"V04","type":"valuation_table","page":1,"q":"코스피 지수 종가는?","answer":"8,411","answer_keys":["코스피","8,411"]},
+    {"id":"V05","type":"valuation_table","page":1,"q":"코스닥 지수 종가는?","answer":"851.37","answer_keys":["코스닥","851.37"]},
+    {"id":"V06","type":"valuation_table","page":2,"q":"Nvidia의 시가총액(백만 달러)은?","answer":"4,659,226","answer_keys":["Nvidia","4,659,226"]},
+    {"id":"V07","type":"valuation_table","page":2,"q":"TSMC ADR의 26F P/E는?","answer":"27.6","answer_keys":["TSMC","27.6"]},
+    {"id":"V08","type":"valuation_table","page":2,"q":"Micron의 YTD 주가 수익률은?","answer":"296.7%","answer_keys":["Micron","296.7"]},
+
+    {"id":"F01","type":"finance_table","page":23,"q":"삼성전자 반도체 부문의 2026F 매출액은?","answer":"534.9조원","answer_keys":["반도체","534.9"]},
+    {"id":"F02","type":"finance_table","page":23,"q":"삼성전자 반도체 부문의 2026F 영업이익은?","answer":"382.8조원","answer_keys":["382.8"]},
+    {"id":"F03","type":"finance_table","page":23,"q":"삼성전자 Memory 부문의 2026F 매출액은?","answer":"505.1조원","answer_keys":["Memory","505.1"]},
+    {"id":"F04","type":"finance_table","page":23,"q":"삼성전자 DRAM의 2026F 매출액은?","answer":"479.0조원","answer_keys":["DRAM","479.0"]},
+    {"id":"F05","type":"finance_table","page":23,"q":"삼성전자 반도체 부문의 2026F 영업이익률은?","answer":"72%","answer_keys":["영업이익률","72%"]},
+
+    {"id":"C01","type":"chart_title","page":7,"q":"DDR5 16Gb의 현물가와 고정가를 비교한 도표 번호는?","answer":"도표 2","answer_keys":["도표 2","DDR5 16Gb"]},
+    {"id":"C02","type":"chart_title","page":11,"q":"SK하이닉스 DRAM CAPEX 추이 및 전망 도표 번호는?","answer":"도표 11","answer_keys":["도표 11","SK하이닉스 DRAM CAPEX"]},
+    {"id":"C03","type":"chart_title","page":15,"q":"DRAM 지역별 수출 비중을 보여주는 도표 번호는?","answer":"도표 43","answer_keys":["도표 43","DRAM 지역별 수출 비중"]},
+    {"id":"C04","type":"chart_title","page":21,"q":"반도체 장비 국가별 수입 비중 도표 번호는?","answer":"도표 50","answer_keys":["도표 50","반도체 장비 국가별 수입 비중"]},
+    {"id":"C05","type":"chart_title","page":22,"q":"글로벌 PC 출하량 추이 및 전망 도표 번호는?","answer":"도표 90","answer_keys":["도표 90","글로벌 PC 출하량"]}
+  ]
+}
