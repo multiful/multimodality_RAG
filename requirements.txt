@@ -3,6 +3,8 @@ sentence-transformers
 openai
 chromadb
 supabase
+psycopg2-binary  # Supabase 직접 Postgres 연결(DDL 실행, document_evidence 등 벌크 upsert)용 —
+                 # supabase 클라이언트(REST/PostgREST)로는 CREATE TABLE 등 DDL을 못 돌려서 필요
 pandas>=2.0.0
 python-dotenv
 requests
@@ -22,6 +24,8 @@ pymupdf
 rank-bm25
 docling
 ultralytics
+timm  # table_processing의 TableTransformer(microsoft/table-transformer-structure-recognition) 백본 필수 —
+      # 기존 환경들엔 암묵적으로 깔려있었으나 requirements.txt에 빠져있어 새 venv에서 ImportError 발생 확인됨
 # 아래 3개는 Unstructured(Hi-Res) 비교실험용 — 최종 채택 파이프라인에는 미포함(속도 문제로 탈락).
 # unstructured[pdf] 자체는 pi-heif가 libheif 네이티브 라이브러리 없이 빌드 실패하니, pip install 전에
 # site-packages에 더미 pi_heif 모듈(register_heif_opener 빈 함수)을 만들어 import만 통과시켜야 함.
