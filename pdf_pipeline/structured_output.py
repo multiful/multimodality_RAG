@@ -13,11 +13,16 @@
 """
 
 import os
+import sys
+from pathlib import Path
 from typing import Literal, Optional
 
 from pydantic import BaseModel
+from tenacity import retry, retry_if_exception_type, stop_after_attempt, wait_random_exponential
 
 _DEFAULT_MODEL = "gpt-4o-mini"
+
+sys.path.insert(0, str(Path(__file__).resolve().parent / "table_processing"))  # [37] sector_schema.yaml 재사용
 
 
 def _get_client(client=None):
@@ -25,6 +30,51 @@ def _get_client(client=None):
         return client
     from openai import OpenAI
     return OpenAI(api_key=os.environ["OPENAI_API_KEY"])
+
+
+def _retryable_parse(client, **kwargs):
+    """[37] 사용자 지적("페이지 늘어날수록 조정할 부분") 반영 — 표/청크 수가 많은 대형 문서는
+    구조화 출력 API 호출이 수십~수백 건 나갈 수 있는데, 지금까지 재시도/백오프가 전혀 없어서
+    레이트리밋(429)이나 일시적 5xx에 그대로 실패했다. `tenacity`로 지수 백오프 재시도 추가 —
+    429(RateLimitError)/5xx(APIStatusError, internal_server_error 등)/연결 오류/타임아웃만 재시도
+    (스키마 위반 같은 4xx 요청 자체 오류는 재시도해도 똑같이 실패하므로 즉시 실패 처리)."""
+    from openai import APIConnectionError, APITimeoutError, InternalServerError, RateLimitError
+
+    @retry(
+        retry=retry_if_exception_type((RateLimitError, InternalServerError, APIConnectionError, APITimeoutError)),
+        wait=wait_random_exponential(min=1, max=30),
+        stop=stop_after_attempt(5),
+        reraise=True,
+    )
+    def _call():
+        return client.chat.completions.parse(**kwargs)
+
+    return _call()
+
+
+def _sector_hint(sector: str = None) -> str:
+    """[37] 사용자 요청("문서 종류에 따라 그에 알맞는 구조화 출력") 반영 — 스키마 자체를 섹터별로
+    N개 따로 만들지 않고(오버엔지니어링 방지), 이미 있는 `sector_schema.yaml`의 섹터별 큐레이션
+    필드 별칭을 프롬프트 힌트로 주입 — 같은 스키마 형태를 유지하면서 "이 섹터에서 특히 중요한
+    지표"에 LLM의 주의를 끌어 metric_mentions/notable_finding 등의 품질을 높인다."""
+    if not sector:
+        return ""
+    try:
+        from canonical_field_schema import SECTOR_TABLE_TYPES, FIELD_BY_KEY
+        table_types = SECTOR_TABLE_TYPES.get(sector, {}).get("table_types", {})
+        field_keys = {fk for fields in table_types.values() for fk in fields}
+        aliases = []
+        for fk in field_keys:
+            aliases.extend(FIELD_BY_KEY[fk].aliases[:2] if fk in FIELD_BY_KEY else [])
+        if not aliases:
+            return ""
+        sample = ", ".join(dict.fromkeys(aliases))[:300]
+        return (f"\n이 문서는 '{sector}' 섹터 리포트입니다. 이 섹터에서 흔히 쓰이는 지표 예시(참고용): "
+                f"{sample}. **주의: 이건 어떤 지표를 찾아야 할지 감을 잡는 참고 목록일 뿐입니다 — "
+                f"위 chunk/표 원문에 실제로 등장하지 않는 지표는 절대 지어내지 말고, 원문에 실제로 "
+                f"있는 내용만 뽑으세요.**\n")
+    except Exception:
+        return ""  # sector_schema 조회 실패해도 구조화 출력 자체는 계속 진행(핵심 기능 아님)
 
 
 # ---------- 텍스트 라우팅 끝: 청크 단위 구조화 메타데이터 ----------
@@ -61,11 +111,12 @@ _TEXT_METADATA_PROMPT = (
 
 
 def extract_text_chunk_metadata(chunks: list, doc_title: str = None, client=None,
-                                 model_name: str = _DEFAULT_MODEL) -> list:
+                                 model_name: str = _DEFAULT_MODEL, sector: str = None) -> list:
     """텍스트 라우팅 끝에서 호출 — 한 페이지의 chunk들(raw_chunk + section_path)을 한 번의 API
     호출로 배치 처리(청크마다 호출하면 페이지당 API 호출 수가 너무 많아짐). 반환은 입력 chunks와
     같은 길이/순서의 dict 리스트(항목별 병합은 호출측이 수행 — chunk_index로 정렬해 매칭하므로
-    LLM이 순서를 안 지켜도 안전)."""
+    LLM이 순서를 안 지켜도 안전). sector: [37] `sector_classifier.classify_pdf_sector()`로 이미
+    판별한 섹터명을 넘기면 그 섹터에 특화된 지표 힌트를 프롬프트에 주입(선택, 없어도 동작)."""
     if not chunks:
         return []
     client = _get_client(client)
@@ -75,12 +126,10 @@ def extract_text_chunk_metadata(chunks: list, doc_title: str = None, client=None
     )
     doc_title_line = f"문서 제목: {doc_title}\n\n" if doc_title else ""
     prompt = _TEXT_METADATA_PROMPT.format(doc_title_line=doc_title_line, chunks_block=chunks_block)
+    prompt += _sector_hint(sector)
 
-    resp = client.chat.completions.parse(
-        model=model_name,
-        messages=[{"role": "user", "content": prompt}],
-        response_format=_TextChunkMetadataBatch,
-    )
+    resp = _retryable_parse(client, model=model_name, messages=[{"role": "user", "content": prompt}],
+                             response_format=_TextChunkMetadataBatch)
     parsed = resp.choices[0].message.parsed
     by_index = {item.chunk_index: item for item in parsed.items}
     return [by_index[i].model_dump() if i in by_index else None for i in range(len(chunks))]
@@ -114,10 +163,11 @@ _TABLE_METADATA_PROMPT = (
 
 
 def extract_table_metadata(table_text: str, mapped_records: list, unmapped_labels: list,
-                            client=None, model_name: str = _DEFAULT_MODEL) -> dict:
+                            client=None, model_name: str = _DEFAULT_MODEL, sector: str = None) -> dict:
     """표 라우팅(run_table_metadata_pipeline) 끝에서 표 하나마다 호출. mapped_records: 이미
     canonical_field가 매칭된 레코드들(raw_label 요약용), unmapped_labels: 매칭 안 된 행의 원본
-    라벨 리스트. 빈 표(행 없음)에는 호출하지 않도록 호출측에서 가드할 것."""
+    라벨 리스트. 빈 표(행 없음)에는 호출하지 않도록 호출측에서 가드할 것. sector: [37] 섹터
+    특화 지표 힌트 주입용(선택)."""
     client = _get_client(client)
     mapped_summary = ", ".join(
         f"{r['canonical_field']}={r.get('raw_label') or r.get('cells')}" for r in mapped_records
@@ -125,12 +175,10 @@ def extract_table_metadata(table_text: str, mapped_records: list, unmapped_label
     unmapped_str = ", ".join(unmapped_labels) or "(없음)"
     prompt = _TABLE_METADATA_PROMPT.format(
         table_text=table_text, mapped_summary=mapped_summary, unmapped_labels=unmapped_str)
+    prompt += _sector_hint(sector)
 
-    resp = client.chat.completions.parse(
-        model=model_name,
-        messages=[{"role": "user", "content": prompt}],
-        response_format=TableMetadata,
-    )
+    resp = _retryable_parse(client, model=model_name, messages=[{"role": "user", "content": prompt}],
+                             response_format=TableMetadata)
     return resp.choices[0].message.parsed.model_dump()
 
 

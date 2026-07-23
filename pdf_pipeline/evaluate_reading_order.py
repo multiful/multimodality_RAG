@@ -17,7 +17,6 @@
 4. 우리 rule-based hard/easy 분류를 이 GT 대비 정밀도/재현율/F1으로 채점.
 """
 
-import importlib.util
 import json
 import sys
 import time
@@ -34,19 +33,10 @@ sys.path.insert(0, str(ROOT / "pdf_pipeline"))
 sys.path.insert(0, str(ROOT / "pdf_pipeline" / "page_classification"))
 sys.path.insert(0, str(ROOT / "pdf_pipeline" / "text_processing"))
 
-
-def _load_as(alias, path):
-    spec = importlib.util.spec_from_file_location(alias, path)
-    mod = importlib.util.module_from_spec(spec)
-    sys.modules[alias] = mod
-    spec.loader.exec_module(mod)
-    return mod
-
-
-_text_tn = _load_as("_text_processing_text_normalization",
-                     ROOT / "pdf_pipeline" / "text_processing" / "text_normalization.py")
-sys.modules["text_normalization"] = _text_tn
-
+# [36] text_normalization 이름 충돌 우회용 로더가 있었으나, 이 스크립트가 실제로 쓰는
+# assess_page_difficulty/classify_pdf는 text_normalization에 의존하지 않아 애초에 불필요했음
+# — text_processing 쪽 text_normalization.py 삭제([36], PUA/구두점 정규화는 pdf_pipeline/
+# text_cleanup.py로 이동)에 맞춰 정리.
 from page_classifier import classify_pdf  # noqa: E402
 from reading_order_router import assess_page_difficulty, NON_TEXT_CLASSES, _is_excluded  # noqa: E402
 

@@ -5,7 +5,6 @@
 보완이므로) 구조화 출력을 호출하도록도 확인.
 """
 
-import importlib.util
 import json
 import sys
 import time
@@ -20,26 +19,11 @@ sys.path.insert(0, str(ROOT / "pdf_pipeline" / "page_classification"))
 sys.path.insert(0, str(ROOT / "pdf_pipeline" / "text_processing"))
 sys.path.insert(0, str(ROOT / "pdf_pipeline" / "table_processing"))
 
-
-def _load_as(alias, path):
-    spec = importlib.util.spec_from_file_location(alias, path)
-    mod = importlib.util.module_from_spec(spec)
-    sys.modules[alias] = mod
-    spec.loader.exec_module(mod)
-    return mod
-
-
-_text_tn = _load_as("_text_processing_text_normalization",
-                     ROOT / "pdf_pipeline" / "text_processing" / "text_normalization.py")
-_table_tn = _load_as("_table_processing_text_normalization",
-                      ROOT / "pdf_pipeline" / "table_processing" / "text_normalization.py")
-
-sys.modules["text_normalization"] = _text_tn
+# [36] text_processing/table_processing 양쪽의 이름 충돌하던 text_normalization.py 문제는 PUA/
+# 구두점 정규화를 pdf_pipeline/text_cleanup.py로 옮기면서 해소(text_processing 쪽 파일 삭제) —
+# sys.modules 스왑 우회 더는 불필요.
 from page_classifier import classify_pdf  # noqa: E402
 from text_extraction import process_pdf  # noqa: E402
-import hierarchical_chunker  # noqa: E402,F401 — [35] _text_tn 활성 상태에서 미리 로드(자세한 이유는 compare_baseline_vs_pipeline.py 참고)
-
-sys.modules["text_normalization"] = _table_tn
 import adaptive_table_router as atr  # noqa: E402
 import run_table_metadata_pipeline as rtmp  # noqa: E402
 

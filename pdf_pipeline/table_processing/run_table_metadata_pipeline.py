@@ -15,6 +15,7 @@ import json
 import sys
 from pathlib import Path
 
+import torch
 from transformers import AutoImageProcessor, AutoModelForObjectDetection
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -73,7 +74,8 @@ def _finalize_value(raw_value: str, cf) -> dict:
 
 
 def build_records(pdf_id: str, add_structured_metadata: bool = False, openai_client=None,
-                   page_boxes: dict = None, yolo_model=None, structured_metadata_workers: int = 8):
+                   page_boxes: dict = None, yolo_model=None, structured_metadata_workers: int = 8,
+                   sector: str = None):
     """page_boxes: [26] page_classification 등 앞단에서 이미 같은 PDF에 YOLO를 돌린 결과가 있으면
     `{page_number(1-based): [(cls_name, fitz.Rect), ...]}` 형태로 넘겨 표 라우터가 YOLO를 다시
     호출하지 않게 함(`page_classification.page_classifier.classify_pdf()`가 반환하는 cached_boxes를
@@ -92,9 +94,20 @@ def build_records(pdf_id: str, add_structured_metadata: bool = False, openai_cli
         from openai import OpenAI
         openai_client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
 
+    # [37] 사용자 지적("페이지 늘어날수록 조정할 부분" — TATR이 표 개수만큼 반복되는 병목) 대응.
+    # 주의: 처음에 더미 이미지(800x500 흰 배경)로 측정했을 땐 MPS가 2.79배 빠르다고 나왔는데,
+    # 실제 LGCNS 표 12개(300dpi 실제 크롭, 훨씬 큼)로 다시 재보니 CPU 322ms/표 -> MPS 292ms/표로
+    # 겨우 9% 개선 — 더미 이미지 벤치마크가 실제 워크로드를 대표 못 한 것으로 확인(작은 이미지는
+    # MPS 커널 디스패치/디바이스 전송 오버헤드 대비 이득이 작음). 배치 처리도 시도했으나 CPU에서
+    # 오히려 손해(표마다 크기가 달라 가장 큰 쪽에 패딩하는 오버헤드가 배치 이득을 상쇄) — 기각.
+    # 9%는 크진 않지만 손해는 없어 유지. 표 처리가 텍스트 처리와 동시에(병렬) 돌아가는 구조가
+    # 되면 BGE-m3-ko와 MPS 자원을 경합할 수 있음(sector_classifier 조사에서 실측한 문제, [24]
+    # 참고) — 지금은 순차 실행 구조라 이 위험은 없음.
     model = AutoModelForObjectDetection.from_pretrained("microsoft/table-transformer-structure-recognition")
     processor = AutoImageProcessor.from_pretrained("microsoft/table-transformer-structure-recognition")
     model.eval()
+    tatr_device = "mps" if torch.backends.mps.is_available() else "cpu"
+    model = model.to(tatr_device)
     doc_fitz = fitz.open(str(PDF_PATH))
 
     import pdfplumber
@@ -218,7 +231,8 @@ def build_records(pdf_id: str, add_structured_metadata: bool = False, openai_cli
         from concurrent.futures import ThreadPoolExecutor, as_completed
         with ThreadPoolExecutor(max_workers=structured_metadata_workers) as executor:
             future_to_meta = {
-                executor.submit(extract_table_metadata, table_text, mapped_t, unmapped_labels_t, openai_client):
+                executor.submit(extract_table_metadata, table_text, mapped_t, unmapped_labels_t,
+                                openai_client, "gpt-4o-mini", sector):
                     (page, table_idx, ttype)
                 for page, table_idx, ttype, table_text, mapped_t, unmapped_labels_t in pending_structured_calls
             }

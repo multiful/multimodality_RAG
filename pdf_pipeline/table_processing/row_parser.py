@@ -6,9 +6,15 @@ TATR로 표의 row bbox뿐 아니라 column bbox까지 탐지하고, 각 (row, c
 자연스럽게 표현할 수 있다(계약상대방처럼 텍스트 값도, 수주잔고처럼 연도별 숫자 여러 개도 동일 구조).
 """
 
+import sys
+from pathlib import Path
+
 import fitz
 from PIL import Image
 import torch
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))  # [36] text_cleanup이 pdf_pipeline/에 있음
+from text_cleanup import clean_extracted_text  # noqa: E402
 
 
 def _boxes_by_label(results, id2label, target_label):
@@ -47,6 +53,10 @@ def _run_tatr(model, processor, doc_fitz, page_num: int, bbox_pt: tuple,
 
     scale = render_dpi / 72
     inputs = processor(images=img, return_tensors="pt")
+    # [37] model.to(device)(MPS 등)로 옮겨져 있으면 입력 텐서도 같은 device로 옮겨야 함 —
+    # model.device는 파라미터 하나를 보고 판단(모델 전체가 한 device에 있다는 전제, TATR처럼
+    # 작은 모델은 항상 그러함).
+    inputs = {k: v.to(model.device) for k, v in inputs.items()}
     with torch.no_grad():
         outputs = model(**inputs)
     target_sizes = torch.tensor([img.size[::-1]])
@@ -81,7 +91,8 @@ def _build_grid_rows(page_pp, row_boxes, col_boxes, padded_pt, scale):
             return ""
         cell_pt = (padded_pt[0] + local_box[0] / scale, padded_pt[1] + local_box[1] / scale,
                    padded_pt[0] + local_box[2] / scale, padded_pt[1] + local_box[3] / scale)
-        return (table_page.crop(cell_pt).extract_text() or "").replace("\n", " ").strip()
+        raw = (table_page.crop(cell_pt).extract_text() or "").replace("\n", " ").strip()
+        return clean_extracted_text(raw)  # [36] PUA/구두점 정규화 — 셀 텍스트도 검색·LLM 입력이 됨
 
     parsed_rows = []
     for row_box in row_boxes:
@@ -100,7 +111,7 @@ def _build_grid_rows(page_pp, row_boxes, col_boxes, padded_pt, scale):
             rx1, ry1, rx2, ry2 = row_box
             row_pt = (padded_pt[0] + rx1 / scale, padded_pt[1] + ry1 / scale,
                       padded_pt[0] + rx2 / scale, padded_pt[1] + ry2 / scale)
-            whole = (table_page.crop(row_pt).extract_text() or "").replace("\n", " ").strip()
+            whole = clean_extracted_text((table_page.crop(row_pt).extract_text() or "").replace("\n", " ").strip())
             if not whole:
                 continue
             cells = [whole]
@@ -159,8 +170,8 @@ def parse_simple_table_from_words(page_pp, bbox_pt: tuple, median_line_height_pt
             split_idx = split_after + 1 if biggest_gap > median_line_height_pt * 0.4 else 1
         else:
             split_idx = 1
-        label = " ".join(w["text"] for w in row_words[:split_idx]).strip()
-        value = " ".join(w["text"] for w in row_words[split_idx:]).strip()
+        label = clean_extracted_text(" ".join(w["text"] for w in row_words[:split_idx]).strip())
+        value = clean_extracted_text(" ".join(w["text"] for w in row_words[split_idx:]).strip())
         if not label:
             continue
         parsed.append({"label": label, "cells": [value] if value else [], "row_top_pt": None})

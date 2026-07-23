@@ -31,6 +31,7 @@ from PIL import Image
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))  # [26] yolo_layout이 pdf_pipeline/에 있음
 from yolo_layout import run_yolo_layout  # noqa: E402
+from text_cleanup import clean_extracted_text  # noqa: E402 — [36] raw_text가 구조화 출력(LLM) 입력으로도 쓰여서 정규화 필요
 
 ROOT = Path(__file__).resolve().parent.parent.parent
 PDF_PATH = ROOT / "pdf_pipeline" / "reference" / "LGCNS" / "20260721_company_279243000.pdf"
@@ -156,7 +157,10 @@ def detect_and_route(thresholds: RouterThresholds = RouterThresholds(), crop_dir
                 try:
                     cropped_page = page_pp.crop(bbox_pt)
                     quick_table = cropped_page.extract_table()
-                    raw_text = cropped_page.extract_text() or ""
+                    # [36] raw_text는 classify_table()의 재무 키워드 매칭뿐 아니라 구조화 출력
+                    # (extract_table_metadata, [25])의 LLM 입력으로도 그대로 쓰이는데 PUA/구두점
+                    # 정규화가 전혀 안 되고 있었음 — text_cleanup.clean_extracted_text()로 통일.
+                    raw_text = clean_extracted_text(cropped_page.extract_text() or "")
                 except Exception:
                     quick_table = None
                     raw_text = ""

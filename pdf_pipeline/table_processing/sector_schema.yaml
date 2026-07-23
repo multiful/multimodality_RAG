@@ -78,6 +78,50 @@ fields:
     unit: percent
     category: 공용
 
+  # --- 밸류에이션/투자지표(전 섹터 공용) — 애널리스트 forward 추정치라 financial_chunks
+  # (실적 실측치)에 없는 새 정보. table_type_router.PURE_LINE_ITEM_KEYWORDS에서 제외해
+  # 여기로 매칭되도록 함(투자의견의 핵심 근거이므로 canonical field로 승격) ---
+  valuation_per:
+    aliases: [PER, PCR]
+    value_type: numeric_amount
+    unit: 배
+    category: 밸류에이션
+  valuation_pbr:
+    aliases: [PBR]
+    value_type: numeric_amount
+    unit: 배
+    category: 밸류에이션
+  valuation_ev_ebitda:
+    aliases: [EV/EBITDA]
+    value_type: numeric_amount
+    unit: 배
+    category: 밸류에이션
+  valuation_psr:
+    aliases: [PSR]
+    value_type: numeric_amount
+    unit: 배
+    category: 밸류에이션
+  forecast_eps:
+    aliases: [EPS, EBITDAPS, SPS, CFPS]
+    value_type: numeric_amount
+    unit: 원
+    category: 밸류에이션
+  forecast_bps:
+    aliases: [BPS]
+    value_type: numeric_amount
+    unit: 원
+    category: 밸류에이션
+  forecast_dps:
+    aliases: [DPS, 배당수익률]
+    value_type: numeric_amount
+    unit: 원
+    category: 밸류에이션
+  forecast_roe:
+    aliases: [ROE]
+    value_type: percent
+    unit: percent
+    category: 밸류에이션
+
   # --- 건설업 ---
   unsold_units:
     aliases: [미분양, 미분양현황, 미분양 세대수, 미분양물량, 준공후미분양]

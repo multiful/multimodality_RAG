@@ -47,3 +47,41 @@ as $$
     order by financial_chunks.embedding <=> query_embedding
     limit match_count;
 $$;
+
+-- KOSPI200_output/kospi200_profiles/*.md (기업 프로필, 티커당 1개 파일)를 인덱싱할 벡터 테이블.
+create table if not exists company_profile_chunks (
+    id text primary key,              -- ticker, "000080.KS"
+    ticker text not null,
+    content text not null,            -- 프로필 마크다운 원문(임베딩 대상 텍스트)
+    embedding vector(1536) not null,
+    created_at timestamptz not null default now()
+);
+
+create index if not exists company_profile_chunks_ticker_idx on company_profile_chunks (ticker);
+
+create index if not exists company_profile_chunks_embedding_idx
+    on company_profile_chunks using hnsw (embedding vector_cosine_ops);
+
+create or replace function match_company_profile_chunks(
+    query_embedding vector(1536),
+    match_count int default 5,
+    filter_ticker text default null
+)
+returns table (
+    id text,
+    ticker text,
+    content text,
+    similarity float
+)
+language sql stable
+as $$
+    select
+        company_profile_chunks.id,
+        company_profile_chunks.ticker,
+        company_profile_chunks.content,
+        1 - (company_profile_chunks.embedding <=> query_embedding) as similarity
+    from company_profile_chunks
+    where filter_ticker is null or company_profile_chunks.ticker = filter_ticker
+    order by company_profile_chunks.embedding <=> query_embedding
+    limit match_count;
+$$;

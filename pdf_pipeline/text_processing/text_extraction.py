@@ -18,8 +18,8 @@ import fitz
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))  # [10] yolo_layout이 pdf_pipeline/로 이동
 from reading_order_router import assess_pdf, assess_page_difficulty  # noqa: E402
-from text_normalization import (detect_pua_artifact, strip_pua_artifacts,  # noqa: E402
-                                  normalize_punctuation, normalize_symbols_and_whitespace)
+from text_cleanup import (detect_pua_artifact, strip_pua_artifacts,  # noqa: E402 — [36] pdf_pipeline/로 이동(공유)
+                            normalize_punctuation, normalize_symbols_and_whitespace)
 from header_footer_remover import detect_headers_footers, strip_headers_footers  # noqa: E402
 from yolo_layout import run_yolo_layout  # noqa: E402
 from boilerplate_remover import detect_boilerplate_paragraphs_fast  # noqa: E402
@@ -87,7 +87,7 @@ def process_pdf(pdf_path, model, doc_title: str = None, strip_headers: bool = Tr
                  chunk_backend: str = "rulebased", remove_boilerplate: bool = True,
                  embed_model=None, page_boxes: dict = None,
                  add_structured_metadata: bool = False, openai_client=None,
-                 structured_metadata_workers: int = 8) -> dict:
+                 structured_metadata_workers: int = 8, sector: str = None) -> dict:
     """[8]/[10] 최종 통합 진입점 — 페이지당 YOLO를 한 번만 호출해 난이도 판정과 계층적 청킹(+컨텍스트
     주입) 양쪽에 재사용. easy 페이지만 청킹까지 진행하고, hard 페이지는 텍스트만 채우고
     `needs_external_reader=True`로 표시(청킹은 생략 — MinerU 등 외부 리더가 처리할 몫).
@@ -177,7 +177,8 @@ def process_pdf(pdf_path, model, doc_title: str = None, strip_headers: bool = Tr
                           "chunks": chunks}
             pages.append(page_entry)
             if executor and chunks:
-                futures[executor.submit(extract_text_chunk_metadata, chunks, doc_title, openai_client)] = page_entry
+                futures[executor.submit(extract_text_chunk_metadata, chunks, doc_title, openai_client,
+                                        "gpt-4o-mini", sector)] = page_entry
         doc_fitz.close()
 
         if executor:
