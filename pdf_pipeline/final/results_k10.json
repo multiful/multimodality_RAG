@@ -1,0 +1,1459 @@
+{
+  "topk": 10,
+  "window": 220,
+  "axes": {
+    "baseline": {
+      "latency": {
+        "parse_time_s": 0.157,
+        "total_time_s": 8.517,
+        "stage_timing": {
+          "text_extract_s": 0.157,
+          "table_naive_s": 8.36
+        }
+      },
+      "structure": {
+        "n_tables_detected": 34,
+        "n_table_rows": 530,
+        "n_zero_or_1row_tables": 1,
+        "chart_titles_preserved": 93,
+        "table_caps_preserved": 11,
+        "note": "표는 pdfplumber 나이브 추출(구조 보정 없음). 청크=페이지 원문(구조 인식 없음)."
+      },
+      "n_chunks": 55,
+      "retrieval": {
+        "extraction_coverage_prox": {
+          "n": 30,
+          "hit": 30,
+          "rate": 1.0
+        },
+        "extraction_coverage_present": {
+          "n": 30,
+          "hit": 30,
+          "rate": 1.0
+        },
+        "retrieval_hit_prox@k": {
+          "n": 30,
+          "hit": 30,
+          "rate": 1.0
+        },
+        "retrieval_hit_present@k": {
+          "n": 30,
+          "hit": 30,
+          "rate": 1.0
+        },
+        "by_type_ret_prox": {
+          "text_thesis": {
+            "n": 12,
+            "hit": 12,
+            "rate": 1.0
+          },
+          "valuation_table": {
+            "n": 8,
+            "hit": 8,
+            "rate": 1.0
+          },
+          "finance_table": {
+            "n": 5,
+            "hit": 5,
+            "rate": 1.0
+          },
+          "chart_title": {
+            "n": 5,
+            "hit": 5,
+            "rate": 1.0
+          }
+        },
+        "by_type_cov_prox": {
+          "text_thesis": {
+            "n": 12,
+            "hit": 12,
+            "rate": 1.0
+          },
+          "valuation_table": {
+            "n": 8,
+            "hit": 8,
+            "rate": 1.0
+          },
+          "finance_table": {
+            "n": 5,
+            "hit": 5,
+            "rate": 1.0
+          },
+          "chart_title": {
+            "n": 5,
+            "hit": 5,
+            "rate": 1.0
+          }
+        }
+      },
+      "per_q": [
+        {
+          "id": "T01",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "T02",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "T03",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "T04",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "T05",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "T06",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "T07",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 3
+        },
+        {
+          "id": "T08",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "T09",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "T10",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "T11",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 2
+        },
+        {
+          "id": "T12",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 6
+        },
+        {
+          "id": "V01",
+          "type": "valuation_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "V02",
+          "type": "valuation_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "V03",
+          "type": "valuation_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 3
+        },
+        {
+          "id": "V04",
+          "type": "valuation_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "V05",
+          "type": "valuation_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "V06",
+          "type": "valuation_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "V07",
+          "type": "valuation_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "V08",
+          "type": "valuation_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 7
+        },
+        {
+          "id": "F01",
+          "type": "finance_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "F02",
+          "type": "finance_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "F03",
+          "type": "finance_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "F04",
+          "type": "finance_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 2
+        },
+        {
+          "id": "F05",
+          "type": "finance_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "C01",
+          "type": "chart_title",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "C02",
+          "type": "chart_title",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "C03",
+          "type": "chart_title",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "C04",
+          "type": "chart_title",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "C05",
+          "type": "chart_title",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        }
+      ]
+    },
+    "enhanced": {
+      "latency": {
+        "parse_time_s": 47.601,
+        "total_time_s": 47.96,
+        "stage_timing": {
+          "model_load_warmup_s": 0.359,
+          "page_classify_s": 6.138,
+          "text_route_s": 11.914,
+          "table_route_s": 29.549
+        }
+      },
+      "structure": {
+        "n_table_records_rows": 3252,
+        "n_canonical_matched": 447,
+        "canonical_hit_rate": 0.1375,
+        "n_finance_rows_filtered": 34,
+        "chart_titles_preserved": 87,
+        "table_caps_preserved": 9,
+        "avg_section_path_depth": 1.37,
+        "chunks_with_section_path": 40
+      },
+      "n_chunks": 78,
+      "retrieval": {
+        "extraction_coverage_prox": {
+          "n": 30,
+          "hit": 27,
+          "rate": 0.9
+        },
+        "extraction_coverage_present": {
+          "n": 30,
+          "hit": 28,
+          "rate": 0.933
+        },
+        "retrieval_hit_prox@k": {
+          "n": 30,
+          "hit": 26,
+          "rate": 0.867
+        },
+        "retrieval_hit_present@k": {
+          "n": 30,
+          "hit": 26,
+          "rate": 0.867
+        },
+        "by_type_ret_prox": {
+          "text_thesis": {
+            "n": 12,
+            "hit": 10,
+            "rate": 0.833
+          },
+          "valuation_table": {
+            "n": 8,
+            "hit": 8,
+            "rate": 1.0
+          },
+          "finance_table": {
+            "n": 5,
+            "hit": 4,
+            "rate": 0.8
+          },
+          "chart_title": {
+            "n": 5,
+            "hit": 4,
+            "rate": 0.8
+          }
+        },
+        "by_type_cov_prox": {
+          "text_thesis": {
+            "n": 12,
+            "hit": 11,
+            "rate": 0.917
+          },
+          "valuation_table": {
+            "n": 8,
+            "hit": 8,
+            "rate": 1.0
+          },
+          "finance_table": {
+            "n": 5,
+            "hit": 4,
+            "rate": 0.8
+          },
+          "chart_title": {
+            "n": 5,
+            "hit": 4,
+            "rate": 0.8
+          }
+        }
+      },
+      "per_q": [
+        {
+          "id": "T01",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "T02",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "T03",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "T04",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "T05",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "T06",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "T07",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "T08",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "T09",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "T10",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": false,
+          "ret_present": false,
+          "ret_prox": false,
+          "rank": null
+        },
+        {
+          "id": "T11",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "T12",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": false,
+          "ret_prox": false,
+          "rank": null
+        },
+        {
+          "id": "V01",
+          "type": "valuation_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "V02",
+          "type": "valuation_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "V03",
+          "type": "valuation_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 2
+        },
+        {
+          "id": "V04",
+          "type": "valuation_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "V05",
+          "type": "valuation_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "V06",
+          "type": "valuation_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "V07",
+          "type": "valuation_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "V08",
+          "type": "valuation_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 3
+        },
+        {
+          "id": "F01",
+          "type": "finance_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "F02",
+          "type": "finance_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "F03",
+          "type": "finance_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "F04",
+          "type": "finance_table",
+          "cov_present": false,
+          "cov_prox": false,
+          "ret_present": false,
+          "ret_prox": false,
+          "rank": null
+        },
+        {
+          "id": "F05",
+          "type": "finance_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "C01",
+          "type": "chart_title",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "C02",
+          "type": "chart_title",
+          "cov_present": false,
+          "cov_prox": false,
+          "ret_present": false,
+          "ret_prox": false,
+          "rank": null
+        },
+        {
+          "id": "C03",
+          "type": "chart_title",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "C04",
+          "type": "chart_title",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "C05",
+          "type": "chart_title",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        }
+      ],
+      "page_classification": {
+        "table": {
+          "tp": 15,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "image": {
+          "tp": 17,
+          "fp": 4,
+          "fn": 0,
+          "precision": 0.81,
+          "recall": 1.0,
+          "f1": 0.895
+        }
+      },
+      "routing": {
+        "route_to_mineru": true,
+        "hard_page_numbers": [
+          31
+        ],
+        "n_hard_pages": 1
+      }
+    },
+    "docling": {
+      "latency": {
+        "parse_time_s": 401.631,
+        "total_time_s": 401.631,
+        "stage_timing": {
+          "convert_s": 401.631
+        }
+      },
+      "structure": {
+        "n_tables_detected": 31,
+        "n_table_rows": 574,
+        "chart_titles_preserved": 93,
+        "table_caps_preserved": 11,
+        "md_chars": 123393
+      },
+      "n_chunks": 673,
+      "retrieval": {
+        "extraction_coverage_prox": {
+          "n": 30,
+          "hit": 29,
+          "rate": 0.967
+        },
+        "extraction_coverage_present": {
+          "n": 30,
+          "hit": 30,
+          "rate": 1.0
+        },
+        "retrieval_hit_prox@k": {
+          "n": 30,
+          "hit": 29,
+          "rate": 0.967
+        },
+        "retrieval_hit_present@k": {
+          "n": 30,
+          "hit": 29,
+          "rate": 0.967
+        },
+        "by_type_ret_prox": {
+          "text_thesis": {
+            "n": 12,
+            "hit": 12,
+            "rate": 1.0
+          },
+          "valuation_table": {
+            "n": 8,
+            "hit": 8,
+            "rate": 1.0
+          },
+          "finance_table": {
+            "n": 5,
+            "hit": 4,
+            "rate": 0.8
+          },
+          "chart_title": {
+            "n": 5,
+            "hit": 5,
+            "rate": 1.0
+          }
+        },
+        "by_type_cov_prox": {
+          "text_thesis": {
+            "n": 12,
+            "hit": 12,
+            "rate": 1.0
+          },
+          "valuation_table": {
+            "n": 8,
+            "hit": 8,
+            "rate": 1.0
+          },
+          "finance_table": {
+            "n": 5,
+            "hit": 4,
+            "rate": 0.8
+          },
+          "chart_title": {
+            "n": 5,
+            "hit": 5,
+            "rate": 1.0
+          }
+        }
+      },
+      "per_q": [
+        {
+          "id": "T01",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "T02",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "T03",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "T04",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "T05",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 2
+        },
+        {
+          "id": "T06",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "T07",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 3
+        },
+        {
+          "id": "T08",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 7
+        },
+        {
+          "id": "T09",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "T10",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "T11",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "T12",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 5
+        },
+        {
+          "id": "V01",
+          "type": "valuation_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 6
+        },
+        {
+          "id": "V02",
+          "type": "valuation_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 8
+        },
+        {
+          "id": "V03",
+          "type": "valuation_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 8
+        },
+        {
+          "id": "V04",
+          "type": "valuation_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "V05",
+          "type": "valuation_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "V06",
+          "type": "valuation_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "V07",
+          "type": "valuation_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 2
+        },
+        {
+          "id": "V08",
+          "type": "valuation_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 4
+        },
+        {
+          "id": "F01",
+          "type": "finance_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "F02",
+          "type": "finance_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 2
+        },
+        {
+          "id": "F03",
+          "type": "finance_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "F04",
+          "type": "finance_table",
+          "cov_present": true,
+          "cov_prox": false,
+          "ret_present": false,
+          "ret_prox": false,
+          "rank": null
+        },
+        {
+          "id": "F05",
+          "type": "finance_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 2
+        },
+        {
+          "id": "C01",
+          "type": "chart_title",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "C02",
+          "type": "chart_title",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "C03",
+          "type": "chart_title",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "C04",
+          "type": "chart_title",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "C05",
+          "type": "chart_title",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        }
+      ]
+    },
+    "mineru": {
+      "latency": {
+        "parse_time_s": 236.462,
+        "total_time_s": 236.462,
+        "stage_timing": {
+          "convert_s": 236.462
+        }
+      },
+      "structure": {
+        "n_tables_detected": 34,
+        "chart_titles_preserved": 93,
+        "table_caps_preserved": 11,
+        "md_chars": 108144,
+        "md_path": "C:\\Users\\wodlf\\OneDrive\\Desktop\\프로젝트2\\multimodality_RAG\\pdf_pipeline\\final\\work\\mineru_out\\20260629_industry_47868000\\auto\\20260629_industry_47868000.md"
+      },
+      "n_chunks": 306,
+      "retrieval": {
+        "extraction_coverage_prox": {
+          "n": 30,
+          "hit": 27,
+          "rate": 0.9
+        },
+        "extraction_coverage_present": {
+          "n": 30,
+          "hit": 30,
+          "rate": 1.0
+        },
+        "retrieval_hit_prox@k": {
+          "n": 30,
+          "hit": 25,
+          "rate": 0.833
+        },
+        "retrieval_hit_present@k": {
+          "n": 30,
+          "hit": 26,
+          "rate": 0.867
+        },
+        "by_type_ret_prox": {
+          "text_thesis": {
+            "n": 12,
+            "hit": 12,
+            "rate": 1.0
+          },
+          "valuation_table": {
+            "n": 8,
+            "hit": 8,
+            "rate": 1.0
+          },
+          "finance_table": {
+            "n": 5,
+            "hit": 0,
+            "rate": 0.0
+          },
+          "chart_title": {
+            "n": 5,
+            "hit": 5,
+            "rate": 1.0
+          }
+        },
+        "by_type_cov_prox": {
+          "text_thesis": {
+            "n": 12,
+            "hit": 12,
+            "rate": 1.0
+          },
+          "valuation_table": {
+            "n": 8,
+            "hit": 8,
+            "rate": 1.0
+          },
+          "finance_table": {
+            "n": 5,
+            "hit": 2,
+            "rate": 0.4
+          },
+          "chart_title": {
+            "n": 5,
+            "hit": 5,
+            "rate": 1.0
+          }
+        }
+      },
+      "per_q": [
+        {
+          "id": "T01",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "T02",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "T03",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "T04",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "T05",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "T06",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "T07",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "T08",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 5
+        },
+        {
+          "id": "T09",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "T10",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "T11",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "T12",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "V01",
+          "type": "valuation_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 9
+        },
+        {
+          "id": "V02",
+          "type": "valuation_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 2
+        },
+        {
+          "id": "V03",
+          "type": "valuation_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 2
+        },
+        {
+          "id": "V04",
+          "type": "valuation_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "V05",
+          "type": "valuation_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 2
+        },
+        {
+          "id": "V06",
+          "type": "valuation_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "V07",
+          "type": "valuation_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "V08",
+          "type": "valuation_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 4
+        },
+        {
+          "id": "F01",
+          "type": "finance_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": false,
+          "ret_prox": false,
+          "rank": null
+        },
+        {
+          "id": "F02",
+          "type": "finance_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": false,
+          "ret_prox": false,
+          "rank": null
+        },
+        {
+          "id": "F03",
+          "type": "finance_table",
+          "cov_present": true,
+          "cov_prox": false,
+          "ret_present": true,
+          "ret_prox": false,
+          "rank": null
+        },
+        {
+          "id": "F04",
+          "type": "finance_table",
+          "cov_present": true,
+          "cov_prox": false,
+          "ret_present": false,
+          "ret_prox": false,
+          "rank": null
+        },
+        {
+          "id": "F05",
+          "type": "finance_table",
+          "cov_present": true,
+          "cov_prox": false,
+          "ret_present": false,
+          "ret_prox": false,
+          "rank": null
+        },
+        {
+          "id": "C01",
+          "type": "chart_title",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "C02",
+          "type": "chart_title",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "C03",
+          "type": "chart_title",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "C04",
+          "type": "chart_title",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "C05",
+          "type": "chart_title",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        }
+      ]
+    }
+  }
+}
