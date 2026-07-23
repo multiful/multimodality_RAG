@@ -56,10 +56,13 @@ PDF_PATH = ROOT / "pdf_pipeline" / "reference" / "LGCNS" / "20260721_company_279
 PDF_ID = "LGCNS"
 TICKER = "064400.KS"
 QUERY = "이 PDF 내용을 바탕으로 이 회사에 대한 투자 의견을 제공해줘"
-DB_URL = os.environ.get(
-    "SUPABASE_DIRECT_DB_URL",
-    "postgresql://postgres.itkxhdutnxircvbzwpon:SuperTeam24ever@aws-0-ap-northeast-1.pooler.supabase.com:5432/postgres",
-)
+DB_URL = os.environ.get("SUPABASE_DIRECT_DB_URL")
+if not DB_URL:
+    raise RuntimeError(
+        "SUPABASE_DIRECT_DB_URL 환경변수가 없습니다. .env에 설정하세요 "
+        "(비밀번호를 코드에 하드코딩하지 않음 — 과거 하드코딩된 값은 유출된 것으로 간주하고 "
+        "Supabase 대시보드에서 반드시 회전(rotate)할 것)."
+    )
 ONESTOP_CARDS_PATH = ROOT / "data" / "onestop" / PDF_ID / "onestop_cards.jsonl"
 
 # MinerU 미설치 환경에서 이미지 브랜치 나머지 단계(합성/저장/검색/생성)를 검증하기 위한 대표
