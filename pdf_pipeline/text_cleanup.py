@@ -1,9 +1,15 @@
-"""[2] 텍스트 파이프라인 정규화 유틸 — table_processing/text_normalization.py의 `detect_cid_artifact`
-패턴을 텍스트 파이프라인에 맞게 확장.
+"""[36] 텍스트 정규화 유틸(PUA/구두점/기호) — 원래 `text_processing/text_normalization.py`에만
+있었는데, 사용자 지적("정규화가 일반화가 안 돼?")으로 감사해보니 table_processing의 표 셀
+텍스트/raw_text, sector_classifier의 첫 페이지 텍스트 등 **PDF에서 텍스트를 뽑는 다른 모든
+지점**은 이 정규화를 전혀 안 거치고 있었음(PUA 문자, 줄임표/대시 표기 혼용, ▲▼ 기호 등이
+그대로 임베딩/LLM 입력에 들어감). `pdf_pipeline/` 루트(embedding.py/yolo_layout.py와 같은
+위치)로 옮겨서 text_processing/table_processing 양쪽이 같은 함수를 재사용하도록 함 — 이제
+`table_processing/text_normalization.py`(Hangul 과잉 띄어쓰기/값 타입 정제/cid 아티팩트 탐지,
+표 파싱에만 필요한 별개 관심사)와 이름이 겹치지 않아 `sys.modules` 스왑 우회도 더는 필요 없음.
 
 PUA(Private Use Area, U+E000~U+F8FF) 글리프 매핑 실패는 table_processing의 `(cid:\\d+)` 패턴과
-같은 계열의 버그지만 대응이 다르다: `(cid:9)`는 실제 숫자/문자 정보 자체가 유실된 경우라 복구 불가능
-(그래서 `data_quality: "unmapped_glyph"`로만 플래그하고 값은 원문 그대로 보존, [19]). 반면 이번에
+같은 계열의 버그지만 대응이 다르다: `(cid:9)`는 실제 숫자/문자 정보 자체가 유실된 경우라 복구
+불가능(그래서 `data_quality: "unmapped_glyph"`로만 플래그하고 값은 원문 그대로 보존, [19]). 반면
 Construct PDF에서 실측한 PUA 글리프는 전부 불릿 아이콘 폰트가 표준 유니코드 없이 임베드된
 경우로, 문단/불릿 시작 위치에만 나타나고(양쪽 공백으로 둘러싸인 독립 토큰) 뒤따르는 실제 문장
 내용에는 전혀 영향이 없음 — 68개 표본(Construct 전체) 전수 확인 완료, 예외 없음. 즉 이 글리프는
@@ -34,13 +40,11 @@ def strip_pua_artifacts(text: str) -> str:
 # [4] 구두점 변형 통일 — 사용자 지적: "..."/"…"(줄임표), "-"/"–"/"—"(하이픈/en-dash/em-dash)가
 # 리포트마다 섞여 나와 같은 의미의 텍스트가 문자열 레벨에서 다르게 취급됨(예: 임베딩/중복 탐지
 # 시 다른 벡터로 계산될 수 있음). 실측(Construct PDF)에서 실제로 같은 문서 안에서도 "재개…도봉"
-# (en-dash 줄임표 …) 와 "재개...도봉"(마침표 3개)이 혼용됨을 확인 — [3]의 golden set 작성 중
-# 발견한 바로 그 표기 차이.
+# (en-dash 줄임표 …) 와 "재개...도봉"(마침표 3개)이 혼용됨을 확인.
 ELLIPSIS_RE = re.compile(r"\.{2,}|…")
-# en-dash(–)/em-dash(—) -> ASCII 하이픈(-). 단어 구분자("삼성전자–SK하이닉스")든, 숫자 범위
-# ("2024–2026")든, 음수 부호로 쓰인 경우("–150억원")든 전부 글리프만 다를 뿐 의미는 동일해
-# 무조건 변환해도 안전 — 애초에 순수 ASCII 하이픈으로 이미 쓰인 음수 표기("-15%")는 이 정규식이
-# 아예 매칭하지 않으므로 별도 예외처리가 필요 없다(en/em-dash 문자 자체만 대상으로 함).
+# en-dash(–)/em-dash(—) -> ASCII 하이픈(-). 단어 구분자든, 숫자 범위든, 음수 부호로 쓰인 경우든
+# 전부 글리프만 다를 뿐 의미는 동일해 무조건 변환해도 안전 — 순수 ASCII 하이픈 표기("-15%")는
+# 이 정규식이 아예 매칭하지 않으므로 별도 예외처리가 필요 없다(en/em-dash 문자 자체만 대상으로 함).
 DASH_RE = re.compile(r"[–—]")
 
 
@@ -51,7 +55,7 @@ def normalize_punctuation(text: str) -> str:
     return text
 
 
-# [5] 사용자 피드백 반영 — 한국어/금융 특화 구두점·기호 확장.
+# [5] 한국어/금융 특화 구두점·기호 확장.
 # ▲/▼(세모)는 장식이 아니라 **의미를 담은 기호**임에 주의 — 한국 금융 리포트에서 숫자 앞의
 # ▲/▼는 상승/하락(또는 증가/감소)의 부호 역할을 한다(예: "▲1,200원"=플러스 1,200원,
 # "▼0.5%"=마이너스 0.5%p). 그래서 숫자 바로 앞에 오면 +/-로 변환(부호 정보 보존)하고, 숫자가
@@ -79,3 +83,14 @@ def normalize_symbols_and_whitespace(text: str) -> str:
         text = text.replace(k, v)
     text = GENERIC_BULLET_RE.sub("- ", text)
     return text
+
+
+def clean_extracted_text(text: str) -> str:
+    """[36] 위 3개 함수를 이 프로젝트 전체가 공유하는 표준 순서로 묶은 편의 함수 — PUA 감지 시에만
+    제거(조건부), 구두점/기호 정규화는 항상 적용(가벼움). 새로 텍스트 추출 지점을 추가할 때 이
+    함수 하나만 부르면 정규화 누락을 방지할 수 있음."""
+    had_pua = detect_pua_artifact(text)
+    cleaned = strip_pua_artifacts(text) if had_pua else text
+    cleaned = normalize_punctuation(cleaned)
+    cleaned = normalize_symbols_and_whitespace(cleaned)
+    return cleaned

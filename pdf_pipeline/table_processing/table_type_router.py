@@ -13,14 +13,21 @@ Recall 손실 없이 지연을 크게 줄일 수 있을 것으로 예상.
 
 import re
 
-FINANCE_KEYWORDS = [
+PURE_LINE_ITEM_KEYWORDS = [
     "매출액", "매출원가", "매출총이익", "판매비와관리비", "영업이익", "영업외수익", "영업외비용",
     "법인세비용", "당기순이익", "유동자산", "비유동자산", "자산총계", "유동부채", "비유동부채",
     "부채총계", "자본금", "이익잉여금", "자본총계", "현금및현금성자산", "EBITDA", "감가상각비",
-    # 투자지표류(밸류에이션 지표) — "주요 투자지표" 표처럼 손익/재무상태표 키워드가 없어도
-    # 순수 숫자/지표 나열형 표라 마찬가지로 LLM 없이 규칙 처리가 안전한 케이스
-    "투자지표", "PER", "PBR", "EPS", "BPS", "EV/EBITDA", "ROE", "배당수익률", "DPS", "CFPS",
 ]
+# 밸류에이션/투자지표류(PER, ROE 등)는 실적 실측치(financial_chunks에 이미 있는 손익/재무상태표
+# actual)와 달리, 애널리스트 리포트 고유의 forward-looking 추정치(2026F~2028F 등)라
+# financial_chunks에 없는 새 정보 — is_pure_financial_line_item()에서 제외해 canonical
+# field 매칭(투자의견의 핵심 근거)까지 이어지도록 한다. classify_table()의 "finance" 판정에는
+# 계속 포함(표 전체가 재무/밸류에이션 표라는 신호 자체는 유효하므로).
+VALUATION_KEYWORDS = [
+    "투자지표", "PER", "PCR", "PBR", "EPS", "BPS", "EBITDAPS", "SPS", "PSR",
+    "EV/EBITDA", "ROE", "배당수익률", "DPS", "CFPS",
+]
+FINANCE_KEYWORDS = PURE_LINE_ITEM_KEYWORDS + VALUATION_KEYWORDS
 FINANCE_MIN_KEYWORD_HITS = 2  # 이 개수 이상 매칭되면 재무제표로 판정
 
 # 한국 기업/기관명의 일반적인 접미사(특정 회사명 하드코딩 아님 — 다른 PDF에도 재사용 가능)
@@ -49,12 +56,35 @@ def is_pure_financial_line_item(label: str) -> bool:
     "이 행 하나"가 재무제표 원초 항목인지만 본다 — "1-1. 음원/음반"처럼 번호가 붙어도, "매출총이익률
     (%)"처럼 비율 표기가 붙어도 매칭되도록 번호 접두사/괄호를 먼저 제거하고 FINANCE_KEYWORDS와
     대조. 매칭되면 True(그 행은 버림 = DB 재무제표와 중복이므로 캐싱 안 함), 아니면 False(그 행은
-    세그먼트/비재무 정보이므로 보존 + canonical field 매칭 시도)."""
+    세그먼트/비재무 정보이므로 보존 + canonical field 매칭 시도).
+
+    로마자 키워드 오탐 방지: "EBITDA"가 "EBITDAPS"(EBITDA per share)나 "EV/EBITDA"(밸류에이션
+    배수) 같은 전혀 다른 지표의 부분 문자열로 우연히 걸리는 경우를 막기 위해, 로마자 키워드의
+    앞/뒤로 로마자·숫자·"/"가 바로 이어지면(합성 지표명의 일부로 판단) 매칭에서 제외한다(실측
+    LGCNS PDF에서 발견됨). 한글 키워드(예: "매출총이익")는 이 조건 없이 원래대로 매칭 —
+    "매출총이익률(%)"처럼 비율 접미사가 붙어도 여전히 매칭되어야 하기 때문."""
     norm = _NUMBERING_PREFIX_RE.sub("", label)
     norm = re.sub(r"\([^)]*\)", "", norm).strip()
     if not norm:
         return False
-    return any(kw == norm or kw in norm for kw in FINANCE_KEYWORDS)
+
+    def _compound_char(ch: str) -> bool:
+        return ch.isascii() and (ch.isalnum() or ch == "/")
+
+    for kw in PURE_LINE_ITEM_KEYWORDS:
+        if kw == norm:
+            return True
+        idx = norm.find(kw)
+        if idx == -1:
+            continue
+        if not kw.isascii():
+            return True
+        head = norm[idx - 1] if idx > 0 else ""
+        tail = norm[idx + len(kw)] if idx + len(kw) < len(norm) else ""
+        if _compound_char(head) or _compound_char(tail):
+            continue
+        return True
+    return False
 
 
 def rule_extract_entities(markdown: str, anchor_entities: set) -> list:

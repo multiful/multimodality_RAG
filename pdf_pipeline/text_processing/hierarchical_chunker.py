@@ -20,8 +20,7 @@ import fitz
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))  # [10] yolo_layout이 pdf_pipeline/로 이동
 from yolo_layout import run_yolo_layout  # noqa: E402 — [8] 공유 YOLO 호출(중복 추론 제거)
-from text_normalization import (detect_pua_artifact, strip_pua_artifacts,  # noqa: E402
-                                  normalize_punctuation, normalize_symbols_and_whitespace)
+from text_cleanup import clean_extracted_text  # noqa: E402 — [36] pdf_pipeline/로 이동(공유)
 
 NON_TEXT_CLASSES = {"Table", "Picture"}
 CHROME_CLASSES = {"Page-header", "Page-footer"}  # 페이지 번호/반복 헤더 — 내용도 헤더 로직도 아님
@@ -46,25 +45,14 @@ def _dedupe_overlapping(items: list, tol_pt: float = 5.0) -> list:
     return kept
 
 
-def _clean_chunk_text(text: str) -> str:
-    """[35] 사용자 지적("여기 잘 뽑히는지 확인해줘")으로 인덱싱 테스트 중 발견한 버그 수정 —
-    실제로 임베딩/검색 대상이 되는 건 이 청크 텍스트인데, `extract_page_text()`(whole_page
-    baseline, recall 측정용)에만 PUA 제거/구두점·기호 정규화가 적용되고 있었고 청크 자체는
-    `get_textbox()` 원문 그대로였다(PUA 불릿 문자, 풀폭 기호 등이 그대로 임베딩되고 있었다는
-    뜻). `extract_page_text()`와 동일한 정규화를 청크 텍스트에도 적용해 두 경로의 정제 수준을
-    맞춘다."""
-    had_pua = detect_pua_artifact(text)
-    cleaned = strip_pua_artifacts(text) if had_pua else text
-    cleaned = normalize_punctuation(cleaned)
-    cleaned = normalize_symbols_and_whitespace(cleaned)
-    return cleaned
-
-
 def _get_boxes_with_text(model, doc_fitz, page_idx: int, cached_boxes: list = None):
     """YOLO로 페이지의 Text/Title/Section-header/List-item/Caption 박스를 찾고, 각 박스 안의
-    텍스트를 get_textbox()로 통째로(여러 줄 자동 결합) 추출한 뒤 `_clean_chunk_text()`로 정규화
-    — Table/Picture/Page-header/Page-footer는 제외(표·이미지는 다른 파이프라인 소관, 페이지
-    크롬은 내용이 아님).
+    텍스트를 get_textbox()로 통째로(여러 줄 자동 결합) 추출한 뒤 `text_cleanup.
+    clean_extracted_text()`([36], PUA 제거+구두점/기호 정규화)로 정규화 — Table/Picture/
+    Page-header/Page-footer는 제외(표·이미지는 다른 파이프라인 소관, 페이지 크롬은 내용이 아님).
+    [35] 사용자 지적("여기 잘 뽑히는지 확인해줘")으로 인덱싱 테스트 중, 실제 임베딩/검색 대상인
+    이 청크 텍스트가 `extract_page_text()`(recall 측정용 baseline)와 달리 정규화를 전혀 안 거치고
+    있던 버그를 발견해 추가 — [36]에서 정규화 함수 자체를 pdf_pipeline/ 공유 위치로 옮김.
 
     cached_boxes: [8] 공유 YOLO 호출 결과([(cls_name, fitz.Rect), ...])를 넘기면 이 함수는
     YOLO를 다시 부르지 않고 그 결과를 그대로 재사용 — reading_order_router의 난이도 판정과
@@ -76,7 +64,7 @@ def _get_boxes_with_text(model, doc_fitz, page_idx: int, cached_boxes: list = No
     for cls_name, rect in yolo_boxes:
         if cls_name in NON_TEXT_CLASSES or cls_name in CHROME_CLASSES:
             continue
-        text = _clean_chunk_text(page.get_textbox(rect).strip())
+        text = clean_extracted_text(page.get_textbox(rect).strip())
         if text:
             items.append({"text": text, "y0": rect.y0, "x0": rect.x0, "cls": cls_name})
     items = _dedupe_overlapping(items)

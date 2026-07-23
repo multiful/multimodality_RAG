@@ -14,7 +14,6 @@ PDF) 기준. page_classification/text_processing/table_processing 세 모듈을 
 ([11]/[25])은 유료 API라 이 비교에서는 기본 off(따로 스모크 테스트로 이미 검증됨).
 """
 
-import importlib.util
 import json
 import re
 import sys
@@ -32,34 +31,11 @@ sys.path.insert(0, str(ROOT / "pdf_pipeline" / "page_classification"))
 sys.path.insert(0, str(ROOT / "pdf_pipeline" / "text_processing"))
 sys.path.insert(0, str(ROOT / "pdf_pipeline" / "table_processing"))
 
-
-def _load_as(alias: str, path: Path):
-    spec = importlib.util.spec_from_file_location(alias, path)
-    mod = importlib.util.module_from_spec(spec)
-    sys.modules[alias] = mod
-    spec.loader.exec_module(mod)
-    return mod
-
-
-# text_processing/text_normalization.py와 table_processing/text_normalization.py는 이름은 같지만
-# 완전히 다른 함수 세트를 가진 별개 파일 — 둘 다 sys.path에 있으면 나중에 import되는 쪽이
-# sys.modules 캐시를 밀어써서 먼저 import된 모듈이 깨진다(같은 프로세스에서 text_processing과
-# table_processing을 동시에 쓰는 스크립트에서만 드러나는 문제, 각 모듈 단독 실행 시엔 무해).
-# 이 스크립트에서만 격리해서 우회 — 프로덕션 코드는 안 건드림.
-_text_tn = _load_as("_text_processing_text_normalization",
-                     ROOT / "pdf_pipeline" / "text_processing" / "text_normalization.py")
-_table_tn = _load_as("_table_processing_text_normalization",
-                      ROOT / "pdf_pipeline" / "table_processing" / "text_normalization.py")
-
-sys.modules["text_normalization"] = _text_tn
+# [36] 예전엔 text_processing/table_processing 양쪽에 이름이 같은 text_normalization.py가 있어
+# sys.modules 스왑으로 우회해야 했는데, PUA/구두점 정규화 함수를 pdf_pipeline/text_cleanup.py로
+# 옮기면서(text_processing 쪽 text_normalization.py는 삭제) 이름 충돌 자체가 사라져 더는 필요 없음.
 from page_classifier import classify_pdf  # noqa: E402
 from text_extraction import process_pdf  # noqa: E402
-import hierarchical_chunker  # noqa: E402,F401 — [35] chunk_contextual_production이 내부에서 지연
-# import하는 hierarchical_chunker가 text_normalization을 top-level import하게 되면서(청크
-# 텍스트에도 PUA/구두점 정규화 적용) _text_tn이 활성 상태일 때 미리 로드해둬야 함 — 안 그러면
-# 실제 청킹이 실행되는 시점엔 이미 아래에서 _table_tn으로 스왑된 뒤라 ImportError 발생.
-
-sys.modules["text_normalization"] = _table_tn
 import adaptive_table_router as atr  # noqa: E402
 import run_table_metadata_pipeline as rtmp  # noqa: E402
 

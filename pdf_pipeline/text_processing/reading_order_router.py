@@ -18,10 +18,14 @@
   크기가 들쭉날쭉하면 커짐(사용자가 언급한 "레이아웃 복잡도"의 정량화)
 - **figure_density**: YOLO Table+Picture 박스가 차지하는 페이지 면적 비율(그림/표 밀도)
 
-한계(정직하게 기록): 실제 hard 문서가 없어 rotation/font_variance/figure_density 가중치는 아직
-실측 캘리브레이션이 안 된 초기값 — columns/overlap만으로 검증된 [2]의 결론(easy/hard 양쪽 분기
-모두 확인)은 유지되나, 새로 추가한 3개 신호가 실제 판정에 미치는 영향은 그런 레이아웃(회전된
-스캔본, 폰트가 들쭉날쭉한 브로슈어, 그림이 빽빽한 잡지)을 가진 PDF가 생기면 재검증 필요.
+[38] 위 한계가 실제로 문제를 일으킨 게 확인됨 — 클로드가 K-Wave 73페이지를 전수 검토(`[34]`)한
+결과 rotation/font_variance/figure_density가 밀어올린 가중합 점수로 hard 판정된 33페이지가
+전부 "실제로는 리딩오더 문제 없음"이었다(차트/표 중심 리포트에서 이 신호들은 난이도가 아니라
+그냥 "차트가 많다"만 의미했음). 그래서 **hard 판정 자체는 더 이상 가중합 점수로 내리지 않고**,
+`material_overlaps`(컬럼이 실제로 겹침) + `_interleaving_excess()`(원문 추출 순서가 그 겹치는
+컬럼 사이를 실제로 오가는가, 그냥 컬럼별로 그룹화돼서 나오면 안 헷갈림) 두 조건을 **동시에**
+만족할 때만 hard로 확정한다. 가중합 점수/개별 신호는 `signals`에 참고용으로만 남겨둠(디버깅/
+재캘리브레이션 대비) — 이걸로 K-Wave 34개(모두 오탐) -> 0개(클로드 판정과 정확히 일치)로 수정.
 """
 
 import statistics
@@ -47,6 +51,9 @@ class ColumnRouterThresholds:
     gap_pt: float = 60.0            # 이 이상 벌어지면 새 x클러스터 후보([1]에서 쓴 값 그대로)
     min_y_overlap_pt: float = 30.0  # 두 클러스터의 y범위가 이 이상 겹쳐야 "진짜 나란히 배치"로 판단
     min_chars_for_hard: int = 200   # 겹치는 두 클러스터 각각의 글자 수가 이 이상이어야 "본문 컬럼"
+    min_interleaving_excess: int = 2  # [38] 이 이상 "초과 전환"이 있어야 실제 인터리빙으로 판단
+    # (1 정도는 제목 하나 위치가 어긋나는 정도의 노이즈로 취급 — [34] page3 사례처럼 컬럼별로
+    # 그룹화는 됐는데 제목 하나만 어긋난 경우까지 hard로 잡으면 또 과다판정이 됨)
 
 
 @dataclass
@@ -70,6 +77,7 @@ class PageDifficultyResult:
     n_clusters: int
     material_overlaps: list = field(default_factory=list)   # 근거로 쓰인 겹치는 클러스터 쌍 정보
     layout_class_diversity: int = 0  # 참고용 신호(제목/본문/캡션/사이드바 등 블록 타입 다양성)
+    interleaving_excess: int = 0     # [38] 컬럼 사이 실제 인터리빙 정도(0=그룹화됨, 클수록 심함)
 
 
 def _cluster_by_x0(blocks: list, gap_pt: float) -> list:
@@ -137,6 +145,29 @@ def _is_excluded(bbox: fitz.Rect, exclude_rects: list, overlap_threshold: float 
     return (total_overlap / (bbox.width * bbox.height)) > overlap_threshold
 
 
+def _interleaving_excess(text_blocks: list, clusters: list) -> int:
+    """[38] 사용자 지적("클로드 판정을 기준으로 거의 비슷하게 분류되도록") 반영 — `[34]`에서
+    클로드가 K-Wave 73페이지를 전수 검토한 결과, "컬럼이 겹친다"(현재 material_overlaps 신호)와
+    "실제로 읽었을 때 혼동된다"는 별개였다: 여러 컬럼이 있어도 원문 추출 순서가 **컬럼별로
+    통째로 그룹화**돼 있으면(컬럼1 전체 -> 컬럼2 전체 -> ...) 사람이/LLM이 읽어도 문제없고,
+    실제로 순서가 컬럼 사이를 왔다갔다(인터리빙)해야 진짜 혼동이 생긴다.
+
+    text_blocks(페이지에서 원문 그대로 추출된 순서)를 그대로 순회하면서 각 블록이 어느
+    x클러스터에 속하는지 시퀀스로 만들고, "클러스터마다 한 번씩만 몰아서 방문"하는 이상적인
+    경우의 최소 전환 횟수(클러스터 수-1) 대비 실제 전환 횟수가 얼마나 초과하는지를 반환한다
+    (0=완전히 그룹화됨=인터리빙 없음, 클수록 컬럼 사이를 자주 오간다는 뜻)."""
+    block_to_cluster = {}
+    for ci, cluster in enumerate(clusters):
+        for b in cluster:
+            block_to_cluster[id(b)] = ci
+    seq = [block_to_cluster[id(b)] for b in text_blocks if id(b) in block_to_cluster]
+    if len(seq) < 2:
+        return 0
+    transitions = sum(1 for i in range(1, len(seq)) if seq[i] != seq[i - 1])
+    ideal = len(set(seq)) - 1
+    return max(0, transitions - ideal)
+
+
 def _figure_density(page: fitz.Page, exclude_rects: list) -> float:
     """YOLO Table+Picture 박스 면적 / 페이지 전체 면적."""
     page_area = page.rect.width * page.rect.height
@@ -184,18 +215,23 @@ def assess_page_difficulty(model, doc_fitz, page_idx: int,
     font_variance_signal = _font_size_cv(page)
     figure_density_signal = _figure_density(page, exclude_rects)
 
-    def _finalize(difficulty, reason, columns_signal, overlap_signal, n_clusters, material_overlaps):
+    def _finalize(difficulty, reason, columns_signal, overlap_signal, n_clusters, material_overlaps,
+                  interleaving_excess=0):
         score = (w.w_columns * columns_signal + w.w_overlap * overlap_signal
                  + w.w_rotation * rotation_signal + w.w_font_variance * font_variance_signal
                  + w.w_figure_density * figure_density_signal)
-        # material_overlaps(본문 분량 컬럼이 실제로 나란히 겹침)는 [1]/[2]에서 유일하게 실측
-        # 검증된 확증 신호라 가중합 점수와 무관하게 항상 hard로 확정한다 — 가중합에만 맡기면
-        # 다른 신호(rotation/font_variance/figure_density)가 전부 0인 "딱 2컬럼만 있고 나머지는
-        # 평범한" 문서에서 컬럼 가중치(0.30)만으로는 threshold(0.40)를 못 넘어 easy로 오판되는
-        # 회귀를 합성 2단 PDF 재검증 중 실측으로 발견 — 그래서 확증 신호는 override로 분리.
-        # 가중합 점수는 material_overlaps가 없을 때(회전/폰트/그림밀도 등 다른 이유로 어려운
-        # 문서일 수 있는 경계 사례)만 보조적으로 사용.
-        final_difficulty = "hard" if material_overlaps or score >= w.hard_threshold else difficulty
+        # [38] 사용자 지적("클로드 판정 기준으로 재분류")으로 K-Wave 73페이지를 다시 돌려보니,
+        # material_overlaps override를 `_interleaving_excess()` 조건으로 고친 뒤에도 나머지
+        # 33페이지가 **가중합 점수(score >= hard_threshold) 경로**로 여전히 hard 판정되고 있었음
+        # — 전부 rotation/font_variance/figure_density(애초에 "실측 미검증 초기값"이라고 [4]에
+        # 정직하게 적어뒀던 신호들)가 밀어올린 점수였다. 클로드가 이 33페이지를 전부 "리딩오더
+        # 문제 없음"으로 판정했으니(`[34]`), 이 신호들이 이 문서 유형(차트/표 중심 증권 리포트)
+        # 에서는 "리딩오더 필요성"과 상관관계가 없다는 게 실측으로 확인된 셈 — 애초에 검증 안 된
+        # 채로 hard 판정을 단독으로 내릴 수 있게 해둔 게 설계 결함이었음. 이제 가중합 점수는
+        # signals에 참고용으로만 남기고, **hard 판정은 material_overlaps+interleaving 하나로만
+        # 결정**한다(rotation/font_variance/figure_density가 단독으로 hard를 강제하지 못하게).
+        material_and_interleaved = bool(material_overlaps) and interleaving_excess >= th.min_interleaving_excess
+        final_difficulty = "hard" if material_and_interleaved else difficulty
         return PageDifficultyResult(
             page=page_idx + 1, difficulty=final_difficulty, reason=reason,
             difficulty_score=round(score, 4),
@@ -204,6 +240,7 @@ def assess_page_difficulty(model, doc_fitz, page_idx: int,
                      "figure_density": round(figure_density_signal, 4)},
             n_text_blocks=len(text_blocks), n_clusters=n_clusters,
             material_overlaps=material_overlaps, layout_class_diversity=len(text_classes_found),
+            interleaving_excess=interleaving_excess,
         )
 
     if len(text_blocks) < 2:
@@ -231,17 +268,25 @@ def assess_page_difficulty(model, doc_fitz, page_idx: int,
                     "chars": (chars_a, chars_b),
                 })
 
-    if material_overlaps:
+    interleaving_excess = _interleaving_excess(text_blocks, clusters) if material_overlaps else 0
+
+    if material_overlaps and interleaving_excess >= th.min_interleaving_excess:
         columns_signal, overlap_signal = 1.0, max_overlap_ratio
-        reason = (f"본문 분량의 텍스트 컬럼 {len(material_overlaps)}쌍이 나란히 겹쳐 있음 "
-                  f"(각 {th.min_chars_for_hard}자 이상) — 리딩오더 복원 권장")
+        reason = (f"본문 분량의 텍스트 컬럼 {len(material_overlaps)}쌍이 나란히 겹쳐 있고, 추출 순서도 "
+                  f"실제로 컬럼 사이를 오감(초과 전환 {interleaving_excess}회) — 리딩오더 복원 권장")
+    elif material_overlaps:
+        columns_signal, overlap_signal = 1.0, max_overlap_ratio
+        reason = (f"텍스트 컬럼 {len(material_overlaps)}쌍이 겹치지만 추출 순서는 컬럼별로 그룹화돼 "
+                  f"있음(초과 전환 {interleaving_excess}회 < 임계 {th.min_interleaving_excess}) — "
+                  f"[38] 실제로는 안 헷갈리는 것으로 판단, 가중합 점수로만 보조 판정")
     else:
         columns_signal = min((len(clusters) - 1) / 3, 1.0)
         overlap_signal = max_overlap_ratio
         reason = (f"x클러스터 {len(clusters)}개 있으나 겹치는 쌍이 없거나 전부 소량(boilerplate 수준)"
                   f" — 다른 레이아웃 신호로 최종 판정")
 
-    return _finalize("easy", reason, columns_signal, overlap_signal, len(clusters), material_overlaps)
+    return _finalize("easy", reason, columns_signal, overlap_signal, len(clusters), material_overlaps,
+                     interleaving_excess)
 
 
 def assess_pdf(pdf_path, model=None, thresholds: ColumnRouterThresholds = None,

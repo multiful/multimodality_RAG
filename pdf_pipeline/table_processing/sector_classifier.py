@@ -72,11 +72,12 @@ def classify_pdf_sector(pdf_path, embed_model=None) -> dict:
     확인했듯 표/차트가 아닌 서술형 텍스트 자체가 문서의 20~30%뿐이라 첫 페이지가 상대적으로
     텍스트 밀도가 높은 페이지인 경우가 많음)."""
     import fitz
+    from text_cleanup import clean_extracted_text  # noqa: [36] — 임베딩 대상 텍스트도 정규화 필요
     if embed_model is None:
         from embedding import get_embedding_model
         embed_model = get_embedding_model()
     doc = fitz.open(str(pdf_path))
-    text = doc[0].get_text()
+    text = clean_extracted_text(doc[0].get_text())
     doc.close()
     return embedding_classify(text, embed_model)
 
