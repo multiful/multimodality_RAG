@@ -62,6 +62,18 @@ create index if not exists company_profile_chunks_ticker_idx on company_profile_
 create index if not exists company_profile_chunks_embedding_idx
     on company_profile_chunks using hnsw (embedding vector_cosine_ops);
 
+-- 투자 인사이트 요약(LLM 생성, generate_profile_summaries.py 참고). 프로필은 티커당 1행이라 컬럼으로 추가.
+alter table company_profile_chunks add column if not exists summary text;
+
+-- 재무제표 투자 인사이트 요약(LLM 생성, generate_financial_summaries.py 참고).
+-- financial_chunks는 티커당 여러 행(statement_type x period_type)으로 쪼개져 있어 컬럼 추가가 맞지 않아
+-- 티커당 1행인 별도 테이블로 분리.
+create table if not exists financial_summaries (
+    ticker text primary key,          -- "000080.KS"
+    summary text not null,
+    created_at timestamptz not null default now()
+);
+
 create or replace function match_company_profile_chunks(
     query_embedding vector(1536),
     match_count int default 5,
