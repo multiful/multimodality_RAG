@@ -61,6 +61,17 @@ def normalize_label(label: str) -> str:
     return s.lower().strip()
 
 
+# [39] match_canonical_field()가 매 호출마다 394개 별칭 전체를 다시 normalize_label()하던 것을
+# import 시점에 1회만 계산하도록 미리 뽑아둠(별칭 자체는 고정값이므로 안전 — 매칭 결과는 동일,
+# 이 PDF 스케일(~250행)에서 실측 61.82ms -> 2.07ms).
+_NORMALIZED_ALIASES = [
+    (cf, norm_alias)
+    for cf in CANONICAL_FIELDS
+    for alias in cf.aliases
+    if (norm_alias := normalize_label(alias))
+]
+
+
 def detect_wide_form(parsed_rows: list, min_header_matches: int = 2):
     """표가 narrow-form(라벨: 값들, 예: '수주잔고 | 12조 13조 14조')인지 wide-form(필드명이
     컬럼 헤더로, 레코드가 행으로 나열 — 예: 계약공시표의 '계약일|계약명|계약금액|계약상대...')
@@ -95,9 +106,7 @@ def match_canonical_field(raw_label: str):
     if not norm_label:
         return None
     best, best_len = None, 0
-    for cf in CANONICAL_FIELDS:
-        for alias in cf.aliases:
-            norm_alias = normalize_label(alias)
-            if norm_alias and norm_alias in norm_label and len(norm_alias) > best_len:
-                best, best_len = cf, len(norm_alias)
+    for cf, norm_alias in _NORMALIZED_ALIASES:
+        if norm_alias in norm_label and len(norm_alias) > best_len:
+            best, best_len = cf, len(norm_alias)
     return best

@@ -15,6 +15,8 @@ Usage:
 
 import os
 import sys
+import threading
+import time
 from pathlib import Path
 
 import psycopg2
@@ -47,6 +49,17 @@ DB_URL = os.environ.get(
 
 
 def main():
+    timings = {}
+
+    # [39] BGE-m3-ko 콜드로드(~6.8s)가 텍스트 브랜치 진입 시점에 동기적으로 일어나 그 브랜치를
+    # 통째로 블로킹하고 있었음 — YOLO 로딩/분류와 동시에 백그라운드에서 미리 시작해서 텍스트
+    # 브랜치가 실제로 필요로 하는 시점엔 이미 캐시돼 있도록 함. get_embedding_model()은 싱글턴
+    # (embedding.py의 전역 _model)이라 결과 모델 객체는 동일 — 로딩 순서만 앞당길 뿐 출력에
+    # 영향 없음.
+    from embedding import get_embedding_model
+    threading.Thread(target=get_embedding_model, daemon=True).start()
+
+    t0 = time.perf_counter()
     print("1) YOLO 로딩 + 페이지 분류")
     yolo_model = YOLO(str(ROOT / "pdf_pipeline" / "page_classification" / "models" / "yolo11n_doc_layout.pt"))
     yolo_model.predict(Image.new("RGB", (595, 842), (255, 255, 255)), conf=0.25, verbose=False)
@@ -54,14 +67,18 @@ def main():
     cls_result = classify_pdf(PDF_PATH, yolo_model)
     page_boxes = {p["page"]: p["cached_boxes"] for p in cls_result["pages"]}
     print(f"   {cls_result['n_pages']}페이지 분류 완료")
+    timings["1_yolo_load_and_classify"] = time.perf_counter() - t0
 
+    t0 = time.perf_counter()
     print("2) 텍스트 브랜치: 추출 + 청킹")
     text_result = process_pdf(PDF_PATH, yolo_model, page_boxes=page_boxes,
                                chunk_backend="rulebased", remove_boilerplate=True,
                                add_structured_metadata=False)
     n_chunks = sum(len(p["chunks"]) for p in text_result["pages"])
     print(f"   {n_chunks}개 청크 생성")
+    timings["2_text_branch"] = time.perf_counter() - t0
 
+    t0 = time.perf_counter()
     print("3) 테이블 브랜치: TATR + canonical 매칭")
     rtmp.PDF_PATH = PDF_PATH
     table_records, n_finance_filtered, n_cid = rtmp.build_records(
@@ -79,12 +96,16 @@ def main():
     # 필터된 것) 외의 모든 표 행을 근거로 사용 — 세그먼트별 매출(예: 클라우드&AI)처럼 canonical
     # field가 아직 없는 항목도 실제 수치가 있으면 투자의견의 중요한 근거이므로 빠뜨리지 않는다.
     table_context = "\n".join(_fmt_row(r) for r in row_records) or "(표에서 추출된 항목 없음)"
+    timings["3_table_branch"] = time.perf_counter() - t0
 
+    t0 = time.perf_counter()
     print("4) 텍스트 청크 하이브리드 인덱스(BGE-m3-ko dense + BM25) 구축")
     index = build_index(PDF_ID, text_result)
     dim = index.embeddings.shape[1]
     print(f"   임베딩 차원: {dim}, 청크 수: {len(index.chunks)}")
+    timings["4_build_hybrid_index"] = time.perf_counter() - t0
 
+    t0 = time.perf_counter()
     print("5) 임시 Supabase 테이블 생성 + 텍스트 청크 적재")
     conn = psycopg2.connect(DB_URL)
     conn.autocommit = True
@@ -108,13 +129,17 @@ def main():
             cur, "insert into pdf_chunks_temp (id, pdf_id, page, content, embedding) values %s", rows)
     conn.close()
     print(f"   {len(rows)}개 청크 -> pdf_chunks_temp 적재 완료")
+    timings["5_supabase_store"] = time.perf_counter() - t0
 
+    t0 = time.perf_counter()
     print("6) 하이브리드 검색 (BM25 + BGE-m3-ko, weighted-sum fusion)")
     hits = hybrid_search(index, QUERY, top_k=5)
     for h in hits:
         print(f"   - page{h['chunk']['page']} score={h['score']:.3f} "
               f"(dense={h['dense_score']:.3f}, bm25={h['bm25_score']:.3f})")
+    timings["6_hybrid_search"] = time.perf_counter() - t0
 
+    t0 = time.perf_counter()
     print("7) LLM 투자의견 생성 (gpt-4o-mini)")
     text_context = "\n\n".join(f"[p{h['chunk']['page']}] {h['chunk']['text']}" for h in hits)
 
@@ -144,12 +169,20 @@ def main():
     result = generate_with_citation_check(
         client, prompt, context=text_context + "\n" + table_context, model="gpt-4o-mini", max_retries=2)
     answer = result["answer"]
+    timings["7_llm_generation"] = time.perf_counter() - t0
 
     print("\n" + "=" * 60)
     print(f"LLM 투자의견 출력 ({result['attempts']}회 생성"
           f"{', 미해결 근거없는 숫자: ' + str(result['unsupported_numbers']) if result['unsupported_numbers'] else ''})")
     print("=" * 60)
     print(answer)
+
+    total = sum(timings.values())
+    print("\n" + "=" * 60)
+    print(f"단계별 소요시간 (총 {total:.1f}s)")
+    print("=" * 60)
+    for name, sec in timings.items():
+        print(f"   {name:30s} {sec:7.2f}s  ({sec / total * 100:5.1f}%)")
 
 
 if __name__ == "__main__":
