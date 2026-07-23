@@ -7,8 +7,9 @@
 바꾸면 되고, 호출부(인덱싱 스크립트/쿼리 핸들러)는 그대로 재사용 가능하도록 설계.
 
 다이어그램 반영: "핵심모델: DENSE(BGE-m3-ko), 보조모델: BM25" — dense_weight를 bm25_weight보다
-높게 기본 설정. Rank Fusion은 가장 단순한 min-max 정규화 후 가중합(RRF 등 더 정교한 방식은
-데이터 늘어나면 재검토 — 지금은 틀만 잡는 단계라 오버엔지니어링 방지).
+높게 기본 설정. Rank Fusion 기본값은 min-max 정규화 후 가중합(fusion="weighted_sum")이고,
+[42]에서 RRF(fusion="rrf")를 추가해 dense-only/dense+BM25(가중합)/dense+BM25(RRF) 세 방식을
+`evaluate_hybrid_search.py`로 비교 검증한다.
 """
 
 import re
@@ -57,10 +58,26 @@ def build_index(pdf_id: str, process_pdf_result: dict, embed_model=None) -> Text
     return TextIndex(pdf_id=pdf_id, chunk_ids=chunk_ids, chunks=chunks, embeddings=embeddings, bm25=bm25)
 
 
+def _rrf_scores(scores, k: int = 60):
+    """[42] 사용자 요청("RRF를 먼저 도입해서 시험") 반영 — RRF(Reciprocal Rank Fusion, Cormack et
+    al. 2009)는 점수 값 자체가 아니라 "순위"만 이용해 결합한다. dense(코사인 유사도, -1~1)와
+    BM25(비정규화, 코퍼스마다 범위가 다름)처럼 스케일이 다른 두 신호를 min-max 정규화 없이
+    결합할 수 있어서, 이상치 하나가 정규화 전체를 흔드는 문제에서 자유롭다. k=60은 원 논문
+    기본값(대부분의 IR 구현체가 그대로 씀 — 코퍼스 규모별 재튜닝은 드묾)."""
+    import numpy as np
+    order = np.argsort(-scores)
+    ranks = np.empty_like(order)
+    ranks[order] = np.arange(1, len(scores) + 1)
+    return 1.0 / (k + ranks)
+
+
 def hybrid_search(index: TextIndex, query: str, embed_model=None, top_k: int = 5,
-                   dense_weight: float = 0.7, bm25_weight: float = 0.3) -> list:
-    """Dense(코사인 유사도) + BM25 점수를 각각 min-max 정규화 후 가중합으로 결합(Rank Fusion
-    초안). 반환: [{chunk_id, chunk, score, dense_score, bm25_score}, ...] score 내림차순 top_k."""
+                   dense_weight: float = 0.7, bm25_weight: float = 0.3,
+                   fusion: str = "weighted_sum", rrf_k: int = 60) -> list:
+    """Dense(코사인 유사도) + BM25 점수를 결합(Rank Fusion). fusion="weighted_sum"(기본, 기존 동작
+    그대로)은 각 점수를 min-max 정규화 후 가중합. fusion="rrf"는 [42] 순위 기반 RRF로 결합 —
+    dense_weight/bm25_weight는 이 모드에서 쓰이지 않고 rrf_k만 적용됨.
+    반환: [{chunk_id, chunk, score, dense_score, bm25_score}, ...] score 내림차순 top_k."""
     if not index.chunks:
         return []
     if embed_model is None:
@@ -73,11 +90,14 @@ def hybrid_search(index: TextIndex, query: str, embed_model=None, top_k: int = 5
     dense_scores = np.asarray(index.embeddings) @ query_emb
     bm25_scores = np.asarray(index.bm25.get_scores(_tokenize(query)))
 
-    def _normalize(arr):
-        span = arr.max() - arr.min()
-        return (arr - arr.min()) / span if span > 0 else np.zeros_like(arr)
+    if fusion == "rrf":
+        fused = _rrf_scores(dense_scores, k=rrf_k) + _rrf_scores(bm25_scores, k=rrf_k)
+    else:
+        def _normalize(arr):
+            span = arr.max() - arr.min()
+            return (arr - arr.min()) / span if span > 0 else np.zeros_like(arr)
+        fused = dense_weight * _normalize(dense_scores) + bm25_weight * _normalize(bm25_scores)
 
-    fused = dense_weight * _normalize(dense_scores) + bm25_weight * _normalize(bm25_scores)
     order = np.argsort(-fused)[:top_k]
     return [
         {"chunk_id": index.chunk_ids[i], "chunk": index.chunks[i], "score": float(fused[i]),
