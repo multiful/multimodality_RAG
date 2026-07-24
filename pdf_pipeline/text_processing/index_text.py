@@ -483,15 +483,30 @@ _DECOMPOSE_PROMPT = (
 
 # [재일] 다중 의도 감지 — decompose 게이팅용. 요청 동사("알려줘/정리해줘/분석해줘/도출해줘" 등)와
 # 물음표를 세어 2개 이상이면 쪼갤 의도가 여러 개로 본다. 실제로 문제가 됐던 질의
-# "…인사이트 도출해주고, …가장 높은 기업이 어딘지 알려줘"는 도출/알려줘 2개라 분해 대상으로 남고,
+# "…인사이트 도출해주고, …가장 높은 기업은 어딘지 추출해"는 도출/추출 2개라 분해 대상으로 남고,
 # "GS건설 종가와 시가총액 알려줘"는 1개라 분해를 건너뛴다.
+# [교차리뷰 보강] 원조 실패 질의의 두 번째 동사가 "추출해"인데 목록에 빠져 있었다(그 질의는
+# 규칙 분류가 summary로 잡아줘 게이트를 피했지만 방어선이 한 겹뿐이었음) — 추출/산출/계산/골라 추가.
 _REQUEST_VERB_RE = re.compile(
-    r"(알려\s*줘|알려주|정리해|분석해|도출해|요약해|설명해|비교해|찾아\s*줘|뽑아\s*줘|보여\s*줘)")
+    r"(알려\s*줘|알려주|정리해|분석해|도출해|요약해|설명해|비교해|찾아\s*줘|뽑아\s*줘|보여\s*줘"
+    r"|추출해|산출해|계산해|골라\s*줘)")
 
 
 def _looks_multi_intent(query: str) -> bool:
     q = query or ""
     return len(_REQUEST_VERB_RE.findall(q)) + q.count("?") >= 2
+
+
+# [교차리뷰 보강] decompose 게이팅의 factoid "양성 신호" — 규칙 분류(classify_query_type)는
+# 기본값이 factoid라서, 트리거 단어 없는 abstract 질의("이 회사 어때?")도 factoid로 나온다.
+# 그런 질의는 요청 동사도 0개라 다중 의도 검사(_looks_multi_intent)로도 못 거른다 — 즉
+# "규칙분류 factoid + 단일 의도" 두 조건만으로는 게이트가 abstract 질의를 삼켜 MQE/HyDE를
+# 놓칠 수 있다. 그래서 질의가 구체적 지표어/숫자/티커를 실제로 담고 있을 때만(=진짜 키워드형
+# 질의라는 양성 증거) 게이트를 통과시킨다. 신호가 없으면 decompose 경로로 남는데, 그 비용은
+# 분해 LLM 호출 ~2s뿐이고 품질 손해는 없다(안전한 쪽으로 실패).
+_FACTOID_SIGNAL_RE = re.compile(
+    r"\d|매출|영업이익|목표주가|종가|시가총액|수익률|주가|PER|PBR|EPS|ROE|배당|점유율|계약|수주"
+    r"|투자의견|괴리율|영업이익률|부채비율|티커")
 
 
 def decompose_query(query: str, client=None, model: str = "gpt-4o") -> list:
@@ -557,11 +572,14 @@ def decompose_and_route_search(index: TextIndex, query: str, client=None, top_k:
     # 근거: decompose_query()는 gpt-4o 호출이라 질의마다 ~2s를 무조건 문다. 그런데 "GS건설 종가와
     # 시가총액 알려줘"처럼 의도가 하나뿐인 질의는 분해해도 사실상 같은 질의가 나올 뿐이고, 실측
     # (골든셋 18질의)에서 키워드형 성능은 고정 하이브리드(0.05s)와 동일했다 — 지연만 40배 더 낸다.
-    # 두 조건을 **모두** 만족할 때만 건너뛴다: (a) 규칙 분류가 factoid이고 (b) 요청 동사/물음표가
-    # 하나뿐이라 다중 의도로 안 보일 것. (a)만으로 게이팅하지 않는 이유는 규칙 분류의 기본값이
-    # factoid라서, 트리거 단어 없는 abstract 질의("이 회사 어때?")가 여기로 새면 분해·MQE를 놓치기
-    # 때문이다([44]의 블라인드스팟). 두 조건을 겹쳐 "확실할 때만" 건너뛴다.
-    if classify_query_type(query) == "factoid" and not _looks_multi_intent(query):
+    # [교차리뷰 보강] 세 조건을 **모두** 만족할 때만 건너뛴다: (a) 규칙 분류가 factoid,
+    # (b) 요청 동사/물음표가 하나뿐(다중 의도 아님), (c) 지표어/숫자/티커 같은 factoid 양성
+    # 신호가 실제로 있음. (c)가 없던 초판은 "이 회사 어때?"(동사 0+물음표 1, 규칙분류 기본값
+    # factoid)가 게이트에 걸려 MQE/HyDE를 놓치는 구멍이 있었다 — 양성 신호를 요구하면 그런
+    # 애매한 질의는 안전하게 분해 경로로 남는다(비용은 지연 ~2s뿐, 품질 손해 없음).
+    if (classify_query_type(query) == "factoid"
+            and _FACTOID_SIGNAL_RE.search(query or "")
+            and not _looks_multi_intent(query)):
         return hybrid_search(index, query, top_k=top_k, fusion="weighted_sum"), []
 
     subqueries = decompose_query(query, client=client, model=decompose_model)
