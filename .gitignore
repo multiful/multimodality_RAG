@@ -25,3 +25,4 @@ logs/
 eval/*.html
 eval/image_labels.csv
 debug_*.html
+data/onestop/

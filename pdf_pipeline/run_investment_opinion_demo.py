@@ -332,6 +332,13 @@ def main(pdf_path=None, pdf_id: str = None, ticker: str = None, query: str = Non
     query = query or DEFAULT_QUERY
     onestop_cards_path = _find_onestop_cards(pdf_id, pdf_path)
 
+    # [배선 최적화] BGE-m3-ko 콜드로드(~10–16s)를 미리 백그라운드로 시작 — 기존엔 텍스트 브랜치가
+    # 임베딩 시점에 처음 로드해 3브랜치 동시 실행 벽시계가 사실상 "BGE 로드 시간"에 묶였다(실측
+    # 벽시계 ~13s 중 대부분). 스캔감지/YOLO/파싱과 겹쳐두면 브랜치들이 임베딩할 때쯤 로드가 끝나
+    # 있다. 싱글턴 락이라 중복 로드 없음(embedding.get_embedding_model 내부 보장).
+    import threading as _th
+    _th.Thread(target=__import__("embedding").get_embedding_model, daemon=True).start()
+
     def _p(*a):
         if verbose:
             print(*a)
@@ -559,6 +566,9 @@ DB에서 직접 조회한 정보임을 나타냅니다.
 - 근거 안의 "[OCR손상]" 표기는 원문 대조에서 신뢰 불가로 판정돼 제거된 값이다 — 그 항목의
   수치는 존재하지 않는 것으로 취급하고, 어떤 수치 판단(최고/최저/비교/합산)의 근거로도 절대
   쓰지 말 것. "[OCR손상]"이 섞인 항목의 기업/지표를 굳이 언급해야 하면 "값 판독 불가"로만 서술할 것.
+- **간결하게 쓸 것**: 같은 내용을 본문과 표에 중복 서술하거나, 장식적 서론/결론 반복, 항목마다
+  똑같은 문형을 되풀이하지 말 것. 필요한 수치 인용(최소 3개)·긍정/부정 균형·결론의 근거는 전부
+  유지하되, 분량을 늘리기 위한 문장은 쓰지 말 것 — 짧고 밀도 높은 답이 좋은 답이다.
 
 [사용자 요청]
 {query}
