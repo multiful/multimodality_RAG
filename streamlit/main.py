@@ -64,6 +64,218 @@ TITLE_RE = re.compile(r"^# (.+?) \((.+?)\) 기업 프로필")
 
 st.set_page_config(page_title="포트폴리오", page_icon="📈", layout="wide")
 
+# ---------------------------------------------------------------------------
+# 테마 (supaste.com 참고 — 오프화이트 배경 + 인디고 포인트 + 세리프/모노 폰트 조합).
+# 순수 CSS 오버레이라 기능 로직에는 영향 없음: .streamlit/config.toml의 라이트 테마 색상 위에
+# 폰트·라운드 코너·pill 버튼·카드 그림자만 얹는다.
+# ---------------------------------------------------------------------------
+st.markdown(
+    """
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Fragment+Mono&family=Inter:wght@400;500;600;700&display=swap');
+
+    :root {
+        /* supaste.com 실측(원본 HTML) 기준 — 페이지는 흰 배경, 카드는 오프화이트 flat fill
+           (반대로 페이지를 회색+카드를 흰색으로 하면 흔한 대시보드 톤이 되어버려 supaste
+           특유의 "낮은 대비 flat 색면" 느낌이 안 남). */
+        --bg: #ffffff;
+        --surface: #f7f7f7;
+        --surface-2: #ffffff;
+        --text: #0d0d0d;
+        --muted: #6b7280;
+        --border: #e3e3e3;
+        --primary: #5f61ed;
+        --primary-hover: #4d4fd1;
+        --primary-soft: #eef0ff;
+        --radius-lg: 28px;
+        --radius-md: 14px;
+        --radius-pill: 999px;
+        --shadow-sm: 0 1px 2px rgba(13,13,13,.04), 0 1px 1px rgba(13,13,13,.03);
+        --shadow-md: 0 8px 24px rgba(13,13,13,.06), 0 2px 6px rgba(13,13,13,.04);
+    }
+
+    html, body, .stApp { background: var(--bg) !important; font-family: 'Inter', -apple-system, sans-serif; }
+
+    h1 { font-family: 'Instrument Serif', serif !important; font-weight: 400 !important;
+         letter-spacing: -0.01em; color: var(--text) !important; }
+    h2, h3 { font-family: 'Inter', sans-serif !important; font-weight: 600 !important; color: var(--text) !important; }
+
+    [data-testid="stCaptionContainer"], .stCaption, small {
+        font-family: 'Fragment Mono', monospace !important;
+        color: var(--muted) !important;
+        letter-spacing: 0.01em;
+    }
+
+    /* 버튼: supaste의 flat 회색 pill(보조) / 검정 pill(주요) 톤을 인디고 기준으로 재현 —
+       외곽선 대신 색면 채움 위주(테두리는 hover에서만 강조로 잠깐 등장). */
+    .stButton > button, .stDownloadButton > button {
+        border-radius: var(--radius-pill) !important;
+        border: 1px solid transparent !important;
+        background: var(--surface) !important;
+        color: var(--text) !important;
+        font-weight: 500 !important;
+        transition: border-color .15s ease, color .15s ease, background .15s ease;
+    }
+    .stButton > button:hover, .stDownloadButton > button:hover {
+        border-color: var(--primary) !important;
+        color: var(--primary) !important;
+    }
+    button[kind="primary"] {
+        background: var(--primary) !important;
+        border-color: var(--primary) !important;
+        color: #fff !important;
+    }
+    button[kind="primary"]:hover {
+        background: var(--primary-hover) !important;
+        border-color: var(--primary-hover) !important;
+        color: #fff !important;
+    }
+
+    .stTextInput input, .stTextArea textarea, [data-baseweb="select"] > div {
+        border-radius: var(--radius-md) !important;
+        border-color: var(--border) !important;
+        background: var(--surface-2) !important;
+    }
+    .stTextInput input:focus {
+        border-color: var(--primary) !important;
+        box-shadow: 0 0 0 3px var(--primary-soft) !important;
+    }
+
+    /* 카드: supaste의 카드는 테두리·그림자 없이 flat 색면 + 큰 radius만으로 구분됨 —
+       hover에서만 아주 옅은 그림자로 살짝 뜨는 느낌만 추가. */
+    [data-testid="stVerticalBlockBorderWrapper"] {
+        border-radius: var(--radius-lg) !important;
+        border: 4px solid var(--border) !important;
+        background: var(--surface) !important;
+        box-shadow: none;
+        transition: box-shadow .15s ease;
+    }
+    [data-testid="stVerticalBlockBorderWrapper"]:hover { box-shadow: var(--shadow-sm); }
+
+    [data-testid="stAlert"], [data-testid="stExpander"], [data-testid="stStatusWidget"],
+    [data-testid="stFileUploaderDropzone"] {
+        border-radius: var(--radius-md) !important;
+        border-color: var(--border) !important;
+    }
+
+    [data-baseweb="tab-list"] { gap: 4px; border-bottom: 1px solid var(--border) !important; }
+    [data-baseweb="tab"] { font-family: 'Inter', sans-serif !important; font-weight: 500 !important; color: var(--muted) !important; }
+    [aria-selected="true"][data-baseweb="tab"] { color: var(--primary) !important; }
+    [data-baseweb="tab-highlight"] { background-color: var(--primary) !important; }
+
+    [data-testid="stMetricValue"] { font-family: 'Instrument Serif', serif !important; font-size: 2.2rem !important; }
+    [data-testid="stMetricLabel"] { font-family: 'Fragment Mono', monospace !important; color: var(--muted) !important; }
+
+    hr { border-color: var(--border) !important; }
+
+    /* ---- supaste 스타일 컴포넌트: 히어로 배지 / 2줄 헤드라인 / 배지 행 / 카드 아바타·태그 / 스텝 라벨 ---- */
+
+    .pp-eyebrow {
+        display: inline-block; font-family: 'Fragment Mono', monospace; font-size: .7rem;
+        letter-spacing: .03em; color: var(--primary); background: var(--primary-soft);
+        padding: 5px 12px; border-radius: var(--radius-pill); margin-bottom: 10px;
+    }
+
+    /* supaste 히어로/푸터의 시그니처 모티프: 굵은 산세리프 한 줄 + 이탤릭 세리프 한 줄. */
+    .pp-hero2 { line-height: 1.08; margin: 2px 0 14px; }
+    .pp-hero2-bold {
+        display: block; font-family: 'Inter', sans-serif; font-weight: 700;
+        font-size: 2.3rem; letter-spacing: -0.03em; color: var(--text);
+    }
+    .pp-hero2-italic {
+        display: block; font-family: 'Instrument Serif', serif; font-style: italic;
+        font-weight: 400; font-size: 2.3rem; letter-spacing: -0.02em; color: var(--text);
+    }
+
+    .pp-badge-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 18px; }
+    .pp-badge {
+        display: inline-flex; align-items: center; gap: 6px;
+        background: var(--surface); padding: 8px 14px; border-radius: var(--radius-pill);
+        font-family: 'Inter', sans-serif; font-size: .82rem; font-weight: 500; color: var(--text);
+    }
+    .pp-badge svg { width: 14px; height: 14px; stroke: var(--primary); flex-shrink: 0; }
+
+    .pp-card-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+    .pp-avatar {
+        width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
+        background: var(--primary-soft); color: var(--primary);
+        display: flex; align-items: center; justify-content: center;
+        font-family: 'Instrument Serif', serif; font-size: 1.1rem; font-weight: 600;
+    }
+    .pp-ticker-pill {
+        font-family: 'Fragment Mono', monospace; font-size: .68rem; color: var(--muted);
+        background: var(--surface-2); border: 1px solid var(--border);
+        padding: 3px 9px; border-radius: var(--radius-pill); white-space: nowrap;
+    }
+    .pp-ticker-pill-lg { font-size: .85rem; padding: 5px 14px; margin-left: 10px; vertical-align: middle; }
+    .pp-card-name { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 1.02rem; color: var(--text); }
+
+    .pp-hero-title { font-family: 'Instrument Serif', serif !important; font-weight: 400 !important;
+        letter-spacing: -0.01em; color: var(--text) !important; }
+
+    .pp-step {
+        display: flex; align-items: center; gap: 10px; margin: 22px 0 8px;
+        font-family: 'Fragment Mono', monospace; font-size: .78rem; color: var(--muted); letter-spacing: .02em;
+    }
+    .pp-step-num {
+        display: inline-flex; align-items: center; justify-content: center;
+        width: 22px; height: 22px; border-radius: 50%; background: var(--primary); color: #fff;
+        font-size: .68rem; font-weight: 600; flex-shrink: 0;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
+
+def _avatar_html(label: str) -> str:
+    initial = (label or "?").strip()[0] if (label or "").strip() else "?"
+    return f'<div class="pp-avatar">{initial}</div>'
+
+
+def _step_label(n: int, text: str) -> None:
+    st.markdown(
+        f'<div class="pp-step"><span class="pp-step-num">{n:02d}</span>{text}</div>',
+        unsafe_allow_html=True,
+    )
+
+
+def _hero_headline(bold_line: str, italic_line: str) -> None:
+    """supaste.com 히어로/푸터의 시그니처 타이포 모티프(굵은 산세리프 한 줄 + 이탤릭 세리프
+    한 줄, 예: "Copy once." / "Reuse anytime.")를 재현한 2줄 헤드라인."""
+    st.markdown(
+        f'''
+        <div class="pp-hero2">
+            <span class="pp-hero2-bold">{bold_line}</span>
+            <span class="pp-hero2-italic">{italic_line}</span>
+        </div>
+        ''',
+        unsafe_allow_html=True,
+    )
+
+
+_PP_ICONS = {
+    "chart": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" '
+             'stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5M4 19h16M8 15l3-4 3 2 4-6"/></svg>',
+    "doc": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" '
+           'stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l5 5v13H7z"/>'
+           '<path d="M14 3v5h5M9 13h6M9 17h6"/></svg>',
+    "sparkle": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" '
+               'stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.6 4.9L18.5 9.5l-4.9 1.6L12 16'
+               'l-1.6-4.9L5.5 9.5l4.9-1.6z"/></svg>',
+    "search": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" '
+              'stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/>'
+              '<path d="M21 21l-4.3-4.3"/></svg>',
+}
+
+
+def _badge_row(items: list[tuple[str, str]]) -> None:
+    """supaste.com의 pill 배지 행("Local first" 등)을 참고한 아이콘+라벨 배지 나열."""
+    pills = "".join(
+        f'<span class="pp-badge">{_PP_ICONS.get(icon, "")}{label}</span>' for icon, label in items
+    )
+    st.markdown(f'<div class="pp-badge-row">{pills}</div>', unsafe_allow_html=True)
+
 
 # ---------------------------------------------------------------------------
 # 캐시된 리소스 / 데이터
@@ -290,14 +502,21 @@ def run_pdf_query(pdf_path: Path, pdf_id: str, ticker: str | None, query: str,
 # ---------------------------------------------------------------------------
 
 def render_home():
+    st.markdown('<span class="pp-eyebrow">AI 리서치 대시보드</span>', unsafe_allow_html=True)
     title_col, upload_col = st.columns([5, 1])
     with title_col:
-        st.title("홈")
+        _hero_headline("관심 종목,", "인사이트로 완성됩니다.")
     with upload_col:
         st.write("")
         if st.button("+ PDF로 질문하기", use_container_width=True):
             st.session_state["page"] = "upload"
             st.rerun()
+    _badge_row([
+        ("chart", "실시간 시세"),
+        ("doc", "재무제표 요약"),
+        ("sparkle", "AI 투자 인사이트"),
+        ("search", "PDF 근거 검색"),
+    ])
     st.caption("KOSPI200 종목별 재무제표·기업 프로필을 바탕으로 AI가 투자 인사이트를 요약해드립니다.")
 
     query = st.text_input("종목명 또는 티커 검색", placeholder="예: Samsung, 005930.KS")
@@ -315,8 +534,16 @@ def render_home():
         cols = st.columns(cols_per_row)
         for col, item in zip(cols, row):
             with col, st.container(border=True):
-                st.markdown(f"**{item['name']}**")
-                st.caption(item["ticker"])
+                st.markdown(
+                    f'''
+                    <div class="pp-card-head">
+                        {_avatar_html(item["name"])}
+                        <span class="pp-ticker-pill">{item["ticker"]}</span>
+                    </div>
+                    <div class="pp-card-name">{item["name"]}</div>
+                    ''',
+                    unsafe_allow_html=True,
+                )
                 if st.button("상세보기", key=f"open_{item['ticker']}", use_container_width=True):
                     st.session_state["page"] = "detail"
                     st.session_state["ticker"] = item["ticker"]
@@ -334,80 +561,86 @@ def render_upload():
         st.session_state["page"] = "home"
         st.rerun()
 
-    st.title("PDF + 질문으로 물어보기")
+    st.markdown('<span class="pp-eyebrow">PDF 분석 · 하이브리드 검색</span>', unsafe_allow_html=True)
+    _hero_headline("PDF를 올리고,", "질문으로 답을 찾아보세요.")
     st.caption(
         "애널리스트 리포트 PDF와 질문을 함께 올리면, 텍스트/표/이미지 3브랜치를 동시에 처리해 "
         "근거를 적재하고 질의 분해 검색(BM25+BGE-m3-ko/HyDE/MQE) + KOSPI200 기업 DB 매칭까지 "
         "종합한 답변을 바로 보여줍니다."
     )
 
-    uploaded = st.file_uploader("PDF 파일 선택", type=["pdf"])
+    with st.container(border=True):
+        _step_label(1, "리포트 업로드")
+        uploaded = st.file_uploader("PDF 파일 선택", type=["pdf"])
 
-    universe = load_ticker_universe()
-    ticker_options = ["-- 직접 입력 --", "지정 안 함 (여러 기업/섹터 리포트)"] + [
-        f"{u['name']} ({u['ticker']})" for u in universe
-    ]
-    picked = st.selectbox("연결할 종목 (선택)", ticker_options)
+        _step_label(2, "종목 연결 (선택)")
+        universe = load_ticker_universe()
+        ticker_options = ["-- 직접 입력 --", "지정 안 함 (여러 기업/섹터 리포트)"] + [
+            f"{u['name']} ({u['ticker']})" for u in universe
+        ]
+        picked = st.selectbox("연결할 종목 (선택)", ticker_options)
 
-    col1, col2 = st.columns(2)
-    if picked == "-- 직접 입력 --":
-        ticker = col1.text_input("티커", placeholder="예: 005930.KS") or None
-        name = col2.text_input("종목명 (선택)", placeholder="예: Samsung")
-    elif picked == "지정 안 함 (여러 기업/섹터 리포트)":
-        ticker, name = None, None
-        col1.caption("여러 기업을 다루는 산업 섹터 리포트 등 — 특정 종목에 묶지 않습니다.")
-    else:
-        item = universe[ticker_options.index(picked) - 2]
-        ticker, name = item["ticker"], item["name"]
+        col1, col2 = st.columns(2)
+        if picked == "-- 직접 입력 --":
+            ticker = col1.text_input("티커", placeholder="예: 005930.KS") or None
+            name = col2.text_input("종목명 (선택)", placeholder="예: Samsung")
+        elif picked == "지정 안 함 (여러 기업/섹터 리포트)":
+            ticker, name = None, None
+            col1.caption("여러 기업을 다루는 산업 섹터 리포트 등 — 특정 종목에 묶지 않습니다.")
+        else:
+            item = universe[ticker_options.index(picked) - 2]
+            ticker, name = item["ticker"], item["name"]
 
-    sector = st.text_input("업종/섹터 (선택)", placeholder="예: 건설, 반도체")
-    query = st.text_area("질문", placeholder="예: 이 PDF 내용을 바탕으로 투자 의견을 알려줘", height=80)
+        _step_label(3, "질문")
+        sector = st.text_input("업종/섹터 (선택)", placeholder="예: 건설, 반도체")
+        query = st.text_area("질문", placeholder="예: 이 PDF 내용을 바탕으로 투자 의견을 알려줘", height=80)
 
-    use_real_images = st.checkbox(
-        "실제 이미지/차트 근거 추출 (MinerU) — 문서 페이지 수에 따라 수 분 소요될 수 있습니다"
-    )
-    if not use_real_images:
-        st.info(
-            "이미지/차트 근거는 이 PDF에 대해 사전 처리된 MinerU 카드가 없으면 예시 데이터로 "
-            "대체됩니다 — 답변에서 이미지 출처가 인용되면 실제 업로드 문서 내용이 아닐 수 있으니 "
-            "참고만 하세요(아래 결과에 표시됩니다). 실제 차트를 근거로 쓰려면 위 체크박스를 켜세요."
+        _step_label(4, "옵션")
+        use_real_images = st.checkbox(
+            "실제 이미지/차트 근거 추출 (MinerU) — 문서 페이지 수에 따라 수 분 소요될 수 있습니다"
         )
+        if not use_real_images:
+            st.info(
+                "이미지/차트 근거는 이 PDF에 대해 사전 처리된 MinerU 카드가 없으면 예시 데이터로 "
+                "대체됩니다 — 답변에서 이미지 출처가 인용되면 실제 업로드 문서 내용이 아닐 수 있으니 "
+                "참고만 하세요(아래 결과에 표시됩니다). 실제 차트를 근거로 쓰려면 위 체크박스를 켜세요."
+            )
 
-    disabled = uploaded is None or not query.strip()
-    if st.button("분석 시작", type="primary", disabled=disabled):
-        pdf_id = f"upload_{uuid.uuid4().hex[:8]}"
-        tmp_path = Path(tempfile.gettempdir()) / f"{pdf_id}.pdf"
-        tmp_path.write_bytes(uploaded.getvalue())
+        disabled = uploaded is None or not query.strip()
+        if st.button("분석 시작", type="primary", disabled=disabled):
+            pdf_id = f"upload_{uuid.uuid4().hex[:8]}"
+            tmp_path = Path(tempfile.gettempdir()) / f"{pdf_id}.pdf"
+            tmp_path.write_bytes(uploaded.getvalue())
 
-        try:
-            if use_real_images:
-                with st.spinner("MinerU로 이미지/차트 추출 중 (수 분 소요될 수 있습니다)..."):
-                    try:
-                        ok = extract_real_image_cards(tmp_path, pdf_id)
-                    except Exception as e:
-                        ok = False
-                        st.warning(f"MinerU 이미지 추출에 실패해 예시 데이터로 대체합니다: {e}")
-                    if not ok:
-                        st.warning("MinerU 카드 생성에 실패해 이미지 근거는 예시 데이터로 대체됩니다.")
+            try:
+                if use_real_images:
+                    with st.spinner("MinerU로 이미지/차트 추출 중 (수 분 소요될 수 있습니다)..."):
+                        try:
+                            ok = extract_real_image_cards(tmp_path, pdf_id)
+                        except Exception as e:
+                            ok = False
+                            st.warning(f"MinerU 이미지 추출에 실패해 예시 데이터로 대체합니다: {e}")
+                        if not ok:
+                            st.warning("MinerU 카드 생성에 실패해 이미지 근거는 예시 데이터로 대체됩니다.")
 
-            with st.spinner("PDF + 질문 분석 중 (최대 1~2분 소요될 수 있습니다)..."):
-                result = run_pdf_query(tmp_path, pdf_id, ticker, query.strip(), sector=sector or None)
-        except Exception as e:
-            st.error(f"처리 중 오류가 발생했습니다: {e}")
-            st.session_state.pop("pdf_query_result", None)
-            return
-        finally:
-            tmp_path.unlink(missing_ok=True)
+                with st.spinner("PDF + 질문 분석 중 (최대 1~2분 소요될 수 있습니다)..."):
+                    result = run_pdf_query(tmp_path, pdf_id, ticker, query.strip(), sector=sector or None)
+            except Exception as e:
+                st.error(f"처리 중 오류가 발생했습니다: {e}")
+                st.session_state.pop("pdf_query_result", None)
+                return
+            finally:
+                tmp_path.unlink(missing_ok=True)
 
-        has_document_evidence.clear()  # 방금 적재한 근거를 바로 조회할 수 있도록 캐시 무효화
-        # st.button()은 클릭이 일어난 바로 그 rerun에서만 True를 반환하므로, 결과와 아래
-        # 후속 버튼을 이 if 블록 안에 그대로 두면 그 버튼을 누르는 순간(=새 rerun) 바깥 if가
-        # 다시 False가 되어 버튼 자체가 사라져 클릭이 무시된다(실측 확인). session_state에
-        # 저장해 다음 rerun에서도 이 블록 밖에서 렌더링되게 한다.
-        st.session_state["pdf_query_result"] = {
-            "result": result, "pdf_id": pdf_id, "ticker": ticker, "name": name,
-            "used_fallback_images": not has_real_image_cards(pdf_id),
-        }
+            has_document_evidence.clear()  # 방금 적재한 근거를 바로 조회할 수 있도록 캐시 무효화
+            # st.button()은 클릭이 일어난 바로 그 rerun에서만 True를 반환하므로, 결과와 아래
+            # 후속 버튼을 이 if 블록 안에 그대로 두면 그 버튼을 누르는 순간(=새 rerun) 바깥 if가
+            # 다시 False가 되어 버튼 자체가 사라져 클릭이 무시된다(실측 확인). session_state에
+            # 저장해 다음 rerun에서도 이 블록 밖에서 렌더링되게 한다.
+            st.session_state["pdf_query_result"] = {
+                "result": result, "pdf_id": pdf_id, "ticker": ticker, "name": name,
+                "used_fallback_images": not has_real_image_cards(pdf_id),
+            }
 
     saved = st.session_state.get("pdf_query_result")
     if saved:
@@ -469,22 +702,27 @@ def render_detail():
         st.session_state["page"] = "home"
         st.rerun()
 
-    st.title(f"{name} ({ticker})")
+    st.markdown('<span class="pp-eyebrow">종목 상세</span>', unsafe_allow_html=True)
+    st.markdown(
+        f'<h1 class="pp-hero-title">{name}<span class="pp-ticker-pill pp-ticker-pill-lg">{ticker}</span></h1>',
+        unsafe_allow_html=True,
+    )
 
     try:
         hist = load_price_history(ticker)
     except Exception:
         hist = None
 
-    if hist is not None and not hist.empty:
-        last = hist["Close"].iloc[-1]
-        prev = hist["Close"].iloc[-2] if len(hist) > 1 else last
-        change = last - prev
-        pct = (change / prev * 100) if prev else 0
-        st.metric(f"{ticker} 현재가", f"{last:,.2f}", f"{change:+,.2f} ({pct:+.2f}%)")
-        st.line_chart(hist["Close"])
-    else:
-        st.info("가격 데이터를 불러오지 못했습니다.")
+    with st.container(border=True):
+        if hist is not None and not hist.empty:
+            last = hist["Close"].iloc[-1]
+            prev = hist["Close"].iloc[-2] if len(hist) > 1 else last
+            change = last - prev
+            pct = (change / prev * 100) if prev else 0
+            st.metric(f"{ticker} 현재가", f"{last:,.2f}", f"{change:+,.2f} ({pct:+.2f}%)")
+            st.line_chart(hist["Close"])
+        else:
+            st.info("가격 데이터를 불러오지 못했습니다.")
 
     st.divider()
     st.subheader("AI 투자 인사이트 요약")
