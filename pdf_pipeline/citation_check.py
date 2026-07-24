@@ -48,25 +48,38 @@ def extract_numbers(text: str, min_digits: int = 3) -> set:
 #   "계산·추정치, 비율/비교 수치(예: '3배', '150%')는 일체 사용하지 않았습니다"
 # 안의 150이 "근거로 확인되지 않은 숫자"로 잡혔다. 그 문장은 사실 주장이 아니라 **쓰지 않았다는
 # 선언**이라 근거가 있을 리 없다 — 오히려 지침을 잘 지킨 답변일수록 이 오탐이 난다.
+# [교차리뷰 보강] 힌트를 순수 선언형("~하지 않았다")으로만 좁혔다. 초판에 있던
+# "근거에 없/확인할 수 없/제공된 컨텍스트에 없"은 선언이 아니라 **헤지 문장**에도 붙는 표현이라
+# ("정확한 값은 확인할 수 없으나 약 1,500억원으로 추정됩니다") 검증이 가장 필요한 추정 숫자를
+# 통째로 검사에서 빼는 미탐(false negative) 구멍이었다 — 오탐(불필요 재생성)은 비용 문제지만
+# 미탐은 환각 숫자가 사용자에게 그대로 나가는 정확성 문제라, 애매하면 검사하는 쪽으로 좁힌다.
 _META_SENTENCE_HINTS = (
     "사용하지 않았", "쓰지 않았", "포함하지 않았", "인용하지 않았", "제외했", "제외하였",
-    "지어내지", "추측하지", "근거에 없", "확인할 수 없", "제공된 컨텍스트에 없",
+    "지어내지 않았", "추측하지 않았",
 )
 _SENTENCE_SPLIT_RE = re.compile(r"(?<=[.!?。])\s+|\n+")
 
 
-def strip_meta_sentences(answer: str) -> str:
-    """모델이 자기 답변의 작성 방침을 설명하는 문장을 제거한 본문을 돌려준다."""
-    keep = [s for s in _SENTENCE_SPLIT_RE.split(answer or "")
-            if not any(h in s for h in _META_SENTENCE_HINTS)]
+def strip_meta_sentences(answer: str, verbose: bool = False) -> str:
+    """모델이 자기 답변의 작성 방침을 설명하는 문장을 제거한 본문을 돌려준다.
+
+    안전망: 제거한 문장에 3자리 이상 숫자가 들어 있으면(선언문에 인용된 예시 숫자일 수도,
+    잘못 걸러진 실제 주장일 수도 있음) verbose 시 경고를 남겨 디버깅 단서를 유지한다."""
+    keep, dropped = [], []
+    for s in _SENTENCE_SPLIT_RE.split(answer or ""):
+        (dropped if any(h in s for h in _META_SENTENCE_HINTS) else keep).append(s)
+    if verbose:
+        for s in dropped:
+            if extract_numbers(s):
+                print(f"[citation-check] 메타 문장 제외(숫자 포함, 확인 요망): {s.strip()[:80]}")
     return " ".join(keep)
 
 
-def find_unsupported_numbers(answer: str, context: str) -> list:
+def find_unsupported_numbers(answer: str, context: str, verbose: bool = False) -> list:
     """answer에 등장하는 숫자 중 context(원문 근거) 어디에도 없는 것들을 반환.
     메타 문장(위 설명 참고)은 사실 주장이 아니므로 검사에서 제외한다."""
     context_numbers = extract_numbers(context)
-    answer_numbers = extract_numbers(strip_meta_sentences(answer))
+    answer_numbers = extract_numbers(strip_meta_sentences(answer, verbose=verbose))
     return sorted(n for n in answer_numbers if n not in context_numbers)
 
 
@@ -84,7 +97,7 @@ def generate_with_citation_check(client, prompt: str, context: str, model: str =
         # 일시적 429/5xx 한 번에 데모 전체가 죽는 회귀 상태였음. 실제로 배선.
         resp = _retryable_create(client, model=model, messages=messages)
         answer = resp.choices[0].message.content
-        unsupported = find_unsupported_numbers(answer, context)
+        unsupported = find_unsupported_numbers(answer, context, verbose=verbose)
         if not unsupported:
             return {"answer": answer, "attempts": attempt + 1, "unsupported_numbers": []}
 

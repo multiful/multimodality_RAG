@@ -232,6 +232,38 @@ def _find_onestop_cards(pdf_id: str, pdf_path=None):
     return roots[0] / pdf_id / "onestop_cards.jsonl"   # 없을 때 로그에 찍힐 기본 경로
 
 
+def _load_image_evidence_from_db(pdf_id: str):
+    """[교차리뷰 수정] 로컬에 onestop 카드가 없을 때(예: MinerU가 없는 Windows 환경) 폴백 예시
+    카드로 가기 전에, **이 pdf_id로 이미 DB에 적재된 실제 image evidence를 임베딩째 재사용**한다.
+
+    배경(실측): Construct의 도표3/도표4 이미지 evidence 16건이 DB에 멀쩡히 있는데도, 카드
+    파일이 없는 머신에서 데모를 돌리면 이미지 브랜치가 예시 카드로 폴백돼 인메모리 인덱스에서
+    차트 근거가 통째로 빠졌고, "건설업종 주간 수익률 1위" 질의가 커버리지 표(건설+건자재 혼합,
+    KOSPI 초과수익률)로 흘러 KCC글라스(건자재)를 오답으로 뽑았다. DB 재사용이면 맥에서 인제스트한
+    문서를 어느 머신에서든 완전한 3소스 인덱스로 재질의할 수 있다(재파싱/재임베딩 없음).
+    반환: (items, embeddings) — 없으면 ([], None)."""
+    import psycopg2
+    try:
+        conn = psycopg2.connect(DB_URL)
+        try:
+            with conn.cursor() as cur:
+                cur.execute(
+                    "select id, source_type, page, content, weight, metadata, embedding::text "
+                    "from document_evidence where pdf_id=%s and source_type='image'", (pdf_id,))
+                rows = cur.fetchall()
+        finally:
+            conn.close()
+    except Exception as e:
+        print(f"   [이미지] DB image evidence 조회 실패({type(e).__name__}) — 폴백 카드로 진행")
+        return [], None
+    if not rows:
+        return [], None
+    items = [{"id": r[0], "source_type": r[1], "page": r[2], "content": r[3],
+              "weight": r[4], "metadata": r[5] or {}} for r in rows]
+    embeddings = np.array([np.fromstring(r[6].strip("[]"), sep=",") for r in rows])
+    return items, embeddings
+
+
 def _normalize_chart_card_signs(cards: list, pdf_path=None) -> list:
     """block_type="chart" 카드의 embed_text 부호/OCR손상 정규화 — 데이터 단계에서 확정(LLM 즉석 해석 실수 방지).
 
@@ -374,18 +406,35 @@ def main(pdf_path=None, pdf_id: str = None, ticker: str = None, query: str = Non
 
     def _run_image_branch():
         tb0 = time.perf_counter()
-        if onestop_cards_path.exists():
+        is_fallback = not onestop_cards_path.exists()
+        if not is_fallback:
             image_cards = [json.loads(line) for line in onestop_cards_path.read_text(encoding="utf-8").splitlines() if line.strip()]
             _p(f"   [이미지] 실제 onestop_cards.jsonl {len(image_cards)}건 로드: {onestop_cards_path}")
         else:
+            # [교차리뷰 수정] 폴백 예시 카드보다 먼저, 이미 DB에 적재된 실제 image evidence 재사용 시도
+            db_items, db_emb = _load_image_evidence_from_db(pdf_id)
+            if db_items:
+                _p(f"   [이미지] 로컬 카드 없음 → DB에 저장된 실제 image evidence {len(db_items)}건 "
+                   f"재사용(재파싱/재임베딩 없음, 재적재 불필요)")
+                return db_items, db_emb, [], time.perf_counter() - tb0
             image_cards = _fallback_image_cards(pdf_id)
-            _p(f"   [이미지] ⚠ {onestop_cards_path} 없음(MinerU 미실행) — 대표 예시 카드 {len(image_cards)}건으로 대체")
-        image_cards = _normalize_chart_card_signs(image_cards, pdf_path=pdf_path)
+            _p(f"   [이미지] ⚠ {onestop_cards_path} 없음(MinerU 미실행) + DB에도 image evidence 없음 — 대표 예시 카드 {len(image_cards)}건으로 대체")
+        # [교차리뷰 수정] 폴백 예시 카드는 텍스트레이어 대조를 하지 않는다 — 카드 내용(LGCNS 사례)과
+        # 대상 PDF가 다른 문서라, 대조하면 모든 숫자가 "원문에 없음"으로 찍혀 [OCR손상] 범벅이 된다
+        # (실제 DB에서 pdf_id='Construct'에 이렇게 오염된 폴백 행이 발견돼 수정함).
+        image_cards = _normalize_chart_card_signs(image_cards, pdf_path=None if is_fallback else pdf_path)
         if add_structured_metadata:
             import structured_output
             image_cards = structured_output.add_structured_metadata_to_cards(image_cards)
         image_items, image_emb = entity_fusion.embed_items(entity_fusion.from_image_cards(pdf_id, image_cards))
-        n = entity_fusion.store_evidence(DB_URL, pdf_id, image_items, image_emb, ticker=ticker)
+        if is_fallback:
+            # [교차리뷰 수정] 폴백 카드는 파이프라인 후단(합성/검색/생성) 검증용 in-memory 전용 —
+            # DB에 저장하면 실제 문서의 evidence로 둔갑해 이후 모든 재질의를 오염시킨다(실측:
+            # pdf_id='Construct'에 LGCNS 예시 수치가 image evidence로 적재돼 있던 사고). 저장 안 함.
+            n = 0
+            _p(f"   [이미지] 폴백 카드 {len(image_items)}건은 DB에 저장하지 않음(오염 방지) — 이번 실행의 검색에만 사용")
+        else:
+            n = entity_fusion.store_evidence(DB_URL, pdf_id, image_items, image_emb, ticker=ticker)
         _p(f"   [이미지] {n}개 즉시 적재")
         return image_items, image_emb, image_cards, time.perf_counter() - tb0
 
@@ -506,6 +555,9 @@ DB에서 직접 조회한 정보임을 나타냅니다.
   해석해서 판단할 것(괄호 안 숫자의 절댓값이 크다고 그게 "가장 높은" 값이 아니다 — 오히려
   가장 큰 하락폭이다). 축 눈금(예: "(38)(34)(30)...")은 데이터가 아니라 눈금선이므로 특정
   대상(기업명 등) 없이 나열된 괄호 숫자는 값으로 쓰지 말 것.
+- 근거 안의 "[OCR손상]" 표기는 원문 대조에서 신뢰 불가로 판정돼 제거된 값이다 — 그 항목의
+  수치는 존재하지 않는 것으로 취급하고, 어떤 수치 판단(최고/최저/비교/합산)의 근거로도 절대
+  쓰지 말 것. "[OCR손상]"이 섞인 항목의 기업/지표를 굳이 언급해야 하면 "값 판독 불가"로만 서술할 것.
 
 [사용자 요청]
 {query}
