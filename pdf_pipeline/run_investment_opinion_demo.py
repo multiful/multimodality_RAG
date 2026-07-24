@@ -242,6 +242,7 @@ def _load_image_evidence_from_db(pdf_id: str):
     KOSPI 초과수익률)로 흘러 KCC글라스(건자재)를 오답으로 뽑았다. DB 재사용이면 맥에서 인제스트한
     문서를 어느 머신에서든 완전한 3소스 인덱스로 재질의할 수 있다(재파싱/재임베딩 없음).
     반환: (items, embeddings) — 없으면 ([], None)."""
+    import numpy as np
     import psycopg2
     try:
         conn = psycopg2.connect(DB_URL)
