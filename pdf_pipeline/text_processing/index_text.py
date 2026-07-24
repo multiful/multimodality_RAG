@@ -384,7 +384,7 @@ def route_search(index: TextIndex, query: str, client=None, top_k: int = 5,
         문서 어휘 "매출/영업이익/목표주가"와 겹칠 리 없음), 그나마 우연히 겹치는 조사(예: "이")
         마저 BM25 길이정규화가 가장 짧고 무의미한 청크(제목/티커 한 줄)에 가장 후하게 점수를
         줘서 순위를 오염시킴을 확인 — dense(+MQE로 다기업/다측면 커버리지 확보) 위주로 감.
-      - keyword_specific(factoid/list/comparison 통합): hybrid_search(fusion="rrf") — 이런
+      - keyword_specific(factoid/list/comparison 통합): hybrid_search(fusion="weighted_sum") — 이런
         질의는 "매출액", "영업이익", 티커명처럼 청크에 그대로 등장하는 구체적 어휘를 담고 있어
         BM25가 정확한 어휘 매칭으로 dense를 보완(실측: 15개 factoid 위주 질의에서 하이브리드가
         dense-only 대비 recall@1 86.7%->93.3%로 개선, `result_hybrid_search_eval.json` 참고).
@@ -422,7 +422,15 @@ def route_search(index: TextIndex, query: str, client=None, top_k: int = 5,
         sub_queries = None
 
     if qtype != "abstract":
-        return hybrid_search(index, query, top_k=top_k, fusion="rrf"), qtype
+        # [수정 — 재일, 골든셋 실측] fusion="rrf" -> "weighted_sum"(선형가중 0.7/0.3).
+        # 근거(pdf_pipeline/final/results_fusion_routing_ab.json — 사람이 PDF를 읽어 만든 18질의):
+        #   전체 ndcg@8/recall  선형가중 0.815/0.94  vs  RRF 0.708~0.729/0.89
+        #   질의타입별로도 전 구간 우세 — 키워드형 0.880 vs 0.794, 하이브리드형 0.908 vs 0.816.
+        # RRF는 점수 크기를 버리고 순위만 쓰므로, 정답이 유일하게 매칭되는 factoid 질의에서 dense가
+        # 압도적 확신을 보여도 BM25가 우연히 1위로 올린 무의미한 짧은 청크를 같은 무게로 끌어올린다.
+        # min-max 정규화로 스케일 문제를 이미 해결한 이 파이프라인에선 RRF가 정보를 버리는 쪽이 된다
+        # (결과적으로 라우팅이 질의의 2/3에 열등한 퓨전을 배정하고 있었다).
+        return hybrid_search(index, query, top_k=top_k, fusion="weighted_sum"), qtype
 
     if not entity_aware:
         if sub_queries is not None:
@@ -473,6 +481,19 @@ _DECOMPOSE_PROMPT = (
 )
 
 
+# [재일] 다중 의도 감지 — decompose 게이팅용. 요청 동사("알려줘/정리해줘/분석해줘/도출해줘" 등)와
+# 물음표를 세어 2개 이상이면 쪼갤 의도가 여러 개로 본다. 실제로 문제가 됐던 질의
+# "…인사이트 도출해주고, …가장 높은 기업이 어딘지 알려줘"는 도출/알려줘 2개라 분해 대상으로 남고,
+# "GS건설 종가와 시가총액 알려줘"는 1개라 분해를 건너뛴다.
+_REQUEST_VERB_RE = re.compile(
+    r"(알려\s*줘|알려주|정리해|분석해|도출해|요약해|설명해|비교해|찾아\s*줘|뽑아\s*줘|보여\s*줘)")
+
+
+def _looks_multi_intent(query: str) -> bool:
+    q = query or ""
+    return len(_REQUEST_VERB_RE.findall(q)) + q.count("?") >= 2
+
+
 def decompose_query(query: str, client=None, model: str = "gpt-4o") -> list:
     """질의를 성격별 하위질의로 분해. 단일 성격이면 [{"type": "single", "query": 원본}] 하나만
     반환(하위 라우팅에서 "single"은 route_search와 동일하게 LLM 재분류를 한 번 더 거쳐
@@ -511,7 +532,7 @@ def decompose_and_route_search(index: TextIndex, query: str, client=None, top_k:
 
     하위질의 처리:
       - type="single": route_search()와 동일하게 재분류(keyword_specific/abstract)해 라우팅.
-      - type="keyword_specific": hybrid_search(fusion="rrf")로 직접 검색(정밀 어휘 매칭 유지).
+      - type="keyword_specific": hybrid_search(fusion="weighted_sum")로 직접 검색(정밀 어휘 매칭 유지).
       - type="abstract": entity_aware=True면 index.entity_count로 HyDE(<=1)/MQE(>1) 분기,
         False면 항상 MQE — route_search()의 entity_aware 분기 로직 그대로 재사용.
 
@@ -532,6 +553,17 @@ def decompose_and_route_search(index: TextIndex, query: str, client=None, top_k:
         from openai import OpenAI
         client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
 
+    # [수정 — 재일] 쪼갤 게 없는 질의는 분해를 건너뛴다(게이팅).
+    # 근거: decompose_query()는 gpt-4o 호출이라 질의마다 ~2s를 무조건 문다. 그런데 "GS건설 종가와
+    # 시가총액 알려줘"처럼 의도가 하나뿐인 질의는 분해해도 사실상 같은 질의가 나올 뿐이고, 실측
+    # (골든셋 18질의)에서 키워드형 성능은 고정 하이브리드(0.05s)와 동일했다 — 지연만 40배 더 낸다.
+    # 두 조건을 **모두** 만족할 때만 건너뛴다: (a) 규칙 분류가 factoid이고 (b) 요청 동사/물음표가
+    # 하나뿐이라 다중 의도로 안 보일 것. (a)만으로 게이팅하지 않는 이유는 규칙 분류의 기본값이
+    # factoid라서, 트리거 단어 없는 abstract 질의("이 회사 어때?")가 여기로 새면 분해·MQE를 놓치기
+    # 때문이다([44]의 블라인드스팟). 두 조건을 겹쳐 "확실할 때만" 건너뛴다.
+    if classify_query_type(query) == "factoid" and not _looks_multi_intent(query):
+        return hybrid_search(index, query, top_k=top_k, fusion="weighted_sum"), []
+
     subqueries = decompose_query(query, client=client, model=decompose_model)
 
     per_subquery_hits = []
@@ -543,7 +575,8 @@ def decompose_and_route_search(index: TextIndex, query: str, client=None, top_k:
                                                  classifier=classifier, entity_aware=entity_aware)
             sq["resolved_type"] = resolved_qtype
         elif sq_type == "keyword_specific":
-            hits = hybrid_search(index, sub_q, top_k=top_k, fusion="rrf")
+            # [수정] 위와 같은 근거로 선형가중 통일(하위질의도 factoid 성격이라 동일 결론)
+            hits = hybrid_search(index, sub_q, top_k=top_k, fusion="weighted_sum")
             sq["resolved_type"] = "keyword_specific"
         else:  # abstract
             if entity_aware:
@@ -655,7 +688,7 @@ def ingest_and_search(pdf_path, yolo_model, query: str, doc_title: str = None,
         index.entity_count = entity_count
 
         if qtype != "abstract":
-            return index, hybrid_search(index, query, top_k=top_k, fusion="rrf"), qtype, entity_count
+            return index, hybrid_search(index, query, top_k=top_k, fusion="weighted_sum"), qtype, entity_count
 
         if entity_count <= 1:
             if speculative_hyde:

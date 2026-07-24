@@ -43,10 +43,30 @@ def extract_numbers(text: str, min_digits: int = 3) -> set:
     return numbers
 
 
+# [수정 — 재일] 답변 안의 "메타 문장"(모델이 자기 답변을 설명하는 줄)은 검사 대상에서 뺀다.
+# 실측 오탐: 모델이 스스로 지침을 지켰다고 밝히는 문장
+#   "계산·추정치, 비율/비교 수치(예: '3배', '150%')는 일체 사용하지 않았습니다"
+# 안의 150이 "근거로 확인되지 않은 숫자"로 잡혔다. 그 문장은 사실 주장이 아니라 **쓰지 않았다는
+# 선언**이라 근거가 있을 리 없다 — 오히려 지침을 잘 지킨 답변일수록 이 오탐이 난다.
+_META_SENTENCE_HINTS = (
+    "사용하지 않았", "쓰지 않았", "포함하지 않았", "인용하지 않았", "제외했", "제외하였",
+    "지어내지", "추측하지", "근거에 없", "확인할 수 없", "제공된 컨텍스트에 없",
+)
+_SENTENCE_SPLIT_RE = re.compile(r"(?<=[.!?。])\s+|\n+")
+
+
+def strip_meta_sentences(answer: str) -> str:
+    """모델이 자기 답변의 작성 방침을 설명하는 문장을 제거한 본문을 돌려준다."""
+    keep = [s for s in _SENTENCE_SPLIT_RE.split(answer or "")
+            if not any(h in s for h in _META_SENTENCE_HINTS)]
+    return " ".join(keep)
+
+
 def find_unsupported_numbers(answer: str, context: str) -> list:
-    """answer에 등장하는 숫자 중 context(원문 근거) 어디에도 없는 것들을 반환."""
+    """answer에 등장하는 숫자 중 context(원문 근거) 어디에도 없는 것들을 반환.
+    메타 문장(위 설명 참고)은 사실 주장이 아니므로 검사에서 제외한다."""
     context_numbers = extract_numbers(context)
-    answer_numbers = extract_numbers(answer)
+    answer_numbers = extract_numbers(strip_meta_sentences(answer))
     return sorted(n for n in answer_numbers if n not in context_numbers)
 
 
