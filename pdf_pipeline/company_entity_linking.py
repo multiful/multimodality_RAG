@@ -89,6 +89,20 @@ def fetch_company_db_context(db_url: str, matched: list) -> str:
             lines.append(f"[{name}({t}) 재무제표 요약 — DB]\n{fin[t]}")
         if prof.get(t):
             lines.append(f"[{name}({t}) 기업 프로필 요약 — DB]\n{prof[t]}")
+
+    # [재일] README 아키텍처에서 비어 있던 화살표 연결 —
+    # `NEWS(관련 뉴스 Sentiment Analysis) -> META(기업 메타데이터 DB) -> LLM`.
+    # 뉴스 감성은 지금까지 헤드라인 수집까지만 있고 생성 단계에 도달하지 못했다. 여기서 붙여야
+    # 실제로 프롬프트에 실린다(이 함수가 LLM 컨텍스트를 만드는 유일한 지점이기 때문).
+    # 테이블이 없거나 해당 티커 데이터가 없으면 빈 문자열이 와서 기존 동작 그대로 유지된다.
+    try:
+        from news_sentiment_link import fetch_news_sentiment_context
+        news_block = fetch_news_sentiment_context(db_url, tickers)
+        if news_block:
+            lines.append(news_block)
+    except Exception:
+        pass  # 뉴스 감성은 보조 신호 — 실패해도 재무/프로필 컨텍스트는 그대로 나가야 한다
+
     return "\n\n".join(lines)
 
 
