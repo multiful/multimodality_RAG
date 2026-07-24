@@ -14,7 +14,9 @@ RAG/Retriever/LLM은 이 파이프라인에 전혀 들어가지 않는다(사용
 """
 
 import json
+import re
 import sys
+from collections import Counter
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -66,6 +68,105 @@ def _finalize_value(raw_value: str, cf) -> dict:
             numeric_value, unit = parsed["numeric_value"], parsed["unit"]
     quality = "unmapped_glyph" if detect_cid_artifact(value) else None
     return {"value": value, "data_quality": quality, "numeric_value": numeric_value, "unit": unit}
+
+
+CAPTION_LOOKUP_PT = 200  # 표 bbox 위 몇 pt까지를 캡션 후보로 볼지
+CAPTION_MAX_CHARS = 80
+_CAPTION_TEXTY_RE = re.compile(r"[가-힣A-Za-z]{2,}")   # 글자가 2자 이상 있어야 '제목 줄'로 인정
+
+
+PAGE_TOP_MARGIN_PT = 80      # 이 위쪽은 페이지 머리글("통신장비 Overweight") 영역으로 보고 캡션 후보에서 제외
+_CAPTION_NUM_RE = re.compile(r"-?\d[\d,\.]*%?")
+
+
+def _looks_like_data_line(line: str) -> bool:
+    """숫자 토큰이 3개 이상이면 캡션이 아니라 표 데이터 행/축 눈금 줄로 본다
+    ("25.5.15 BUY 28,000 -45.42% -18.04%", "0 10,000 20,000 ...")."""
+    return len(_CAPTION_NUM_RE.findall(line)) >= 3
+
+
+def _texty_caption_lines(page_pp, box):
+    try:
+        text = page_pp.crop(box).extract_text() or ""
+    except Exception:
+        return []
+    return [ln.strip() for ln in text.splitlines()
+            if ln.strip() and _CAPTION_TEXTY_RE.search(ln) and not _looks_like_data_line(ln)]
+
+
+def _caption_above(page_pp, bbox_pt):
+    """[재일 — C밴드 사례] 표의 **제목 줄(회사명/표 제목)**을 찾아 돌려준다. 두 레이아웃을 모두 본다:
+
+    (1) 표 위쪽 — 일반적인 배치(예: Construct "주간 수주 공시"). 단 페이지 머리글까지 올라가지
+        않도록 위쪽을 PAGE_TOP_MARGIN_PT에서 자른다(안 자르면 '통신장비 Overweight' 같은 머리글이
+        캡션으로 잡혀 (2)로 넘어가지도 못한다 — 실측으로 확인).
+    (2) **같은 높이의 왼쪽 영역** — 증권 리포트의 투자의견 변동표는 차트와 표를 좌우로 나란히
+        놓아서 캡션이 표 '위'가 아니라 '왼쪽'에 있다(실측 c밴드 p4: 좌측 영역에
+        '투자의견 변동 내역 및 목표주가 괴리율' / '케이엠더블유'가 그대로 있었다).
+
+    숫자 토큰이 3개 이상인 줄(앞 표의 데이터 행, 차트 축 눈금)은 후보에서 제외한다."""
+    x0, y0, x1, y1 = bbox_pt
+    above = (x0, max(PAGE_TOP_MARGIN_PT, y0 - CAPTION_LOOKUP_PT), x1, y0)
+    left = (0, max(PAGE_TOP_MARGIN_PT, y0 - 30), x0, y1)
+    # 좌측(나란히 배치) 후보를 앞에 둔다 — 위쪽 후보는 표 자신의 헤더 조각("괴리율", "날짜
+    # 투자의견 목표주가")이 잡히는 경우가 있어 회사명을 놓쳤다(실측: 우리넷 표). 표가 페이지 폭을
+    # 거의 다 쓰면 좌측 영역이 비어 있으므로 자연히 위쪽 캡션이 쓰인다(Construct 수주표가 그 경우).
+    cands = []
+    for box in (left, above):
+        if box[1] >= box[3] or box[0] >= box[2]:
+            continue
+        cands += _texty_caption_lines(page_pp, box)
+    seen, uniq = set(), []
+    for ln in cands:
+        if ln not in seen:
+            seen.add(ln); uniq.append(ln)
+    return " ".join(uniq[:2])[:CAPTION_MAX_CHARS] if uniq else None
+_HEADER_HAS_DIGIT_RE = re.compile(r"\d")
+_HEADER_SCAN_ROWS = 3   # 표 상단 몇 행까지 헤더 후보로 볼지(제목/단위 행이 앞에 낄 수 있음)
+
+
+def _detect_column_headers(parsed_rows: list):
+    """[재일] 공시/계약표처럼 **컬럼명이 첫 행에 있고 canonical 재무필드가 아닌** 표에서 컬럼명을
+    회수한다. 배경: canonical_field_schema.detect_wide_form()은 헤더를 표준 재무필드(매출액 등)로
+    매칭될 때만 wide-form으로 인정하므로, "날짜|건설사|수주 프로젝트|계약 금액|세대 수" 같은
+    비재무 헤더는 통째로 버려지고 각 행이 `날짜값: [건설사, 프로젝트, 금액]`으로만 저장돼 어떤
+    숫자가 "계약 금액"인지 알 수 없게 된다(실측: Construct p5 주간 수주 공시표 — 계약금액/세대수를
+    묻는 질의에 컬럼명 토큰이 아예 없어 검색이 안 걸림).
+
+    판정은 특정 표를 하드코딩하지 않고 구조로만 한다 — 상단 몇 행 중 (a) 숫자가 하나도 없고
+    (b) 비어있지 않은 칸이 3개 이상이며 (c) 그 개수가 아래 데이터 행들의 최빈 폭과 ±1 이내인
+    행을 헤더로 본다. 못 찾으면 (None, None)(기존 동작 그대로).
+
+    반환: (헤더 리스트, 헤더 행의 인덱스)."""
+    if len(parsed_rows) < 3:
+        return None, None
+    widths = [1 + len(r.get("cells") or []) for r in parsed_rows[1:]]
+    if not widths:
+        return None, None
+    modal_width = Counter(widths).most_common(1)[0][0]
+    for i, row in enumerate(parsed_rows[:_HEADER_SCAN_ROWS]):
+        hdr = [h.strip() for h in ([row.get("label") or ""] + list(row.get("cells") or [])) if h and h.strip()]
+        if len(hdr) < 3 or any(_HEADER_HAS_DIGIT_RE.search(h) for h in hdr):
+            continue
+        # [재일 — C밴드 사례] 폭 허용범위를 비대칭으로 넓힌다(-1 ~ +2). 증권 리포트의 투자의견
+        # 변동표는 헤더가 **두 줄**로 쪼개진다 — 1행 `날짜|투자의견|목표주가`(3칸), 2행
+        # `평균|최고/최저`(괴리율의 하위 헤더, 2칸), 데이터행은 5칸. 기존 ±1 조건이면 |5-3|=2라
+        # 헤더로 인정 못 해 컬럼명이 통째로 버려지고, 그 두 줄이 `날짜: ['투자의견','목표주가']`
+        # 같은 **노이즈 행으로 적재**됐다(실측: c밴드 table 청크에 그대로 존재). 헤더가 데이터보다
+        # 짧은 건 하위헤더 때문에 흔하므로 +2까지 허용하고, 반대 방향(헤더가 더 김)은 그대로 1로 둔다.
+        if -1 <= modal_width - len(hdr) <= 2:
+            # 헤더 바로 다음 줄도 숫자가 없으면 하위헤더 연장으로 보고 같이 흡수(그 줄이 노이즈
+            # 행으로 남지 않도록 헤더 인덱스를 뒤로 민다).
+            j = i
+            while (j + 1 < len(parsed_rows) and j + 1 < _HEADER_SCAN_ROWS + 1):
+                nxt = [h.strip() for h in ([parsed_rows[j+1].get("label") or ""]
+                                            + list(parsed_rows[j+1].get("cells") or [])) if h and h.strip()]
+                if not nxt or any(_HEADER_HAS_DIGIT_RE.search(h) for h in nxt):
+                    break
+                hdr += nxt
+                j += 1
+            return hdr, j
+    return None, None
 
 
 def build_records(pdf_id: str, add_structured_metadata: bool = False, openai_client=None,
@@ -154,6 +255,16 @@ def build_records(pdf_id: str, add_structured_metadata: bool = False, openai_cli
                                               doc_fitz=doc_fitz, page_num=r["page"])
         method = "하이브리드 게이트(text-strategy/word-clustering, complex는 TATR 안전망 후보, [JAEIL v5])"
 
+        # [재일 — C밴드 사례] 표 bbox 바로 위 캡션을 **항상** 회수한다(전엔 구조화 출력을 켤 때만
+        # 뽑아 LLM에게만 줬음). 이유: "투자의견 변동 내역 및 목표주가 괴리율 / 케이엠더블유"처럼
+        # **어느 회사 표인지가 캡션에만 있는 표**가 흔한데, 표 행은 `26.5.19: ['BUY','70,000',...]`
+        # 로 저장돼 회사명이 한 글자도 없다. 그러면 "케이엠더블유 목표주가" 질의로는 이 행이
+        # 어휘로도 의미로도 매칭될 수 없어 **검색 후보 자체가 못 된다**(실측: c밴드 문서 table
+        # 청크 63개 중 회사명 포함 0건). 그 결과 회사명으로 도달 가능한 유일한 근거가 차트 이미지
+        # 카드(축 눈금만 담김)뿐이라, 생성 단계가 Y축 눈금 9개와 X축 날짜 9개를 순서대로 짝지어
+        # 존재하지 않는 목표주가 시계열을 만들어냈다(4개 기업 전부 실제와 반대 방향).
+        caption_above = _caption_above(page_pp, bbox_pt)
+
         table_over_spaced = is_over_spaced(r["raw_text"])
         parsed_rows = [_normalize_row(row, table_over_spaced) for row in parsed_rows]
 
@@ -189,11 +300,32 @@ def build_records(pdf_id: str, add_structured_metadata: bool = False, openai_cli
                         "data_quality": finalized["data_quality"],
                         "page": r["page"], "table_idx": r["table_idx"],
                         "row_record_idx": row_idx, "table_type": ttype,
+                        "table_caption": caption_above,
                     }
                     records.append(rec)
                     table_records.append(rec)
         else:
-            for row in parsed_rows:
+            # [재일] canonical 매칭이 안 되는 비재무표(공시/계약표 등)의 컬럼명 회수 — 아래 rec에
+            # column_headers로 실어 보내면 entity_fusion.from_table_records()가 "컬럼명=값" 형태로
+            # 직렬화해 "계약 금액" 같은 컬럼명 토큰으로도 검색되게 한다.
+            col_headers, hdr_idx = _detect_column_headers(parsed_rows)
+            # [재일] 버려지는 제목행에는 표 제목뿐 아니라 **단위 표기**가 들어있는 경우가 많다
+            # (실측: "주간 수주 공시 (단위: 억원)"). 제목행을 그냥 지우면 단위 정보가 사라져
+            # 생성 모델이 단위를 추측하다 틀린다(실측: gpt-4.1이 14,367을 '백만원'으로 오해해
+            # "143억"이라 답함). 행 청크에서는 빼되 표 단위 노트로 보존해 요약 청크에 싣는다.
+            table_note = None
+            if col_headers:
+                note_bits = []
+                for row in parsed_rows[:hdr_idx]:
+                    note_bits += [x for x in ([row.get("label") or ""] + list(row.get("cells") or [])) if x and x.strip()]
+                table_note = " ".join(note_bits).strip() or None
+            for row_i, row in enumerate(parsed_rows):
+                # [재일] 헤더가 확인된 표에서는 제목행/헤더행 자체를 레코드로 만들지 않는다 —
+                # 실측(Construct p5): 제목행이 "날짜=주간 수주 공시 | 건설사=시 | 비고=(단위: 억원"
+                # 이라는 노이즈 청크가 되어, "수주 공시" 어휘가 그대로 들어있는 탓에 정작 데이터
+                # 행들을 밀어내고 검색 1위를 차지했다.
+                if col_headers and row_i <= hdr_idx:
+                    continue
                 cf = match_canonical_field(row["label"])
                 finalized_cells = [_finalize_value(c, cf) for c in row["cells"]]
                 if cf:
@@ -215,6 +347,8 @@ def build_records(pdf_id: str, add_structured_metadata: bool = False, openai_cli
                     "trend": trend,
                     "data_quality": next((fc["data_quality"] for fc in finalized_cells if fc["data_quality"]), None),
                     "page": r["page"], "table_idx": r["table_idx"], "table_type": ttype,
+                    "column_headers": col_headers, "table_note": table_note,
+                    "table_caption": caption_above,
                 }
                 records.append(rec)
                 table_records.append(rec)
@@ -225,7 +359,12 @@ def build_records(pdf_id: str, add_structured_metadata: bool = False, openai_cli
             table_text = r.get("markdown") or r["raw_text"]
             mapped_t = [x for x in table_records if x["canonical_field"]]
             unmapped_labels_t = [x["raw_label"] for x in table_records if not x["canonical_field"]]
-            pending_structured_calls.append((r["page"], r["table_idx"], ttype, table_text, mapped_t, unmapped_labels_t))
+            # [재일 — 스키마 감사] 표 bbox 바로 위 구간의 텍스트를 캡션 후보로 같이 넘긴다. 지금까지
+            # 구조화 출력에 들어가는 입력은 bbox 내부 텍스트뿐이라 "도표 3. 건설업종 종목 주간
+            # 수익률" 같은 표 제목/문맥이 잘려 나갔고, entities_mentioned/table_title을 채울 근거가
+            # 입력에 아예 없었다(실측 빈 배열). 캡션 실패해도 파이프라인은 그대로 진행.
+            pending_structured_calls.append((r["page"], r["table_idx"], ttype, table_text, mapped_t,
+                                             unmapped_labels_t, caption_above))
 
         form = "wide-form(헤더=필드명)" if header_fields else "narrow-form(행라벨=필드명)"
         filtered_note = f", 재무항목 {n_before_filter - len(parsed_rows)}행 필터" if n_before_filter != len(parsed_rows) else ""
@@ -240,9 +379,11 @@ def build_records(pdf_id: str, add_structured_metadata: bool = False, openai_cli
         with ThreadPoolExecutor(max_workers=structured_metadata_workers) as executor:
             future_to_meta = {
                 executor.submit(extract_table_metadata, table_text, mapped_t, unmapped_labels_t,
-                                openai_client, "gpt-4o-mini", sector):
+                                openai_client, "gpt-4o-mini", sector,
+                                PDF_PATH.stem, page, caption_above):
                     (page, table_idx, ttype)
-                for page, table_idx, ttype, table_text, mapped_t, unmapped_labels_t in pending_structured_calls
+                for page, table_idx, ttype, table_text, mapped_t, unmapped_labels_t, caption_above
+                in pending_structured_calls
             }
             for future in as_completed(future_to_meta):
                 page, table_idx, ttype = future_to_meta[future]

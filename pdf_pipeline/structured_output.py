@@ -17,7 +17,7 @@ import sys
 from pathlib import Path
 from typing import Literal, Optional
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from tenacity import retry, retry_if_exception_type, stop_after_attempt, wait_random_exponential
 
 _DEFAULT_MODEL = "gpt-4o-mini"
@@ -52,6 +52,20 @@ def _retryable_parse(client, **kwargs):
     return _call()
 
 
+_EXTRACTION_SYSTEM = (
+    "너는 한국 증권사 리포트에서 메타데이터를 추출하는 도구다. 주어진 원문에 문자로 존재하는 것만 "
+    "추출하고, 없으면 null 또는 빈 배열을 반환한다. 추론·요약·외부지식 사용 금지."
+)
+
+
+def _extraction_msgs(prompt: str) -> list:
+    """[재일 — 스키마 감사] 세 호출부 모두 user 메시지 단독 + temperature 미지정(기본 1.0)이었다.
+    추출 태스크에 temperature 1.0은 같은 표에서 실행마다 다른 table_title/table_type_refined가
+    나오게 해 평가 재현성을 깬다. system 메시지로 "원문에 있는 것만"을 못박고 temperature=0으로
+    고정 — 프롬프트 안의 "없으면 추론"과 "지어내지 말 것" 충돌도 이쪽으로 정리된다."""
+    return [{"role": "system", "content": _EXTRACTION_SYSTEM}, {"role": "user", "content": prompt}]
+
+
 def _sector_hint(sector: str = None) -> str:
     """[37] 사용자 요청("문서 종류에 따라 그에 알맞는 구조화 출력") 반영 — 스키마 자체를 섹터별로
     N개 따로 만들지 않고(오버엔지니어링 방지), 이미 있는 `sector_schema.yaml`의 섹터별 큐레이션
@@ -79,15 +93,22 @@ def _sector_hint(sector: str = None) -> str:
 
 # ---------- 텍스트 라우팅 끝: 청크 단위 구조화 메타데이터 ----------
 
+# [재일 — 스키마 감사] 세 스키마 모두 필드에 description이 하나도 없어서(감사 시점 `Field(` 0회),
+# OpenAI에 전송되는 JSON Schema에는 필드명/타입만 실리고 "무엇을 넣어야 하는지"는 프롬프트 불릿에만
+# 있었다. Structured Outputs는 schema description을 가장 강한 신호로 쓰는데 그 채널이 비어 있으면,
+# 긴 표/청크 원문에 지시문이 묻힐 때 모델이 타입만 만족하는 빈 값([]/null)을 반환하는 저비용 경로로
+# 빠진다(실측: 표 entities_mentioned가 문서 전체에서 빈 배열, time_periods_covered가 ["0"] 같은
+# 쓰레기 값). 아래는 각 필드에 "어디서 찾아라 / 무엇을 넣지 마라 / 없을 때 무엇을 반환하라"를 명시.
+
 class TextChunkMetadata(BaseModel):
-    chunk_index: int
-    entities: list[str]
-    sector_mentioned: Optional[str]
-    topic: str
-    metric_mentions: list[str]
-    time_period: Optional[str]
-    sentiment: Literal["positive", "neutral", "negative"]
-    contains_forward_looking_statement: bool
+    chunk_index: int = Field(description="입력에 [chunk_index=N]으로 표시된 번호 그대로. 입력에 있는 모든 번호를 빠짐없이 하나씩 반환할 것.")
+    entities: list[str] = Field(description="이 chunk 본문에 문자로 실제 등장하는 기업/기관/브랜드명. 리포트 발간사(하나증권 등)와 데이터 출처(Quantiwise, FnGuide 등)는 제외하고 분석 대상 기업만. 원문 표기 그대로, 중복 제거, 최대 10개. 하나도 없으면 빈 배열.")
+    sector_mentioned: Optional[str] = Field(description="이 chunk가 다루는 산업/섹터명 하나(예: 건설업, 반도체). 개별 기업만 다루면 그 기업의 산업을 추정해 적지 말고 null.")
+    topic: str = Field(description="이 chunk의 핵심 주제를 명사구 한 줄로, 30자 이내. 문서 제목을 그대로 복사하지 말 것.")
+    metric_mentions: list[str] = Field(description="이 chunk에 등장하는 재무/수치 지표의 '라벨만'(예: 영업이익률, 수주잔고, PER). 숫자 값은 절대 포함하지 말 것. 최대 10개. 없으면 빈 배열.")
+    time_period: Optional[str] = Field(description="이 chunk가 명시적으로 언급한 시점/기간(예: 2026E, 3Q25, 2026.7.21). 여러 개면 가장 핵심적인 하나. 명시가 없으면 null.")
+    sentiment: Literal["positive", "neutral", "negative", "not_applicable"] = Field(description="투자 관점의 논조. 표지/헤더/목차/출처 표기처럼 논조 판단 자체가 불가능한 조각은 neutral이 아니라 not_applicable.")
+    contains_forward_looking_statement: bool = Field(description="전망/예상/추정 또는 E/F 표기 등 미래 시점 서술이 포함되면 true.")
     # [47] 사용자 지적("지연/토큰 병목 잡아줘") 반영 — summary 필드 제거. 실측(C밴드.pdf 1페이지
     # 23청크)으로 completion_tokens 1829->1407(-23%), 호출시간 16.71s->12.95s(-22%)로 확인 —
     # 이 필드가 chunk당 가장 비싼 출력이었는데, raw_chunk 자체가 이미 짧고 인용 가능한 단위라
@@ -131,7 +152,7 @@ def _extract_text_chunk_metadata_single_call(chunks: list, doc_title: str, clien
     prompt = _TEXT_METADATA_PROMPT.format(doc_title_line=doc_title_line, chunks_block=chunks_block)
     prompt += _sector_hint(sector)
 
-    resp = _retryable_parse(client, model=model_name, messages=[{"role": "user", "content": prompt}],
+    resp = _retryable_parse(client, model=model_name, messages=_extraction_msgs(prompt), temperature=0,
                              response_format=_TextChunkMetadataBatch)
     parsed = resp.choices[0].message.parsed
     by_index = {item.chunk_index: item for item in parsed.items}
@@ -169,24 +190,31 @@ def extract_text_chunk_metadata(chunks: list, doc_title: str = None, client=None
 # ---------- 표 라우팅 끝: 표 단위 구조화 메타데이터 ----------
 
 class TableMetadata(BaseModel):
-    table_title: Optional[str]
-    entities_mentioned: list[str]
-    time_periods_covered: list[str]
-    table_type_refined: str
-    unmapped_fields_summary: Optional[str]
-    notable_finding: Optional[str]
+    table_title: Optional[str] = Field(description="표 위 캡션/제목에 문자로 명시된 경우에만 그대로 옮길 것. 명시된 제목이 없으면 반드시 null — 표 내용을 보고 제목을 지어내지 말 것.")
+    entities_mentioned: list[str] = Field(description="표의 셀, 행 라벨, 표 제목, 표 위 캡션에 문자로 등장하는 기업/기관명을 전부. 셀 안에 종목명이 하나라도 있으면 반드시 나열할 것 — 이 배열을 비우는 것은 표 어디에도 회사명이 한 글자도 없을 때만 허용된다. 원문 표기 그대로, 중복 제거, 최대 30개.")
+    time_periods_covered: list[str] = Field(description="컬럼 헤더나 셀에 명시된 시점 문자열만(예: 2024, 2026F, 3Q25, 2026-07-20). 단위 없는 단순 숫자(0, 1, 313)는 시점이 아니므로 넣지 말 것. 없으면 빈 배열.")
+    # [재일 — 스키마 감사] str 자유문자열이라 같은 성격의 표가 '수익률 및 Valuation' / '투자지표' /
+    # '기타'처럼 제각각 값으로 떨어져 필터·집계에 못 썼다(실측: Construct 15개 표에서 7종 난립).
+    # Literal로 고정해 표준 어휘로 수렴시키고, 목록 밖은 '기타'로 흘려보낸다.
+    table_type_refined: Literal[
+        "실적요약", "재무제표", "밸류에이션", "투자의견_목표주가", "수주_계약공시",
+        "세그먼트별매출", "수급_거래동향", "시장지표_통계", "일정_이벤트", "기타",
+    ] = Field(description="이 표의 세부 유형. 목록에 딱 맞는 게 없으면 '기타'.")
+    unmapped_fields_summary: Optional[str] = Field(description="'규칙 기반 매칭 안 된 행'이 어떤 정보인지 한 줄 요약. 매칭 안 된 행이 없으면 null.")
+    notable_finding: Optional[str] = Field(description="표 안 숫자에서 직접 읽히는 특이점만(급증/급감/이례적 수치). 표 밖 지식이나 추측으로 해석하지 말 것. 없으면 null.")
 
 
 _TABLE_METADATA_PROMPT = (
     "다음은 증권사 리포트에서 추출한 표 하나의 원문 텍스트와, 이미 규칙 기반으로 표준 필드에 매칭된 "
     "값 목록입니다. 규칙 기반으로 이미 뽑힌 값(canonical_field로 매칭된 것들)은 다시 반복하지 말고, "
     "아래 항목만 이 표 내용을 바탕으로 채우세요.\n\n"
-    "- table_title: 표 제목/주제 한 줄(원문에 명시된 제목이 없으면 내용 기반으로 추론)\n"
-    "- entities_mentioned: 표에 언급된 기업/기관명\n"
+    "- table_title: <문서 컨텍스트>의 '표 위 캡션'에 제목이 있으면 그대로 옮기고, 없으면 null(지어내지 말 것)\n"
+    "- entities_mentioned: 표 원문의 셀/행라벨과 표 위 캡션에 등장하는 기업/기관명 전부\n"
     "- time_periods_covered: 표가 다루는 시점 목록(예: [\"2024\", \"2025\", \"2026E\"])\n"
     "- table_type_refined: 이 표의 세부 유형(예: '실적 요약', '계약 공시', '투자지표', '세그먼트별 매출')\n"
     "- unmapped_fields_summary: '규칙 기반 매칭 안 된 행'이 어떤 정보인지 한 줄 요약(없으면 null)\n"
     "- notable_finding: 이 표에서 눈에 띄는 점(급증/급감/이례적 수치 등, 없으면 null)\n\n"
+    "<문서 컨텍스트>\n{doc_context}\n</문서 컨텍스트>\n\n"
     "<표 원문>\n{table_text}\n</표 원문>\n\n"
     "<규칙 기반 매칭된 필드>\n{mapped_summary}\n</규칙 기반 매칭된 필드>\n\n"
     "<규칙 기반 매칭 안 된 행 라벨>\n{unmapped_labels}\n</규칙 기반 매칭 안 된 행 라벨>"
@@ -194,7 +222,8 @@ _TABLE_METADATA_PROMPT = (
 
 
 def extract_table_metadata(table_text: str, mapped_records: list, unmapped_labels: list,
-                            client=None, model_name: str = _DEFAULT_MODEL, sector: str = None) -> dict:
+                            client=None, model_name: str = _DEFAULT_MODEL, sector: str = None,
+                            doc_title: str = None, page: int = None, caption_above: str = None) -> dict:
     """표 라우팅(run_table_metadata_pipeline) 끝에서 표 하나마다 호출. mapped_records: 이미
     canonical_field가 매칭된 레코드들(raw_label 요약용), unmapped_labels: 매칭 안 된 행의 원본
     라벨 리스트. 빈 표(행 없음)에는 호출하지 않도록 호출측에서 가드할 것. sector: [37] 섹터
@@ -204,11 +233,23 @@ def extract_table_metadata(table_text: str, mapped_records: list, unmapped_label
         f"{r['canonical_field']}={r.get('raw_label') or r.get('cells')}" for r in mapped_records
     ) or "(없음)"
     unmapped_str = ", ".join(unmapped_labels) or "(없음)"
+    # [재일 — 스키마 감사] 표 브랜치만 문서 컨텍스트가 0이었다(텍스트 브랜치는 doc_title/section_path를
+    # 넣어줌). 입력이 YOLO Table bbox 내부 텍스트뿐이라 표 위 "도표 3. 건설업종 종목 주간 수익률"
+    # 캡션도 페이지 문맥도 잘려 나갔고 — 그러면 프롬프트를 아무리 고쳐도 entities_mentioned를 채울
+    # 근거가 입력에 물리적으로 없다(실측: 문서 전체 표에서 빈 배열). 표 위 캡션/문서 제목을 같이 넘긴다.
+    ctx = []
+    if doc_title:
+        ctx.append(f"문서 제목: {doc_title}")
+    if page:
+        ctx.append(f"페이지: {page}")
+    if caption_above:
+        ctx.append(f"표 위 캡션: {caption_above.strip()[:200]}")
     prompt = _TABLE_METADATA_PROMPT.format(
-        table_text=table_text, mapped_summary=mapped_summary, unmapped_labels=unmapped_str)
+        table_text=table_text, mapped_summary=mapped_summary, unmapped_labels=unmapped_str,
+        doc_context=chr(10).join(ctx) or "(없음)")
     prompt += _sector_hint(sector)
 
-    resp = _retryable_parse(client, model=model_name, messages=[{"role": "user", "content": prompt}],
+    resp = _retryable_parse(client, model=model_name, messages=_extraction_msgs(prompt), temperature=0,
                              response_format=TableMetadata)
     return resp.choices[0].message.parsed.model_dump()
 
@@ -221,11 +262,11 @@ def extract_table_metadata(table_text: str, mapped_records: list, unmapped_label
 # 입력으로 쓴다 — vision API 호출 불필요, 텍스트 전용 구조화 출력으로 충분.
 
 class ImageMetadata(BaseModel):
-    image_type: Literal["chart", "logo", "photo", "diagram", "other"]
-    caption_or_title: Optional[str]
-    entities_mentioned: list[str]
-    described_content: str
-    key_values_or_trend: Optional[str]
+    image_type: Literal["chart", "logo", "photo", "diagram", "other"] = Field(description="이 이미지가 무엇인지: 수치/축이 있으면 chart, 회사 로고면 logo, 사진이면 photo, 구조도/흐름도면 diagram, 그 외 other.")
+    caption_or_title: Optional[str] = Field(description="원문에 캡션/제목(예: '도표 3. 건설업종 종목 주간 수익률')이 있으면 그대로. 없으면 null — 지어내지 말 것.")
+    entities_mentioned: list[str] = Field(description="범례, 축 라벨, OCR 텍스트, 캡션에 문자로 등장하는 기업/기관명을 전부. 차트 범례에 종목명이 나열돼 있으면 하나도 빠뜨리지 말 것. 원문 표기 그대로, 중복 제거, 최대 30개. 하나도 없으면 빈 배열.")
+    described_content: str = Field(description="이 이미지가 무엇을 보여주는지 1~2문장. 무엇을(지표) 무엇에 대해(대상) 어떤 축으로 보여주는지 포함할 것.")
+    key_values_or_trend: Optional[str] = Field(description="차트라면 읽을 수 있는 핵심 수치와 추세(예: '금호건설 -35.2%로 최저, IPARK만 +1.3% 상승'). OCR이 깨져 읽을 수 없으면 null — 숫자를 추측하지 말 것.")
     time_period: Optional[str]
 
 
@@ -262,7 +303,7 @@ def extract_image_metadata(card: dict, client=None, model_name: str = _DEFAULT_M
         chart_table=card.get("chart_table") or "(없음 — 차트분석 미실행)",
         narrative=card.get("narrative") or "(없음)",
     )
-    resp = _retryable_parse(client, model=model_name, messages=[{"role": "user", "content": prompt}],
+    resp = _retryable_parse(client, model=model_name, messages=_extraction_msgs(prompt), temperature=0,
                              response_format=ImageMetadata)
     return resp.choices[0].message.parsed.model_dump()
 

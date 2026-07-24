@@ -144,6 +144,28 @@ def _page_number_set(doc, page: int):
         return None
 
 
+_AXIS_LADDER_MIN = 5   # 등간격 숫자가 이만큼 이상이면 데이터가 아니라 축 눈금으로 본다
+_AXIS_WARNING = ("\n[주의] 이 차트 OCR에는 **축 눈금 숫자만** 있고 실제 계열 값은 없다. 여기 숫자들을 "
+                 "날짜와 순서대로 짝지어 시계열로 해석하지 말 것 — 값이 필요하면 같은 페이지의 표 근거를 쓸 것.")
+
+
+def _looks_like_axis_ladder(text: str) -> bool:
+    """[재일 — c밴드 사례] 차트 OCR 숫자들이 '등간격 사다리'면 데이터가 아니라 축 눈금으로 판정.
+
+    배경: 스텝/라인 차트는 데이터 라벨이 안 찍혀 있어 OCR이 Y축 눈금(0, 10,000, ..., 80,000)과
+    X축 날짜(24.07 ... 26.07)만 긁어온다. 두 목록의 개수가 우연히 같으면(실측 c밴드: 9개 vs 9개)
+    생성 모델이 순서대로 1:1 짝지어 **존재하지 않는 목표주가 시계열**을 만들어낸다(실측: 4개 기업
+    전부 실제와 정반대인 '하락 추세'로 답변, 실제는 전부 상향). 값 라벨이 붙은 막대차트(예:
+    Construct 도표3 종목별 주간수익률)는 값이 등간격이 아니라 이 판정에 안 걸린다."""
+    nums = sorted({float(x.replace(",", "")) for x in re.findall(r"-?\d[\d,]*(?:\.\d+)?", text or "")})
+    if len(nums) < _AXIS_LADDER_MIN:
+        return False
+    from collections import Counter
+    diffs = [round(b - a, 6) for a, b in zip(nums, nums[1:])]
+    modal, n = Counter(diffs).most_common(1)[0]
+    return modal > 0 and n >= _AXIS_LADDER_MIN - 1
+
+
 def _normalize_chart_card_signs(cards: list, pdf_path=None) -> list:
     """block_type="chart" 카드의 embed_text 부호/OCR손상 정규화 — 데이터 단계에서 확정(LLM 즉석 해석 실수 방지).
 
@@ -175,6 +197,10 @@ def _normalize_chart_card_signs(cards: list, pdf_path=None) -> list:
                     t = _CHART_NUM_RE.sub(
                         lambda m: "[OCR손상]" if (m.group(0) not in pn and len(m.group(0).replace(".", "")) >= 2)
                         else m.group(0), t)
+            # (4) [재일 — c밴드 사례] 축 눈금만 읽힌 차트에 경고 문구를 붙인다. 차트분석(4a, MinerU
+            # VLM)이 켜져 있어 실제 계열 값(chart_table/narrative)이 있으면 붙이지 않는다.
+            if not (c.get("chart_table") or c.get("narrative")) and _looks_like_axis_ladder(t):
+                t = t + _AXIS_WARNING
             c = {**c, "embed_text": t}
         out.append(c)
     if doc is not None:
@@ -244,8 +270,25 @@ def main(pdf_path=None, pdf_id: str = None, ticker: str = None, query: str = Non
         table_records, n_finance_filtered, n_cid = rtmp.build_records(
             pdf_id, page_boxes=page_boxes, yolo_model=yolo_model,
             add_structured_metadata=add_structured_metadata, sector=sector)
+        # [재일 §8.4 갭 수정] 표 브랜치도 텍스트/이미지처럼 structured_metadata를 evidence에 부착.
+        #  (1) 표 단위 table_metadata(record_type="table_metadata": table_title/type/notable/entities_mentioned)를
+        #      table_idx로 매핑해 같은 표의 행에 붙임. (2) 행 content(라벨+셀)에서 KOSPI200 기업명을 결정적
+        #      매칭해 entities로 채움 — LLM extract_table_metadata가 entities_mentioned를 자주 빈값으로 주던
+        #      문제를 결정적 매칭으로 보완(§8.4: 표 entities 0건 → 채워짐).
+        tmeta = {r.get("table_idx"): r for r in table_records if r.get("record_type") == "table_metadata"}
         row_records = [r for r in table_records if r.get("record_type") != "table_metadata"]
         mapped = [r for r in row_records if r.get("canonical_field")]
+        _name_map = company_entity_linking.get_korean_name_map()
+        for r in row_records:
+            tm = tmeta.get(r.get("table_idx")) or {}
+            row_text = f"{r.get('raw_label','')} " + " ".join(str(x) for x in (r.get("cells") or []))
+            row_ents = [m["name"] for m in company_entity_linking.find_mentioned_companies(row_text, _name_map)]
+            ents = sorted(set((tm.get("entities_mentioned") or []) + row_ents))
+            sm = {k: tm[k] for k in ("table_title", "table_type_refined", "notable_finding") if tm.get(k)}
+            if ents:
+                sm["entities"] = ents
+            if sm:
+                r["structured_metadata"] = sm
         table_items, table_emb = entity_fusion.embed_items(entity_fusion.from_table_records(pdf_id, row_records))
         n = entity_fusion.store_evidence(DB_URL, pdf_id, table_items, table_emb, ticker=ticker)
         _p(f"   [테이블] {len(row_records)}행 파싱(하이브리드 게이트, [JAEIL v5]), "

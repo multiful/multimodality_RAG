@@ -1,0 +1,179 @@
+{
+  "n_samples": 9,
+  "models": {
+    "gpt-4o-mini": {
+      "faithfulness": 0.74,
+      "answer_relevancy": 0.309,
+      "llm_context_precision_with_reference": 0.502,
+      "context_recall": 0.741,
+      "factual_correctness(mode=f1)": 0.332,
+      "logic_rubric_1to5": 2.22,
+      "latency_s_mean": 4.71,
+      "out_tok_mean": 304
+    },
+    "gpt-4.1": {
+      "faithfulness": 0.893,
+      "answer_relevancy": 0.31,
+      "llm_context_precision_with_reference": 0.482,
+      "context_recall": 0.741,
+      "factual_correctness(mode=f1)": 0.409,
+      "logic_rubric_1to5": 3.0,
+      "latency_s_mean": 6.04,
+      "out_tok_mean": 814
+    }
+  },
+  "per_query": {
+    "gpt-4o-mini": {
+      "K2": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.657,
+        "llm_context_precision_with_reference": 0.25,
+        "context_recall": 1.0,
+        "factual_correctness(mode=f1)": 0.0
+      },
+      "K4": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.206,
+        "llm_context_precision_with_reference": 0.5,
+        "context_recall": 1.0,
+        "factual_correctness(mode=f1)": 0.8
+      },
+      "K6": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.29,
+        "llm_context_precision_with_reference": 0.25,
+        "context_recall": 1.0,
+        "factual_correctness(mode=f1)": 0.0
+      },
+      "H1": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.0,
+        "llm_context_precision_with_reference": 1.0,
+        "context_recall": 0.0,
+        "factual_correctness(mode=f1)": 0.75
+      },
+      "H3": {
+        "faithfulness": 0.375,
+        "answer_relevancy": 0.552,
+        "llm_context_precision_with_reference": 1.0,
+        "context_recall": 1.0,
+        "factual_correctness(mode=f1)": 0.22
+      },
+      "H4": {
+        "faithfulness": 0.333,
+        "answer_relevancy": 0.0,
+        "llm_context_precision_with_reference": 0.0,
+        "context_recall": 0.0,
+        "factual_correctness(mode=f1)": 0.57
+      },
+      "A1": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.379,
+        "llm_context_precision_with_reference": 1.0,
+        "context_recall": 1.0,
+        "factual_correctness(mode=f1)": 0.37
+      },
+      "A2": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.39,
+        "llm_context_precision_with_reference": 0.125,
+        "context_recall": 0.667,
+        "factual_correctness(mode=f1)": 0.07
+      },
+      "A6": {
+        "faithfulness": 0.95,
+        "answer_relevancy": 0.305,
+        "llm_context_precision_with_reference": 0.389,
+        "context_recall": 1.0,
+        "factual_correctness(mode=f1)": 0.21
+      }
+    },
+    "gpt-4o-mini_rubric": {
+      "K2": 1,
+      "K4": 2,
+      "K6": 2,
+      "H1": 1,
+      "H3": 3,
+      "H4": 1,
+      "A1": 3,
+      "A2": 4,
+      "A6": 3
+    },
+    "gpt-4.1": {
+      "K2": {
+        "faithfulness": 0.833,
+        "answer_relevancy": 0.658,
+        "llm_context_precision_with_reference": 0.25,
+        "context_recall": 1.0,
+        "factual_correctness(mode=f1)": 0.4
+      },
+      "K4": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.22,
+        "llm_context_precision_with_reference": 0.5,
+        "context_recall": 1.0,
+        "factual_correctness(mode=f1)": 0.8
+      },
+      "K6": {
+        "faithfulness": 0.5,
+        "answer_relevancy": 0.29,
+        "llm_context_precision_with_reference": 0.25,
+        "context_recall": 1.0,
+        "factual_correctness(mode=f1)": 0.0
+      },
+      "H1": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.0,
+        "llm_context_precision_with_reference": 1.0,
+        "context_recall": 0.0,
+        "factual_correctness(mode=f1)": 0.57
+      },
+      "H3": {
+        "faithfulness": 0.909,
+        "answer_relevancy": 0.543,
+        "llm_context_precision_with_reference": 1.0,
+        "context_recall": 1.0,
+        "factual_correctness(mode=f1)": 0.0
+      },
+      "H4": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.0,
+        "llm_context_precision_with_reference": 0.0,
+        "context_recall": 0.0,
+        "factual_correctness(mode=f1)": 0.29
+      },
+      "A1": {
+        "faithfulness": 0.793,
+        "answer_relevancy": 0.379,
+        "llm_context_precision_with_reference": 0.95,
+        "context_recall": 1.0,
+        "factual_correctness(mode=f1)": 0.94
+      },
+      "A2": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.39,
+        "llm_context_precision_with_reference": 0.0,
+        "context_recall": 0.667,
+        "factual_correctness(mode=f1)": 0.52
+      },
+      "A6": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.306,
+        "llm_context_precision_with_reference": 0.389,
+        "context_recall": 1.0,
+        "factual_correctness(mode=f1)": 0.16
+      }
+    },
+    "gpt-4.1_rubric": {
+      "K2": 5,
+      "K4": 2,
+      "K6": 2,
+      "H1": 1,
+      "H3": 3,
+      "H4": 1,
+      "A1": 4,
+      "A2": 5,
+      "A6": 4
+    }
+  }
+}

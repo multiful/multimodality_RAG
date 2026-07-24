@@ -1,0 +1,53 @@
+{
+  "docs": {
+    "Construct": {
+      "tatr_candidates": 2,
+      "old_escalated": 0,
+      "new_escalated": 2,
+      "added_tatr_s": 4.51,
+      "tables": [
+        {
+          "page": 4,
+          "head": "매전 매세 0 지지 7 .1 3 지 역 수 증 수 증 감감 률",
+          "old_escalate": false,
+          "new_escalate": true,
+          "wc_rows": 4,
+          "wc_quality": [
+            1.0,
+            0.75
+          ],
+          "tatr_rows": 4,
+          "tatr_quality": [
+            1.0,
+            0.75
+          ],
+          "tatr_s": 4.3
+        },
+        {
+          "page": 5,
+          "head": "주간 수주 공시 (단위: 억원) 날짜 건설사 수주 프로젝트 계",
+          "old_escalate": false,
+          "new_escalate": true,
+          "wc_rows": 14,
+          "wc_quality": [
+            0.86,
+            0.43
+          ],
+          "tatr_rows": 8,
+          "tatr_quality": [
+            7.0,
+            0.12
+          ],
+          "tatr_s": 0.21
+        }
+      ]
+    },
+    "SmartPhone": {
+      "tatr_candidates": 0,
+      "old_escalated": 0,
+      "new_escalated": 0,
+      "added_tatr_s": 0.0,
+      "tables": []
+    }
+  }
+}

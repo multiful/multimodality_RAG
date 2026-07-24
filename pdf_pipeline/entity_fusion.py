@@ -79,11 +79,92 @@ def from_table_records(pdf_id: str, row_records: list) -> list:
         if not cells:
             continue
         weight = SOURCE_WEIGHTS["table"] if r.get("canonical_field") else UNMATCHED_TABLE_WEIGHT
+        meta = {"canonical_field": r.get("canonical_field"), "table_idx": r.get("table_idx")}
+        # [재일] 텍스트/이미지 브랜치와 동일하게 표 브랜치도 structured_metadata를 evidence에 부착
+        # (기존엔 여기서 안 실려 표 entities_mentioned가 DB에 전무 — §8.4 갭). 호출측(데모)이 표
+        # 단위 table_metadata + 행 content에서 매칭한 기업 entities를 row record에 넣어 넘긴다.
+        if r.get("structured_metadata"):
+            meta["structured_metadata"] = r["structured_metadata"]
+        # [재일] 컬럼명이 회수된 표(run_table_metadata_pipeline._detect_column_headers)는 "컬럼명=값"
+        # 으로 직렬화 — 기존 "2026-07-20: ['대우건설','상도15구역...','14,367']" 형태는 어떤 숫자가
+        # 계약금액인지 알 수 없고 "계약 금액" 같은 컬럼명 토큰이 본문에 없어 BM25/dense 둘 다
+        # 못 걸렸다(실측: Construct p5 주간 수주 공시). 헤더가 없으면 기존 형태 그대로.
+        headers = r.get("column_headers")
+        row_values = [r["raw_label"]] + list(cells)
+        if headers and len(headers) >= 2:
+            pairs = [f"{h}={v}" for h, v in zip(headers, row_values) if str(v).strip()]
+            extra = [str(v) for v in row_values[len(headers):] if str(v).strip()]
+            content = " | ".join(pairs + extra)
+            meta["column_headers"] = headers
+        else:
+            content = f"{r['raw_label']}: {cells}"
+        # [재일 — C밴드 사례] 표 캡션(있으면)을 행 본문 앞에 붙인다. 캡션에만 회사명이 있는 표
+        # ("투자의견 변동 내역 및 목표주가 괴리율 / 케이엠더블유")에서 행이 `26.5.19: ['BUY',
+        # '70,000',...]`로만 저장되면 회사명 질의로는 어휘·의미 어느 쪽으로도 매칭될 수 없어
+        # **검색 후보가 되지 못한다**(실측: c밴드 table 청크 63개 중 회사명 포함 0건 -> 회사명으로
+        # 도달 가능한 유일한 근거가 축 눈금만 담긴 차트 카드였고, 생성 단계가 Y축 9개·X축 9개를
+        # 순서대로 짝지어 없는 시계열을 만들어냈다).
+        caption = (r.get("table_caption") or "").strip()
+        if caption:
+            content = f"[{caption[:80]}] {content}"
         items.append({
             "id": f"{pdf_id}_table_{i}", "pdf_id": pdf_id, "source_type": "table",
-            "page": r.get("page"), "content": f"{r['raw_label']}: {cells}",
-            "weight": weight,
-            "metadata": {"canonical_field": r.get("canonical_field"), "table_idx": r.get("table_idx")},
+            "page": r.get("page"), "content": content,
+            "weight": weight, "metadata": meta,
+        })
+    return items + _table_digest_items(pdf_id, row_records)
+
+
+TABLE_DIGEST_MAX_ROWS = 25      # 요약 청크에 담을 최대 행 수(아주 긴 재무표가 임베딩을 삼키지 않게)
+TABLE_DIGEST_MAX_CHARS = 2000
+
+
+def _table_digest_items(pdf_id: str, row_records: list) -> list:
+    """[재일] 표 하나를 통째로 담은 '요약 청크'를 표마다 1개 더 만든다.
+
+    배경(실측): 표를 행 단위 청크로만 적재하면 "수주 공시 중 계약금액이 **가장 큰** 프로젝트가
+    뭐야?" 같은 최댓값/집계 질의를 원리적으로 못 푼다 — 정답을 고르려면 6개 행을 한꺼번에 비교해야
+    하는데 각 행은 서로 독립된 청크라 top-k 안에 다 들어오지도 않고, 어느 행에도 "가장 크다"는
+    신호가 없다(골든셋 H4: 검색 9개 방법 전부 hit=0). 표 단위로 헤더+모든 행을 한 청크에 모아두면
+    그 청크 하나만 검색돼도 LLM이 행끼리 비교해 답할 수 있다. 행 단위 청크는 그대로 두므로
+    (핀포인트 질의는 여전히 행이 더 정확) 두 입도가 공존한다."""
+    by_table, order = {}, []
+    for r in row_records:
+        key = (r.get("page"), r.get("table_idx"))
+        if key not in by_table:
+            by_table[key] = []
+            order.append(key)
+        by_table[key].append(r)
+
+    items = []
+    for key in order:
+        rows = by_table[key]
+        if len(rows) < 2:
+            continue                      # 한 줄짜리는 요약해도 행 청크와 같음
+        page, table_idx = key
+        headers = next((r.get("column_headers") for r in rows if r.get("column_headers")), None)
+        sm = next((r.get("structured_metadata") for r in rows if r.get("structured_metadata")), None) or {}
+        title = sm.get("table_title") or ""
+        lines = []
+        for r in rows[:TABLE_DIGEST_MAX_ROWS]:
+            vals = [r.get("raw_label") or ""] + [str(c) for c in (r.get("cells") or [])]
+            lines.append(" | ".join(v for v in vals if str(v).strip()))
+        body = "\n".join(lines)[:TABLE_DIGEST_MAX_CHARS]
+        note = next((r.get("table_note") for r in rows if r.get("table_note")), None)
+        caption = next((r.get("table_caption") for r in rows if r.get("table_caption")), None)
+        head = f"[표 전체] {caption or ''} {title or ''} {note or ''}".strip()
+        if headers:
+            head += f"\n컬럼: {' | '.join(headers)}"
+        n_more = max(0, len(rows) - TABLE_DIGEST_MAX_ROWS)
+        tail = f"\n(외 {n_more}행 생략)" if n_more else ""
+        items.append({
+            "id": f"{pdf_id}_tabledigest_{page}_{table_idx}", "pdf_id": pdf_id,
+            "source_type": "table", "page": page,
+            "content": f"{head}\n{body}{tail}",
+            "weight": SOURCE_WEIGHTS["table"],
+            "metadata": {"table_idx": table_idx, "granularity": "table_digest",
+                         "n_rows": len(rows), "column_headers": headers,
+                         "structured_metadata": sm or None},
         })
     return items
 
