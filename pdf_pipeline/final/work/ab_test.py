@@ -9,7 +9,7 @@ FINAL = HERE.parent
 def load(p): return json.loads((FINAL/p).read_text(encoding="utf-8"))
 
 R5 = load("results.json"); R10 = load("results_k10.json"); RE = load("results_entities.json")
-B = "enhanced_v2"; A_LIST = ["baseline", "enhanced", "docling", "mineru"]
+B = "enhanced_v4"; A_LIST = ["enhanced_v3", "baseline", "docling", "mineru"]
 
 def per_q_map(results, axis, field):
     return {q["id"]: q[field] for q in results["axes"][axis]["per_q"]}

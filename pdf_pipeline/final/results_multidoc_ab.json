@@ -1,0 +1,143 @@
+{
+  "per_doc": {
+    "doc1_construction": {
+      "baseline": 0.875,
+      "enhanced_v5": 1.0,
+      "docling": 1.0,
+      "mineru": 1.0
+    },
+    "doc2_pharma": {
+      "baseline": 0.7708333333333334,
+      "enhanced_v5": 0.9166666666666666,
+      "docling": 0.875,
+      "mineru": 0.8125
+    },
+    "doc3_preview": {
+      "baseline": 0.875,
+      "enhanced_v5": 1.0,
+      "docling": 1.0,
+      "mineru": 1.0
+    },
+    "doc4_retail": {
+      "baseline": 0.7142857142857143,
+      "enhanced_v5": 0.9047619047619048,
+      "docling": 1.0,
+      "mineru": 1.0
+    },
+    "doc5_steel": {
+      "baseline": 0.9310344827586207,
+      "enhanced_v5": 0.6724137931034483,
+      "docling": 0.5344827586206896,
+      "mineru": 0.6724137931034483
+    },
+    "doc06_aircraft": {
+      "baseline": 1.0,
+      "enhanced_v5": 1.0,
+      "docling": 0.5,
+      "mineru": 0.5
+    },
+    "doc07_mart": {
+      "baseline": 1.0,
+      "enhanced_v5": 1.0,
+      "docling": 1.0,
+      "mineru": 1.0
+    },
+    "doc08_solar": {
+      "baseline": 1.0,
+      "enhanced_v5": 1.0,
+      "docling": 1.0,
+      "mineru": 1.0
+    },
+    "doc09_bank": {
+      "baseline": 0.48,
+      "enhanced_v5": 0.92,
+      "docling": 0.96,
+      "mineru": 0.56
+    },
+    "doc10_food": {
+      "baseline": 0.7692307692307693,
+      "enhanced_v5": 0.8461538461538461,
+      "docling": 1.0,
+      "mineru": 0.9230769230769231
+    },
+    "doc11_delivery": {
+      "baseline": 0.8333333333333334,
+      "enhanced_v5": 0.5,
+      "docling": 0.8333333333333334,
+      "mineru": 0.5
+    },
+    "doc12_tourism": {
+      "baseline": 1.0,
+      "enhanced_v5": 0.8333333333333334,
+      "docling": 0.6666666666666666,
+      "mineru": 1.0
+    },
+    "doc13_construction2": {
+      "baseline": 0.8666666666666667,
+      "enhanced_v5": 0.6,
+      "docling": 1.0,
+      "mineru": 0.6666666666666666
+    },
+    "doc14_semi": {
+      "baseline": 0.875,
+      "enhanced_v5": 0.7916666666666666,
+      "docling": 0.125,
+      "mineru": 0.6666666666666666
+    },
+    "doc15_earnings": {
+      "baseline": 0.4383561643835616,
+      "enhanced_v5": 0.863013698630137,
+      "docling": 0.8493150684931506,
+      "mineru": 0.8287671232876712
+    }
+  },
+  "pooled_recall": {
+    "baseline": 0.672,
+    "enhanced_v5": 0.835,
+    "docling": 0.788,
+    "mineru": 0.786
+  },
+  "mcnemar": {
+    "baseline": {
+      "B_win": 107,
+      "A_win": 44,
+      "net": 63,
+      "p": 0.0
+    },
+    "docling": {
+      "B_win": 66,
+      "A_win": 48,
+      "net": 18,
+      "p": 0.1109
+    },
+    "mineru": {
+      "B_win": 68,
+      "A_win": 49,
+      "net": 19,
+      "p": 0.0957
+    }
+  },
+  "latency_structure": {
+    "baseline": {
+      "parse_avg": 0.07,
+      "chart_cap": 1.0,
+      "table_cap": 1.0
+    },
+    "enhanced_v5": {
+      "parse_avg": 8.53,
+      "chart_cap": 1.0,
+      "table_cap": 1.0
+    },
+    "docling": {
+      "parse_avg": 81.28,
+      "chart_cap": 0.987,
+      "table_cap": 1.0
+    },
+    "mineru": {
+      "parse_avg": 97.52,
+      "chart_cap": 1.0,
+      "table_cap": 1.0
+    }
+  },
+  "n_pooled_consensus": 387
+}

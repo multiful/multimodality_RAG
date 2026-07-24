@@ -9,7 +9,7 @@ import common_exp as C
 
 import os
 GT = C.load_json(HERE.parent / "ground_truth_smartphone.json")
-AXES = ["baseline", "enhanced", "enhanced_v2", "docling", "mineru"]
+AXES = ["baseline", "enhanced", "enhanced_v2", "enhanced_v3", "enhanced_v4", "docling", "mineru"]
 TOPK = int(os.environ.get("EVAL_TOPK", "5"))
 WINDOW = 220
 _OUTNAME = os.environ.get("EVAL_OUT", "results.json")

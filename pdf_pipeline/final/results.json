@@ -1129,6 +1129,780 @@
         "n_hard_pages": 1
       }
     },
+    "enhanced_v3": {
+      "latency": {
+        "parse_time_s": 30.836,
+        "total_time_s": 32.177,
+        "stage_timing": {
+          "model_load_warmup_s": 1.342,
+          "page_classify_s": 3.855,
+          "text_route_s": 11.938,
+          "table_pdfplumber_s": 14.95,
+          "caption_recover_s": 0.093,
+          "pagetext_layer_s": 0.0
+        }
+      },
+      "structure": {
+        "n_tables_detected": 32,
+        "n_table_rows": 623,
+        "chart_titles_preserved": 93,
+        "table_caps_preserved": 11,
+        "avg_section_path_depth": 1.37
+      },
+      "n_chunks": 132,
+      "retrieval": {
+        "extraction_coverage_prox": {
+          "n": 30,
+          "hit": 30,
+          "rate": 1.0
+        },
+        "extraction_coverage_present": {
+          "n": 30,
+          "hit": 30,
+          "rate": 1.0
+        },
+        "retrieval_hit_prox@k": {
+          "n": 30,
+          "hit": 29,
+          "rate": 0.967
+        },
+        "retrieval_hit_present@k": {
+          "n": 30,
+          "hit": 29,
+          "rate": 0.967
+        },
+        "by_type_ret_prox": {
+          "text_thesis": {
+            "n": 12,
+            "hit": 11,
+            "rate": 0.917
+          },
+          "valuation_table": {
+            "n": 8,
+            "hit": 8,
+            "rate": 1.0
+          },
+          "finance_table": {
+            "n": 5,
+            "hit": 5,
+            "rate": 1.0
+          },
+          "chart_title": {
+            "n": 5,
+            "hit": 5,
+            "rate": 1.0
+          }
+        },
+        "by_type_cov_prox": {
+          "text_thesis": {
+            "n": 12,
+            "hit": 12,
+            "rate": 1.0
+          },
+          "valuation_table": {
+            "n": 8,
+            "hit": 8,
+            "rate": 1.0
+          },
+          "finance_table": {
+            "n": 5,
+            "hit": 5,
+            "rate": 1.0
+          },
+          "chart_title": {
+            "n": 5,
+            "hit": 5,
+            "rate": 1.0
+          }
+        }
+      },
+      "per_q": [
+        {
+          "id": "T01",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "T02",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "T03",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "T04",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "T05",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "T06",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "T07",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "T08",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "T09",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "T10",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "T11",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 2
+        },
+        {
+          "id": "T12",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": false,
+          "ret_prox": false,
+          "rank": null
+        },
+        {
+          "id": "V01",
+          "type": "valuation_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "V02",
+          "type": "valuation_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "V03",
+          "type": "valuation_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 4
+        },
+        {
+          "id": "V04",
+          "type": "valuation_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "V05",
+          "type": "valuation_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "V06",
+          "type": "valuation_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "V07",
+          "type": "valuation_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "V08",
+          "type": "valuation_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 3
+        },
+        {
+          "id": "F01",
+          "type": "finance_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "F02",
+          "type": "finance_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "F03",
+          "type": "finance_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "F04",
+          "type": "finance_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 2
+        },
+        {
+          "id": "F05",
+          "type": "finance_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "C01",
+          "type": "chart_title",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "C02",
+          "type": "chart_title",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "C03",
+          "type": "chart_title",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "C04",
+          "type": "chart_title",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "C05",
+          "type": "chart_title",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        }
+      ],
+      "page_classification": {
+        "table": {
+          "tp": 15,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "image": {
+          "tp": 17,
+          "fp": 4,
+          "fn": 0,
+          "precision": 0.81,
+          "recall": 1.0,
+          "f1": 0.895
+        }
+      },
+      "routing": {
+        "route_to_mineru": false,
+        "hard_page_numbers": [],
+        "n_hard_pages": 0,
+        "raw_hard_before_override": [
+          31
+        ],
+        "routing_note": "컴플라이언스 보일러플레이트 하드 판정 오버라이드 적용"
+      }
+    },
+    "enhanced_v4": {
+      "latency": {
+        "parse_time_s": 21.004,
+        "total_time_s": 22.548,
+        "stage_timing": {
+          "model_load_warmup_s": 1.545,
+          "page_classify_s": 3.254,
+          "text_route_s": 12.46,
+          "table_pdfplumber_s": 5.149,
+          "caption_recover_s": 0.141,
+          "pagetext_layer_s": 0.0
+        }
+      },
+      "structure": {
+        "n_tables_detected": 32,
+        "n_table_rows": 611,
+        "chart_titles_preserved": 93,
+        "table_caps_preserved": 11,
+        "avg_section_path_depth": 1.37
+      },
+      "n_chunks": 132,
+      "retrieval": {
+        "extraction_coverage_prox": {
+          "n": 30,
+          "hit": 30,
+          "rate": 1.0
+        },
+        "extraction_coverage_present": {
+          "n": 30,
+          "hit": 30,
+          "rate": 1.0
+        },
+        "retrieval_hit_prox@k": {
+          "n": 30,
+          "hit": 28,
+          "rate": 0.933
+        },
+        "retrieval_hit_present@k": {
+          "n": 30,
+          "hit": 28,
+          "rate": 0.933
+        },
+        "by_type_ret_prox": {
+          "text_thesis": {
+            "n": 12,
+            "hit": 11,
+            "rate": 0.917
+          },
+          "valuation_table": {
+            "n": 8,
+            "hit": 7,
+            "rate": 0.875
+          },
+          "finance_table": {
+            "n": 5,
+            "hit": 5,
+            "rate": 1.0
+          },
+          "chart_title": {
+            "n": 5,
+            "hit": 5,
+            "rate": 1.0
+          }
+        },
+        "by_type_cov_prox": {
+          "text_thesis": {
+            "n": 12,
+            "hit": 12,
+            "rate": 1.0
+          },
+          "valuation_table": {
+            "n": 8,
+            "hit": 8,
+            "rate": 1.0
+          },
+          "finance_table": {
+            "n": 5,
+            "hit": 5,
+            "rate": 1.0
+          },
+          "chart_title": {
+            "n": 5,
+            "hit": 5,
+            "rate": 1.0
+          }
+        }
+      },
+      "per_q": [
+        {
+          "id": "T01",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "T02",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "T03",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "T04",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "T05",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "T06",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "T07",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "T08",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "T09",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "T10",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "T11",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 2
+        },
+        {
+          "id": "T12",
+          "type": "text_thesis",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": false,
+          "ret_prox": false,
+          "rank": null
+        },
+        {
+          "id": "V01",
+          "type": "valuation_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "V02",
+          "type": "valuation_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "V03",
+          "type": "valuation_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 4
+        },
+        {
+          "id": "V04",
+          "type": "valuation_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "V05",
+          "type": "valuation_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "V06",
+          "type": "valuation_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "V07",
+          "type": "valuation_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "V08",
+          "type": "valuation_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": false,
+          "ret_prox": false,
+          "rank": null
+        },
+        {
+          "id": "F01",
+          "type": "finance_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "F02",
+          "type": "finance_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "F03",
+          "type": "finance_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "F04",
+          "type": "finance_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 2
+        },
+        {
+          "id": "F05",
+          "type": "finance_table",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "C01",
+          "type": "chart_title",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "C02",
+          "type": "chart_title",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "C03",
+          "type": "chart_title",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "C04",
+          "type": "chart_title",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        },
+        {
+          "id": "C05",
+          "type": "chart_title",
+          "cov_present": true,
+          "cov_prox": true,
+          "ret_present": true,
+          "ret_prox": true,
+          "rank": 1
+        }
+      ],
+      "page_classification": {
+        "table": {
+          "tp": 15,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "image": {
+          "tp": 17,
+          "fp": 4,
+          "fn": 0,
+          "precision": 0.81,
+          "recall": 1.0,
+          "f1": 0.895
+        }
+      },
+      "routing": {
+        "route_to_mineru": false,
+        "hard_page_numbers": [],
+        "n_hard_pages": 0,
+        "raw_hard_before_override": [
+          31
+        ],
+        "routing_note": "컴플라이언스 보일러플레이트 하드 판정 오버라이드 적용"
+      }
+    },
     "docling": {
       "latency": {
         "parse_time_s": 401.631,
