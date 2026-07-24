@@ -108,7 +108,7 @@ def classify_table(quick_table, bbox_height_pt: float, median_line_height_pt: fl
 
 
 def detect_and_route(thresholds: RouterThresholds = RouterThresholds(), crop_dir: Path = None,
-                      yolo_model=None, page_boxes: dict = None, pdf_pp=None):
+                      yolo_model=None, page_boxes: dict = None, pdf_pp=None, pdf_path: Path = None):
     """PDF 전체에서 YOLO로 표를 찾고, 표마다 SIMPLE/COMPLEX를 판정한다.
     SIMPLE 표는 pdfplumber 결과(마크다운 포함)까지 바로 채워서 반환하고,
     COMPLEX 표는 크롭 이미지 경로만 반환(Docling은 호출측에서 병렬 처리).
@@ -124,8 +124,15 @@ def detect_and_route(thresholds: RouterThresholds = RouterThresholds(), crop_dir
     넘겨 재사용 — 이 함수와 build_records()가 각자 pdfplumber.open()을 불러 pdfminer가 페이지당
     콘텐츠 스트림을 두 번 해석하던 것(LGCNS 6페이지 기준 측정 ~3s)이 실측 병목이었음. None이면
     기존처럼 이 함수가 열고 닫는다(하위호환) — 넘겨받은 경우엔 호출측이 lifecycle을 소유하므로
-    여기서 닫지 않는다."""
-    doc_fitz = fitz.open(str(PDF_PATH))
+    여기서 닫지 않는다.
+
+    [수정] pdf_path: 이 함수가 fitz로 열 PDF 경로를 명시적으로 받는다(권장). 안 주면 이 모듈의
+    `PDF_PATH` 전역을 쓰는데, `run_table_metadata_pipeline.py`처럼 자기 자신의 PDF_PATH 전역을
+    따로 갖는 호출측이 그쪽만 패치하고 이 모듈은 import조차 안 하면(실제 run_investment_opinion_
+    demo.py가 이 케이스였음) 여기서 계속 기본값(LGCNS) PDF를 열어 pdf_pp(호출측이 이미 올바른
+    PDF로 열어둔 것)와 서로 다른 문서를 zip()으로 짝짓는 조용한 불일치가 있었다. 호출측이
+    build_records()처럼 자기 PDF_PATH를 명시적으로 넘기면 이 문제가 원천 차단된다."""
+    doc_fitz = fitz.open(str(pdf_path if pdf_path is not None else PDF_PATH))
     if crop_dir:
         crop_dir.mkdir(exist_ok=True, parents=True)
 

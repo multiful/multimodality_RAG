@@ -1,0 +1,15 @@
+11:03:30 [s2_onestop_mineru] metadata.csv에 LGCNS 없음 — 파싱 불가
+11:04:09 [s2_onestop_mineru] 파싱본 없음 → MinerU CLI 파싱 시작: /Users/baiohelseu/Desktop/Project/multimodality_RAG/pdf_pipeline/data/raw/LGCNS.pdf
+11:05:39 [s2_onestop_mineru] MinerU 파싱 완료 (90.7s): /Users/baiohelseu/Desktop/Project/multimodality_RAG/pdf_pipeline/data/parsed/LGCNS
+11:05:41 [s2_onestop_mineru] MinerU OCR 로드 완료 (lang=korean, 1.1s)
+11:05:51 [s2_onestop_mineru] === 원스톱(MinerU 전담) 완료 ===
+11:05:51 [s2_onestop_mineru] 총 19 | useful 5 | rule탈락 0 | OCR탈락 1 | table인계 13 | 스킵 0
+11:05:51 [s2_onestop_mineru] [분류기] MinerU탐지 불일치 0건 → review_queue 후보
+11:05:51 [s2_onestop_mineru] 전체 11.1s | 출력: /Users/baiohelseu/Desktop/Project/multimodality_RAG/pdf_pipeline/data/onestop/LGCNS
+11:29:50 [s2_onestop_mineru] 파싱본 없음 → MinerU CLI 파싱 시작: /Users/baiohelseu/Desktop/Project/multimodality_RAG/pdf_pipeline/data/raw/Construct.pdf
+11:30:24 [s2_onestop_mineru] MinerU 파싱 완료 (34.0s): /Users/baiohelseu/Desktop/Project/multimodality_RAG/pdf_pipeline/data/parsed/Construct
+11:30:26 [s2_onestop_mineru] MinerU OCR 로드 완료 (lang=korean, 1.0s)
+11:30:36 [s2_onestop_mineru] === 원스톱(MinerU 전담) 완료 ===
+11:30:36 [s2_onestop_mineru] 총 32 | useful 16 | rule탈락 0 | OCR탈락 0 | table인계 16 | 스킵 0
+11:30:36 [s2_onestop_mineru] [분류기] MinerU탐지 불일치 0건 → review_queue 후보
+11:30:36 [s2_onestop_mineru] 전체 12.0s | 출력: /Users/baiohelseu/Desktop/Project/multimodality_RAG/pdf_pipeline/data/onestop/Construct

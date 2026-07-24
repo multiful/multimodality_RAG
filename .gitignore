@@ -4,6 +4,7 @@ __pycache__/
 chroma_db/
 .DS_Store
 models/
+pdf_pipeline/data/
 output/*
 !output/financial Statement/
 !output/kospi200_financials/

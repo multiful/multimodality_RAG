@@ -1,7 +1,9 @@
 """[19] Table Metadata Pipeline — 사용자 피드백 전면 반영판(2차: 텍스트 품질 3건 동적 정제 추가).
 
-YOLO Table Crop -> Adaptive Router(SIMPLE/COMPLEX) -> Table Type Classify(finance는 스킵, DB에 있음)
-    -> Row Parser(컬럼 수에 따라 TATR grid 또는 word-clustering 동적 선택, label+cells)
+YOLO Table Crop -> Adaptive Router(표 위치·median_line_height 계산) -> Table Type Classify
+    (finance는 스킵, DB에 있음)
+    -> Row Parser(하이브리드 게이트: pdfplumber text-strategy 또는 word-clustering 동적 선택,
+       label+cells — [JAEIL v5, 15문서 A/B 채택] TATR 대체, `row_parser.parse_table_hybrid`)
     -> 텍스트 정규화(한글 과잉 띄어쓰기/값 타입별 정제/글리프 매핑 실패 플래그 — 전부 동적 판단)
     -> Canonical Field Mapping(alias -> 표준필드) -> Structured Table JSON -> Redis Cache
 
@@ -15,13 +17,10 @@ import json
 import sys
 from pathlib import Path
 
-import torch
-from transformers import AutoImageProcessor, AutoModelForObjectDetection
-
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from adaptive_table_router import RouterThresholds, detect_and_route  # noqa: E402
 from table_type_router import classify_table, is_pure_financial_line_item  # noqa: E402
-from row_parser import parse_table_adaptive, parse_simple_table_from_words  # noqa: E402
+from row_parser import parse_table_hybrid  # noqa: E402
 from canonical_field_schema import match_canonical_field, detect_wide_form  # noqa: E402
 from text_normalization import fix_hangul_spacing, clean_value_by_type, detect_cid_artifact, is_over_spaced  # noqa: E402
 from metadata_cache import get_client, cache_metadata, get_all_metadata  # noqa: E402
@@ -33,10 +32,6 @@ ROOT = Path(__file__).resolve().parent.parent.parent
 PDF_PATH = ROOT / "pdf_pipeline" / "reference" / "LGCNS" / "20260721_company_279243000.pdf"
 OUT_DIR = Path(__file__).resolve().parent
 RESULT_PATH = OUT_DIR / "result_table_metadata_pipeline.json"
-
-TATR_DPI = 300
-TATR_TOP_PAD_PT = 35 / (150 / 72)
-TATR_SIDE_PAD_PT = 12 / (150 / 72)
 
 # [25] 표 라우팅 끝에 OpenAI Structured Output(gpt-4o-mini)으로 정성적 메타데이터(엔티티/논조/
 # 특이사항 등, structured_output.TableMetadata 참고)를 추가할지 여부. 유료 API 호출이라 기본 False
@@ -75,7 +70,7 @@ def _finalize_value(raw_value: str, cf) -> dict:
 
 def build_records(pdf_id: str, add_structured_metadata: bool = False, openai_client=None,
                    page_boxes: dict = None, yolo_model=None, structured_metadata_workers: int = 8,
-                   sector: str = None, tatr_model=None, tatr_processor=None):
+                   sector: str = None):
     """page_boxes: [26] page_classification 등 앞단에서 이미 같은 PDF에 YOLO를 돌린 결과가 있으면
     `{page_number(1-based): [(cls_name, fitz.Rect), ...]}` 형태로 넘겨 표 라우터가 YOLO를 다시
     호출하지 않게 함(`page_classification.page_classifier.classify_pdf()`가 반환하는 cached_boxes를
@@ -85,43 +80,42 @@ def build_records(pdf_id: str, add_structured_metadata: bool = False, openai_cli
     표에서 실측 +115초/finance 표 55개만으로)에서 병목이 커서, 표 파싱(로컬 연산)을 모두 끝낸 뒤
     구조화 출력 호출만 `concurrent.futures.ThreadPoolExecutor`로 한꺼번에 병렬 디스패치한다.
 
-    [38] tatr_model/tatr_processor: yolo_model과 동일한 이유로 외부에서 재사용 가능하게 노출.
-    여러 PDF를 루프로 처리할 때 이 함수가 매번 새로 HuggingFace 체크포인트를 로드하던 것이
-    실측 병목(LGCNS PDF 기준 표 브랜치 6.88초 중 상당 부분)이었음 — 한 번 로드해서 넘기면
-    COMPLEX 표가 있는 PDF에서만 그 비용을 내부적으로 지불(None이면 기존처럼 내부에서 로드)."""
+    [JAEIL v5 채택, pdf_pipeline/final/실험_4축_비교_스마트폰.md §14-17] 행 파싱은 표마다 TATR을
+    항상 돌리는 대신 `row_parser.parse_table_hybrid()`(pdfplumber text-strategy 우선 + 게이트
+    기반 word-clustering 폴백)를 쓴다 — 15문서 A/B로 이 경로만으로도 TATR-only 대비 9.5~11.4배
+    빠르고 엔티티 recall도 근소 우세임이 검증됨.
+
+    [수정 — TATR 3단계 안전망] TATR을 완전히 제거하지 않고 마지막 에스컬레이션으로 남긴다 —
+    complexity="complex"(라우터가 default-strategy로도 구조 파악이 안 됐다고 판단한 표)이고
+    text-strategy/word-clustering 둘 다 부실해 보이는 소수의 표에서만 TATR을 시도한다
+    (parse_table_hybrid 내부 판단, 여기서는 그 후보에게만 doc_fitz/page_num을 건네줄 뿐). TATR
+    자체는 프로세스당 1회만 지연 로드(row_parser._get_tatr_model())되므로 실제로 안 쓰이는 문서
+    (SIMPLE 표뿐이거나 word-clustering이 충분히 깨끗한 문서)에서는 로드 비용조차 안 낸다."""
     import fitz
     import pdfplumber
     # [39] detect_and_route()와 이 함수가 각자 pdfplumber.open()을 하던 것을 하나로 합침
     # (pdfminer 콘텐츠 스트림 페이지당 2회 해석 -> 1회, 실측 ~3s 절감). 아래 row-parsing
     # 루프에서도 같은 pdf_pp를 재사용.
     pdf_pp = pdfplumber.open(str(PDF_PATH))
-    routed = detect_and_route(RouterThresholds(), yolo_model=yolo_model, page_boxes=page_boxes, pdf_pp=pdf_pp)
+    # [수정] TATR 3단계 안전망용 — 이 함수 자신의 PDF_PATH(호출측이 이미 올바르게 패치해둔 값)로
+    # 여는 것이므로 어제 발견된 adaptive_table_router 쪽 PDF_PATH 이원화 버그와는 무관.
+    doc_fitz = fitz.open(str(PDF_PATH))
+    # [수정] pdf_path를 명시적으로 전달 — detect_and_route()가 자기 모듈의 PDF_PATH 전역을 쓰면
+    # 이 함수가 위에서 이미 패치된 PDF_PATH(호출측이 build_records 호출 전 `rtmp.PDF_PATH = ...`로
+    # 바꿔둔 값)를 안 보고 adaptive_table_router 자신의 기본값을 열어버리는 조용한 불일치가 있었음
+    # (호출측이 rtmp만 패치하고 adaptive_table_router는 import조차 안 하는 경우 발생 — 실제
+    # run_investment_opinion_demo.py가 이 케이스였음). 여기서 이 함수의 PDF_PATH를 그대로 넘겨
+    # 두 모듈의 PDF_PATH가 어긋날 여지를 원천 차단.
+    routed = detect_and_route(RouterThresholds(), yolo_model=yolo_model, page_boxes=page_boxes,
+                               pdf_pp=pdf_pp, pdf_path=PDF_PATH)
     print(f"[router] 표 {len(routed)}개(SIMPLE {sum(1 for r in routed if r['complexity']=='simple')} / "
-          f"COMPLEX {sum(1 for r in routed if r['complexity']=='complex')})", flush=True)
+          f"COMPLEX {sum(1 for r in routed if r['complexity']=='complex')}, "
+          f"complexity는 로깅용 — 파싱 방식은 하이브리드 게이트가 표마다 별도 결정)", flush=True)
 
     if add_structured_metadata and openai_client is None:
         import os
         from openai import OpenAI
         openai_client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
-
-    # [37] 사용자 지적("페이지 늘어날수록 조정할 부분" — TATR이 표 개수만큼 반복되는 병목) 대응.
-    # 주의: 처음에 더미 이미지(800x500 흰 배경)로 측정했을 땐 MPS가 2.79배 빠르다고 나왔는데,
-    # 실제 LGCNS 표 12개(300dpi 실제 크롭, 훨씬 큼)로 다시 재보니 CPU 322ms/표 -> MPS 292ms/표로
-    # 겨우 9% 개선 — 더미 이미지 벤치마크가 실제 워크로드를 대표 못 한 것으로 확인(작은 이미지는
-    # MPS 커널 디스패치/디바이스 전송 오버헤드 대비 이득이 작음). 배치 처리도 시도했으나 CPU에서
-    # 오히려 손해(표마다 크기가 달라 가장 큰 쪽에 패딩하는 오버헤드가 배치 이득을 상쇄) — 기각.
-    # 9%는 크진 않지만 손해는 없어 유지. 표 처리가 텍스트 처리와 동시에(병렬) 돌아가는 구조가
-    # 되면 BGE-m3-ko와 MPS 자원을 경합할 수 있음(sector_classifier 조사에서 실측한 문제, [24]
-    # 참고) — 지금은 순차 실행 구조라 이 위험은 없음.
-    if tatr_model is not None and tatr_processor is not None:
-        model, processor = tatr_model, tatr_processor
-    else:
-        model = AutoModelForObjectDetection.from_pretrained("microsoft/table-transformer-structure-recognition")
-        processor = AutoImageProcessor.from_pretrained("microsoft/table-transformer-structure-recognition")
-        model.eval()
-        tatr_device = "mps" if torch.backends.mps.is_available() else "cpu"
-        model = model.to(tatr_device)
-    doc_fitz = fitz.open(str(PDF_PATH))
 
     records = []
     n_finance_rows_filtered = 0  # 표 전체 스킵이 아니라 "행" 단위로 걸러낸 순수 재무항목 개수([22])
@@ -146,15 +140,19 @@ def build_records(pdf_id: str, add_structured_metadata: bool = False, openai_cli
         SCALE = 150 / 72
         bbox_pt = (x1 / SCALE, y1 / SCALE, x2 / SCALE, y2 / SCALE)
 
+        # [JAEIL v5 + TATR 3단계 안전망] 모든 표가 먼저 하이브리드 게이트(text-strategy 우선,
+        # 아니면 word-clustering)를 탄다. complexity="complex"(라우터가 default-strategy로도
+        # 구조 파악이 안 됐다고 판단한 표)인 경우에만 doc_fitz/page_num을 같이 넘겨 TATR
+        # 에스컬레이션 후보로 만든다 — 실제 TATR 호출 여부는 parse_table_hybrid 내부에서 word-
+        # clustering 결과가 부실해 보일 때만(_word_clustering_looks_flattened) 결정된다. SIMPLE
+        # 표는 라우터가 이미 default-strategy로도 깨끗하다고 판정했으므로 TATR 후보에서 제외해
+        # 불필요한 판단 비용을 아낀다.
         if r["complexity"] == "simple":
-            # 기존: pdfplumber extract_table()(quick_rows_data)을 그대로 신뢰 -> 촘촘한 표에서
-            # 셀 텍스트가 뒤섞이는 버그 발견. word 좌표 기반 클러스터링으로 교체(동적 판단, 하드코딩 아님)
-            parsed_rows = parse_simple_table_from_words(page_pp, bbox_pt, median_lh)
-            method = "word-clustering(SIMPLE)"
+            parsed_rows = parse_table_hybrid(page_pp, bbox_pt, median_lh)
         else:
-            parsed_rows = parse_table_adaptive(model, processor, doc_fitz, page_pp, r["page"], bbox_pt,
-                                                TATR_DPI, TATR_TOP_PAD_PT, TATR_SIDE_PAD_PT, median_lh)
-            method = "TATR-grid 또는 word-clustering(컬럼 수 기반 동적 선택)"
+            parsed_rows = parse_table_hybrid(page_pp, bbox_pt, median_lh,
+                                              doc_fitz=doc_fitz, page_num=r["page"])
+        method = "하이브리드 게이트(text-strategy/word-clustering, complex는 TATR 안전망 후보, [JAEIL v5])"
 
         table_over_spaced = is_over_spaced(r["raw_text"])
         parsed_rows = [_normalize_row(row, table_over_spaced) for row in parsed_rows]

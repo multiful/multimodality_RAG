@@ -102,7 +102,7 @@ def main():
     timings["2_text_branch"] = time.perf_counter() - t0
 
     t0 = time.perf_counter()
-    print("3) 테이블 브랜치: TATR + canonical 매칭 -> 임베딩 -> 즉시 적재")
+    print("3) 테이블 브랜치: 하이브리드 게이트([JAEIL v5], TATR 대체) + canonical 매칭 -> 임베딩 -> 즉시 적재")
     rtmp.PDF_PATH = PDF_PATH
     table_records, n_finance_filtered, n_cid = rtmp.build_records(
         PDF_ID, page_boxes=page_boxes, yolo_model=yolo_model, sector="통신장비")
