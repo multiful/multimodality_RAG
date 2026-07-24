@@ -69,6 +69,7 @@ from generation import GPTGenerator  # noqa: E402
 from supabase_store import SupabaseVectorStore  # noqa: E402
 
 PROFILE_DIR = ROOT / "KOSPI200_output" / "kospi200_profiles"
+LOGO_PATH = ROOT / "streamlit" / "static" / "logo.png"
 TITLE_RE = re.compile(r"^# (.+?) \((.+?)\) 기업 프로필")
 
 st.set_page_config(page_title="포트폴리오", page_icon="📈", layout="wide")
@@ -200,7 +201,8 @@ st.markdown(
         font-weight: 400; font-size: 2.3rem; letter-spacing: 0.02em; color: var(--text);
     }
 
-    .pp-badge-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 18px; }
+    .pp-badge-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 4px 0 18px; }
+    .pp-center { text-align: center; }
     .pp-badge {
         display: inline-flex; align-items: center; gap: 6px;
         background: var(--surface); padding: 8px 14px; border-radius: var(--radius-pill);
@@ -240,10 +242,37 @@ st.markdown(
         width: 22px; height: 22px; border-radius: 50%; background: var(--primary); color: #fff;
         font-size: .68rem; font-weight: 600; flex-shrink: 0;
     }
+
+    .pp-logo-wrap { text-align: center; }
+    .pp-logo { display: inline-block; height: 52px; width: auto; margin: 4px 0 16px; }
+
+    .pp-subtitle {
+        font-family: 'Inter', 'Pretendard', sans-serif; font-weight: 500;
+        font-size: 1.15rem; color: var(--muted); line-height: 1.5; margin: 2px 0 16px;
+    }
     </style>
     """,
     unsafe_allow_html=True,
 )
+
+
+@st.cache_data
+def _load_logo_data_uri() -> str | None:
+    """streamlit/static/logo.png를 base64 data URI로 읽어온다 — Streamlit의 정적 파일
+    서빙(enableStaticServing) 설정 없이도 어디서든 <img>로 바로 쓸 수 있다."""
+    if not LOGO_PATH.exists():
+        return None
+    import base64
+    return "data:image/png;base64," + base64.b64encode(LOGO_PATH.read_bytes()).decode()
+
+
+def _render_logo() -> None:
+    uri = _load_logo_data_uri()
+    if uri:
+        st.markdown(
+            f'<div class="pp-logo-wrap"><img src="{uri}" class="pp-logo" alt="logo"></div>',
+            unsafe_allow_html=True,
+        )
 
 
 def _avatar_html(label: str) -> str:
@@ -287,12 +316,10 @@ _PP_ICONS = {
 }
 
 
-def _badge_row(items: list[tuple[str, str]]) -> None:
-    """supaste.com의 pill 배지 행("Local first" 등)을 참고한 아이콘+라벨 배지 나열."""
-    pills = "".join(
+def _badge_pills_html(items: list[tuple[str, str]]) -> str:
+    return "".join(
         f'<span class="pp-badge">{_PP_ICONS.get(icon, "")}{label}</span>' for icon, label in items
     )
-    st.markdown(f'<div class="pp-badge-row">{pills}</div>', unsafe_allow_html=True)
 
 
 # ---------------------------------------------------------------------------
@@ -715,21 +742,28 @@ DB에서 직접 조회한 정보임을 나타냅니다.
 # ---------------------------------------------------------------------------
 
 def render_home():
-    st.markdown('<span class="pp-eyebrow">AI 리서치 대시보드</span>', unsafe_allow_html=True)
-    title_col, upload_col = st.columns([5, 1])
-    with title_col:
-        _hero_headline("관심 종목,", "인사이트로 완성됩니다.")
-    with upload_col:
-        st.write("")
-        if st.button("+ PDF로 질문하기", use_container_width=True):
-            st.session_state["page"] = "upload"
-            st.rerun()
-    _badge_row([
+    badges = _badge_pills_html([
         ("chart", "실시간 시세"),
         ("doc", "재무제표 요약"),
         ("sparkle", "AI 투자 인사이트"),
         ("search", "PDF 근거 검색"),
     ])
+    # 로고(_render_logo, main()에서 렌더)부터 이 배지 행까지가 사용자가 지정한 "가운데 정렬"
+    # 대상 — 한 번의 st.markdown 안에 묶어야 실제로 같은 부모에 중첩돼 text-align이 먹는다
+    # (별개의 st.markdown 호출로 나누면 각자 독립된 컨테이너라 열고 닫는 태그가 안 이어짐).
+    st.markdown(
+        f'''
+        <div class="pp-center">
+            <div class="pp-subtitle">관심 종목, 인사이트로 완성됩니다.</div>
+            <div class="pp-badge-row">{badges}</div>
+        </div>
+        ''',
+        unsafe_allow_html=True,
+    )
+
+    if st.button("+ PDF로 질문하기", use_container_width=True):
+        st.session_state["page"] = "upload"
+        st.rerun()
     st.caption("KOSPI200 종목별 재무제표·기업 프로필을 바탕으로 AI가 투자 인사이트를 요약해드립니다.")
 
     query = st.text_input("종목명 또는 티커 검색", placeholder="예: Samsung, 005930.KS")
@@ -998,6 +1032,7 @@ def render_detail():
 def main():
     st.session_state.setdefault("page", "home")
     _warmup_heavy_models()
+    _render_logo()
 
     if st.session_state["page"] == "detail" and "ticker" in st.session_state:
         render_detail()
