@@ -62,6 +62,36 @@ sys.path.insert(0, str(ROOT / "pdf_pipeline" / "image_processing"))
 
 load_dotenv(ROOT / ".env")
 
+
+# [Windows 안정성] 파이프라인 저수준 모듈들은 진행 로그를 print()로 남기는데, 앱을 출력
+# 리다이렉트/파이프 상태로 띄웠다가 그 수신자가 사라지면(파이프 닫힘) Windows에서 print가
+# OSError [Errno 22] Invalid argument를 던져 **인덱싱 전체가 진행 로그 한 줄 때문에 죽는다**
+# (실사용에서 실제 발생 — 업로드 인덱싱이 표 라우터 로그 시점에 중단됨). 진행 로그는 보조
+# 출력이므로 쓰기 실패를 조용히 삼키는 래퍼로 감싼다 — 앱 동작/스트림릿 UI에는 영향 없음.
+class _SafeStream:
+    def __init__(self, stream):
+        self._stream = stream
+
+    def write(self, data):
+        try:
+            return self._stream.write(data)
+        except (OSError, ValueError):
+            return len(data)
+
+    def flush(self):
+        try:
+            self._stream.flush()
+        except (OSError, ValueError):
+            pass
+
+    def __getattr__(self, name):
+        return getattr(self._stream, name)
+
+
+if not isinstance(sys.stdout, _SafeStream):
+    sys.stdout = _SafeStream(sys.stdout)
+    sys.stderr = _SafeStream(sys.stderr)
+
 from supabase import create_client  # noqa: E402
 
 from embeddings.gpt_embedder import GPTEmbedder  # noqa: E402
@@ -931,7 +961,14 @@ def render_upload():
                         counts = index_pdf_fast(tmp_path, pdf_id, ticker, sector or None, status)
                         status.update(label="텍스트·표 인덱싱 완료 — 바로 질문 가능", state="complete")
                 except Exception as e:
+                    # 메시지만으론 발생 지점을 못 찾는다(실사용에서 "[Errno 22]"만 보고 원인
+                    # 추적에 시간을 씀) — 전체 트레이스백을 터미널 로그와 화면 expander 양쪽에 남긴다.
+                    import traceback
+                    tb = traceback.format_exc()
+                    print(f"[인덱싱 오류]\n{tb}")
                     st.error(f"인덱싱 중 오류가 발생했습니다: {e}")
+                    with st.expander("오류 상세(트레이스백)"):
+                        st.code(tb)
                     return
 
                 has_document_evidence.clear()
