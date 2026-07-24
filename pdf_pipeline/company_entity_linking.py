@@ -55,10 +55,14 @@ def find_mentioned_companies(text: str, name_map: dict = None) -> list:
     return found
 
 
-def fetch_company_db_context(db_url: str, matched: list) -> str:
+def fetch_company_db_context(db_url: str, matched: list, news_sync_max: int = None) -> str:
     """매칭된 티커들의 financial_summaries.summary + company_profile_chunks.summary를 DB에서
     직접 조회 — 이미 정확한 티커를 알고 있으므로 검색(유사도)이 아니라 PK 조회라 결과가 틀릴
-    여지가 없다. 반환: LLM 프롬프트에 그대로 넣을 수 있는 텍스트 블록(매칭 없으면 빈 문자열)."""
+    여지가 없다. 반환: LLM 프롬프트에 그대로 넣을 수 있는 텍스트 블록(매칭 없으면 빈 문자열).
+
+    news_sync_max: 뉴스 미캐시 종목을 이 호출 안에서 **동기로** 수집할 최대 수. None이면
+    news_sentiment_link 기본값(2). 0이면 절대 블로킹하지 않고 캐시된 것만 쓴다 — streamlit처럼
+    업로드 시점에 수집을 미리 시작해둔 호출측이 질문 지연을 없애려 쓸 때(수집은 백그라운드 계속)."""
     if not matched:
         return ""
     import psycopg2
@@ -117,7 +121,8 @@ def fetch_company_db_context(db_url: str, matched: list) -> str:
     # 자격증명이 없거나 수집이 실패하면 조용히 기존 캐시로 진행한다.
     try:
         from news_sentiment_link import fetch_news_sentiment_context, refresh_for_matched
-        refresh_for_matched(db_url, matched)
+        refresh_for_matched(db_url, matched,
+                            **({"sync_max": news_sync_max} if news_sync_max is not None else {}))
         news_block = fetch_news_sentiment_context(db_url, tickers)
         if news_block:
             lines.append(news_block)

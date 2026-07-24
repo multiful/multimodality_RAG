@@ -772,6 +772,24 @@ def index_images_background(pdf_path: Path, pdf_id: str, ticker: str | None, sec
         _set_image_stage(pdf_id, "failed", f"이미지/차트 근거 처리 실패: {e}")
 
 
+def prewarm_news_background(pdf_path: Path) -> None:
+    """[지연 개선] 업로드 직후 문서에서 KOSPI200 기업을 매칭해 뉴스 감성 수집을 백그라운드로
+    미리 시작한다(sync_max=0 — 이 스레드 안에서는 어차피 아무도 안 기다리지만, 수집 자체는
+    news_sentiment_link의 _COLLECT_LOCK으로 직렬화돼 GPU 경합 없음). 실패는 조용히 무시(보조 신호)."""
+    try:
+        import fitz
+        import company_entity_linking
+        from news_sentiment_link import refresh_for_matched
+        doc = fitz.open(str(pdf_path))
+        full_text = "\n".join(doc[i].get_text() for i in range(doc.page_count))
+        doc.close()
+        matched = company_entity_linking.find_mentioned_companies(full_text)
+        if matched:
+            refresh_for_matched(os.environ["SUPABASE_DIRECT_DB_URL"], matched, sync_max=len(matched))
+    except Exception as e:
+        print(f"[뉴스 프리웜] 실패(무시): {type(e).__name__}: {e}")
+
+
 def search_and_generate(pdf_path: Path, pdf_id: str, ticker: str | None, query: str) -> dict:
     """질의 시점에 document_evidence를 다시 읽어(entity_fusion.load_evidence_from_db) 그 순간
     까지 적재된 근거(텍스트/표는 항상 있음, 이미지는 2단계가 끝났으면 포함)로 질의 분해 라우팅
@@ -805,7 +823,9 @@ def search_and_generate(pdf_path: Path, pdf_id: str, ticker: str | None, query: 
         full_text = "\n".join(doc[i].get_text() for i in range(doc.page_count))
         doc.close()
         matched = company_entity_linking.find_mentioned_companies(full_text)
-        db_context = company_entity_linking.fetch_company_db_context(db_url, matched)
+        # news_sync_max=0 — 질문 경로는 뉴스 수집을 절대 기다리지 않는다(캐시된 것만 사용).
+        # 수집은 업로드 직후 prewarm_news_background가 이미 백그라운드로 진행 중.
+        db_context = company_entity_linking.fetch_company_db_context(db_url, matched, news_sync_max=0)
         return matched, db_context
 
     t0 = time.perf_counter()
@@ -1031,6 +1051,13 @@ def render_upload():
                         args=(tmp_path, pdf_id, ticker, sector or None),
                         daemon=True,
                     ).start()
+
+                # [지연 개선] 뉴스 감성 수집을 **업로드 직후** 백그라운드로 미리 시작한다 —
+                # 기존엔 첫 질문 시점에 동기 수집(종목당 ~40–70s)이 답변을 2분+ 막았다(실측).
+                # 여기서 미리 돌려두면 사용자가 질문을 입력할 때쯤 캐시가 차 있고, 질문 경로는
+                # news_sync_max=0이라 어떤 경우에도 수집을 기다리지 않는다(캐시된 만큼만 사용,
+                # 나머지는 다음 질문부터 반영).
+                threading.Thread(target=prewarm_news_background, args=(tmp_path,), daemon=True).start()
 
     indexed = st.session_state.get("indexed_doc")
     if indexed:
