@@ -193,12 +193,12 @@ st.markdown(
     /* supaste 히어로/푸터의 시그니처 모티프: 굵은 산세리프 한 줄 + 이탤릭 세리프 한 줄. */
     .pp-hero2 { line-height: 1.08; margin: 2px 0 14px; }
     .pp-hero2-bold {
-        display: block; font-family: 'Inter', 'Pretendard', sans-serif; font-weight: 700;
-        font-size: 2.3rem; letter-spacing: -0.03em; color: var(--text);
+        font-family: 'Inter', 'Pretendard', sans-serif; font-weight: 700;
+        font-size: 1.6rem; letter-spacing: -0.03em; color: var(--text);
     }
     .pp-hero2-italic {
-        display: block; font-family: 'Bebas Neue', 'Pretendard', sans-serif;
-        font-weight: 400; font-size: 2.3rem; letter-spacing: 0.02em; color: var(--text);
+        font-family: 'Bebas Neue', 'Pretendard', sans-serif;
+        font-weight: 400; font-size: 1.6rem; letter-spacing: 0.02em; color: var(--text);
     }
 
     .pp-badge-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 4px 0 18px; }
@@ -211,11 +211,11 @@ st.markdown(
     .pp-badge svg { width: 14px; height: 14px; stroke: var(--primary); flex-shrink: 0; }
 
     .pp-card-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
-    .pp-avatar {
-        width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
-        background: var(--primary-soft); color: var(--primary);
-        display: flex; align-items: center; justify-content: center;
-        font-family: 'Bebas Neue', 'Pretendard', sans-serif; font-size: 1.2rem; font-weight: 400;
+    .pp-price-badge {
+        min-width: 36px; height: 30px; padding: 0 10px;
+        flex-shrink: 0; color: var(--text);
+        display: flex; align-items: center; justify-content: center; white-space: nowrap;
+        font-family: 'Fragment Mono', 'Pretendard', monospace; font-size: .82rem; font-weight: 600;
     }
     .pp-ticker-pill {
         font-family: 'Fragment Mono', 'Pretendard', monospace; font-size: .68rem; color: var(--muted);
@@ -228,6 +228,7 @@ st.markdown(
            기준으로 min-height를 잡아 모든 카드 높이를 맞춘다 — 어떤 이름도 잘리지 않는다. */
         font-family: 'Inter', 'Pretendard', sans-serif; font-weight: 600; font-size: 1.02rem; color: var(--text);
         white-space: normal; overflow-wrap: anywhere; line-height: 1.3; min-height: 3.9em;
+        text-align: center;
     }
 
     .pp-hero-title { font-family: 'Bebas Neue', 'Pretendard', sans-serif !important; font-weight: 400 !important;
@@ -275,9 +276,9 @@ def _render_logo() -> None:
         )
 
 
-def _avatar_html(label: str) -> str:
-    initial = (label or "?").strip()[0] if (label or "").strip() else "?"
-    return f'<div class="pp-avatar">{initial}</div>'
+def _price_badge_html(price: float | None) -> str:
+    text = f"₩{price:,.0f}" if price is not None else "-"
+    return f'<div class="pp-price-badge">{text}</div>'
 
 
 def _step_label(n: int, text: str) -> None:
@@ -293,8 +294,7 @@ def _hero_headline(bold_line: str, italic_line: str) -> None:
     st.markdown(
         f'''
         <div class="pp-hero2">
-            <span class="pp-hero2-bold">{bold_line}</span>
-            <span class="pp-hero2-italic">{italic_line}</span>
+            <span class="pp-hero2-bold">{bold_line}</span> <span class="pp-hero2-italic">{italic_line}</span>
         </div>
         ''',
         unsafe_allow_html=True,
@@ -457,6 +457,27 @@ def has_document_evidence(ticker: str) -> bool:
 @st.cache_data(ttl=300)
 def load_price_history(ticker: str):
     return yf.Ticker(ticker).history(period="6mo")
+
+
+@st.cache_data(ttl=300)
+def load_current_prices(tickers: tuple[str, ...]) -> dict[str, float | None]:
+    """관심 주식 카드의 가격 배지에 쓸 현재가 일괄 조회. 카드 개수(최대 199개)만큼 yfinance를
+    종목별로 따로 호출하면 홈 화면이 수십 초씩 멈춘 것처럼 보이므로, yf.download()로 한 번에
+    배치 조회한다(5분 캐시)."""
+    if not tickers:
+        return {}
+    import pandas as pd
+
+    data = yf.download(list(tickers), period="1d", progress=False, group_by="ticker", threads=True)
+    is_multi = isinstance(data.columns, pd.MultiIndex)
+    prices: dict[str, float | None] = {}
+    for t in tickers:
+        try:
+            close = (data[t]["Close"] if is_multi else data["Close"]).dropna()
+            prices[t] = float(close.iloc[-1]) if not close.empty else None
+        except Exception:
+            prices[t] = None
+    return prices
 
 
 # ---------------------------------------------------------------------------
@@ -781,7 +802,11 @@ def render_home():
     if st.button("+ PDF로 질문하기", use_container_width=True):
         st.session_state["page"] = "upload"
         st.rerun()
-    st.caption("KOSPI200 종목별 재무제표·기업 프로필을 바탕으로 AI가 투자 인사이트를 요약해드립니다.")
+    st.markdown(
+        '<div class="pp-center"><small>KOSPI200 종목별 재무제표·기업 프로필을 바탕으로 '
+        'AI가 투자 인사이트를 요약해드립니다.</small></div>',
+        unsafe_allow_html=True,
+    )
 
     query = st.text_input("종목명 또는 티커 검색", placeholder="예: Samsung, 005930.KS")
 
@@ -792,6 +817,9 @@ def render_home():
 
     st.subheader(f"관심 주식 ({len(universe)}개)")
 
+    with st.spinner("현재가 불러오는 중..."):
+        prices = load_current_prices(tuple(u["ticker"] for u in universe))
+
     cols_per_row = 4
     for i in range(0, len(universe), cols_per_row):
         row = universe[i : i + cols_per_row]
@@ -801,7 +829,7 @@ def render_home():
                 st.markdown(
                     f'''
                     <div class="pp-card-head">
-                        {_avatar_html(item["name"])}
+                        {_price_badge_html(prices.get(item["ticker"]))}
                         <span class="pp-ticker-pill">{item["ticker"]}</span>
                     </div>
                     <div class="pp-card-name">{item["name"]}</div>
@@ -820,6 +848,8 @@ def render_home():
 # ---------------------------------------------------------------------------
 
 def render_upload():
+    st.markdown('<div class="pp-center"><span class="pp-eyebrow">PDF 분석 · 하이브리드 검색</span></div>', unsafe_allow_html=True)
+
     if st.button("← 홈으로"):
         old = st.session_state.get("indexed_doc")
         if old and old.get("pdf_path"):
@@ -829,12 +859,10 @@ def render_upload():
         st.session_state["page"] = "home"
         st.rerun()
 
-    st.markdown('<span class="pp-eyebrow">PDF 분석 · 하이브리드 검색</span>', unsafe_allow_html=True)
     _hero_headline("PDF를 올리면,", "바로 인덱싱을 시작합니다.")
     st.caption(
         "PDF를 올리는 즉시 텍스트/표 근거를 인덱싱해 바로 질문할 수 있습니다. 이미지/차트 근거는 "
-        "백그라운드에서 따로 처리되고(MinerU VLM 차트→표 + qwen3:8b 서술형 해석), 완료되면 다음 질문부터 자동으로 "
-        "반영됩니다."
+        "백그라운드에서 따로 처리되고, 완료되면 다음 질문부터 자동으로 반영됩니다."
     )
 
     with st.container(border=True):
@@ -981,11 +1009,11 @@ def render_detail():
     ticker = st.session_state["ticker"]
     name = st.session_state.get("ticker_name", ticker)
 
+    st.markdown('<div class="pp-center"><span class="pp-eyebrow">종목 상세</span></div>', unsafe_allow_html=True)
+
     if st.button("← 홈으로"):
         st.session_state["page"] = "home"
         st.rerun()
-
-    st.markdown('<span class="pp-eyebrow">종목 상세</span>', unsafe_allow_html=True)
     st.markdown(
         f'<h1 class="pp-hero-title">{name}<span class="pp-ticker-pill pp-ticker-pill-lg">{ticker}</span></h1>',
         unsafe_allow_html=True,
@@ -1002,7 +1030,7 @@ def render_detail():
             prev = hist["Close"].iloc[-2] if len(hist) > 1 else last
             change = last - prev
             pct = (change / prev * 100) if prev else 0
-            st.metric(f"{ticker} 현재가", f"{last:,.2f}", f"{change:+,.2f} ({pct:+.2f}%)")
+            st.metric(f"{ticker} 현재가", f"₩{last:,.2f}", f"{change:+,.2f} ({pct:+.2f}%)")
             st.line_chart(hist["Close"])
         else:
             st.info("가격 데이터를 불러오지 못했습니다.")
@@ -1013,17 +1041,17 @@ def render_detail():
     with st.spinner("요약 불러오는 중..."):
         summaries = load_summaries(ticker)
 
-    tab_financial, tab_profile = st.tabs(["재무제표 요약", "기업 프로필 요약"])
-    with tab_financial:
-        if summaries["financial_summary"]:
-            st.markdown(summaries["financial_summary"])
-        else:
-            st.info("이 종목의 재무제표 요약이 아직 없습니다.")
-    with tab_profile:
-        if summaries["profile_summary"]:
-            st.markdown(summaries["profile_summary"])
-        else:
-            st.info("이 종목의 프로필 요약이 아직 없습니다.")
+    st.markdown("##### 재무제표 요약")
+    if summaries["financial_summary"]:
+        st.markdown(summaries["financial_summary"])
+    else:
+        st.info("이 종목의 재무제표 요약이 아직 없습니다.")
+
+    st.markdown("##### 기업 프로필 요약")
+    if summaries["profile_summary"]:
+        st.markdown(summaries["profile_summary"])
+    else:
+        st.info("이 종목의 프로필 요약이 아직 없습니다.")
 
     st.divider()
     st.subheader("AI에게 질문하기")
