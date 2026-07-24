@@ -1,0 +1,31 @@
+{
+  "recall": 0.8,
+  "hits": [
+    "LG CNS",
+    "064400",
+    "LG전자",
+    "LG화학",
+    "LG유플러스",
+    "네이버클라우드",
+    "NH농협은행",
+    "교보증권"
+  ],
+  "misses": [
+    "우리은행",
+    "국민연금공단"
+  ],
+  "precision_approx": 0.8333,
+  "f1_approx": 0.8163,
+  "docling_table_stage_s": 5.198,
+  "entity_extract_stage_s": 546.308,
+  "classify_text_image_stage_s": 390.57,
+  "total_pipeline_s": 942.07,
+  "per_page_entities": {
+    "1": "LG CNS (064400), KYOBOTEC(Kyobo 교보증권)",
+    "2": "LG CNS (064400), 업무부서: 클라우드 & AI, 스마트엔지니어링, 디지털 비즈니스 서비스, 엘지전자, 엘지화학, 엘지유플러스, 기타 특수관계자, 대외고객",
+    "3": "LG CNS (064400), LG전자, NH농협은행, 네이버 클라우드, 고양 삼송 데이터센터, 죽전데이터센터, LG CNS, 교보증권 리서치센터, DART",
+    "4": "LG CNS (064400), 교보증권 리서치 센터",
+    "5": "LG CNS (064400), 교보증권 리서치 센터(RC)",
+    "6": "LG CNS (064400), Research Center"
+  }
+}
