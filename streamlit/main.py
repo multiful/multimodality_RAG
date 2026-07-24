@@ -40,6 +40,7 @@ sys.path.insert(0, str(ROOT / "pdf_pipeline"))
 sys.path.insert(0, str(ROOT / "pdf_pipeline" / "page_classification"))
 sys.path.insert(0, str(ROOT / "pdf_pipeline" / "text_processing"))
 sys.path.insert(0, str(ROOT / "pdf_pipeline" / "table_processing"))
+sys.path.insert(0, str(ROOT / "pdf_pipeline" / "image_processing"))
 
 load_dotenv(ROOT / ".env")
 
@@ -214,10 +215,12 @@ def answer_question(ticker: str, query: str) -> dict:
 # ---------------------------------------------------------------------------
 
 def ingest_pdf(pdf_path: Path, pdf_id: str, ticker: str, status) -> dict:
-    """업로드된 PDF 한 건을 pdf_pipeline의 텍스트/표 브랜치로 처리해 document_evidence(Supabase)에
-    즉시 적재한다. run_investment_opinion_demo.py와 동일한 흐름(스캔본 감지 -> YOLO 페이지 분류 ->
-    텍스트/표 브랜치 -> 임베딩 -> 즉시 적재)을 재사용한다. 이미지/차트 브랜치(MinerU)는 이 데모
-    환경에 설치돼 있지 않아 생략한다."""
+    """업로드된 PDF 한 건을 pdf_pipeline의 텍스트/표/이미지 세 브랜치로 처리해 document_evidence
+    (Supabase)에 즉시 적재한다. run_investment_opinion_demo.py와 동일한 흐름(스캔본 감지 -> YOLO
+    페이지 분류 -> 텍스트/표/이미지 브랜치 -> 임베딩 -> 즉시 적재)을 재사용한다. 이미지/차트
+    브랜치는 image_processing.s2_onestop_mineru(MinerU CLI 원스톱 파서)를 애드훅 업로드용으로
+    doc_id 사전등록(metadata.csv) 없이 직접 호출한다 — 차트분석(VLM+LLM 서술형 해석)은 CPU 데모
+    환경에서 문서당 지연이 크게 늘어 기본 off, 분류기(--with-classifier)만 켠 빠른 경로만 쓴다."""
     db_url = os.environ.get("SUPABASE_DIRECT_DB_URL")
     if not db_url:
         raise RuntimeError(
@@ -264,8 +267,28 @@ def ingest_pdf(pdf_path: Path, pdf_id: str, ticker: str, status) -> dict:
     counts["table_rows"] = len(row_records)
     counts["table_stored"] = entity_fusion.store_evidence(db_url, pdf_id, table_items, table_emb, ticker=ticker)
 
-    status.write("이미지/차트 브랜치는 MinerU 미설치로 생략 (텍스트/표 근거만 적재)")
-    counts["image_skipped"] = True
+    status.write("이미지/차트 브랜치 처리 중 (MinerU)...")
+    try:
+        import argparse as _argparse
+        import s2_onestop_mineru
+
+        image_args = _argparse.Namespace(
+            doc=pdf_id, pdf_abs=str(pdf_path), lang="korean", timeout_sec=1800,
+            with_classifier=True, with_chart_analysis=False,
+            chart_max_new_tokens=s2_onestop_mineru.CHART_MAX_NEW_TOKENS,
+            narrative_model=s2_onestop_mineru.CFG["LLM_MODEL"],
+            with_structured_output=False, force=False,
+        )
+        s2_onestop_mineru.process(image_args)
+        cards = s2_onestop_mineru.common.load_jsonl(
+            s2_onestop_mineru.ONESTOP_DIR / pdf_id / "onestop_cards.jsonl"
+        )
+        image_items, image_emb = entity_fusion.embed_items(entity_fusion.from_image_cards(pdf_id, cards))
+        counts["image_cards"] = len(cards)
+        counts["image_stored"] = entity_fusion.store_evidence(db_url, pdf_id, image_items, image_emb, ticker=ticker)
+    except Exception as e:
+        status.write(f"이미지/차트 브랜치 처리 실패 — 텍스트/표 근거만 적재합니다: {e}")
+        counts["image_skipped"] = True
 
     return counts
 
@@ -321,11 +344,14 @@ def render_upload():
 
     st.title("PDF 리포트 업로드")
     st.caption(
-        "애널리스트 리포트 PDF와 질문을 함께 입력하면, 텍스트/표 근거를 추출해 즉시 적재하고 "
-        "그 자리에서 질문에 대한 답변까지 보여줍니다. 종목 연결은 선택 사항이며, 지정하지 않아도 "
-        "이 PDF만의 근거로 바로 답변받을 수 있습니다."
+        "애널리스트 리포트 PDF와 질문을 함께 입력하면, 텍스트/표/이미지·차트 근거를 추출해 즉시 "
+        "적재하고 그 자리에서 질문에 대한 답변까지 보여줍니다. 종목 연결은 선택 사항이며, 지정하지 "
+        "않아도 이 PDF만의 근거로 바로 답변받을 수 있습니다."
     )
-    st.info("이미지/차트 근거 추출(MinerU)은 이 데모 환경에 설치되어 있지 않아 생략됩니다 — 텍스트·표 근거만 적재됩니다.")
+    st.info(
+        "이미지/차트 근거는 MinerU로 추출하되, 차트를 서술형으로 해석하는 VLM+LLM 단계는 이 데모 "
+        "환경에서 문서당 지연이 커 기본적으로 꺼져 있습니다(캡션·OCR 텍스트만 근거로 적재)."
+    )
 
     uploaded = st.file_uploader("PDF 파일 선택", type=["pdf"])
     question = st.text_input(
@@ -387,12 +413,17 @@ def render_upload():
     result = st.session_state.get("upload_result")
     if result:
         counts = result["counts"]
-        st.success(
-            f"{counts['n_pages']}페이지 중 텍스트 {counts['text_stored']}건, "
-            f"표 {counts['table_stored']}건을 근거로 적재했습니다."
-        )
+        parts = [f"텍스트 {counts['text_stored']}건", f"표 {counts['table_stored']}건"]
+        if counts.get("image_stored") is not None:
+            parts.append(f"이미지/차트 {counts['image_stored']}건")
+        st.success(f"{counts['n_pages']}페이지 중 {', '.join(parts)}을 근거로 적재했습니다.")
+        if counts.get("image_skipped"):
+            st.warning("이미지/차트 브랜치 처리에 실패해 텍스트/표 근거만 적재했습니다 (자세한 사유는 위 진행 로그 참고).")
         if counts.get("scanned_pages"):
-            st.warning(f"스캔본으로 판정된 페이지 {counts['scanned_pages']}는 MinerU 미설치로 텍스트 대체를 건너뛰었습니다.")
+            st.warning(
+                f"스캔본으로 판정된 페이지 {counts['scanned_pages']}는 자체 추출 텍스트 품질이 낮을 수 있습니다 "
+                "(MinerU 텍스트 대체는 아직 이 업로드 흐름에 연결되어 있지 않습니다)."
+            )
 
         if result.get("answer"):
             st.divider()

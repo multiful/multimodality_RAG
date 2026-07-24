@@ -287,20 +287,27 @@ def narrative_from_table(caption: str, table: str, model: str) -> tuple[str | No
 
 # ---------------------------------------------------------------- 파싱 보장 (원스톱)
 
-def ensure_parsed(doc_id: str, timeout_sec: int) -> Path | None:
-    """파싱본이 있으면 재사용, 없으면 MinerU CLI로 파싱 (s1 로직 재사용)."""
+def ensure_parsed(doc_id: str, timeout_sec: int, pdf_abs: str | None = None) -> Path | None:
+    """파싱본이 있으면 재사용, 없으면 MinerU CLI로 파싱 (s1 로직 재사용).
+
+    pdf_abs가 주어지면 metadata.csv 조회 없이 그 경로로 바로 파싱한다 — 애드훅 업로드(예:
+    streamlit PDF 업로드 화면)처럼 doc_id가 metadata.csv에 등록돼 있지 않은 경우용."""
     for did, mdir in common.find_parsed_docs():
         if did == doc_id:
             logger.info(f"파싱본 재사용: {mdir}")
             return Path(mdir)
-    rows = [r for r in common.read_metadata() if r["doc_id"] == doc_id]
-    if not rows:
-        logger.info(f"metadata.csv에 {doc_id} 없음 — 파싱 불가")
-        return None
-    logger.info(f"파싱본 없음 → MinerU CLI 파싱 시작: {rows[0]['pdf_abs']}")
+    if pdf_abs:
+        row = {"doc_id": doc_id, "pdf_abs": pdf_abs}
+    else:
+        rows = [r for r in common.read_metadata() if r["doc_id"] == doc_id]
+        if not rows:
+            logger.info(f"metadata.csv에 {doc_id} 없음 — 파싱 불가")
+            return None
+        row = rows[0]
+    logger.info(f"파싱본 없음 → MinerU CLI 파싱 시작: {row['pdf_abs']}")
     import s1_parse
     t0 = time.time()
-    out = s1_parse.parse_doc(rows[0], timeout_sec)
+    out = s1_parse.parse_doc(row, timeout_sec)
     logger.info(f"MinerU 파싱 완료 ({time.time()-t0:.1f}s): {out}")
     return out
 
@@ -309,7 +316,7 @@ def ensure_parsed(doc_id: str, timeout_sec: int) -> Path | None:
 
 def process(args: argparse.Namespace) -> None:
     doc_id = args.doc
-    mdir = ensure_parsed(doc_id, args.timeout_sec)
+    mdir = ensure_parsed(doc_id, args.timeout_sec, pdf_abs=getattr(args, "pdf_abs", None))
     if mdir is None:
         return
     content = common.load_content_list(mdir)

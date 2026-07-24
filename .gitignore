@@ -9,3 +9,5 @@ output/*
 !output/kospi200_financials/
 logos/
 .venv/
+pdf_pipeline/data/
+pdf_pipeline/logs/
