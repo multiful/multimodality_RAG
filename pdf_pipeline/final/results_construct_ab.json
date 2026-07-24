@@ -1,0 +1,53 @@
+{
+  "query": "여기 나온 기업의 인사이트 도출해주고, 건설업종 종목 주간 수익률이 가장 높은 기업은 어딘지 추출해",
+  "stage_timings": {
+    "load_evidence": 0.65,
+    "precompute_entity_count": 0.09,
+    "bge_warmup": 10.38
+  },
+  "retrieval_ab": {
+    "weighted_hybrid": {
+      "latency_s": 0.05,
+      "건설업종_도표3_img_rank": 2,
+      "건자재_도표4_img_rank": 3,
+      "correct(건설>건자재)": true,
+      "top1": "[text]p2 이 chunk는 다음 문맥에 속합니다: 주간 건설업 주가차트 > 도표 3. 건설업종 종목 주간 수익률  도표"
+    },
+    "route_search": {
+      "latency_s": 1.93,
+      "건설업종_도표3_img_rank": 6,
+      "건자재_도표4_img_rank": 1,
+      "correct(건설>건자재)": false,
+      "top1": "[image]p2 도표 4. 건자재업종 종목 주간 수익률 자료: Quantiwise, 하나증권 (%) (12X11X10)-9 "
+    },
+    "decompose_route": {
+      "latency_s": 2.78,
+      "건설업종_도표3_img_rank": 2,
+      "건자재_도표4_img_rank": 4,
+      "correct(건설>건자재)": true,
+      "top1": "[text]p1 이 chunk는 다음 문맥에 속합니다: 이번 주부터 실적발표 시작 > 주간 투자 전략 및 이슈 점검   전반"
+    }
+  },
+  "generation_ab": {
+    "gpt-4o-mini": {
+      "latency_s": 6.58,
+      "attempts": 1,
+      "unsupported_numbers": [],
+      "correct(IPARK언급)": true,
+      "answer_head": "### 투자 인사이트 도출  1. **GS건설 (Top Pick 추천)**    - GS건설은 동해 AI 데이터센터 관련 뉴스와 인허가, 자금조달의 기대감 덕분에 매력적인 투자처로 평가됩니다. 하반기 실적 발표가 예정되어 있는 가운데, 데이터센터와 같은 상승 요인을 통해 주가가 반등할 가능성이 높아 보입니다.  2. **IPARK현대산업개발**    - IPARK현대산업개발은 2분기 실적이 "
+    },
+    "gpt-4.1": {
+      "latency_s": 14.74,
+      "attempts": 1,
+      "unsupported_numbers": [],
+      "correct(IPARK언급)": true,
+      "answer_head": "아래는 당신이 제공한 분석 자료, 업계 데이터, 재무제표, 주간 수익률 차트, 시장 환경을 바탕으로 한 **건설업종 주요 상장사 투자 인사이트** 및 **주간 수익률 최상위 기업** 답변입니다.  ---  ## 1. 투자 인사이트 요약  ### ● 시장 환경 및 단기 모멘텀 - **하반기 건설주 투자 환경은 우호적이지 않음**   - 기준금리 인상(2.75%), 추가 인상 전망 및 시중은행 "
+    }
+  },
+  "e2e_search_plus_gen": {
+    "current(decompose_route + gpt-4.1)": 17.52,
+    "opt_A(decompose_route + gpt-4o-mini)": 9.36,
+    "opt_B(weighted_hybrid + gpt-4o-mini)": 6.63
+  },
+  "n_matched_companies": 7
+}
