@@ -1,0 +1,12 @@
+# 이 파이프라인은 연산환경(MinerU·torch·Pillow·requests)을 pdfex\demo_venv 에서 재사용한다.
+# 별도 venv를 새로 만들 경우 아래를 설치하면 된다 (Supabase 연동은 선택).
+mineru>=3.4
+torch
+torchvision
+Pillow
+requests
+python-dotenv
+# 그림 분류기(S3 게이트, --route clf): docling-project/DocumentFigureClassifier-v2.5
+transformers>=4.40
+# 선택: Supabase 저장을 켤 때만
+# supabase

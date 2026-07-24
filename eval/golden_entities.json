@@ -1,0 +1,19 @@
+{
+  "_meta": {
+    "annotator": "LLM(Claude) 이미지 직접 판독",
+    "definition": "각 이미지에서 실제 식별 가능한 기업명·티커·지표명. 아이콘/조감도 등 분석엔티티 없으면 []. 로고그리드는 실재 기업명 포함.",
+    "date": "2026-07-22"
+  },
+  "industry_15_p7_chart1": { "entities": ["DDR4 8Gb", "현물가", "고정가", "프리미엄"] },
+  "industry_15_p7_chart2": { "entities": ["DDR5 16Gb", "현물가", "고정가", "프리미엄"] },
+  "industry_15_p7_chart3": { "entities": ["TLC 512Gb", "현물가격"] },
+  "industry_15_p7_chart4": { "entities": ["TLC", "QLC", "1Tb", "현물가격"] },
+  "industry_15_p7_chart5": { "entities": ["삼성전자", "SK하이닉스", "DRAM ASP"] },
+  "industry_15_p7_chart6": { "entities": ["삼성전자", "SK하이닉스", "NAND ASP"] },
+  "industry_15_p8_chart1": { "entities": ["삼성전자", "SK하이닉스", "Micron", "Winbond", "PSMC", "Nanya", "JHICC", "CXMT", "DRAM CAPEX"] },
+  "industry_15_p8_chart2": { "entities": ["삼성전자", "SK하이닉스", "Micron", "Kioxia", "WDC", "SanDisk", "Solidigm", "YMTC", "NAND CAPEX"] },
+  "industry_15_p1_image1": { "entities": [] },
+  "industry_hana_17_p39_image1": { "entities": ["NVIDIA", "네이버"] },
+  "industry_hana_17_p42_image1": { "entities": [] },
+  "industry_hana_17_p58_image2": { "entities": ["HYUNDAI", "HD현대중공업", "CATERPILLAR", "JOHN DEERE", "KIA", "DOOSAN", "한화에어로스페이스", "Everllence", "한화파워", "HD건설기계", "STX Engine", "한화엔진", "HYUNDAI WIA", "TATA", "CSSC", "SEOAM"] }
+}

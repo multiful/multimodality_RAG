@@ -1,0 +1,293 @@
+[
+  {
+    "iid": "industry_15_p7_chart1",
+    "bt": "chart",
+    "crop": "C:\\Users\\wodlf\\OneDrive\\Desktop\\파이프라인 고도화\\data\\parsed\\industry_15\\images\\9073ab0cfbfbea43f3209c044c2085ad2caef49c3e24db1037d583705eb4967e.jpg",
+    "cap": "도표 1. DDR4 8Gb 현물가 vs 고정가",
+    "clf_label": "line_chart",
+    "route": "useful",
+    "clf_dt": 0.014,
+    "vlm_dt": 46.51,
+    "vlm_entities": [
+      "DDR4 8Gb",
+      "현물가",
+      "고정가",
+      "프리미엄(우)"
+    ],
+    "vlm_type": "line_chart",
+    "vlm_useful": true,
+    "de_dt": 2.82,
+    "de_table": "TITLE |  \n  | <0xE0><0xB8><0x9D>น<0xE0><0xB9><0x88> \n 21.2 | 6.71 \n 22.2 | 6.54 \n 23.2 | 0.25 \n 24.2 | 0.26 \n 25.2 | 0.21 \n 26.2 | 28.59 \n 20.0 | 100% \n 20.6 | 50% \n 21.0 | 100% \n 26.5 | 20.00",
+    "de_entities": [
+      "<0xE0><0xB8><0x9D>น<0xE0><0xB9><0x88>"
+    ]
+  },
+  {
+    "iid": "industry_15_p7_chart2",
+    "bt": "chart",
+    "crop": "C:\\Users\\wodlf\\OneDrive\\Desktop\\파이프라인 고도화\\data\\parsed\\industry_15\\images\\1118cd6a630ad639b23133d91bbbaf141e973898e066abda83f71b4cb2d0f871.jpg",
+    "cap": "도표 2. DDR5 16Gb 현물가 vs 고정가",
+    "clf_label": "line_chart",
+    "route": "useful",
+    "clf_dt": 0.016,
+    "vlm_dt": 20.35,
+    "vlm_entities": [
+      "DDR5 16Gb",
+      "현물가",
+      "고정가",
+      "프리미엄(우)"
+    ],
+    "vlm_type": "line_chart",
+    "vlm_useful": true,
+    "de_dt": 3.92,
+    "de_table": "TITLE |  \n  | <0xE1><0x9E><0x97>ូមិ | ដូង | <0xE1><0x9E><0x97>ូមិ | <0xE1><0x9E><0x97>ូមិ \n 23.1 | 15.2 | 5.2 | 9.2 \n 23.7 | 3.9 | 2.6 | 16.9 \n 24.1 | 4.1 | 3.7 | 11.5 \n 24.7 | 5.0 | 4.7 | 11.7 \n 25.1 | 3.7 | 2.5 | 14.3 \n 25.7 | 6.1 | 5.2 | 14.7 \n 26.1 | 38.8 | 19.8 | 20.0 \n 26.7 | 47.1 | 150 | -50",
+    "de_entities": [
+      "<0xE1><0x9E><0x97>ូមិ",
+      "ដូង"
+    ]
+  },
+  {
+    "iid": "industry_15_p7_chart3",
+    "bt": "chart",
+    "crop": "C:\\Users\\wodlf\\OneDrive\\Desktop\\파이프라인 고도화\\data\\parsed\\industry_15\\images\\ed1cca3a8ec2d3f2361c1dc8625fa5dd443a77414669daf00a2ce8eefa786f75.jpg",
+    "cap": "도표 3. TLC 512Gb 현물가격",
+    "clf_label": "line_chart",
+    "route": "useful",
+    "clf_dt": 0.017,
+    "vlm_dt": 32.97,
+    "vlm_entities": [
+      "TLC 512Gb",
+      "현물가격"
+    ],
+    "vlm_type": "line_chart",
+    "vlm_useful": true,
+    "de_dt": 1.86,
+    "de_table": "TITLE |  \n  | ($) \n 24.11 | 2.23 \n 25.2 | 2.23 \n 25.5 | 2.62 \n 25.8 | 2.60 \n 25.11 | 5.17 \n 26.2 | 17.65 \n 26.5 | 20.33",
+    "de_entities": []
+  },
+  {
+    "iid": "industry_15_p7_chart4",
+    "bt": "chart",
+    "crop": "C:\\Users\\wodlf\\OneDrive\\Desktop\\파이프라인 고도화\\data\\parsed\\industry_15\\images\\9f6dfda6a75b94bef61aeee8c9f93887effa8f4f4ace5025b2037233ada0329a.jpg",
+    "cap": "도표 4. TLC/QLC 1Tb 현물가격 추이",
+    "clf_label": "line_chart",
+    "route": "useful",
+    "clf_dt": 0.017,
+    "vlm_dt": 19.03,
+    "vlm_entities": [
+      "TLC",
+      "QLC",
+      "1Tb"
+    ],
+    "vlm_type": "line_chart",
+    "vlm_useful": true,
+    "de_dt": 2.44,
+    "de_table": "TITLE |  \n  | ($) \n 24.11 | 5.1 \n 25.1 | 5.0 \n 25.3 | 4.9 \n 25.5 | 5.1 \n 25.7 | 5.0 \n 25.9 | 5.0 \n 25.11 | 6.7 \n 26.1 | 16.8 \n 26.3 | 28.0 \n 26.5 | 24.9",
+    "de_entities": []
+  },
+  {
+    "iid": "industry_15_p7_chart5",
+    "bt": "chart",
+    "crop": "C:\\Users\\wodlf\\OneDrive\\Desktop\\파이프라인 고도화\\data\\parsed\\industry_15\\images\\967ba93248cdb658290131d8b7988b1d0374b0de9df503365025975e1b2ea933.jpg",
+    "cap": "도표 5. 업체별 DRAM ASP 추이 및 전망",
+    "clf_label": "line_chart",
+    "route": "useful",
+    "clf_dt": 0.016,
+    "vlm_dt": 34.27,
+    "vlm_entities": [
+      "삼성전자",
+      "SK하이닉스",
+      "DRAM ASP"
+    ],
+    "vlm_type": "line_chart",
+    "vlm_useful": true,
+    "de_dt": 2.69,
+    "de_table": "TITLE |  \n  | <0xE1><0xB1><0x92><0xE1><0xB1><0xA0><0xE1><0xB1><0xA0><0xE1><0xB1><0xA0> | <0xE1><0xB1><0x92><0xE1><0xB1><0xA0><0xE1><0xB1><0xA0> \n 1Q21 | 0.40 | 0.40 \n 1Q22 | 0.47 | 0.47 \n 1Q23 | 0.23 | 0.19 \n 1Q24 | 0.29 | 0.32 \n 1Q25 | 0.43 | 0.51 \n 1Q26 | 2.07 | 1.73",
+    "de_entities": [
+      "<0xE1><0xB1><0x92><0xE1><0xB1><0xA0><0xE1><0xB1><0xA0><0xE1><0xB1><0xA0>",
+      "<0xE1><0xB1><0x92><0xE1><0xB1><0xA0><0xE1><0xB1><0xA0>",
+      "1Q21",
+      "1Q22",
+      "1Q23",
+      "1Q24",
+      "1Q25",
+      "1Q26"
+    ]
+  },
+  {
+    "iid": "industry_15_p7_chart6",
+    "bt": "chart",
+    "crop": "C:\\Users\\wodlf\\OneDrive\\Desktop\\파이프라인 고도화\\data\\parsed\\industry_15\\images\\17038116682c65548359ddb9497fde21deef68582fef33280207befb72b7837c.jpg",
+    "cap": "도표 6. 업체별 NAND ASP 추이 및 전망",
+    "clf_label": "line_chart",
+    "route": "useful",
+    "clf_dt": 0.02,
+    "vlm_dt": 20.72,
+    "vlm_entities": [
+      "삼성전자",
+      "SK하이닉스",
+      "NAND ASP"
+    ],
+    "vlm_type": "line_chart",
+    "vlm_useful": true,
+    "de_dt": 2.91,
+    "de_table": "TITLE |  \n  | <0xE1><0x80><0x86><0xE1><0x80><0x92><0xE1><0x80><0x84><0xE1><0x80><0x85><0xE1><0x80><0x82><0xE1><0x80><0x96><0xE1><0x80><0x88> | <0xE1><0x80><0x92><0xE1><0x80><0x92><0xE1><0x80><0x84><0xE1><0x80><0x85><0xE1><0x80><0x82><0xE1><0x80><0x96><0xE1><0x80><0x88> \n 1Q21 | 0.20 | 0.20 \n 1Q22 | 0.21 | 0.22 \n 1Q23 | 0.10 | 0.09 \n 1Q24 | 0.10 | 0.14 \n 1Q25 | 0.12 | 0.18 \n 1Q26 | 0.28 | 0.29",
+    "de_entities": [
+      "<0xE1><0x80><0x86><0xE1><0x80><0x92><0xE1><0x80><0x84><0xE1><0x80><0x85><0xE1><0x80><0x82><0xE1><0x80><0x96><0xE1><0x80><0x88>",
+      "<0xE1><0x80><0x92><0xE1><0x80><0x92><0xE1><0x80><0x84><0xE1><0x80><0x85><0xE1><0x80><0x82><0xE1><0x80><0x96><0xE1><0x80><0x88>",
+      "1Q21",
+      "1Q22",
+      "1Q23",
+      "1Q24",
+      "1Q25",
+      "1Q26"
+    ]
+  },
+  {
+    "iid": "industry_15_p8_chart1",
+    "bt": "chart",
+    "crop": "C:\\Users\\wodlf\\OneDrive\\Desktop\\파이프라인 고도화\\data\\parsed\\industry_15\\images\\1ad644316784b2e2b1b291c0968167b634e4b11acf888242320633e2991079ef.jpg",
+    "cap": "도표 7. 글로벌 DRAM CAPEX 추이 및 전망",
+    "clf_label": "bar_chart",
+    "route": "useful",
+    "clf_dt": 0.018,
+    "vlm_dt": 23.05,
+    "vlm_entities": [
+      "삼성전자",
+      "Winbond",
+      "JHICC",
+      "SK하이닉스",
+      "PSMC",
+      "CXMT",
+      "Micron",
+      "Nanya"
+    ],
+    "vlm_type": "bar_chart",
+    "vlm_useful": true,
+    "de_dt": 6.22,
+    "de_table": "TITLE |  \n  | Δ<0xCE><0x9B><0xCE><0x97><0xCE><0xA1>, <0xCE><0x9A>Α<0xCE><0x9A><0xCE><0xA1> | <0xCE><0x9A><0xCE><0x94><0xCE><0x9A><0xCE><0xA1> | <0xCE><0x9A><0xCE><0x94><0xCE><0x9A><0xCE><0xA1> | <0xCE><0x9A><0xCE><0x94><0xCE><0x9A><0xCE><0xA1> | Micron | Nanya \n 2018 | 99 | 316 | 1 | 9 | 1 | 1 | 174 \n 2019 | 87 | 65 | 1 | 7 | 1 | 1 | 134 \n 2020 | 85 | 60 | 2 | 5 | 2 | 1 | 238 \n 2021 | 121 | 227 | 5 | 10 | 2 | 18 | 177 \n 2022 | 120 | 227 | 2 | 18 | 2 | 18 | 238 \n 2023 | 139 | 179 | 1 | 10 | 1 | 18 | 180 \n 2024 | 141 | 180 | 1 | 10 | 1 | 20 | 220 \n 2025 | 183 | 227 | 1 | 10 | 1 | 70 | 670 \n 2026F | 2170 | 240 | 3 | 18 | 2 | 183 | 970",
+    "de_entities": [
+      "Δ<0xCE><0x9B><0xCE><0x97><0xCE><0xA1>, <0xCE><0x9A>Α<0xCE><0x9A><0xCE><0xA1>",
+      "<0xCE><0x9A><0xCE><0x94><0xCE><0x9A><0xCE><0xA1>",
+      "Micron",
+      "Nanya",
+      "2026F"
+    ]
+  },
+  {
+    "iid": "industry_15_p8_chart2",
+    "bt": "chart",
+    "crop": "C:\\Users\\wodlf\\OneDrive\\Desktop\\파이프라인 고도화\\data\\parsed\\industry_15\\images\\9623865163bc86359527754f100656ce267d0c2a38043669d0f80365097806ab.jpg",
+    "cap": "도표 8. 글로벌 NAND CAPEX 추이 및 전망",
+    "clf_label": "bar_chart",
+    "route": "useful",
+    "clf_dt": 0.016,
+    "vlm_dt": 24.6,
+    "vlm_entities": [
+      "삼성전자",
+      "SK하이닉스",
+      "Micron",
+      "Kioxia",
+      "WDC",
+      "SanDisk",
+      "Solidigm",
+      "YMTC"
+    ],
+    "vlm_type": "bar_chart",
+    "vlm_useful": true,
+    "de_dt": 5.49,
+    "de_table": "TITLE |  \n  | <0xE1><0x80><0x97>ို<0xE1><0x80><0x9F><0xE1><0x80>6 | <0xE1>1/မတ် | 5008 | 3952 \n 2018 | 7000 | 6792 | 6076 | 3438 \n 2019 | 7700 | 8008 | 4688 | 3409 \n 2020 | 7800 | 7634 | 4514 | 4912 \n 2021 | 11300 | 7614 | 1392 | 7664 \n 2022 | 12300 | 11162 | 1097 | 8923 \n 2023 | 10000 | 9933 | 1133 | 3964 \n 2024 | 10000 | 9398 | 1128 | 4739 \n 2025 | 9000 | 9252 | 1200 | 4760 \n 2026F | 7000 | 9000 | 1500 | 7600",
+    "de_entities": [
+      "<0xE1><0x80><0x97>ို<0xE1><0x80><0x9F><0xE1><0x80>6",
+      "<0xE1>1/မတ်",
+      "2026F"
+    ]
+  },
+  {
+    "iid": "industry_15_p1_image1",
+    "bt": "image",
+    "crop": "C:\\Users\\wodlf\\OneDrive\\Desktop\\파이프라인 고도화\\data\\parsed\\industry_15\\images\\5ed34ab425f5ecaa51e5893d5d0e889e0da94bff80b83d6fe56de8cc70032642.jpg",
+    "cap": "",
+    "clf_label": "icon",
+    "route": "junk",
+    "clf_dt": 0.01,
+    "vlm_dt": 28.22,
+    "vlm_entities": [],
+    "vlm_type": "logo",
+    "vlm_useful": true,
+    "de_dt": 0.0,
+    "de_table": "",
+    "de_entities": []
+  },
+  {
+    "iid": "industry_hana_17_p39_image1",
+    "bt": "image",
+    "crop": "C:\\Users\\wodlf\\OneDrive\\Desktop\\파이프라인 고도화\\data\\parsed\\industry_hana_17\\images\\c99c21c88771851c4a3ac944508fab4a1f94edc386615bee0a9d052f209c6188.jpg",
+    "cap": "도표 3. 네이버-모로코 AI 데이터센터 구축 협의",
+    "clf_label": "photograph",
+    "route": "junk",
+    "clf_dt": 0.01,
+    "vlm_dt": 23.5,
+    "vlm_entities": [
+      "NVIDIA",
+      "네이버"
+    ],
+    "vlm_type": "photo",
+    "vlm_useful": true,
+    "de_dt": 0.0,
+    "de_table": "",
+    "de_entities": []
+  },
+  {
+    "iid": "industry_hana_17_p42_image1",
+    "bt": "image",
+    "crop": "C:\\Users\\wodlf\\OneDrive\\Desktop\\파이프라인 고도화\\data\\parsed\\industry_hana_17\\images\\257482541b8c0d24233a6d3bd6c238b70cb56aac93870a2b57af69d413b9c711.jpg",
+    "cap": "도표 2. 국가 AI컴퓨팅센터(한국 AI CC) 조감도",
+    "clf_label": "photograph",
+    "route": "junk",
+    "clf_dt": 0.01,
+    "vlm_dt": 27.26,
+    "vlm_entities": [
+      "국가 AI 컴퓨팅센터",
+      "한국 AI CC"
+    ],
+    "vlm_type": "diagram",
+    "vlm_useful": true,
+    "de_dt": 0.0,
+    "de_table": "",
+    "de_entities": []
+  },
+  {
+    "iid": "industry_hana_17_p58_image2",
+    "bt": "image",
+    "crop": "C:\\Users\\wodlf\\OneDrive\\Desktop\\파이프라인 고도화\\data\\parsed\\industry_hana_17\\images\\2ed19ad7fefa9f38c467411f68c6ceb0e01c8de346bc81f8f7ffb2be3e6ff07a.jpg",
+    "cap": "도표 6. 주요 고객사",
+    "clf_label": "logo",
+    "route": "junk",
+    "clf_dt": 0.011,
+    "vlm_dt": 25.55,
+    "vlm_entities": [
+      "HYUNDAI",
+      "HD현대중공업",
+      "CATERPILLAR",
+      "JOHN DEERE",
+      "KIA",
+      "DOOSAN 두산에너지",
+      "한화에로스페이스",
+      "Everllence",
+      "한화파워",
+      "HD건설기계",
+      "stx Engine",
+      "한화엔진",
+      "HYUNDAI WIA",
+      "TATA",
+      "CSST SERVICE",
+      "SEOAM"
+    ],
+    "vlm_type": "logo",
+    "vlm_useful": true,
+    "de_dt": 0.0,
+    "de_table": "",
+    "de_entities": []
+  }
+]

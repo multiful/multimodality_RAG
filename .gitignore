@@ -1,0 +1,14 @@
+.env
+demo_venv/
+venv/
+__pycache__/
+*.pyc
+data/raw/**/*.pdf
+data/parsed/
+data/images/useful/
+data/images/discarded/
+data/cache/
+logs/
+eval/*.html
+eval/image_labels.csv
+debug_*.html

@@ -1,0 +1,23 @@
+{
+  "doc_id": "industry_15",
+  "title": "“or”가 아닌 “and”로 높아진 커트라인",
+  "stats": {
+    "total": 140,
+    "useful": 105,
+    "discarded_rule": 0,
+    "discarded_ocr": 1,
+    "table_handoff": 34,
+    "skipped": 0,
+    "clf_disagree": 0,
+    "chart_analyzed": 103,
+    "chart_analysis_failed": 2
+  },
+  "ocr_calls": 0,
+  "ocr_sec_mean": null,
+  "wall_sec": 2314.2,
+  "ocr_min_chars": 20,
+  "with_classifier": true,
+  "with_chart_analysis": true,
+  "lang": "korean",
+  "ts": "2026-07-23T05:36:46.073761+00:00"
+}

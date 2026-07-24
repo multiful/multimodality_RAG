@@ -1,0 +1,537 @@
+{
+  "V1": {
+    "name": "V1 베이스라인",
+    "precision": 0.9273,
+    "recall": 0.9107,
+    "f1": 0.9189,
+    "n_pred": 55,
+    "n_gold": 56,
+    "time_s": 326.0,
+    "per_image": [
+      {
+        "iid": "industry_15_p7_chart1",
+        "processed": true,
+        "n_pred": 4,
+        "n_gold": 4,
+        "matched_pred": 4,
+        "matched_gold": 4
+      },
+      {
+        "iid": "industry_15_p7_chart2",
+        "processed": true,
+        "n_pred": 4,
+        "n_gold": 4,
+        "matched_pred": 4,
+        "matched_gold": 4
+      },
+      {
+        "iid": "industry_15_p7_chart3",
+        "processed": true,
+        "n_pred": 2,
+        "n_gold": 2,
+        "matched_pred": 2,
+        "matched_gold": 2
+      },
+      {
+        "iid": "industry_15_p7_chart4",
+        "processed": true,
+        "n_pred": 3,
+        "n_gold": 4,
+        "matched_pred": 3,
+        "matched_gold": 3
+      },
+      {
+        "iid": "industry_15_p7_chart5",
+        "processed": true,
+        "n_pred": 3,
+        "n_gold": 3,
+        "matched_pred": 3,
+        "matched_gold": 3
+      },
+      {
+        "iid": "industry_15_p7_chart6",
+        "processed": true,
+        "n_pred": 3,
+        "n_gold": 3,
+        "matched_pred": 3,
+        "matched_gold": 3
+      },
+      {
+        "iid": "industry_15_p8_chart1",
+        "processed": true,
+        "n_pred": 8,
+        "n_gold": 9,
+        "matched_pred": 8,
+        "matched_gold": 8
+      },
+      {
+        "iid": "industry_15_p8_chart2",
+        "processed": true,
+        "n_pred": 8,
+        "n_gold": 9,
+        "matched_pred": 8,
+        "matched_gold": 8
+      },
+      {
+        "iid": "industry_15_p1_image1",
+        "processed": true,
+        "n_pred": 0,
+        "n_gold": 0,
+        "matched_pred": 0,
+        "matched_gold": 0
+      },
+      {
+        "iid": "industry_hana_17_p39_image1",
+        "processed": true,
+        "n_pred": 2,
+        "n_gold": 2,
+        "matched_pred": 2,
+        "matched_gold": 2
+      },
+      {
+        "iid": "industry_hana_17_p42_image1",
+        "processed": true,
+        "n_pred": 2,
+        "n_gold": 0,
+        "matched_pred": 0,
+        "matched_gold": 0
+      },
+      {
+        "iid": "industry_hana_17_p58_image2",
+        "processed": true,
+        "n_pred": 16,
+        "n_gold": 16,
+        "matched_pred": 14,
+        "matched_gold": 14
+      }
+    ]
+  },
+  "V2": {
+    "name": "V2 고도화(+분류기)",
+    "precision": 1.0,
+    "recall": 0.625,
+    "f1": 0.7692,
+    "n_pred": 35,
+    "n_gold": 56,
+    "time_s": 221.7,
+    "per_image": [
+      {
+        "iid": "industry_15_p7_chart1",
+        "processed": true,
+        "n_pred": 4,
+        "n_gold": 4,
+        "matched_pred": 4,
+        "matched_gold": 4
+      },
+      {
+        "iid": "industry_15_p7_chart2",
+        "processed": true,
+        "n_pred": 4,
+        "n_gold": 4,
+        "matched_pred": 4,
+        "matched_gold": 4
+      },
+      {
+        "iid": "industry_15_p7_chart3",
+        "processed": true,
+        "n_pred": 2,
+        "n_gold": 2,
+        "matched_pred": 2,
+        "matched_gold": 2
+      },
+      {
+        "iid": "industry_15_p7_chart4",
+        "processed": true,
+        "n_pred": 3,
+        "n_gold": 4,
+        "matched_pred": 3,
+        "matched_gold": 3
+      },
+      {
+        "iid": "industry_15_p7_chart5",
+        "processed": true,
+        "n_pred": 3,
+        "n_gold": 3,
+        "matched_pred": 3,
+        "matched_gold": 3
+      },
+      {
+        "iid": "industry_15_p7_chart6",
+        "processed": true,
+        "n_pred": 3,
+        "n_gold": 3,
+        "matched_pred": 3,
+        "matched_gold": 3
+      },
+      {
+        "iid": "industry_15_p8_chart1",
+        "processed": true,
+        "n_pred": 8,
+        "n_gold": 9,
+        "matched_pred": 8,
+        "matched_gold": 8
+      },
+      {
+        "iid": "industry_15_p8_chart2",
+        "processed": true,
+        "n_pred": 8,
+        "n_gold": 9,
+        "matched_pred": 8,
+        "matched_gold": 8
+      },
+      {
+        "iid": "industry_15_p1_image1",
+        "processed": false,
+        "n_pred": 0,
+        "n_gold": 0,
+        "matched_pred": 0,
+        "matched_gold": 0
+      },
+      {
+        "iid": "industry_hana_17_p39_image1",
+        "processed": false,
+        "n_pred": 0,
+        "n_gold": 2,
+        "matched_pred": 0,
+        "matched_gold": 0
+      },
+      {
+        "iid": "industry_hana_17_p42_image1",
+        "processed": false,
+        "n_pred": 0,
+        "n_gold": 0,
+        "matched_pred": 0,
+        "matched_gold": 0
+      },
+      {
+        "iid": "industry_hana_17_p58_image2",
+        "processed": false,
+        "n_pred": 0,
+        "n_gold": 16,
+        "matched_pred": 0,
+        "matched_gold": 0
+      }
+    ]
+  },
+  "V3": {
+    "name": "V3 고도화+ChartQA",
+    "precision": 0.0741,
+    "recall": 0.0357,
+    "f1": 0.0482,
+    "n_pred": 27,
+    "n_gold": 56,
+    "time_s": 28.5,
+    "per_image": [
+      {
+        "iid": "industry_15_p7_chart1",
+        "processed": true,
+        "n_pred": 1,
+        "n_gold": 4,
+        "matched_pred": 0,
+        "matched_gold": 0
+      },
+      {
+        "iid": "industry_15_p7_chart2",
+        "processed": true,
+        "n_pred": 2,
+        "n_gold": 4,
+        "matched_pred": 0,
+        "matched_gold": 0
+      },
+      {
+        "iid": "industry_15_p7_chart3",
+        "processed": true,
+        "n_pred": 0,
+        "n_gold": 2,
+        "matched_pred": 0,
+        "matched_gold": 0
+      },
+      {
+        "iid": "industry_15_p7_chart4",
+        "processed": true,
+        "n_pred": 0,
+        "n_gold": 4,
+        "matched_pred": 0,
+        "matched_gold": 0
+      },
+      {
+        "iid": "industry_15_p7_chart5",
+        "processed": true,
+        "n_pred": 8,
+        "n_gold": 3,
+        "matched_pred": 0,
+        "matched_gold": 0
+      },
+      {
+        "iid": "industry_15_p7_chart6",
+        "processed": true,
+        "n_pred": 8,
+        "n_gold": 3,
+        "matched_pred": 0,
+        "matched_gold": 0
+      },
+      {
+        "iid": "industry_15_p8_chart1",
+        "processed": true,
+        "n_pred": 5,
+        "n_gold": 9,
+        "matched_pred": 2,
+        "matched_gold": 2
+      },
+      {
+        "iid": "industry_15_p8_chart2",
+        "processed": true,
+        "n_pred": 3,
+        "n_gold": 9,
+        "matched_pred": 0,
+        "matched_gold": 0
+      },
+      {
+        "iid": "industry_15_p1_image1",
+        "processed": false,
+        "n_pred": 0,
+        "n_gold": 0,
+        "matched_pred": 0,
+        "matched_gold": 0
+      },
+      {
+        "iid": "industry_hana_17_p39_image1",
+        "processed": false,
+        "n_pred": 0,
+        "n_gold": 2,
+        "matched_pred": 0,
+        "matched_gold": 0
+      },
+      {
+        "iid": "industry_hana_17_p42_image1",
+        "processed": false,
+        "n_pred": 0,
+        "n_gold": 0,
+        "matched_pred": 0,
+        "matched_gold": 0
+      },
+      {
+        "iid": "industry_hana_17_p58_image2",
+        "processed": false,
+        "n_pred": 0,
+        "n_gold": 16,
+        "matched_pred": 0,
+        "matched_gold": 0
+      }
+    ]
+  },
+  "V3H": {
+    "name": "V3' 하이브리드(원시)",
+    "precision": 0.5833,
+    "recall": 0.625,
+    "f1": 0.6034,
+    "n_pred": 60,
+    "n_gold": 56,
+    "time_s": 250.0,
+    "per_image": [
+      {
+        "iid": "industry_15_p7_chart1",
+        "processed": true,
+        "n_pred": 5,
+        "n_gold": 4,
+        "matched_pred": 4,
+        "matched_gold": 4
+      },
+      {
+        "iid": "industry_15_p7_chart2",
+        "processed": true,
+        "n_pred": 6,
+        "n_gold": 4,
+        "matched_pred": 4,
+        "matched_gold": 4
+      },
+      {
+        "iid": "industry_15_p7_chart3",
+        "processed": true,
+        "n_pred": 2,
+        "n_gold": 2,
+        "matched_pred": 2,
+        "matched_gold": 2
+      },
+      {
+        "iid": "industry_15_p7_chart4",
+        "processed": true,
+        "n_pred": 3,
+        "n_gold": 4,
+        "matched_pred": 3,
+        "matched_gold": 3
+      },
+      {
+        "iid": "industry_15_p7_chart5",
+        "processed": true,
+        "n_pred": 11,
+        "n_gold": 3,
+        "matched_pred": 3,
+        "matched_gold": 3
+      },
+      {
+        "iid": "industry_15_p7_chart6",
+        "processed": true,
+        "n_pred": 11,
+        "n_gold": 3,
+        "matched_pred": 3,
+        "matched_gold": 3
+      },
+      {
+        "iid": "industry_15_p8_chart1",
+        "processed": true,
+        "n_pred": 11,
+        "n_gold": 9,
+        "matched_pred": 8,
+        "matched_gold": 8
+      },
+      {
+        "iid": "industry_15_p8_chart2",
+        "processed": true,
+        "n_pred": 11,
+        "n_gold": 9,
+        "matched_pred": 8,
+        "matched_gold": 8
+      },
+      {
+        "iid": "industry_15_p1_image1",
+        "processed": false,
+        "n_pred": 0,
+        "n_gold": 0,
+        "matched_pred": 0,
+        "matched_gold": 0
+      },
+      {
+        "iid": "industry_hana_17_p39_image1",
+        "processed": false,
+        "n_pred": 0,
+        "n_gold": 2,
+        "matched_pred": 0,
+        "matched_gold": 0
+      },
+      {
+        "iid": "industry_hana_17_p42_image1",
+        "processed": false,
+        "n_pred": 0,
+        "n_gold": 0,
+        "matched_pred": 0,
+        "matched_gold": 0
+      },
+      {
+        "iid": "industry_hana_17_p58_image2",
+        "processed": false,
+        "n_pred": 0,
+        "n_gold": 16,
+        "matched_pred": 0,
+        "matched_gold": 0
+      }
+    ]
+  },
+  "V4": {
+    "name": "V4 개선(필터 하이브리드)",
+    "precision": 1.0,
+    "recall": 0.625,
+    "f1": 0.7692,
+    "n_pred": 35,
+    "n_gold": 56,
+    "time_s": 250.0,
+    "per_image": [
+      {
+        "iid": "industry_15_p7_chart1",
+        "processed": true,
+        "n_pred": 4,
+        "n_gold": 4,
+        "matched_pred": 4,
+        "matched_gold": 4
+      },
+      {
+        "iid": "industry_15_p7_chart2",
+        "processed": true,
+        "n_pred": 4,
+        "n_gold": 4,
+        "matched_pred": 4,
+        "matched_gold": 4
+      },
+      {
+        "iid": "industry_15_p7_chart3",
+        "processed": true,
+        "n_pred": 2,
+        "n_gold": 2,
+        "matched_pred": 2,
+        "matched_gold": 2
+      },
+      {
+        "iid": "industry_15_p7_chart4",
+        "processed": true,
+        "n_pred": 3,
+        "n_gold": 4,
+        "matched_pred": 3,
+        "matched_gold": 3
+      },
+      {
+        "iid": "industry_15_p7_chart5",
+        "processed": true,
+        "n_pred": 3,
+        "n_gold": 3,
+        "matched_pred": 3,
+        "matched_gold": 3
+      },
+      {
+        "iid": "industry_15_p7_chart6",
+        "processed": true,
+        "n_pred": 3,
+        "n_gold": 3,
+        "matched_pred": 3,
+        "matched_gold": 3
+      },
+      {
+        "iid": "industry_15_p8_chart1",
+        "processed": true,
+        "n_pred": 8,
+        "n_gold": 9,
+        "matched_pred": 8,
+        "matched_gold": 8
+      },
+      {
+        "iid": "industry_15_p8_chart2",
+        "processed": true,
+        "n_pred": 8,
+        "n_gold": 9,
+        "matched_pred": 8,
+        "matched_gold": 8
+      },
+      {
+        "iid": "industry_15_p1_image1",
+        "processed": false,
+        "n_pred": 0,
+        "n_gold": 0,
+        "matched_pred": 0,
+        "matched_gold": 0
+      },
+      {
+        "iid": "industry_hana_17_p39_image1",
+        "processed": false,
+        "n_pred": 0,
+        "n_gold": 2,
+        "matched_pred": 0,
+        "matched_gold": 0
+      },
+      {
+        "iid": "industry_hana_17_p42_image1",
+        "processed": false,
+        "n_pred": 0,
+        "n_gold": 0,
+        "matched_pred": 0,
+        "matched_gold": 0
+      },
+      {
+        "iid": "industry_hana_17_p58_image2",
+        "processed": false,
+        "n_pred": 0,
+        "n_gold": 16,
+        "matched_pred": 0,
+        "matched_gold": 0
+      }
+    ]
+  }
+}

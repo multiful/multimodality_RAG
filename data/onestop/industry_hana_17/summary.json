@@ -1,0 +1,20 @@
+{
+  "doc_id": "industry_hana_17",
+  "title": "데크크(Data center Creator Crew)",
+  "stats": {
+    "total": 303,
+    "useful": 113,
+    "discarded_rule": 8,
+    "discarded_ocr": 31,
+    "table_handoff": 151,
+    "skipped": 0
+  },
+  "ocr_calls": 144,
+  "ocr_sec_total": 79.7,
+  "ocr_sec_mean": 0.55,
+  "ocr_sec_p50": 0.53,
+  "wall_sec": 82.9,
+  "ocr_min_chars": 20,
+  "lang": "korean",
+  "ts": "2026-07-23T01:01:43.759291+00:00"
+}
