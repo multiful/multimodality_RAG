@@ -180,9 +180,20 @@ def get_ocr(lang: str):
 
 
 def ocr_crop(img_file: Path, lang: str) -> dict:
-    """크롭 1장을 MinerU OCR로 → {text, lines, n_boxes, mean_conf, seconds}."""
+    """크롭 1장을 MinerU OCR로 → {text, lines, n_boxes, mean_conf, seconds}.
+
+    [수정] common.py에 이미 구현돼 있었지만 어디서도 안 쓰이던 content-hash 캐시(cache_get/
+    cache_put, VLM 캐시 L2 키용으로 설계된 것)를 여기서 처음 배선 — 크롭 픽셀 내용이 같으면
+    (같은 브로커의 반복되는 템플릿 차트/워터마크 등, 문서가 달라도) OCR을 다시 안 돌린다.
+    같은 문서 재실행 시의 카드 단위 resume(호출측의 `old_cards`)과는 별개 계층 — 이건 "다른
+    문서/다른 이미지_id라도 크롭 픽셀이 같으면" 캐시가 걸린다."""
     import cv2
     import numpy as np
+    chash = common.content_hash(img_file)
+    key = common.cache_key(chash, "ocr_v1", lang)
+    cached = common.cache_get("ocr", key)
+    if cached is not None:
+        return cached
     engine = get_ocr(lang)
     t0 = time.time()
     img = cv2.imdecode(np.fromfile(str(img_file), dtype=np.uint8), cv2.IMREAD_COLOR)
@@ -203,10 +214,12 @@ def ocr_crop(img_file: Path, lang: str) -> dict:
         if text:
             lines.append({"text": text, "conf": round(conf, 3) if conf is not None else None})
     confs = [l["conf"] for l in lines if l["conf"] is not None]
-    return {"text": " ".join(l["text"] for l in lines),
-            "lines": lines, "n_boxes": len(lines),
-            "mean_conf": round(sum(confs) / len(confs), 3) if confs else None,
-            "seconds": round(dt, 2)}
+    result = {"text": " ".join(l["text"] for l in lines),
+              "lines": lines, "n_boxes": len(lines),
+              "mean_conf": round(sum(confs) / len(confs), 3) if confs else None,
+              "seconds": round(dt, 2)}
+    common.cache_put("ocr", key, result)
+    return result
 
 
 # ---------------------------------------------------------------- [3] 그림 분류기 (선택)
@@ -262,6 +275,15 @@ def get_chart_vlm(max_new_tokens: int):
 
 
 def chart_table_extract(img_file: Path, block_type: str, max_new_tokens: int) -> tuple[str | None, float]:
+    """[수정] content-hash 캐시 배선(common.cache_get/cache_put, [4a]가 이 파이프라인에서 가장
+    비싼 단계 — 15.5초/장) — 같은 크롭이 다른 문서에서 다시 나오면(반복 템플릿 차트 등) 재호출
+    안 함. 실패(None) 결과는 캐시하지 않는다(일시적 실패를 영구 캐시하면 재시도 기회를 잃음)."""
+    chash = common.content_hash(img_file)
+    key = common.cache_key(chash, f"chart_extract_v1:{block_type}:{max_new_tokens}", CHART_VLM_MODEL_ID)
+    cached = common.cache_get("chart_table", key)
+    if cached is not None:
+        return cached["table"], cached["seconds"]
+
     from PIL import Image
     client = get_chart_vlm(max_new_tokens)
     im = Image.open(img_file).convert("RGB")
@@ -272,17 +294,32 @@ def chart_table_extract(img_file: Path, block_type: str, max_new_tokens: int) ->
         logger.info(f"  MinerU VLM 호출 실패: {e}")
         return None, round(time.time() - t0, 2)
     dt = round(time.time() - t0, 2)
-    return (str(out) if out else None), dt
+    table = str(out) if out else None
+    if table:
+        common.cache_put("chart_table", key, {"table": table, "seconds": dt})
+    return table, dt
 
 
 # ---------------------------------------------------------------- [4b] 서술형 해석 (텍스트전용 LLM)
 
 def narrative_from_table(caption: str, table: str, model: str) -> tuple[str | None, float]:
+    """[수정] content-hash 캐시 배선 — 여기서는 이미지가 아니라 (caption, table) 텍스트 내용이
+    입력이므로 그 문자열을 해시한다(3.5초/장, [4a]만큼 크진 않지만 표가 같으면 서술도 결정적으로
+    같아야 하므로 재호출 비용을 아낄 수 있음)."""
+    chash = common.content_hash(f"{caption or ''}|{table}".encode("utf-8"))
+    key = common.cache_key(chash, "narrative_v1", model)
+    cached = common.cache_get("narrative", key)
+    if cached is not None:
+        return cached["narrative"], cached["seconds"]
+
     prompt = NARRATIVE_PROMPT.format(caption=caption or "없음", table=table)
     t0 = time.time()
     res = common.ollama_chat(model, prompt, images=None, expect_json=False,
                              num_ctx=CFG["VLM_NUM_CTX"], think=False)
-    return res, round(time.time() - t0, 2)
+    dt = round(time.time() - t0, 2)
+    if res:
+        common.cache_put("narrative", key, {"narrative": res, "seconds": dt})
+    return res, dt
 
 
 # ---------------------------------------------------------------- 파싱 보장 (원스톱)

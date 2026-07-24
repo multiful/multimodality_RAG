@@ -13,3 +13,14 @@
 11:30:36 [s2_onestop_mineru] 총 32 | useful 16 | rule탈락 0 | OCR탈락 0 | table인계 16 | 스킵 0
 11:30:36 [s2_onestop_mineru] [분류기] MinerU탐지 불일치 0건 → review_queue 후보
 11:30:36 [s2_onestop_mineru] 전체 12.0s | 출력: /Users/baiohelseu/Desktop/Project/multimodality_RAG/pdf_pipeline/data/onestop/Construct
+11:50:47 [s2_onestop_mineru] 파싱본 재사용: /Users/baiohelseu/Desktop/Project/multimodality_RAG/pdf_pipeline/data/parsed/LGCNS
+11:50:48 [s2_onestop_mineru] MinerU OCR 로드 완료 (lang=korean, 1.2s)
+11:50:54 [s2_onestop_mineru] === 원스톱(MinerU 전담) 완료 ===
+11:50:54 [s2_onestop_mineru] 총 19 | useful 5 | rule탈락 0 | OCR탈락 1 | table인계 13 | 스킵 0
+11:50:54 [s2_onestop_mineru] [분류기] MinerU탐지 불일치 0건 → review_queue 후보
+11:50:54 [s2_onestop_mineru] 전체 7.4s | 출력: /Users/baiohelseu/Desktop/Project/multimodality_RAG/pdf_pipeline/data/onestop/LGCNS
+11:51:13 [s2_onestop_mineru] 파싱본 재사용: /Users/baiohelseu/Desktop/Project/multimodality_RAG/pdf_pipeline/data/parsed/LGCNS
+11:51:18 [s2_onestop_mineru] === 원스톱(MinerU 전담) 완료 ===
+11:51:18 [s2_onestop_mineru] 총 19 | useful 5 | rule탈락 0 | OCR탈락 1 | table인계 13 | 스킵 0
+11:51:18 [s2_onestop_mineru] [분류기] MinerU탐지 불일치 0건 → review_queue 후보
+11:51:18 [s2_onestop_mineru] 전체 4.1s | 출력: /Users/baiohelseu/Desktop/Project/multimodality_RAG/pdf_pipeline/data/onestop/LGCNS

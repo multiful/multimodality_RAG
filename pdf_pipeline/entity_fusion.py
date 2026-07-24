@@ -16,6 +16,8 @@ hybrid_search()의 fused score에 곱해져 검색 순위에 반영된다.
 from __future__ import annotations
 
 import sys
+import threading
+import time
 from pathlib import Path
 
 import numpy as np
@@ -189,7 +191,33 @@ def store_evidence(db_url: str, pdf_id: str, items: list, embeddings, ticker: st
     return len(rows)
 
 
-def load_evidence_from_db(db_url: str, pdf_id: str = None, ticker: str = None) -> TextIndex:
+# [수정] 사용자 지적("load_evidence_from_db가 매 호출마다 BM25 재구축 — 캐싱 고려") 반영 —
+# (pdf_id, ticker) 키의 프로세스 메모리 캐시. DB 재조회(네트워크 왕복) + 임베딩 문자열 파싱
+# (np.fromstring, evidence 수에 비례) + BM25 전체 재토큰화를 매 호출마다 반복하던 것을 없앤다.
+# Redis 등 외부 인프라는 불필요 — 지금 배포는 단일 프로세스(README: "배포는 아직 구현 안 됨")
+# 라 여러 프로세스가 캐시를 공유할 필요가 없고, TextIndex 자체가 numpy 배열+BM25Okapi 객체를
+# 들고 있어 JSON으로 못 담아 Redis에 넣으려면 pickle 등 추가 직렬화가 필요해지는데 지금 규모에선
+# 오버엔지니어링. [49]처럼 백그라운드 잡이 나중에 upsert하면 캐시가 stale해질 수 있어 기본
+# TTL(60초)을 두고, 그걸 아는 호출측(예: RQ 워커 완료 콜백)은 invalidate_evidence_cache()로
+# 즉시 무효화할 수 있다.
+_EVIDENCE_CACHE_TTL_S = 60
+_evidence_cache: dict = {}
+_evidence_cache_lock = threading.Lock()
+
+
+def invalidate_evidence_cache(pdf_id: str = None, ticker: str = None) -> None:
+    """load_evidence_from_db()의 캐시를 무효화. 인자를 안 주면 캐시 전체를 비운다 — 예:
+    store_evidence()로 같은 pdf_id/ticker에 새로 적재한 직후 호출측이 명시적으로 불러 스테일
+    캐시를 지울 수 있다."""
+    with _evidence_cache_lock:
+        if pdf_id is None and ticker is None:
+            _evidence_cache.clear()
+            return
+        _evidence_cache.pop((pdf_id, ticker), None)
+
+
+def load_evidence_from_db(db_url: str, pdf_id: str = None, ticker: str = None,
+                           use_cache: bool = True, cache_ttl_s: float = _EVIDENCE_CACHE_TTL_S) -> TextIndex:
     """[41] 사용자 지적("질의 시점에 저장소에서 다시 읽어오는 경로가 없음") 반영 — store_evidence()가
     document_evidence에 적재해둔 임베딩을 재계산 없이 그대로 읽어와 TextIndex(BM25+dense)를
     재구성한다. 이 함수가 있으면 검색은 수집(ingest)과 같은 프로세스/실행일 필요가 없다 — 문서를
@@ -200,9 +228,22 @@ def load_evidence_from_db(db_url: str, pdf_id: str = None, ticker: str = None) -
     build_index_from_items()가 만든 것과 동일한 구조라 weighted_hybrid_search()에 그대로 넘기면 됨.
 
     psycopg2는 pgvector 어댑터가 없으면 embedding 컬럼을 '[0.1,0.2,...]' 문자열로 반환하므로
-    (image_processing/common.py의 vec_to_pg()와 반대 방향 변환) 여기서 직접 파싱한다."""
+    (image_processing/common.py의 vec_to_pg()와 반대 방향 변환) 여기서 직접 파싱한다.
+
+    [수정] use_cache=True(기본)면 (pdf_id, ticker) 키로 TTL 캐시를 먼저 확인 — 히트하면 DB 왕복/
+    파싱/BM25 재구축 없이 즉시 반환. use_cache=False로 캐시를 완전히 우회할 수 있음(디버깅,
+    "방금 적재한 최신 상태를 반드시 봐야 함"이 확실한 호출부)."""
     if not pdf_id and not ticker:
         raise ValueError("pdf_id 또는 ticker 중 하나는 지정해야 합니다(전체 스캔 방지).")
+
+    cache_key = (pdf_id, ticker)
+    if use_cache:
+        with _evidence_cache_lock:
+            cached = _evidence_cache.get(cache_key)
+        if cached is not None:
+            index, cached_at = cached
+            if time.monotonic() - cached_at < cache_ttl_s:
+                return index
 
     import psycopg2
 
@@ -229,17 +270,22 @@ def load_evidence_from_db(db_url: str, pdf_id: str = None, ticker: str = None) -
 
     index_id = pdf_id or ticker
     if not rows:
-        return TextIndex(pdf_id=index_id)
+        index = TextIndex(pdf_id=index_id)
+    else:
+        items = [
+            {"id": row_id, "pdf_id": index_id, "source_type": source_type, "page": page,
+             "content": content, "weight": weight, "metadata": metadata}
+            for row_id, source_type, page, content, weight, metadata, _ in rows
+        ]
+        embeddings = np.asarray([
+            np.fromstring(embedding_str.strip("[]"), sep=",") for *_, embedding_str in rows
+        ])
+        index = build_index_from_items(index_id, items, embeddings)
 
-    items = [
-        {"id": row_id, "pdf_id": index_id, "source_type": source_type, "page": page,
-         "content": content, "weight": weight, "metadata": metadata}
-        for row_id, source_type, page, content, weight, metadata, _ in rows
-    ]
-    embeddings = np.asarray([
-        np.fromstring(embedding_str.strip("[]"), sep=",") for *_, embedding_str in rows
-    ])
-    return build_index_from_items(index_id, items, embeddings)
+    if use_cache:
+        with _evidence_cache_lock:
+            _evidence_cache[cache_key] = (index, time.monotonic())
+    return index
 
 
 def weighted_hybrid_search(index: TextIndex, query: str, top_k: int = 5,

@@ -1,6 +1,12 @@
 """LGCNS PDF 한 건으로 ERD 전체 흐름을 실행: 스캔본 페이지 감지(MinerU 전용 처리) -> 텍스트/
-테이블/이미지 세 브랜치 -> 엔티티 합성(가중치 정제) -> 통합 Supabase 테이블 적재 -> 하이브리드
-검색(BM25+BGE-m3-ko, 소스 가중치 반영) -> citation-check 포함 LLM 투자의견 생성까지 한 번에 돈다.
+테이블/이미지 세 브랜치 -> 엔티티 합성(가중치 정제) -> 통합 Supabase 테이블 적재 -> 쿼리 라우팅
+검색(route_search — gpt-4o 분류 후 keyword_specific=hybrid RRF, abstract=entity_count 기반
+HyDE/MQE) -> citation-check 포함 LLM 투자의견 생성까지 한 번에 돈다.
+
+[수정] 검색 단계를 entity_fusion.weighted_hybrid_search()(항상 고정 dense+BM25 가중합, 쿼리
+분류/HyDE/MQE 없음)에서 index_text.route_search()로 교체 — 4문서 A/B(파이프라인_최종정리_
+핸드오프.md §5)에서 route_search(entity_aware=True)가 ndcg 0.848(4문서 평균)로 dense-only
+(0.554)/고정 hybrid(0.428~0.470)/구 라우팅(0.754) 전부보다 높게 나온, 검증상 최고 성능 경로.
 
 [40] 사용자 지적("Entity Fusion sync barrier" — 세 브랜치를 다 모은 뒤 한 번에 DB 적재하면, 가장
 느린 브랜치(이미지/VLM, 문서당 최대 152초+)가 끝날 때까지 몇 초면 끝나는 텍스트/테이블 결과까지
@@ -64,6 +70,7 @@ from text_extraction import process_pdf  # noqa: E402
 import run_table_metadata_pipeline as rtmp  # noqa: E402
 from citation_check import generate_with_citation_check  # noqa: E402
 from scanned_page_router import detect_scanned_pages  # noqa: E402
+from index_text import route_search, precompute_entity_count  # noqa: E402
 import entity_fusion  # noqa: E402
 
 load_dotenv(ROOT / ".env")
@@ -245,22 +252,39 @@ def main(pdf_path=None, pdf_id: str = None, ticker: str = None, query: str = Non
     print(f"   임베딩 차원: {dim}, evidence 수: {len(index.chunks)}")
     timings["6_build_fused_index"] = time.perf_counter() - t0
 
+    from openai import OpenAI
+    client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
+
+    # [수정] 사용자 확인("4번 문제 — 최고성능인 신 라우터로 교체") — 4문서 A/B(핀터멘털/납기/
+    # LGCNS/KWave, 파이프라인_최종정리_핸드오프.md §5)에서 route_search(entity_aware=True)가
+    # ndcg 0.848(4문서 평균, 전 방법 중 최고 — 고정 weighted_hybrid_search 0.554~0.470보다 높음)로
+    # 검증됐는데 이 데모는 그 검증된 경로를 안 쓰고 있었다. route_search()가 abstract 질의에서
+    # entity_count로 HyDE/MQE를 가르므로, [46] 권장대로 인제스트 직후(질의 전에) 미리 계산해
+    # 캐시해둔다 — 안 해두면 첫 질의가 그 계산 지연을 그대로 떠안는다.
     t0 = time.perf_counter()
-    print("7) 가중 하이브리드 검색 (BM25 + BGE-m3-ko + 소스 가중치)")
-    hits = entity_fusion.weighted_hybrid_search(index, query, top_k=8)
+    print("6b) 문서 엔티티 수 사전계산 (route_search의 HyDE/MQE 분기 판단용)")
+    precompute_entity_count(index, pdf_path=pdf_path, client=client)
+    print(f"   entity_count={index.entity_count}")
+    timings["6b_precompute_entity_count"] = time.perf_counter() - t0
+
+    t0 = time.perf_counter()
+    print("7) 쿼리 라우팅 검색 (route_search — gpt-4o 분류 → keyword_specific=hybrid RRF / "
+          "abstract=entity_count로 HyDE·MQE 분기, 소스 가중치는 내부에서 동일 적용)")
+    hits, qtype = route_search(index, query, client=client, top_k=8)
+    print(f"   분류: {qtype} (entity_count={index.entity_count})")
     for h in hits:
-        print(f"   - [{h['source_type']}] page{h['chunk'].get('page')} score={h['score']:.3f} "
-              f"(dense={h['dense_score']:.3f}, bm25={h['bm25_score']:.3f})")
-    timings["7_hybrid_search"] = time.perf_counter() - t0
+        source_type = h["chunk"].get("source_type")
+        extra = (f"dense={h['dense_score']:.3f}, bm25={h['bm25_score']:.3f}"
+                 if "dense_score" in h else "MQE/HyDE 융합 점수(개별 dense/bm25 분해 없음)")
+        print(f"   - [{source_type}] page{h['chunk'].get('page')} score={h['score']:.3f} ({extra})")
+    timings["7_route_search"] = time.perf_counter() - t0
 
     t0 = time.perf_counter()
     print("8) LLM 투자의견 생성 (gpt-4o-mini, citation-check 포함)")
     evidence_context = "\n\n".join(
-        f"[{h['source_type']} / p{h['chunk'].get('page')}] {h['chunk']['content']}" for h in hits
+        f"[{h['chunk'].get('source_type')} / p{h['chunk'].get('page')}] {h['chunk']['content']}" for h in hits
     )
 
-    from openai import OpenAI
-    client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
     prompt = f"""다음은 한 기업 리포트 PDF에서 텍스트/표/이미지(차트) 세 소스를 통합한 하이브리드
 검색(BM25+BGE-m3-ko, 소스별 가중치 반영)으로 찾은 근거입니다. 각 항목 앞의 [text/table/image]는
 어느 브랜치에서 나온 근거인지를 나타냅니다.
@@ -303,7 +327,8 @@ def main(pdf_path=None, pdf_id: str = None, ticker: str = None, query: str = Non
         print(f"   {name:30s} {sec:7.2f}s  ({sec / total * 100:5.1f}%)")
 
     return {
-        "pdf_id": pdf_id, "ticker": ticker, "query": query,
+        "pdf_id": pdf_id, "ticker": ticker, "query": query, "qtype": qtype,
+        "entity_count": index.entity_count,
         "text_chunks": text_chunks, "row_records": row_records, "image_cards": image_cards,
         "all_items": all_items, "n_evidence_by_source": by_source,
         "hits": hits, "answer": answer, "citation_result": result,
