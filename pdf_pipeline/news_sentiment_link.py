@@ -18,9 +18,20 @@ README(§단계별 핵심 내용)에 이렇게 적혀 있었다:
   layer3 뉴스 md 파싱 -> KR-FinBert 감성 채점 -> 티커별 집계 -> Supabase `company_news_sentiment`
   적재 -> `fetch_news_sentiment_context()`로 프롬프트 블록 생성.
 
-주의: 네이버 API 자격증명(.env)이 없으면 실시간 수집은 불가하므로 **캐시된 md만** 사용한다.
-자격증명이 생기면 `src/finance/layer3_naver_news.search_news()`로 신규 수집분을 같은 경로에
-떨어뜨리기만 하면 이 모듈은 그대로 동작한다.
+설계문서 정합성 — 배치가 아니라 **읽기-통과 캐시(read-through)**로 간다:
+  - `docs/PRD_pdf_pipeline.md` §4는 "확정된 기업 기준으로 주가 조회 / 재무제표 요약 / 관련 뉴스기사"로
+    적어, 티커가 확정된 **그 시점에 조회**하는 흐름이다(뉴스 추출 방식은 §5 Open Question #1로 미정).
+  - `README.md` 다이어그램은 `NEWS -> META(기업 메타데이터 DB) -> LLM`이라 **DB를 거쳐** 나간다.
+  - `src/finance/layer3_news_selection.py`의 Layer3는 애초에 **실시간 파이프라인**이다
+    (네이버 검색 API 실시간 수집 -> 하드 필터 -> 4요소 가중 랭킹 -> Qwen3 reasoning 검증 -> top-N).
+
+두 요구를 다 만족시키는 형태가 읽기-통과 캐시다 — 질의 시점에 티커별로 캐시를 보고, 신선하면
+그대로 쓰고(지연 0), 없거나 TTL이 지났으면 **Layer3 정식 진입점 `select_news()`를 그 자리에서
+호출**해 채운 뒤 같은 테이블에 upsert한다. 그래서 새 기업이 나와도 자동으로 채워지고, 이미 본
+기업은 재호출 비용을 안 낸다.
+
+주의: 네이버 API 자격증명(`NAVER_CLIENT_ID`/`NAVER_CLIENT_SECRET`)이 없으면 실시간 경로는
+동작할 수 없으므로 캐시(및 기존 layer3 md 산출물)만 사용하고, 조용히 건너뛴다.
 """
 from __future__ import annotations
 
@@ -41,9 +52,17 @@ create table if not exists company_news_sentiment (
     n_articles     integer,
     avg_age_days   double precision,   -- 근거 기사 평균 경과일(신선도)
     headlines      text,               -- 근거 헤드라인(프롬프트에 그대로 인용)
-    updated_at     timestamptz default now()
+    collected_at   timestamptz,        -- **뉴스가 실제로 수집된 시각**(신선도/TTL 판단 기준)
+    source         text,               -- 'layer3_live'(실시간 수집) | 'layer3_cache'(기존 md 산출물)
+    updated_at     timestamptz default now()   -- 이 행을 적재한 시각(운영 추적용)
 )
 """
+
+# 기존 배포본에 컬럼이 없을 수 있어 멱등 추가(있으면 무시)
+TABLE_MIGRATE = [
+    "alter table company_news_sentiment add column if not exists collected_at timestamptz",
+    "alter table company_news_sentiment add column if not exists source text",
+]
 
 # 집계 점수를 다시 라벨로 되돌릴 때의 경계(layer3_news_sentiment.LABEL_SCORES와 같은 축)
 _LABEL_BOUNDS = [(0.75, "very_positive"), (0.25, "positive"), (-0.25, "neutral"),
@@ -63,9 +82,23 @@ _TITLE_RE = re.compile(r"^###\s+\d+\.\s+(.*)$")
 _LINK_RE = re.compile(r"^-\s*링크:\s*(\S+)")
 _DATE_RE = re.compile(r"^-\s*게재일:\s*(\S+)")
 _LEAD_RE = re.compile(r"^-\s*리드문:\s*(.*)$")
+_GENERATED_RE = re.compile(r"^_generated:\s*(\S+)_?\s*$", re.M)
 
 
-def parse_layer3_markdown(path: Path) -> tuple[str, list[NewsItem]]:
+def _parse_generated_at(text: str):
+    """layer3 md 머리말의 `_generated: 2026-07-23T12:23:38+00:00_`을 읽어 **실제 수집 시각**을
+    돌려준다. 이걸 안 쓰고 적재 시각(now())을 신선도로 삼으면, 몇 달 전 산출물도 방금 수집한
+    것처럼 보여 읽기-통과 캐시가 재수집을 영원히 건너뛴다(실제로 처음 적재할 때 그렇게 넣었다)."""
+    m = _GENERATED_RE.search(text)
+    if not m:
+        return None
+    try:
+        return datetime.fromisoformat(m.group(1).rstrip("_"))
+    except Exception:
+        return None
+
+
+def parse_layer3_markdown(path: Path) -> tuple[str, list[NewsItem], object]:
     """layer3 뉴스 md에서 (기업 한글명, 기사 목록)을 뽑는다. 파일 형식은 수집기가 만든 고정
     템플릿(`### N. 제목` / `- 링크:` / `- 게재일:` / `- 리드문:`)이라 정규식으로 충분하다."""
     text = path.read_text(encoding="utf-8")
@@ -98,7 +131,7 @@ def parse_layer3_markdown(path: Path) -> tuple[str, list[NewsItem]]:
         if pd.tzinfo is None:
             pd = pd.replace(tzinfo=timezone.utc)
         out.append(NewsItem(title=it["title"], lead=it["lead"], link=it["link"], pub_date=pd))
-    return name_ko, out
+    return name_ko, out, _parse_generated_at(text)
 
 
 def _to_scored_article(item: NewsItem):
@@ -126,7 +159,7 @@ def score_ticker(ticker: str, md_path: Path) -> dict | None:
         sys.path.insert(0, str(ROOT))
     from src.finance.layer3_news_sentiment import score_news_sentiment
 
-    name_ko, items = parse_layer3_markdown(md_path)
+    name_ko, items, generated_at = parse_layer3_markdown(md_path)
     if not items:
         return None
     articles = [_to_scored_article(i) for i in items]
@@ -136,6 +169,9 @@ def score_ticker(ticker: str, md_path: Path) -> dict | None:
         "sentiment": round(float(s_news), 4), "label": _label_for(s_news),
         "n_articles": len(items), "avg_age_days": round(float(age_days), 2),
         "headlines": " | ".join(i.title for i in items[:NEWS_CONTEXT_MAX_HEADLINES]),
+        # 캐시 경로는 md가 만들어진 시각이 곧 수집 시각. 못 읽으면 기사들의 최신 게재일로 대체.
+        "collected_at": generated_at or max((i.pub_date for i in items), default=None),
+        "source": "layer3_cache",
     }
 
 
@@ -156,16 +192,20 @@ def build_from_cache(db_url: str, layer3_dir: Path = LAYER3_DIR) -> list[dict]:
     try:
         with conn.cursor() as cur:
             cur.execute(TABLE_DDL)
+            for stmt in TABLE_MIGRATE:
+                cur.execute(stmt)
             for r in rows:
                 cur.execute(
                     "insert into company_news_sentiment "
-                    "(ticker,name_ko,sentiment,label,n_articles,avg_age_days,headlines,updated_at) "
+                    "(ticker,name_ko,sentiment,label,n_articles,avg_age_days,headlines,"
+                    "collected_at,source,updated_at) "
                     "values (%(ticker)s,%(name_ko)s,%(sentiment)s,%(label)s,%(n_articles)s,"
-                    "%(avg_age_days)s,%(headlines)s, now()) "
+                    "%(avg_age_days)s,%(headlines)s,%(collected_at)s,%(source)s, now()) "
                     "on conflict (ticker) do update set "
                     "name_ko=excluded.name_ko, sentiment=excluded.sentiment, label=excluded.label, "
                     "n_articles=excluded.n_articles, avg_age_days=excluded.avg_age_days, "
-                    "headlines=excluded.headlines, updated_at=now()",
+                    "headlines=excluded.headlines, collected_at=excluded.collected_at, "
+                    "source=excluded.source, updated_at=now()",
                     r)
         conn.commit()
     finally:
@@ -190,7 +230,8 @@ def fetch_news_sentiment_context(db_url: str, tickers: list) -> str:
             if cur.fetchone()[0] is None:
                 return ""
             cur.execute(
-                "select ticker,name_ko,sentiment,label,n_articles,avg_age_days,headlines "
+                "select ticker,name_ko,sentiment,label,n_articles,avg_age_days,headlines,"
+                "coalesce(collected_at, updated_at) "
                 "from company_news_sentiment where ticker = any(%s)", (list(tickers),))
             rows = cur.fetchall()
     except Exception:
@@ -201,12 +242,127 @@ def fetch_news_sentiment_context(db_url: str, tickers: list) -> str:
     if not rows:
         return ""
     lines = []
-    for t, name, s, lab, n, age, heads in rows:
+    for t, name, s, lab, n, age, heads, collected in rows:
+        # 수집일을 같이 노출한다 — LLM이 "최근 뉴스"의 최근이 언제인지 알아야 오래된 감성을
+        # 현재 상황처럼 단정하지 않는다(신선도가 프롬프트에 없으면 판단 근거가 없다).
+        when = collected.strftime("%Y-%m-%d") if collected else "수집시각 미상"
         lines.append(
             f"[{name}({t}) 최근 뉴스 감성 — DB]\n"
-            f"감성 점수 {s:+.2f} ({lab}), 근거 기사 {n}건, 평균 {age:.1f}일 전\n"
+            f"감성 점수 {s:+.2f} ({lab}), 근거 기사 {n}건, 평균 {age:.1f}일 전, 수집일 {when}\n"
             f"주요 헤드라인: {heads}")
     return "\n\n".join(lines)
+
+
+# ---------------------------------------------------------------- 실시간(Layer3) 경로
+
+NEWS_TTL_HOURS = 24          # 이 시간이 지난 캐시는 오래된 것으로 보고 다시 수집
+NEWS_TOP_N = 5               # Layer3가 최종 선정하는 기사 수(기존 산출물과 동일)
+
+
+def _naver_credentials_available() -> bool:
+    import os
+    return bool(os.environ.get("NAVER_CLIENT_ID") and os.environ.get("NAVER_CLIENT_SECRET"))
+
+
+def score_ticker_live(ticker: str, name_ko: str, aliases: list | None = None,
+                      topic: str | None = None) -> dict | None:
+    """[설계 정합] Layer3 정식 진입점(`select_news`)을 그 자리에서 호출해 감성까지 채점한다.
+
+    md 파일을 파싱하는 캐시 경로와 달리 이쪽이 PRD §4가 말하는 "확정된 기업 기준으로 관련
+    뉴스기사 조회"에 해당한다. 네이버 자격증명이 없으면 None을 돌려주고 호출측이 캐시로 폴백한다."""
+    if not _naver_credentials_available():
+        return None
+    if str(ROOT) not in sys.path:
+        sys.path.insert(0, str(ROOT))
+    from src.finance.layer3_news_selection import select_news
+    from src.finance.layer3_news_sentiment import score_news_sentiment
+
+    try:
+        articles = select_news(name_ko=name_ko, query=name_ko, topic=topic or name_ko,
+                               aliases=aliases or [], top_n=NEWS_TOP_N)
+    except Exception:
+        return None            # 수집/랭킹 실패는 보조 신호 실패일 뿐 — 생성은 계속돼야 한다
+    if not articles:
+        return None
+    s_news, age_days, _ = score_news_sentiment(articles, name_ko)
+    return {
+        "ticker": ticker, "name_ko": name_ko,
+        "sentiment": round(float(s_news), 4), "label": _label_for(s_news),
+        "n_articles": len(articles), "avg_age_days": round(float(age_days), 2),
+        "headlines": " | ".join(a.title for a in articles[:NEWS_CONTEXT_MAX_HEADLINES]),
+        "collected_at": datetime.now(timezone.utc),   # 실시간 경로는 지금이 곧 수집 시각
+        "source": "layer3_live",
+    }
+
+
+def _stale_or_missing(db_url: str, tickers: list, ttl_hours: int) -> list:
+    """캐시에 없거나 TTL이 지난 티커만 골라낸다(있으면 재수집 안 함 = 지연 0)."""
+    import psycopg2
+    try:
+        conn = psycopg2.connect(db_url)
+    except Exception:
+        return list(tickers)
+    try:
+        with conn.cursor() as cur:
+            cur.execute("select to_regclass('public.company_news_sentiment')")
+            if cur.fetchone()[0] is None:
+                return list(tickers)
+            cur.execute(
+                "select ticker from company_news_sentiment "
+                "where ticker = any(%s) and coalesce(collected_at, updated_at) "
+                "> now() - (%s || ' hours')::interval",
+                (list(tickers), str(ttl_hours)))
+            fresh = {r[0] for r in cur.fetchall()}
+    except Exception:
+        return list(tickers)
+    finally:
+        conn.close()
+    return [t for t in tickers if t not in fresh]
+
+
+def _upsert(db_url: str, rows: list) -> None:
+    import psycopg2
+    if not rows:
+        return
+    conn = psycopg2.connect(db_url)
+    try:
+        with conn.cursor() as cur:
+            cur.execute(TABLE_DDL)
+            for stmt in TABLE_MIGRATE:
+                cur.execute(stmt)
+            for r in rows:
+                cur.execute(
+                    "insert into company_news_sentiment "
+                    "(ticker,name_ko,sentiment,label,n_articles,avg_age_days,headlines,"
+                    "collected_at,source,updated_at) "
+                    "values (%(ticker)s,%(name_ko)s,%(sentiment)s,%(label)s,%(n_articles)s,"
+                    "%(avg_age_days)s,%(headlines)s,%(collected_at)s,%(source)s, now()) "
+                    "on conflict (ticker) do update set "
+                    "name_ko=excluded.name_ko, sentiment=excluded.sentiment, label=excluded.label, "
+                    "n_articles=excluded.n_articles, avg_age_days=excluded.avg_age_days, "
+                    "headlines=excluded.headlines, collected_at=excluded.collected_at, "
+                    "source=excluded.source, updated_at=now()", r)
+        conn.commit()
+    finally:
+        conn.close()
+
+
+def refresh_for_matched(db_url: str, matched: list, ttl_hours: int = NEWS_TTL_HOURS) -> int:
+    """[읽기-통과 캐시] 매칭된 기업 중 캐시가 없거나 오래된 것만 Layer3로 실시간 채워 넣는다.
+    반환: 새로 채운 기업 수. 자격증명이 없거나 수집이 실패하면 0(기존 캐시로 그대로 진행)."""
+    if not matched:
+        return 0
+    by_ticker = {m["ticker"]: m.get("name") or m["ticker"] for m in matched}
+    need = _stale_or_missing(db_url, list(by_ticker), ttl_hours)
+    if not need or not _naver_credentials_available():
+        return 0
+    rows = []
+    for t in need:
+        rec = score_ticker_live(t, by_ticker[t])
+        if rec:
+            rows.append(rec)
+    _upsert(db_url, rows)
+    return len(rows)
 
 
 def main():
