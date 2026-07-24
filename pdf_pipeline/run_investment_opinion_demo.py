@@ -9,6 +9,16 @@
 채 같은 document_evidence 테이블에 각자 도착하는 것 자체가 합성 지점이다(entity_fusion.py 참고).
 통합 하이브리드 인덱스는 각 브랜치에서 이미 계산한 임베딩을 재사용해서 만들어 재임베딩 비용도 없앴다.
 
+[수정] [40]/[51]에서 검증된 "브랜치는 서로 독립적" 전제([49] RQ 큐, [51] 인덱싱/질의 준비
+오버랩과 같은 계열의 발견 — test_concurrent_upload_query.py 등에서 실측)가 이 데모 자체에는
+안 배선돼 있었음: 텍스트/테이블/이미지 3브랜치가 완전 순차 실행이라 총 대기시간이
+max(text,table,image)가 아니라 sum(...)이었다(이미지 브랜치 최대 152초+가 그대로 더해짐).
+세 브랜치 모두 자기 pdf_id/ticker로 독립적으로 적재하고(각자 store_evidence 호출), 서로의
+결과를 읽지 않으며, YOLO는 1)에서 이미 전 페이지 caching이 끝난 `page_boxes`를 쓰므로(각
+브랜치 내부에서 재추론 없음) 동시 실행해도 안전 — ThreadPoolExecutor로 실제 동시 실행하도록
+배선한다. 표 브랜치는 `row_parser.parse_table_hybrid()`([JAEIL v5, 15문서 A/B 채택])로 TATR을
+대체해 표 단계 자체도 더 빨라졌다.
+
 범위 제한:
     - 리랭킹: 의도적으로 보류(사용자 확인 완료 — 오버엔지니어링 방지, index_text.py 자체 설계
       원칙과도 일치)
@@ -24,13 +34,19 @@
 
 Usage:
     python pdf_pipeline/run_investment_opinion_demo.py
+    (다른 PDF/쿼리로: main(pdf_path=..., pdf_id=..., ticker=..., query=...) 직접 호출 —
+    [수정] 팀원 인계를 위해 LGCNS 하드코딩을 걷어내고 main()이 인자를 받도록 파라미터화.
+    인자를 안 주면 기존과 동일하게 LGCNS 기본값으로 동작(하위호환). ticker=None이면(예: 여러
+    기업을 다루는 산업 섹터 리포트) document_evidence에 ticker 없이 pdf_id로만 태그된다.)
 """
 
 import json
 import os
+import re
 import sys
 import threading
 import time
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -52,10 +68,10 @@ import entity_fusion  # noqa: E402
 
 load_dotenv(ROOT / ".env")
 
-PDF_PATH = ROOT / "pdf_pipeline" / "reference" / "LGCNS" / "20260721_company_279243000.pdf"
-PDF_ID = "LGCNS"
-TICKER = "064400.KS"
-QUERY = "이 PDF 내용을 바탕으로 이 회사에 대한 투자 의견을 제공해줘"
+DEFAULT_PDF_PATH = ROOT / "pdf_pipeline" / "reference" / "LGCNS" / "20260721_company_279243000.pdf"
+DEFAULT_PDF_ID = "LGCNS"
+DEFAULT_TICKER = "064400.KS"
+DEFAULT_QUERY = "이 PDF 내용을 바탕으로 이 회사에 대한 투자 의견을 제공해줘"
 DB_URL = os.environ.get("SUPABASE_DIRECT_DB_URL")
 if not DB_URL:
     raise RuntimeError(
@@ -63,91 +79,154 @@ if not DB_URL:
         "(비밀번호를 코드에 하드코딩하지 않음 — 과거 하드코딩된 값은 유출된 것으로 간주하고 "
         "Supabase 대시보드에서 반드시 회전(rotate)할 것)."
     )
-ONESTOP_CARDS_PATH = ROOT / "data" / "onestop" / PDF_ID / "onestop_cards.jsonl"
 
-# MinerU 미설치 환경에서 이미지 브랜치 나머지 단계(합성/저장/검색/생성)를 검증하기 위한 대표
-# 예시 카드 — onestop_cards.jsonl(README §5 카드 스키마)과 동일한 필드 구조. 실제 문서 내용이
-# 아니라 이번 LGCNS PDF의 실제 수치(page1_4 텍스트 청크에서 확인된 클라우드&AI 매출 추이)를
-# 반영해 만든 대표 사례.
-FALLBACK_IMAGE_CARDS = [
-    {
-        "image_id": f"{PDF_ID}_p2_chart1", "doc_id": PDF_ID, "page": 2, "block_type": "chart",
-        "status": "useful", "caption": "LG CNS 클라우드&AI 부문 분기별 매출 추이",
-        "footnote": "단위: 십억원", "ocr": {"text": "717 872 880 1,118 765 921"},
-        "chart_table": "| 분기 | 클라우드&AI 매출 |\n|---|---|\n| 1Q25 | 717 |\n| 2Q25 | 872 |\n"
-                        "| 3Q25 | 880 |\n| 4Q25 | 1,118 |\n| 1Q26 | 765 |\n| 2Q26F | 921 |",
-        "narrative": "클라우드&AI 부문 매출은 분기별로 우상향하며, 2Q26F 921십억원까지 성장할 전망이다.",
-        "embed_text": "LG CNS 클라우드&AI 부문 분기별 매출 추이 단위: 십억원 717 872 880 1,118 765 921 "
-                       "클라우드&AI 부문 매출은 분기별로 우상향하며, 2Q26F 921십억원까지 성장할 전망이다.",
-    },
-]
+# MinerU 미실행/onestop_cards.jsonl 없음 환경에서 이미지 브랜치 나머지 단계(합성/저장/검색/생성)를
+# 그래도 끝까지 검증하기 위한 대표 예시 카드(LGCNS 실측 수치 기반) — 다른 pdf_id로 돌릴 때도
+# image_id/doc_id는 그 pdf_id로 자동 치환되지만 내용 자체는 LGCNS 사례임에 유의(진짜 카드가
+# 있으면 이 폴백은 안 쓰인다).
+def _fallback_image_cards(pdf_id: str) -> list:
+    return [
+        {
+            "image_id": f"{pdf_id}_p2_chart1", "doc_id": pdf_id, "page": 2, "block_type": "chart",
+            "status": "useful", "caption": "LG CNS 클라우드&AI 부문 분기별 매출 추이",
+            "footnote": "단위: 십억원", "ocr": {"text": "717 872 880 1,118 765 921"},
+            "chart_table": "| 분기 | 클라우드&AI 매출 |\n|---|---|\n| 1Q25 | 717 |\n| 2Q25 | 872 |\n"
+                            "| 3Q25 | 880 |\n| 4Q25 | 1,118 |\n| 1Q26 | 765 |\n| 2Q26F | 921 |",
+            "narrative": "클라우드&AI 부문 매출은 분기별로 우상향하며, 2Q26F 921십억원까지 성장할 전망이다.",
+            "embed_text": "LG CNS 클라우드&AI 부문 분기별 매출 추이 단위: 십억원 717 872 880 1,118 765 921 "
+                           "클라우드&AI 부문 매출은 분기별로 우상향하며, 2Q26F 921십억원까지 성장할 전망이다.",
+        },
+    ]
 
 
-def main():
+# [수정] 사용자 지적("건설업종 종목 주간 수익률이 가장 높은 기업은?") 검증 중 발견 — 차트를
+# OCR로 읽은 텍스트("삼성E&A (7.4) GS건설 (14.3) ... IPARK현대산업개발 1.3")를 그대로 LLM에
+# 주면(한국 증권 리포트 관례상 괄호=음수/하락) gpt-4o-mini가 괄호 숫자를 그냥 "큰 숫자"로
+# 읽어 GS건설(-14.3%, 실제로는 가장 큰 하락)을 "가장 높은 수익률"이라고 답하는 오류를 실측으로
+# 확인했다. 프롬프트에 "괄호=음수" 지침을 명시해도(아래 프롬프트 참고) gpt-4o-mini가 안정적으로
+# 못 지킴 — LLM의 즉석 해석에 맡기는 대신, 데이터 자체를 정규화해 애매함을 원천 차단한다(citation
+# -check의 extract_numbers()도 부호를 안 보므로 이 오류를 못 잡는다 — 인용 자체는 "그 숫자가
+# 어딘가 있다"만 확인해서 통과함, citation_check.py 자체 한계로 문서화돼 있음). block_type=chart
+# 카드의 embed_text에서만(라벨 있는 표/텍스트 청크의 괄호는 다른 의미일 수 있어 범위를 좁힘)
+# "라벨 (N)" 패턴을 "라벨 -N"으로 치환해 부호를 명시적으로 만든다.
+_CHART_PAREN_NEGATIVE_RE = re.compile(r"\((\d+(?:\.\d+)?)\)")
+
+
+def _normalize_chart_card_signs(cards: list) -> list:
+    """block_type="chart" 카드의 embed_text에서 "(N)" 괄호 표기(한국 증권 리포트 관례상 음수/하락)를
+    "-N"으로 정규화 — LLM이 부호를 즉석 해석하다 실수하는 대신 데이터 단계에서 확정한다."""
+    out = []
+    for c in cards:
+        if c.get("block_type") == "chart" and c.get("embed_text"):
+            c = {**c, "embed_text": _CHART_PAREN_NEGATIVE_RE.sub(r"-\1", c["embed_text"])}
+        out.append(c)
+    return out
+
+
+def main(pdf_path=None, pdf_id: str = None, ticker: str = None, query: str = None,
+         add_structured_metadata: bool = False, sector: str = None, verbose: bool = True):
+    """[수정] 팀원 인계용 파라미터화 — 인자를 안 주면 기존 LGCNS 기본값 그대로 동작.
+    ticker=None이면(예: 여러 기업을 다루는 산업 섹터 리포트) document_evidence에 ticker 컬럼
+    없이 pdf_id로만 태그된다(entity_fusion.store_evidence의 기존 동작 그대로 재사용).
+    add_structured_metadata=True면 텍스트/테이블 라우팅 끝에 OpenAI Structured Output까지
+    돌려 각 청크/행에 정성적 메타데이터(엔티티/논조 등)를 채운다(유료 API 호출 추가).
+    반환: 호출측이 검증/보고서 작성에 쓸 수 있도록 결과 dict를 그대로 돌려준다."""
+    pdf_path = Path(pdf_path) if pdf_path else DEFAULT_PDF_PATH
+    pdf_id = pdf_id or DEFAULT_PDF_ID
+    query = query or DEFAULT_QUERY
+    onestop_cards_path = ROOT / "pdf_pipeline" / "data" / "onestop" / pdf_id / "onestop_cards.jsonl"
+
+    def _p(*a):
+        if verbose:
+            print(*a)
+
     timings = {}
 
     from embedding import get_embedding_model
     threading.Thread(target=get_embedding_model, daemon=True).start()
 
     t0 = time.perf_counter()
-    print("0) 스캔본 페이지 감지 (텍스트 레이어 없음 + 이미지가 페이지 대부분을 덮는 페이지)")
-    scanned_pages = detect_scanned_pages(PDF_PATH)
+    _p("0) 스캔본 페이지 감지 (텍스트 레이어 없음 + 이미지가 페이지 대부분을 덮는 페이지)")
+    scanned_pages = detect_scanned_pages(pdf_path)
     if scanned_pages:
-        print(f"   ⚠ {len(scanned_pages)}개 페이지({scanned_pages})가 어려운(스캔) PDF 페이지로 판정됨 "
-              f"— only MinerU 처리 대상")
-        print("   ⚠ 이 환경엔 MinerU가 설치돼 있지 않아 실제 MinerU 대체 추출은 수행하지 못함 "
-              "(scanned_page_router.extract_text_via_mineru() 참고, MinerU 설치 후 재실행 필요)")
+        _p(f"   ⚠ {len(scanned_pages)}개 페이지({scanned_pages})가 어려운(스캔) PDF 페이지로 판정됨 "
+           f"— only MinerU 처리 대상")
     else:
-        print("   스캔본 페이지 없음 — 전 페이지 자체 파이프라인으로 처리")
+        _p("   스캔본 페이지 없음 — 전 페이지 자체 파이프라인으로 처리")
     timings["0_scanned_page_detect"] = time.perf_counter() - t0
 
     t0 = time.perf_counter()
-    print("1) YOLO 로딩 + 페이지 분류")
+    _p("1) YOLO 로딩 + 페이지 분류")
     yolo_model = YOLO(str(ROOT / "pdf_pipeline" / "page_classification" / "models" / "yolo11n_doc_layout.pt"))
     yolo_model.predict(Image.new("RGB", (595, 842), (255, 255, 255)), conf=0.25, verbose=False)
 
-    cls_result = classify_pdf(PDF_PATH, yolo_model)
+    cls_result = classify_pdf(pdf_path, yolo_model)
     page_boxes = {p["page"]: p["cached_boxes"] for p in cls_result["pages"]}
-    print(f"   {cls_result['n_pages']}페이지 분류 완료")
+    _p(f"   {cls_result['n_pages']}페이지 분류 완료")
     timings["1_yolo_load_and_classify"] = time.perf_counter() - t0
 
     import numpy as np
 
-    t0 = time.perf_counter()
-    print("2) 텍스트 브랜치: 추출 + 청킹 -> 임베딩 -> 즉시 적재")
-    text_result = process_pdf(PDF_PATH, yolo_model, page_boxes=page_boxes,
-                               chunk_backend="rulebased", remove_boilerplate=True,
-                               add_structured_metadata=False)
-    text_chunks = [c for page in text_result["pages"] for c in page["chunks"]]
-    text_items, text_emb = entity_fusion.embed_items(entity_fusion.from_text_chunks(PDF_ID, text_chunks))
-    n = entity_fusion.store_evidence(DB_URL, PDF_ID, text_items, text_emb, ticker=TICKER)
-    print(f"   {len(text_chunks)}개 청크 생성 -> {n}개 즉시 적재 (테이블/이미지 브랜치 대기 안 함)")
-    timings["2_text_branch"] = time.perf_counter() - t0
+    def _run_text_branch():
+        tb0 = time.perf_counter()
+        text_result = process_pdf(pdf_path, yolo_model, page_boxes=page_boxes,
+                                   chunk_backend="rulebased", remove_boilerplate=True,
+                                   add_structured_metadata=add_structured_metadata, sector=sector)
+        text_chunks = [c for page in text_result["pages"] for c in page["chunks"]]
+        text_items, text_emb = entity_fusion.embed_items(entity_fusion.from_text_chunks(pdf_id, text_chunks))
+        n = entity_fusion.store_evidence(DB_URL, pdf_id, text_items, text_emb, ticker=ticker)
+        _p(f"   [텍스트] {len(text_chunks)}개 청크 생성 -> {n}개 즉시 적재")
+        return text_items, text_emb, text_chunks, time.perf_counter() - tb0
+
+    def _run_table_branch():
+        tb0 = time.perf_counter()
+        rtmp.PDF_PATH = pdf_path
+        table_records, n_finance_filtered, n_cid = rtmp.build_records(
+            pdf_id, page_boxes=page_boxes, yolo_model=yolo_model,
+            add_structured_metadata=add_structured_metadata, sector=sector)
+        row_records = [r for r in table_records if r.get("record_type") != "table_metadata"]
+        mapped = [r for r in row_records if r.get("canonical_field")]
+        table_items, table_emb = entity_fusion.embed_items(entity_fusion.from_table_records(pdf_id, row_records))
+        n = entity_fusion.store_evidence(DB_URL, pdf_id, table_items, table_emb, ticker=ticker)
+        _p(f"   [테이블] {len(row_records)}행 파싱(하이브리드 게이트, [JAEIL v5]), "
+           f"canonical 매칭 {len(mapped)}개 -> {n}개 즉시 적재")
+        return table_items, table_emb, row_records, time.perf_counter() - tb0
+
+    def _run_image_branch():
+        tb0 = time.perf_counter()
+        if onestop_cards_path.exists():
+            image_cards = [json.loads(line) for line in onestop_cards_path.read_text(encoding="utf-8").splitlines() if line.strip()]
+            _p(f"   [이미지] 실제 onestop_cards.jsonl {len(image_cards)}건 로드: {onestop_cards_path}")
+        else:
+            image_cards = _fallback_image_cards(pdf_id)
+            _p(f"   [이미지] ⚠ {onestop_cards_path} 없음(MinerU 미실행) — 대표 예시 카드 {len(image_cards)}건으로 대체")
+        image_cards = _normalize_chart_card_signs(image_cards)
+        if add_structured_metadata:
+            import structured_output
+            image_cards = structured_output.add_structured_metadata_to_cards(image_cards)
+        image_items, image_emb = entity_fusion.embed_items(entity_fusion.from_image_cards(pdf_id, image_cards))
+        n = entity_fusion.store_evidence(DB_URL, pdf_id, image_items, image_emb, ticker=ticker)
+        _p(f"   [이미지] {n}개 즉시 적재")
+        return image_items, image_emb, image_cards, time.perf_counter() - tb0
 
     t0 = time.perf_counter()
-    print("3) 테이블 브랜치: TATR + canonical 매칭 -> 임베딩 -> 즉시 적재")
-    rtmp.PDF_PATH = PDF_PATH
-    table_records, n_finance_filtered, n_cid = rtmp.build_records(
-        PDF_ID, page_boxes=page_boxes, yolo_model=yolo_model)
-    row_records = [r for r in table_records if r.get("record_type") != "table_metadata"]
-    mapped = [r for r in row_records if r.get("canonical_field")]
-    table_items, table_emb = entity_fusion.embed_items(entity_fusion.from_table_records(PDF_ID, row_records))
-    n = entity_fusion.store_evidence(DB_URL, PDF_ID, table_items, table_emb, ticker=TICKER)
-    print(f"   {len(row_records)}행 파싱, canonical 매칭 {len(mapped)}개 -> {n}개 즉시 적재")
-    timings["3_table_branch"] = time.perf_counter() - t0
-
-    t0 = time.perf_counter()
-    print("4) 이미지 브랜치: image_processing 카드 로드 -> 임베딩 -> 즉시 적재")
-    if ONESTOP_CARDS_PATH.exists():
-        image_cards = [json.loads(line) for line in ONESTOP_CARDS_PATH.read_text(encoding="utf-8").splitlines() if line.strip()]
-        print(f"   실제 onestop_cards.jsonl {len(image_cards)}건 로드: {ONESTOP_CARDS_PATH}")
-    else:
-        image_cards = FALLBACK_IMAGE_CARDS
-        print(f"   ⚠ {ONESTOP_CARDS_PATH} 없음(MinerU 미실행) — 대표 예시 카드 {len(image_cards)}건으로 대체")
-    image_items, image_emb = entity_fusion.embed_items(entity_fusion.from_image_cards(PDF_ID, image_cards))
-    n = entity_fusion.store_evidence(DB_URL, PDF_ID, image_items, image_emb, ticker=TICKER)
-    print(f"   {n}개 즉시 적재 (이 브랜치가 훨씬 오래 걸려도 텍스트/테이블은 이미 DB에 반영된 뒤였음)")
-    timings["4_image_branch"] = time.perf_counter() - t0
+    print("2-4) 텍스트/테이블/이미지 3브랜치 동시 실행 (서로 독립적 — [40]/[51]과 동일 전제, "
+          "ThreadPoolExecutor로 실제 동시성 배선)")
+    with ThreadPoolExecutor(max_workers=3) as ex:
+        f_text = ex.submit(_run_text_branch)
+        f_table = ex.submit(_run_table_branch)
+        f_image = ex.submit(_run_image_branch)
+        text_items, text_emb, text_chunks, t_text = f_text.result()
+        table_items, table_emb, row_records, t_table = f_table.result()
+        image_items, image_emb, image_cards, t_image = f_image.result()
+    # [수정] 개별 브랜치 시간(t_text/t_table/t_image)은 서로 겹쳐서 돌았으므로 timings에 그대로
+    # 넣으면 "총 소요시간"이 실제 벽시계보다 부풀려짐(동시 실행분이 중복 합산) — 아래 "단계별
+    # 소요시간" 총합/비율 계산에는 실제 벽시계(2-4_concurrent_wall)만 반영하고, 브랜치별 개별
+    # 시간은 참고용으로 바로 위에서 따로 출력한다.
+    timings["2-4_concurrent_wall(text/table/image)"] = time.perf_counter() - t0
+    print(f"   [텍스트 {t_text:.2f}s / 테이블 {t_table:.2f}s / 이미지 {t_image:.2f}s] 개별 합계 "
+          f"{t_text + t_table + t_image:.2f}s -> 동시 실행 벽시계 "
+          f"{timings['2-4_concurrent_wall(text/table/image)']:.2f}s")
 
     t0 = time.perf_counter()
     print("5) 엔티티 합성 완료 확인 (세 브랜치가 각자 적재한 evidence 수 집계 — 추가 대기 없음)")
@@ -156,19 +235,19 @@ def main():
     by_source = {}
     for it in all_items:
         by_source[it["source_type"]] = by_source.get(it["source_type"], 0) + 1
-    print(f"   총 {len(all_items)}개 evidence ({by_source}) — 전부 document_evidence(ticker={TICKER})에 있음")
+    print(f"   총 {len(all_items)}개 evidence ({by_source}) — 전부 document_evidence(ticker={ticker})에 있음")
     timings["5_entity_fusion"] = time.perf_counter() - t0
 
     t0 = time.perf_counter()
     print("6) 통합 하이브리드 인덱스 구축 (이미 계산된 임베딩 재사용 — 재임베딩 없음)")
-    index = entity_fusion.build_index_from_items(PDF_ID, all_items, all_embeddings)
+    index = entity_fusion.build_index_from_items(pdf_id, all_items, all_embeddings)
     dim = index.embeddings.shape[1]
     print(f"   임베딩 차원: {dim}, evidence 수: {len(index.chunks)}")
     timings["6_build_fused_index"] = time.perf_counter() - t0
 
     t0 = time.perf_counter()
     print("7) 가중 하이브리드 검색 (BM25 + BGE-m3-ko + 소스 가중치)")
-    hits = entity_fusion.weighted_hybrid_search(index, QUERY, top_k=8)
+    hits = entity_fusion.weighted_hybrid_search(index, query, top_k=8)
     for h in hits:
         print(f"   - [{h['source_type']}] page{h['chunk'].get('page')} score={h['score']:.3f} "
               f"(dense={h['dense_score']:.3f}, bm25={h['bm25_score']:.3f})")
@@ -195,9 +274,15 @@ def main():
 - 가능하면 text/table/image 여러 소스의 근거를 섞어서 활용할 것(한 소스에만 의존하지 말 것).
 - 긍정적 근거와 부정적/유의할 근거를 모두 찾아 균형 있게 제시할 것.
 - 위 근거에 없는 내용은 추측하지 말 것.
+- [image] 소스는 차트를 OCR로 읽은 원문이라 수치 앞뒤에 부호가 명시적으로 안 붙어 있을 수 있다.
+  한국 증권 리포트 관례상 "값(N)"처럼 **괄호로 감싼 숫자는 음수(하락/손실)**, 괄호 없는 숫자는
+  양수(상승/이익)를 뜻한다 — "가장 높다/많다"류 질문에 답할 때 괄호 유무를 반드시 부호로
+  해석해서 판단할 것(괄호 안 숫자의 절댓값이 크다고 그게 "가장 높은" 값이 아니다 — 오히려
+  가장 큰 하락폭이다). 축 눈금(예: "(38)(34)(30)...")은 데이터가 아니라 눈금선이므로 특정
+  대상(기업명 등) 없이 나열된 괄호 숫자는 값으로 쓰지 말 것.
 
 [사용자 요청]
-{QUERY}
+{query}
 """
     result = generate_with_citation_check(
         client, prompt, context=evidence_context, model="gpt-4o-mini", max_retries=2)
@@ -216,6 +301,14 @@ def main():
     print("=" * 60)
     for name, sec in timings.items():
         print(f"   {name:30s} {sec:7.2f}s  ({sec / total * 100:5.1f}%)")
+
+    return {
+        "pdf_id": pdf_id, "ticker": ticker, "query": query,
+        "text_chunks": text_chunks, "row_records": row_records, "image_cards": image_cards,
+        "all_items": all_items, "n_evidence_by_source": by_source,
+        "hits": hits, "answer": answer, "citation_result": result,
+        "timings": timings, "total_time_s": total,
+    }
 
 
 if __name__ == "__main__":

@@ -94,17 +94,6 @@ def get_yolo_model():
     return model
 
 
-@st.cache_resource
-def get_tatr_model():
-    """표 브랜치(TATR, Table Transformer)의 구조 인식 모델 — build_records()에 재사용시켜
-    호출마다 HuggingFace 체크포인트를 다시 로드하지 않게 한다."""
-    from transformers import AutoImageProcessor, AutoModelForObjectDetection
-
-    model = AutoModelForObjectDetection.from_pretrained("microsoft/table-transformer-structure-recognition")
-    processor = AutoImageProcessor.from_pretrained("microsoft/table-transformer-structure-recognition")
-    return model, processor
-
-
 @st.cache_data(ttl=3600)
 def load_ticker_universe() -> list[dict]:
     """로컬 프로필 md 파일(KOSPI200_output/kospi200_profiles/*_profile.md)의 제목 줄에서
@@ -250,12 +239,14 @@ def ingest_pdf(pdf_path: Path, pdf_id: str, ticker: str, status) -> dict:
     counts["text_chunks"] = len(text_chunks)
     counts["text_stored"] = entity_fusion.store_evidence(db_url, pdf_id, text_items, text_emb, ticker=ticker)
 
-    status.write("표 브랜치 처리 중 (Table Transformer + canonical 매칭)...")
-    tatr_model, tatr_processor = get_tatr_model()
+    status.write("표 브랜치 처리 중 (하이브리드 표 파서 + canonical 매칭)...")
+    # [수정] TATR(Table Transformer)은 pdf_pipeline/final/실험_4축_비교_스마트폰.md §14-17에서
+    # 15문서 A/B 검증을 거쳐 row_parser.parse_table_hybrid()(pdfplumber text-strategy +
+    # word-clustering 게이트)로 대체됐다 — build_records()가 더는 tatr_model/tatr_processor를
+    # 받지 않아 get_tatr_model() 호출도 함께 제거(더 빠르고, TATR 체크포인트 로드 자체가 없음).
     rtmp.PDF_PATH = pdf_path
     table_records, _n_finance_filtered, _n_cid = rtmp.build_records(
         pdf_id, page_boxes=page_boxes, yolo_model=yolo_model,
-        tatr_model=tatr_model, tatr_processor=tatr_processor,
     )
     row_records = [r for r in table_records if r.get("record_type") != "table_metadata"]
     table_items, table_emb = entity_fusion.embed_items(entity_fusion.from_table_records(pdf_id, row_records))

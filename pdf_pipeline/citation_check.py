@@ -58,7 +58,11 @@ def generate_with_citation_check(client, prompt: str, context: str, model: str =
     messages = [{"role": "user", "content": prompt}]
     unsupported = []
     for attempt in range(max_retries + 1):
-        resp = client.chat.completions.create(model=model, messages=messages)
+        # [수정] _retryable_create()가 정의만 되고 실제로는 안 쓰이고 있었음(docstring은 "수정
+        # 완료"라 주장했지만 이 호출부는 계속 client.chat.completions.create()를 직접 불렀음) —
+        # 사용자가 실제로 보는 최종 답변 생성 호출이라 재시도 보호가 특히 중요한 지점이었는데
+        # 일시적 429/5xx 한 번에 데모 전체가 죽는 회귀 상태였음. 실제로 배선.
+        resp = _retryable_create(client, model=model, messages=messages)
         answer = resp.choices[0].message.content
         unsupported = find_unsupported_numbers(answer, context)
         if not unsupported:
