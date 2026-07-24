@@ -9,7 +9,7 @@ sys.path.insert(0, str(HERE))
 import common_exp as C
 
 GT = C.load_json(HERE.parent/"ground_truth_entities_smartphone.json")
-AXES = ["baseline", "enhanced", "enhanced_v2", "docling", "mineru"]
+AXES = ["baseline", "enhanced", "enhanced_v2", "enhanced_v3", "enhanced_v4", "docling", "mineru"]
 
 def norm(s):
     s = unicodedata.normalize("NFKC", str(s)).lower()
