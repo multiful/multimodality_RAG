@@ -72,7 +72,11 @@ st.set_page_config(page_title="포트폴리오", page_icon="📈", layout="wide"
 st.markdown(
     """
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Fragment+Mono&family=Inter:wght@400;500;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fragment+Mono&family=Inter:wght@400;500;600;700&display=swap');
+    @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
+    /* 한글은 전용 서체가 없는 Bebas Neue/Inter/Fragment Mono 대신 Pretendard로 폴백된다 —
+       각 font-family 목록에 'Pretendard'를 2순위로 넣어 영문/숫자는 지정 폰트, 한글은
+       Pretendard로 자동 분기(브라우저가 글리프 단위로 폴백 처리). */
 
     :root {
         /* supaste.com 실측(원본 HTML) 기준 — 페이지는 흰 배경, 카드는 오프화이트 flat fill
@@ -94,14 +98,14 @@ st.markdown(
         --shadow-md: 0 8px 24px rgba(13,13,13,.06), 0 2px 6px rgba(13,13,13,.04);
     }
 
-    html, body, .stApp { background: var(--bg) !important; font-family: 'Inter', -apple-system, sans-serif; }
+    html, body, .stApp { background: var(--bg) !important; font-family: 'Inter', 'Pretendard', -apple-system, sans-serif; }
 
-    h1 { font-family: 'Instrument Serif', serif !important; font-weight: 400 !important;
-         letter-spacing: -0.01em; color: var(--text) !important; }
-    h2, h3 { font-family: 'Inter', sans-serif !important; font-weight: 600 !important; color: var(--text) !important; }
+    h1 { font-family: 'Bebas Neue', 'Pretendard', sans-serif !important; font-weight: 400 !important;
+         letter-spacing: 0.02em; color: var(--text) !important; }
+    h2, h3 { font-family: 'Inter', 'Pretendard', sans-serif !important; font-weight: 600 !important; color: var(--text) !important; }
 
     [data-testid="stCaptionContainer"], .stCaption, small {
-        font-family: 'Fragment Mono', monospace !important;
+        font-family: 'Fragment Mono', 'Pretendard', monospace !important;
         color: var(--muted) !important;
         letter-spacing: 0.01em;
     }
@@ -159,19 +163,19 @@ st.markdown(
     }
 
     [data-baseweb="tab-list"] { gap: 4px; border-bottom: 1px solid var(--border) !important; }
-    [data-baseweb="tab"] { font-family: 'Inter', sans-serif !important; font-weight: 500 !important; color: var(--muted) !important; }
+    [data-baseweb="tab"] { font-family: 'Inter', 'Pretendard', sans-serif !important; font-weight: 500 !important; color: var(--muted) !important; }
     [aria-selected="true"][data-baseweb="tab"] { color: var(--primary) !important; }
     [data-baseweb="tab-highlight"] { background-color: var(--primary) !important; }
 
-    [data-testid="stMetricValue"] { font-family: 'Instrument Serif', serif !important; font-size: 2.2rem !important; }
-    [data-testid="stMetricLabel"] { font-family: 'Fragment Mono', monospace !important; color: var(--muted) !important; }
+    [data-testid="stMetricValue"] { font-family: 'Bebas Neue', 'Pretendard', sans-serif !important; font-size: 2.2rem !important; letter-spacing: 0.02em; }
+    [data-testid="stMetricLabel"] { font-family: 'Fragment Mono', 'Pretendard', monospace !important; color: var(--muted) !important; }
 
     hr { border-color: var(--border) !important; }
 
     /* ---- supaste 스타일 컴포넌트: 히어로 배지 / 2줄 헤드라인 / 배지 행 / 카드 아바타·태그 / 스텝 라벨 ---- */
 
     .pp-eyebrow {
-        display: inline-block; font-family: 'Fragment Mono', monospace; font-size: .7rem;
+        display: inline-block; font-family: 'Fragment Mono', 'Pretendard', monospace; font-size: .7rem;
         letter-spacing: .03em; color: var(--primary); background: var(--primary-soft);
         padding: 5px 12px; border-radius: var(--radius-pill); margin-bottom: 10px;
     }
@@ -179,19 +183,19 @@ st.markdown(
     /* supaste 히어로/푸터의 시그니처 모티프: 굵은 산세리프 한 줄 + 이탤릭 세리프 한 줄. */
     .pp-hero2 { line-height: 1.08; margin: 2px 0 14px; }
     .pp-hero2-bold {
-        display: block; font-family: 'Inter', sans-serif; font-weight: 700;
+        display: block; font-family: 'Inter', 'Pretendard', sans-serif; font-weight: 700;
         font-size: 2.3rem; letter-spacing: -0.03em; color: var(--text);
     }
     .pp-hero2-italic {
-        display: block; font-family: 'Instrument Serif', serif; font-style: italic;
-        font-weight: 400; font-size: 2.3rem; letter-spacing: -0.02em; color: var(--text);
+        display: block; font-family: 'Bebas Neue', 'Pretendard', sans-serif;
+        font-weight: 400; font-size: 2.3rem; letter-spacing: 0.02em; color: var(--text);
     }
 
     .pp-badge-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 18px; }
     .pp-badge {
         display: inline-flex; align-items: center; gap: 6px;
         background: var(--surface); padding: 8px 14px; border-radius: var(--radius-pill);
-        font-family: 'Inter', sans-serif; font-size: .82rem; font-weight: 500; color: var(--text);
+        font-family: 'Inter', 'Pretendard', sans-serif; font-size: .82rem; font-weight: 500; color: var(--text);
     }
     .pp-badge svg { width: 14px; height: 14px; stroke: var(--primary); flex-shrink: 0; }
 
@@ -200,22 +204,27 @@ st.markdown(
         width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
         background: var(--primary-soft); color: var(--primary);
         display: flex; align-items: center; justify-content: center;
-        font-family: 'Instrument Serif', serif; font-size: 1.1rem; font-weight: 600;
+        font-family: 'Bebas Neue', 'Pretendard', sans-serif; font-size: 1.2rem; font-weight: 400;
     }
     .pp-ticker-pill {
-        font-family: 'Fragment Mono', monospace; font-size: .68rem; color: var(--muted);
+        font-family: 'Fragment Mono', 'Pretendard', monospace; font-size: .68rem; color: var(--muted);
         background: var(--surface-2); border: 1px solid var(--border);
         padding: 3px 9px; border-radius: var(--radius-pill); white-space: nowrap;
     }
     .pp-ticker-pill-lg { font-size: .85rem; padding: 5px 14px; margin-left: 10px; vertical-align: middle; }
-    .pp-card-name { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 1.02rem; color: var(--text); }
+    .pp-card-name {
+        /* 압축(말줄임) 대신, KOSPI200 중 가장 긴 종목명(영문 정식 법인명, 최대 3줄 분량)을
+           기준으로 min-height를 잡아 모든 카드 높이를 맞춘다 — 어떤 이름도 잘리지 않는다. */
+        font-family: 'Inter', 'Pretendard', sans-serif; font-weight: 600; font-size: 1.02rem; color: var(--text);
+        white-space: normal; overflow-wrap: anywhere; line-height: 1.3; min-height: 3.9em;
+    }
 
-    .pp-hero-title { font-family: 'Instrument Serif', serif !important; font-weight: 400 !important;
-        letter-spacing: -0.01em; color: var(--text) !important; }
+    .pp-hero-title { font-family: 'Bebas Neue', 'Pretendard', sans-serif !important; font-weight: 400 !important;
+        letter-spacing: 0.02em; color: var(--text) !important; }
 
     .pp-step {
         display: flex; align-items: center; gap: 10px; margin: 22px 0 8px;
-        font-family: 'Fragment Mono', monospace; font-size: .78rem; color: var(--muted); letter-spacing: .02em;
+        font-family: 'Fragment Mono', 'Pretendard', monospace; font-size: .78rem; color: var(--muted); letter-spacing: .02em;
     }
     .pp-step-num {
         display: inline-flex; align-items: center; justify-content: center;
