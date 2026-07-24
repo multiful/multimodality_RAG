@@ -94,6 +94,35 @@ def get_yolo_model():
     return model
 
 
+@st.cache_resource
+def get_bge_model():
+    """entity_fusion(텍스트/표 브랜치 임베딩)이 쓰는 BGE-m3-ko 모델. embedding.py의
+    get_embedding_model()은 모듈 전역 싱글턴이라 YOLO와 달리 st.cache_resource 대상이
+    아니었고, 그래서 첫 PDF 업로드 때 2GB+ 모델을 디스크에서 올리는 콜드로드 비용이
+    업로드 대기 시간에 그대로 드러났다(실측: 5분 중 대부분). 여기서 감싸서 YOLO와 동일하게
+    앱 시작 시 미리 워밍업해둔다."""
+    from embedding import get_embedding_model
+    return get_embedding_model()
+
+
+_WARMUP_STARTED = False
+
+
+def _warmup_heavy_models():
+    """PDF 업로드 파이프라인이 쓰는 무거운 모델(YOLO/BGE-m3-ko)을 앱 프로세스 시작 시
+    백그라운드 스레드로 미리 로드해, 실제 업로드 클릭 시점엔 이미 캐시돼 있게 한다
+    (run_investment_opinion_demo.py가 쓰던 것과 동일한 패턴 — 콜드로드를 사용자 대기 시간
+    밖으로 빼낸다). 프로세스당 한 번만 스레드를 띄우면 되므로(이후 세션은 st.cache_resource
+    캐시를 그대로 재사용) 모듈 전역 플래그로 중복 실행을 막는다."""
+    global _WARMUP_STARTED
+    if _WARMUP_STARTED:
+        return
+    _WARMUP_STARTED = True
+    import threading
+    threading.Thread(target=get_yolo_model, daemon=True).start()
+    threading.Thread(target=get_bge_model, daemon=True).start()
+
+
 @st.cache_data(ttl=3600)
 def load_ticker_universe() -> list[dict]:
     """로컬 프로필 md 파일(KOSPI200_output/kospi200_profiles/*_profile.md)의 제목 줄에서
@@ -442,6 +471,7 @@ def render_detail():
 
 def main():
     st.session_state.setdefault("page", "home")
+    _warmup_heavy_models()
 
     if st.session_state["page"] == "detail" and "ticker" in st.session_state:
         render_detail()
