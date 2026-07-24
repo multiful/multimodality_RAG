@@ -79,6 +79,20 @@ def fetch_company_db_context(db_url: str, matched: list) -> str:
                 (tickers,),
             )
             prof = dict(cur.fetchall())
+            # [배당 스코어링 배선] dividend_scores는 적재·요약문·임베딩·RPC까지 다 만들어져
+            # 있었는데(설계: docs/배당스코어링_STGP_설계.md) 소비하는 코드가 0곳이라 LLM에
+            # 도달하지 못하고 있었다(사용자 확인 요청으로 발견). 여기가 LLM 컨텍스트를 만드는
+            # 유일한 지점이므로 여기 붙여야 실린다 — 뉴스 감성(아래)과 같은 패턴.
+            # score_version='v2'(고도화 산식: 연속 점수+FCF 커버리지, v1은 논문 대조용 보존)의
+            # 최신 사업연도 요약문(content, 이미 완성된 문장)을 티커별 1건 PK성 조회 —
+            # 검색(유사도)이 아니라 정확 조회라 틀릴 여지가 없다.
+            cur.execute(
+                "select distinct on (ticker) ticker, content from dividend_scores "
+                "where ticker = any(%s) and score_version = 'v2' and content is not null "
+                "order by ticker, fiscal_year desc",
+                (tickers,),
+            )
+            div = dict(cur.fetchall())
     finally:
         conn.close()
 
@@ -89,6 +103,8 @@ def fetch_company_db_context(db_url: str, matched: list) -> str:
             lines.append(f"[{name}({t}) 재무제표 요약 — DB]\n{fin[t]}")
         if prof.get(t):
             lines.append(f"[{name}({t}) 기업 프로필 요약 — DB]\n{prof[t]}")
+        if div.get(t):
+            lines.append(f"[{name}({t}) 배당 스코어 — DB]\n{div[t]}")
 
     # [재일] README 아키텍처에서 비어 있던 화살표 연결 —
     # `NEWS(관련 뉴스 Sentiment Analysis) -> META(기업 메타데이터 DB) -> LLM`.

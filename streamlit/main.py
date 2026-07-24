@@ -498,6 +498,7 @@ def answer_question(ticker: str, query: str) -> dict:
 
     financial_store = get_financial_store()
     profile_store = get_profile_store()
+    supabase_client = get_supabase_client()
     db_url = os.environ.get("SUPABASE_DIRECT_DB_URL")
     run_hybrid = bool(db_url) and has_document_evidence(ticker)
 
@@ -506,9 +507,28 @@ def answer_question(ticker: str, query: str) -> dict:
         index = entity_fusion.load_evidence_from_db(db_url, ticker=ticker)
         return entity_fusion.weighted_hybrid_search(index, query, top_k=5)
 
-    with ThreadPoolExecutor(max_workers=3) as ex:
+    def _dividend_lines():
+        # [배당 스코어링 배선] dividend_scores(적재·요약문 완비)를 소비하는 코드가 없어 LLM에
+        # 도달하지 못하던 것을 연결. v2(고도화 산식) 최신 사업연도 요약문 1건 — 티커 정확
+        # 조회라 검색 오류 여지 없음. 실패/데이터 없음이면 빈 리스트(보조 신호).
+        try:
+            resp = (
+                supabase_client.table("dividend_scores")
+                .select("content")
+                .eq("ticker", ticker)
+                .eq("score_version", "v2")
+                .order("fiscal_year", desc=True)
+                .limit(1)
+                .execute()
+            )
+            return [r["content"] for r in (resp.data or []) if r.get("content")]
+        except Exception:
+            return []
+
+    with ThreadPoolExecutor(max_workers=4) as ex:
         f_fin = ex.submit(lambda: financial_store.query(query, top_k=3, ticker=ticker) or [])
         f_prof = ex.submit(lambda: profile_store.query(query, top_k=2, ticker=ticker) or [])
+        f_div = ex.submit(_dividend_lines)
         f_hyb = ex.submit(_hybrid_hits) if run_hybrid else None
 
         evidence_lines = []
@@ -516,6 +536,8 @@ def answer_question(ticker: str, query: str) -> dict:
             evidence_lines.append(f"[financial_chunks] {hit['content']}")
         for hit in f_prof.result():
             evidence_lines.append(f"[company_profile] {hit['content']}")
+        for line in f_div.result():
+            evidence_lines.append(f"[dividend_scores] {line}")
 
         used_hybrid = False
         if f_hyb is not None:
