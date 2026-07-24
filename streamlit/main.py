@@ -707,24 +707,56 @@ def index_images_background(pdf_path: Path, pdf_id: str, ticker: str | None, sec
     완료되면 entity_fusion.invalidate_evidence_cache()로 캐시를 지워, 다음 질문부터 즉시
     반영되게 한다. 실패해도 예외를 삼키고 상태만 기록 — 백그라운드 스레드의 예외는 Streamlit
     UI로 안 올라간다."""
-    _set_image_stage(pdf_id, "running", "이미지/차트 근거(MinerU VLM + qwen3:8b) 백그라운드 처리 중...")
+    _set_image_stage(pdf_id, "running", "이미지/차트 근거(MinerU) 백그라운드 처리 중...")
     try:
-        import argparse
-
-        import s2_onestop_mineru
         import entity_fusion
-        from run_investment_opinion_demo import _normalize_chart_card_signs
+        from run_investment_opinion_demo import _find_onestop_cards, _normalize_chart_card_signs
 
-        args = argparse.Namespace(
-            doc=pdf_id, pdf_abs=str(pdf_path), lang="korean", timeout_sec=1800,
-            with_classifier=True, with_chart_analysis=True,
-            chart_max_new_tokens=s2_onestop_mineru.CHART_MAX_NEW_TOKENS,
-            narrative_model=s2_onestop_mineru.CFG["LLM_MODEL"],
-            with_structured_output=False, force=False,
-        )
-        s2_onestop_mineru.process(args)
+        # [교차리뷰 수정] mineru 패키지가 이 파이썬에 있으면 기존대로 인프로세스(맥/동일 venv 환경),
+        # 없으면(예: Windows — mineru는 별도 venv) MINERU_EXE 옆의 파이썬으로 s2를 서브프로세스
+        # 실행한다. 기존엔 인프로세스 임포트만 있어서 이 PC의 업로드 이미지 단계가 전부 조용히
+        # 실패했고(실측: 최근 upload_* 전부 image evidence 0건), 성공했더라도 카드 경로가
+        # `pdf_pipeline/data/onestop`으로 하드코딩돼 있어(§13.1 데이터 루트 이동 전 경로) 카드를
+        # 못 찾았을 것 — 경로는 데모와 같은 _find_onestop_cards()로 통일한다.
+        try:
+            import mineru  # noqa: F401
+            _in_process = True
+        except ImportError:
+            _in_process = False
 
-        cards_path = ROOT / "pdf_pipeline" / "data" / "onestop" / pdf_id / "onestop_cards.jsonl"
+        if _in_process:
+            import argparse
+            import s2_onestop_mineru
+            args = argparse.Namespace(
+                doc=pdf_id, pdf_abs=str(pdf_path), lang="korean", timeout_sec=1800,
+                with_classifier=True, with_chart_analysis=True,
+                chart_max_new_tokens=s2_onestop_mineru.CHART_MAX_NEW_TOKENS,
+                narrative_model=s2_onestop_mineru.CFG["LLM_MODEL"],
+                with_structured_output=False, force=False,
+            )
+            s2_onestop_mineru.process(args)
+        else:
+            import subprocess
+            mineru_exe = os.environ.get("MINERU_EXE", "")
+            venv_python = Path(mineru_exe).parent / "python.exe" if mineru_exe else None
+            if not (venv_python and venv_python.exists()):
+                _set_image_stage(pdf_id, "failed",
+                                 "mineru 미설치 + MINERU_EXE 미설정 — 이미지 근거 생략(텍스트/표만 사용)")
+                return
+            # 서브프로세스 경로는 차트 VLM(4a/4b)을 끈다 — venv에 vlm extra/Ollama가 없는 환경
+            # 전제(OCR+분류 카드만으로도 §8.4 실측 엔티티 recall 최강 브랜치).
+            r = subprocess.run(
+                [str(venv_python), str(ROOT / "pdf_pipeline" / "image_processing" / "s2_onestop_mineru.py"),
+                 "--doc", pdf_id, "--pdf", str(pdf_path), "--no-chart-analysis"],
+                capture_output=True, text=True, encoding="utf-8", errors="replace",
+                timeout=1800, env={**os.environ, "PYTHONIOENCODING": "utf-8"},
+            )
+            if r.returncode != 0:
+                tail = ((r.stderr or "") + (r.stdout or ""))[-250:].strip()
+                _set_image_stage(pdf_id, "failed", f"MinerU 서브프로세스 실패: {tail}")
+                return
+
+        cards_path = _find_onestop_cards(pdf_id, pdf_path)
         if not cards_path.exists():
             _set_image_stage(pdf_id, "failed", "MinerU 카드 생성 실패 — 텍스트/표 근거만 유지됩니다.")
             return
@@ -735,7 +767,7 @@ def index_images_background(pdf_path: Path, pdf_id: str, ticker: str | None, sec
         db_url = os.environ["SUPABASE_DIRECT_DB_URL"]
         n = entity_fusion.store_evidence(db_url, pdf_id, image_items, image_emb, ticker=ticker)
         entity_fusion.invalidate_evidence_cache(pdf_id=pdf_id)
-        _set_image_stage(pdf_id, "done", f"이미지/차트 근거 {n}건 추가 적재 완료 (MinerU VLM + qwen3:8b 서술형 해석)")
+        _set_image_stage(pdf_id, "done", f"이미지/차트 근거 {n}건 추가 적재 완료 — 다음 질문부터 반영됩니다")
     except Exception as e:
         _set_image_stage(pdf_id, "failed", f"이미지/차트 근거 처리 실패: {e}")
 
