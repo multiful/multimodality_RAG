@@ -127,28 +127,36 @@ RRF --> LLM
   변환. 전량 CPU 실행 가능하도록 설계(자세한 내용은 `pdf_pipeline/image_processing/README.md`).
 - **엔티티 합성 (`pdf_pipeline/entity_fusion.py`)**: 세 브랜치의 출력을 하나의 evidence로 모으고
   소스 타입별 신뢰도 가중치(표 > 이미지 > 텍스트)를 매겨 검색 점수에 반영.
-- **인덱싱 (`pdf_pipeline/text_processing/index_text.py`)**: BM25 + BGE-m3-ko 하이브리드 검색
-  스켈레톤(dense 우선, BM25 보조). Supabase 스키마 확정 전이라 현재는 인메모리 구현이며, 인터페이스만
-  고정해 나중에 Supabase(pgvector)로 교체 가능하도록 설계.
-- **검색**: 사용자 질의를 하이브리드 검색(BM25+BGE-m3-ko) 후 Rank Fusion으로 결합. 다이어그램의
-  "관련 뉴스 Sentiment Analysis"는 현재 뉴스 헤드라인 수집(`data_collection/fetch_news.py`)까지만
-  구현됐고, 감성분석 후 기업 메타데이터 DB에 결합하는 부분과 "Query 타입"별 라우팅은 아직
-  설계 단계입니다.
+- **인덱싱 (`pdf_pipeline/text_processing/index_text.py` + `entity_fusion.py`)**: BM25 + BGE-m3-ko
+  하이브리드 인덱스. evidence는 Supabase `document_evidence`(pgvector)에 적재되고,
+  `load_evidence_from_db()`로 재파싱 없이 재질의 가능(프로세스 메모리 캐시 TTL 60s).
+- **검색**: 질의 성격 게이팅 + 분해 라우팅(`decompose_and_route_search`) — 키워드형은 고정
+  하이브리드(선형가중 0.7/0.3), 추상형은 HyDE/MQE 분기. 다이어그램의 "관련 뉴스 Sentiment
+  Analysis → 기업 메타데이터 DB" 화살표는 `pdf_pipeline/news_sentiment_link.py`(네이버 실시간
+  수집 → Qwen3 선별 → KR-FinBert 채점 → 읽기-통과 캐시)로 배선 완료. 배당 스코어
+  (`dividend_scores` v2)와 Layer1~4 종합 시그널(`layer_signals_link.py`, 실시간 계산)도 기업
+  매칭 시 생성 프롬프트에 합류한다.
 - **생성 (`pdf_pipeline/citation_check.py`)**: LLM 답변에 등장하는 숫자가 실제 컨텍스트 근거에
   있는지 검증하고, 없으면 피드백과 함께 재생성.
 - **엔드투엔드 데모**: `pdf_pipeline/run_investment_opinion_demo.py`가 PDF 한 건으로 위 전체 흐름을
   한 번에 실행(스캔본 감지 → 3-브랜치 병렬 → 엔티티 합성 → 하이브리드 검색 → citation-check 포함
   답변 생성).
 
-배포(서빙/API화)는 아직 구현하지 않았고, 위 파이프라인 단계만 로컬에서 검증된 상태입니다.
+서빙 UI는 `streamlit run streamlit/main.py` — 종목 대시보드 + PDF 업로드(2단계 인덱싱: 텍스트/표
+즉시, 이미지·뉴스는 백그라운드) + 질의응답. 별도 API 서버는 아직 없다.
 
 ## Setup
 
-모델 가중치(`models/`)는 용량이 커서(30GB+) git에 올리지 않습니다. 각자 아래로 받으세요.
-
 ```bash
 pip install -r requirements.txt
-python scripts/download_models.py        # 전체 다운로드
+cp .env.example .env   # 키 채우기 — SUPABASE_DIRECT_DB_URL은 필수(업로드/검색 경로 게이팅)
+```
+
+(선택) 아래 대형 가중치(30GB+)는 **baseline/평가 실험 전용**이다 — 프로덕션 앱은 MinerU·BGE-m3-ko·
+KR-FinBert·Qwen3-0.6B/1.7B(자동 다운로드)만 쓰므로 실험을 재현할 때만 받으면 된다.
+
+```bash
+python scripts/download_models.py        # 전체 다운로드 (실험용)
 python scripts/download_models.py qwen   # Qwen2.5-VL-7B-Instruct만
 python scripts/download_models.py llava  # LLaVA-OneVision-7B-OV만
 ```
