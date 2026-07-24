@@ -31,3 +31,10 @@
 15:12:26 [s2_onestop_mineru] 총 33 | useful 22 | rule탈락 0 | OCR탈락 0 | table인계 11 | 스킵 0
 15:12:26 [s2_onestop_mineru] [분류기] MinerU탐지 불일치 0건 → review_queue 후보
 15:12:26 [s2_onestop_mineru] 전체 15.7s | 출력: /Users/baiohelseu/Desktop/Project/multimodality_RAG/pdf_pipeline/data/onestop/upload_cbf2ed0c
+15:33:27 [s2_onestop_mineru] 파싱본 없음 → MinerU CLI 파싱 시작: /var/folders/7j/r02kf_pd1hx81z_lj3w839640000gn/T/upload_44b76ed9.pdf
+15:33:49 [s2_onestop_mineru] MinerU 파싱 완료 (21.8s): /Users/baiohelseu/Desktop/Project/multimodality_RAG/pdf_pipeline/data/parsed/upload_44b76ed9
+15:33:50 [s2_onestop_mineru] MinerU OCR 로드 완료 (lang=korean, 0.7s)
+15:33:55 [s2_onestop_mineru] === 원스톱(MinerU 전담) 완료 ===
+15:33:55 [s2_onestop_mineru] 총 24 | useful 12 | rule탈락 0 | OCR탈락 0 | table인계 12 | 스킵 0
+15:33:55 [s2_onestop_mineru] [분류기] MinerU탐지 불일치 0건 → review_queue 후보
+15:33:55 [s2_onestop_mineru] 전체 6.1s | 출력: /Users/baiohelseu/Desktop/Project/multimodality_RAG/pdf_pipeline/data/onestop/upload_44b76ed9
