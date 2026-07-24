@@ -132,21 +132,59 @@ def _fallback_image_cards(pdf_id: str) -> list:
 # 카드의 embed_text에서만(라벨 있는 표/텍스트 청크의 괄호는 다른 의미일 수 있어 범위를 좁힘)
 # "라벨 (N)" 패턴을 "라벨 -N"으로 치환해 부호를 명시적으로 만든다.
 _CHART_PAREN_NEGATIVE_RE = re.compile(r"\((\d+(?:\.\d+)?)\)")
+_CHART_TRAIL_PAREN_RE = re.compile(r"(?<![\d(])(\d+(?:\.\d+)?)\)")   # 여는괄호 없이 'N)'만 (겹친 텍스트 OCR 손상)
+_CHART_NUM_RE = re.compile(r"\d+(?:\.\d+)?")
 
 
-def _normalize_chart_card_signs(cards: list) -> list:
-    """block_type="chart" 카드의 embed_text에서 "(N)" 괄호 표기(한국 증권 리포트 관례상 음수/하락)를
-    "-N"으로 정규화 — LLM이 부호를 즉석 해석하다 실수하는 대신 데이터 단계에서 확정한다."""
+def _page_number_set(doc, page: int):
+    """PDF 텍스트레이어(권위) 페이지 숫자 집합 — 이미지 OCR 손상값 대조용."""
+    try:
+        return set(m.lstrip("-") for m in re.findall(r"-?\d+(?:\.\d+)?", doc[page - 1].get_text()))
+    except Exception:
+        return None
+
+
+def _normalize_chart_card_signs(cards: list, pdf_path=None) -> list:
+    """block_type="chart" 카드의 embed_text 부호/OCR손상 정규화 — 데이터 단계에서 확정(LLM 즉석 해석 실수 방지).
+
+    [겹친 텍스트 OCR 손상 대응, 재일]
+      (1) "(N)" 완전괄호 -> "-N"(한국 증권 리포트 관례상 음수/하락). 기존.
+      (2) "N)" 닫는괄호만(여는괄호 유실) -> "-N". 예: "금호건설(35.2)"이 겹친 텍스트로 "금호건5.2)"로 깨지며
+          여는괄호+회사명 일부가 유실된 경우 최소한 부호(하락)라도 복원 → 손상값이 "최고"로 오답되는 걸 차단.
+      (3) 텍스트레이어(권위) 대조: 이미지 OCR 숫자가 원문 페이지 어디에도 없으면 손상값으로 보고 "[OCR손상]"으로
+          치환(수치 제거) → 예: 한샘 "1.7"이 겹친 텍스트로 "11.7"(축범위 +4 초과)로 깨진 경우, 원문엔 11.7이
+          없으므로 제거되어 "가장 높은 수익률"의 근거로 못 쓰이게 됨(정답 KCC글라스 +2.5가 선택되도록).
+      실측(Construct, N=4): 한샘 오답픽 1/4 -> 0/4. pdf_path 없으면 (1)(2)만 적용(무해).
+      주의: (3)은 PP-OCR과 PyMuPDF의 반올림 표기가 다르면 정상값도 제거될 위험 — 이 문서군에선 깨끗했으나
+      여러 문서로 오탐률 측정 필요(핸드오프 남은과제 참조)."""
+    doc = None
+    if pdf_path:
+        try:
+            import fitz
+            doc = fitz.open(str(pdf_path))
+        except Exception:
+            doc = None
     out = []
     for c in cards:
         if c.get("block_type") == "chart" and c.get("embed_text"):
-            c = {**c, "embed_text": _CHART_PAREN_NEGATIVE_RE.sub(r"-\1", c["embed_text"])}
+            t = _CHART_PAREN_NEGATIVE_RE.sub(r"-\1", c["embed_text"])
+            t = _CHART_TRAIL_PAREN_RE.sub(r"-\1", t)
+            if doc is not None and c.get("page"):
+                pn = _page_number_set(doc, c["page"])
+                if pn is not None:
+                    t = _CHART_NUM_RE.sub(
+                        lambda m: "[OCR손상]" if (m.group(0) not in pn and len(m.group(0).replace(".", "")) >= 2)
+                        else m.group(0), t)
+            c = {**c, "embed_text": t}
         out.append(c)
+    if doc is not None:
+        doc.close()
     return out
 
 
 def main(pdf_path=None, pdf_id: str = None, ticker: str = None, query: str = None,
-         add_structured_metadata: bool = False, sector: str = None, verbose: bool = True):
+         add_structured_metadata: bool = False, sector: str = None, verbose: bool = True,
+         gen_model: str = "gpt-4.1"):
     """[수정] 팀원 인계용 파라미터화 — 인자를 안 주면 기존 LGCNS 기본값 그대로 동작.
     ticker=None이면(예: 여러 기업을 다루는 산업 섹터 리포트) document_evidence에 ticker 컬럼
     없이 pdf_id로만 태그된다(entity_fusion.store_evidence의 기존 동작 그대로 재사용).
@@ -222,7 +260,7 @@ def main(pdf_path=None, pdf_id: str = None, ticker: str = None, query: str = Non
         else:
             image_cards = _fallback_image_cards(pdf_id)
             _p(f"   [이미지] ⚠ {onestop_cards_path} 없음(MinerU 미실행) — 대표 예시 카드 {len(image_cards)}건으로 대체")
-        image_cards = _normalize_chart_card_signs(image_cards)
+        image_cards = _normalize_chart_card_signs(image_cards, pdf_path=pdf_path)
         if add_structured_metadata:
             import structured_output
             image_cards = structured_output.add_structured_metadata_to_cards(image_cards)
@@ -315,7 +353,7 @@ def main(pdf_path=None, pdf_id: str = None, ticker: str = None, query: str = Non
     timings["7_search_and_entity_link"] = time.perf_counter() - t0
 
     t0 = time.perf_counter()
-    print("8) LLM 투자의견 생성 (gpt-4.1, citation-check 포함)")
+    print(f"8) LLM 투자의견 생성 ({gen_model}, citation-check 포함)")
     evidence_context = "\n\n".join(
         f"[{h['chunk'].get('source_type')} / p{h['chunk'].get('page')}] {h['chunk']['content']}" for h in hits
     )
@@ -339,6 +377,9 @@ DB에서 직접 조회한 정보임을 나타냅니다.
   땐 출처가 DB임을 명시할 것.
 - 긍정적 근거와 부정적/유의할 근거를 모두 찾아 균형 있게 제시할 것.
 - 위 근거에 없는 내용은 추측하지 말 것.
+- "기업 DB 참고 정보"의 원본 숫자(원단위 금액 등)를 인용할 땐 **단위 변환·반올림 없이 자릿수 그대로**
+  옮길 것(예: "1,234,500,000원"을 "12.3억"으로 바꾸지 말 것). 표기를 바꾸면 근거 검증(citation-check)에서
+  근거 없는 숫자로 오인돼 불필요한 재생성이 발생한다.
 - [image] 소스는 차트를 OCR로 읽은 원문이라 수치 앞뒤에 부호가 명시적으로 안 붙어 있을 수 있다.
   한국 증권 리포트 관례상 "값(N)"처럼 **괄호로 감싼 숫자는 음수(하락/손실)**, 괄호 없는 숫자는
   양수(상승/이익)를 뜻한다 — "가장 높다/많다"류 질문에 답할 때 괄호 유무를 반드시 부호로
@@ -350,7 +391,7 @@ DB에서 직접 조회한 정보임을 나타냅니다.
 {query}
 """
     result = generate_with_citation_check(
-        client, prompt, context=full_context, model="gpt-4.1", max_retries=2)
+        client, prompt, context=full_context, model=gen_model, max_retries=2)
     answer = result["answer"]
     timings["8_llm_generation"] = time.perf_counter() - t0
 
