@@ -37,7 +37,31 @@ try:
 except Exception:
     pass
 
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
+def _resolve_project_root() -> Path:
+    """[수정 — 재일] 데이터 루트를 "실제로 산출물이 있는 곳"으로 찾는다.
+
+    발견한 버그: 이 모듈이 리포 루트에서 `pdf_pipeline/image_processing/` 아래로 옮겨지면서
+    `parent.parent`가 리포 루트가 아니라 `pdf_pipeline/`을 가리키게 됐다. 그런데 실제 산출물
+    (`data/onestop`, `data/parsed`, `data/raw`, `data/images`)은 여전히 **리포 루트**에 있어서,
+    코드는 텅 빈 `pdf_pipeline/data/`만 쳐다보고 있었다. 결과로 (a) 이미 만들어둔 onestop 카드
+    (industry_15: 차트 105장 중 chart_table/narrative 103건 완비)를 아무도 못 읽고, (b) 데모가
+    "onestop_cards.jsonl 없음"으로 판단해 **LGCNS 예시 카드로 폴백**했으며, (c) s2를 다시 돌려도
+    `data/parsed`의 기존 파싱본을 재사용 못 하고 처음부터 파싱하게 된다.
+
+    고정 경로 대신, 후보를 위로 훑으면서 `data/` 밑에 실제 산출물 디렉토리가 있는 쪽을 고른다.
+    `PIPELINE_DATA_ROOT` 환경변수로 명시 지정도 가능(배포/테스트용)."""
+    env = os.environ.get("PIPELINE_DATA_ROOT")
+    if env and Path(env).is_dir():
+        return Path(env).resolve()
+    here = Path(__file__).resolve().parent.parent          # pdf_pipeline/
+    for cand in (here, here.parent):                       # pdf_pipeline/ -> 리포 루트
+        data = cand / "data"
+        if data.is_dir() and any((data / s).is_dir() for s in ("onestop", "parsed", "raw", "images")):
+            return cand
+    return here                                            # 둘 다 없으면 기존 동작 유지
+
+
+PROJECT_ROOT = _resolve_project_root()
 
 
 def load_env() -> None:

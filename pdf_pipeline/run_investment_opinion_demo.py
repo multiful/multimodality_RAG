@@ -193,6 +193,45 @@ def _looks_like_axis_ladder(text: str) -> bool:
     return modal > 0 and n >= _AXIS_LADDER_MIN - 1
 
 
+def _find_onestop_cards(pdf_id: str, pdf_path=None):
+    """[수정 — 재일] 이미지 브랜치 카드(onestop_cards.jsonl) 위치를 견고하게 찾는다.
+
+    기존엔 `ROOT/pdf_pipeline/data/onestop/{pdf_id}/`로 **경로를 하드코딩**했는데, 이미지 모듈의
+    데이터 루트는 `image_processing/common.py`의 CONFIG["DATA_DIR"]가 정하고 실제 산출물은 리포
+    루트 `data/onestop/`에 있었다. 두 경로가 어긋나 있어 **실제 카드가 있어도 못 찾고** 예시 카드로
+    폴백했다(그 상태에선 차트 VLM 결과도 당연히 안 실린다).
+
+    또 s2는 디렉토리 이름으로 `doc_id`(예: industry_15)를 쓰고 데모는 `pdf_id`(예: Construct,
+    upload_xxxx)를 쓰는 **명명 불일치**가 있어서, pdf_id로 못 찾으면 PDF 파일명(stem)으로도 찾고,
+    그래도 없으면 각 후보 디렉토리의 카드에 기록된 doc_id/원본 경로로 역매칭한다."""
+    from image_processing import common as _img_common
+    roots = [Path(_img_common.CONFIG["DATA_DIR"]) / "onestop",
+             ROOT / "data" / "onestop",
+             ROOT / "pdf_pipeline" / "data" / "onestop"]
+    names = [pdf_id]
+    if pdf_path:
+        names.append(Path(pdf_path).stem)
+    for root in roots:
+        for name in names:
+            cand = root / name / "onestop_cards.jsonl"
+            if cand.exists():
+                return cand
+    # 마지막 수단 — 카드 안에 기록된 원본 PDF 경로/파일명으로 역매칭
+    if pdf_path:
+        stem = Path(pdf_path).stem
+        for root in roots:
+            if not root.is_dir():
+                continue
+            for cand in root.glob("*/onestop_cards.jsonl"):
+                try:
+                    head = cand.read_text(encoding="utf-8").split("\n", 1)[0]
+                except Exception:
+                    continue
+                if stem and stem in head:
+                    return cand
+    return roots[0] / pdf_id / "onestop_cards.jsonl"   # 없을 때 로그에 찍힐 기본 경로
+
+
 def _normalize_chart_card_signs(cards: list, pdf_path=None) -> list:
     """block_type="chart" 카드의 embed_text 부호/OCR손상 정규화 — 데이터 단계에서 확정(LLM 즉석 해석 실수 방지).
 
@@ -258,7 +297,7 @@ def main(pdf_path=None, pdf_id: str = None, ticker: str = None, query: str = Non
     pdf_path = Path(pdf_path) if pdf_path else DEFAULT_PDF_PATH
     pdf_id = pdf_id or DEFAULT_PDF_ID
     query = query or DEFAULT_QUERY
-    onestop_cards_path = ROOT / "pdf_pipeline" / "data" / "onestop" / pdf_id / "onestop_cards.jsonl"
+    onestop_cards_path = _find_onestop_cards(pdf_id, pdf_path)
 
     def _p(*a):
         if verbose:

@@ -554,7 +554,13 @@ def export_txt(doc_id: str) -> Path:
 
 def main() -> None:
     p = argparse.ArgumentParser(description="원스톱: MinerU 컴포넌트만으로 이미지 카드 생성 (CPU 배포 전제)")
-    p.add_argument("--doc", required=True, help="doc_id (예: industry_15)")
+    p.add_argument("--doc", required=True, help="doc_id (예: industry_15) — 산출물 디렉토리 이름이 된다")
+    # [추가 — 재일] `process()`는 이미 `args.pdf_abs`를 읽어 `ensure_parsed(..., pdf_abs=...)`로
+    # 넘기는데(=metadata.csv 없이도 파싱 가능) 정작 그 인자를 받는 CLI 옵션이 없어서, 리포에
+    # 등록되지 않은 임의 PDF(스트림릿 업로드본, reference/ 아래 문서 등)로는 카드를 만들 방법이
+    # 없었다. 이 때문에 c밴드·Construct처럼 실제로 쓰는 문서에 이미지 브랜치가 통째로 비어 있었다.
+    p.add_argument("--pdf", dest="pdf_abs", default=None,
+                   help="metadata.csv에 없는 PDF의 절대/상대 경로 — 이걸 주면 doc_id 조회 없이 바로 파싱")
     p.add_argument("--lang", default="korean", help="MinerU OCR 언어 (기본 korean)")
     p.add_argument("--timeout-sec", type=int, default=1800, help="MinerU 파싱 타임아웃")
     p.add_argument("--with-classifier", dest="with_classifier", action="store_true", default=True,

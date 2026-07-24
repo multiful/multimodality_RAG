@@ -89,6 +89,28 @@ def fetch_company_db_context(db_url: str, matched: list) -> str:
             lines.append(f"[{name}({t}) 재무제표 요약 — DB]\n{fin[t]}")
         if prof.get(t):
             lines.append(f"[{name}({t}) 기업 프로필 요약 — DB]\n{prof[t]}")
+
+    # [재일] README 아키텍처에서 비어 있던 화살표 연결 —
+    # `NEWS(관련 뉴스 Sentiment Analysis) -> META(기업 메타데이터 DB) -> LLM`.
+    # 뉴스 감성은 지금까지 헤드라인 수집까지만 있고 생성 단계에 도달하지 못했다. 여기서 붙여야
+    # 실제로 프롬프트에 실린다(이 함수가 LLM 컨텍스트를 만드는 유일한 지점이기 때문).
+    # 테이블이 없거나 해당 티커 데이터가 없으면 빈 문자열이 와서 기존 동작 그대로 유지된다.
+    # 배치 적재가 아니라 **읽기-통과 캐시**다 — PRD §4가 "확정된 기업 기준으로 관련 뉴스기사
+    # 조회"라고 적은 대로, 티커가 확정된 이 시점에 캐시를 보고 없거나 오래됐으면(TTL) Layer3
+    # 정식 진입점(select_news: 네이버 실시간 수집 -> 랭킹 -> Qwen3 검증)으로 그 자리에서 채운다.
+    # 자격증명이 없거나 수집이 실패하면 조용히 기존 캐시로 진행한다.
+    try:
+        from news_sentiment_link import fetch_news_sentiment_context, refresh_for_matched
+        refresh_for_matched(db_url, matched)
+        news_block = fetch_news_sentiment_context(db_url, tickers)
+        if news_block:
+            lines.append(news_block)
+    except Exception as e:
+        # 뉴스 감성은 보조 신호라 실패해도 재무/프로필 컨텍스트는 그대로 나가야 한다. 다만
+        # 조용히 삼키면 배선 버그가 "그냥 뉴스가 없는 것"으로 보여 발견이 늦는다(실제로 SELECT
+        # 컬럼과 unpack 개수가 어긋난 걸 이 침묵 때문에 한 번 놓쳤다) — 경고만 남기고 계속 진행.
+        print(f"   [경고] 뉴스 감성 컨텍스트 생략됨: {type(e).__name__}: {e}")
+
     return "\n\n".join(lines)
 
 
