@@ -466,29 +466,46 @@ def load_price_history(ticker: str):
 def answer_question(ticker: str, query: str) -> dict:
     """financial_chunks/company_profile_chunks 밀집 검색을 기본 근거로 쓰고, 이 종목에 PDF
     리포트가 적재돼 있으면(document_evidence) 하이브리드(BM25+BGE-m3-ko) 검색 근거까지 더해
-    GPT로 투자 인사이트를 생성한다."""
-    evidence_lines = []
+    GPT로 투자 인사이트를 생성한다.
 
-    for hit in get_financial_store().query(query, top_k=3, ticker=ticker) or []:
-        evidence_lines.append(f"[financial_chunks] {hit['content']}")
+    [핸드오프 남은과제 8] 세 검색이 완전 순차라 지연이 sum이던 것을 ThreadPoolExecutor로
+    병렬화(max) — 인제스트 쪽 index_pdf_fast()의 텍스트/표 동시 실행과 같은 패턴. 세 검색은
+    서로의 결과를 읽지 않아 독립적이다. 주의: Streamlit API(st.cache_resource 스토어 획득,
+    st.caption)는 워커 스레드에서 부르면 ScriptRunContext 경고/오류가 나므로 스토어 핸들과
+    has_document_evidence() 판정은 메인 스레드에서 먼저 끝내고, 워커는 순수 검색 호출만 한다."""
+    from concurrent.futures import ThreadPoolExecutor
 
-    for hit in get_profile_store().query(query, top_k=2, ticker=ticker) or []:
-        evidence_lines.append(f"[company_profile] {hit['content']}")
-
-    used_hybrid = False
+    financial_store = get_financial_store()
+    profile_store = get_profile_store()
     db_url = os.environ.get("SUPABASE_DIRECT_DB_URL")
-    if db_url and has_document_evidence(ticker):
-        try:
-            import entity_fusion
+    run_hybrid = bool(db_url) and has_document_evidence(ticker)
 
-            index = entity_fusion.load_evidence_from_db(db_url, ticker=ticker)
-            for hit in entity_fusion.weighted_hybrid_search(index, query, top_k=5):
-                evidence_lines.append(
-                    f"[{hit['source_type']}(PDF) score={hit['score']:.2f}] {hit['chunk']['content']}"
-                )
-            used_hybrid = True
-        except Exception as e:
-            st.caption(f"⚠ PDF 하이브리드 검색을 건너뜁니다: {e}")
+    def _hybrid_hits():
+        import entity_fusion
+        index = entity_fusion.load_evidence_from_db(db_url, ticker=ticker)
+        return entity_fusion.weighted_hybrid_search(index, query, top_k=5)
+
+    with ThreadPoolExecutor(max_workers=3) as ex:
+        f_fin = ex.submit(lambda: financial_store.query(query, top_k=3, ticker=ticker) or [])
+        f_prof = ex.submit(lambda: profile_store.query(query, top_k=2, ticker=ticker) or [])
+        f_hyb = ex.submit(_hybrid_hits) if run_hybrid else None
+
+        evidence_lines = []
+        for hit in f_fin.result():
+            evidence_lines.append(f"[financial_chunks] {hit['content']}")
+        for hit in f_prof.result():
+            evidence_lines.append(f"[company_profile] {hit['content']}")
+
+        used_hybrid = False
+        if f_hyb is not None:
+            try:
+                for hit in f_hyb.result():
+                    evidence_lines.append(
+                        f"[{hit['source_type']}(PDF) score={hit['score']:.2f}] {hit['chunk']['content']}"
+                    )
+                used_hybrid = True
+            except Exception as e:
+                st.caption(f"⚠ PDF 하이브리드 검색을 건너뜁니다: {e}")
 
     context = "\n\n".join(evidence_lines) if evidence_lines else "관련 근거를 찾지 못했습니다."
 
