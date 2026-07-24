@@ -443,6 +443,140 @@ def route_search(index: TextIndex, query: str, client=None, top_k: int = 5,
     return hits, qtype
 
 
+# ---------- [52] 복합 질의 분해 라우팅 ----------
+# 사용자 지적(2026-07-24, Construct PDF 실측) — route_search()는 질의 전체를 통째로 하나의
+# 타입(keyword_specific/abstract)으로만 분류한다. "여기 나온 기업의 인사이트 도출해주고(추상,
+# 종합 필요) + 건설업종 종목 주간 수익률이 가장 높은 기업은 어딘지 추출해(키워드/비교형, 정밀
+# 매칭 필요)"처럼 성격이 다른 절이 한 질의에 섞이면, 분류기(rule/LLM 둘 다 "인사이트"/"도출"
+# 트리거 단어 때문에)가 전체를 abstract로만 보고 abstract 경로의 use_bm25=False가 BM25를
+# 통째로 버려서, 키워드 정밀 매칭이 필요한 뒷절의 정답 근거가 밀려나는 걸 실측으로 확인함
+# (도표3 "건설업종" vs 도표4 "건자재업종" 차트가 근소하게 역전 — BM25 없이는 캡션의 정확한
+# 어휘 매칭 이점을 못 씀). 이 함수는 질의를 먼저 성격별로 쪼갠 뒤 각 하위질의를 route_search와
+# 동일한 갈래(keyword_specific→hybrid RRF, abstract→entity_count 기반 HyDE/MQE)로 따로 검색해
+# RRF로 합친다 — route_search를 대체하는 상위 호환(단일 성격 질의는 분해 결과가 원 질의 그대로
+# 1개라 route_search와 동일하게 동작).
+
+_DECOMPOSE_PROMPT = (
+    "다음 사용자 질의를 분석하세요: \"{query}\"\n\n"
+    "이 질의 안에 성격이 다른 하위 요청이 여러 개 섞여 있는지 판단하세요:\n"
+    "- keyword_specific 성격: 특정 수치/사실/고유명사(기업명, 티커, 금액, 날짜, 지표명 등)를 콕 "
+    "집어 찾거나, 여러 대상 중 조건(최고/최저/비교)에 맞는 것을 추출하는 요청.\n"
+    "- abstract 성격: 여러 근거를 종합/요약/평가해야 답할 수 있는 요청(예: 인사이트 도출, 브리핑, "
+    "전반적 평가).\n\n"
+    "규칙:\n"
+    "1. 한 가지 성격만 있으면(복합 아님) 원본 질의를 그대로 한 줄만 출력하세요: "
+    "\"SINGLE|<원본 질의 그대로>\"\n"
+    "2. 성격이 다른 하위 요청이 여러 개 섞여 있으면, 각각을 독립적으로 검색 가능한 완전한 문장으로 "
+    "나눠(원래 문맥/의미를 각자 온전히 보존, 대명사·생략된 주어 채우기) 한 줄씩 "
+    "\"keyword_specific|<하위질의>\" 또는 \"abstract|<하위질의>\" 형식으로 출력하세요.\n"
+    "다른 설명 없이 위 형식의 줄만 출력하세요."
+)
+
+
+def decompose_query(query: str, client=None, model: str = "gpt-4o") -> list:
+    """질의를 성격별 하위질의로 분해. 단일 성격이면 [{"type": "single", "query": 원본}] 하나만
+    반환(하위 라우팅에서 "single"은 route_search와 동일하게 LLM 재분류를 한 번 더 거쳐
+    keyword_specific/abstract를 정함 — 분해 단계에서 이미 판단했지만 재사용 안 하는 이유는
+    SINGLE 태그 자체가 "분해 불필요"라는 의미이지 타입까지 확정하는 게 아니기 때문). 파싱
+    실패(형식 안 맞는 응답 등) 시 안전망으로 [{"type":"single","query":원본}] 반환."""
+    if client is None:
+        import os
+        from openai import OpenAI
+        client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
+    resp = client.chat.completions.create(
+        model=model, temperature=0,
+        messages=[{"role": "user", "content": _DECOMPOSE_PROMPT.format(query=query)}])
+    lines = [l.strip() for l in resp.choices[0].message.content.splitlines() if l.strip()]
+    parsed = []
+    for line in lines:
+        if "|" not in line:
+            continue
+        qtype, subq = line.split("|", 1)
+        qtype, subq = qtype.strip().lower(), subq.strip().strip("-•. \t")
+        if not subq:
+            continue
+        if qtype in ("single", "keyword_specific", "abstract"):
+            parsed.append({"type": qtype, "query": subq})
+    if not parsed:
+        parsed = [{"type": "single", "query": query}]
+    return parsed
+
+
+def decompose_and_route_search(index: TextIndex, query: str, client=None, top_k: int = 8,
+                                classifier: str = "llm", entity_aware: bool = True,
+                                decompose_model: str = "gpt-4o") -> tuple:
+    """[52] route_search()의 상위 호환 — 복합 질의를 먼저 성격별로 분해한 뒤 하위질의마다 각자
+    맞는 전략으로 검색해 RRF로 합친다. 단일 성격 질의는 decompose_query()가 하위질의 1개(원본
+    그대로)만 돌려주므로 route_search()와 동일하게 동작(추가 비용은 분해 판단 LLM 호출 1회뿐).
+
+    하위질의 처리:
+      - type="single": route_search()와 동일하게 재분류(keyword_specific/abstract)해 라우팅.
+      - type="keyword_specific": hybrid_search(fusion="rrf")로 직접 검색(정밀 어휘 매칭 유지).
+      - type="abstract": entity_aware=True면 index.entity_count로 HyDE(<=1)/MQE(>1) 분기,
+        False면 항상 MQE — route_search()의 entity_aware 분기 로직 그대로 재사용.
+
+    융합: 하위질의별 결과를 각자 top_k만큼 뽑은 뒤 **라운드로빈으로 인터리빙**한다(하위질의0의
+    1위, 하위질의1의 1위, 하위질의0의 2위, ... 순서로 중복 제거하며 채움). [실측으로 발견]
+    순위 기반 RRF 합산(모든 하위질의를 동등한 "투표"로 합산)을 먼저 시도했더니, "인사이트
+    도출"처럼 포괄적인 abstract 하위질의가 코퍼스 전반에 폭넓게 점수를 흩뿌리면서 keyword_
+    specific 하위질의가 정확히 1위로 짚어낸 근거(도표3 건설업종)가 abstract 쪽에서 낮은 순위인
+    바람에 합산 후 다른 청크(도표4 건자재업종, 두 하위질의 모두에서 중상위)에 밀려나는 걸 확인함
+    — 하위질의 수가 늘수록 "정밀 추출"형 하위질의의 1위가 희석되는 구조적 문제. 라운드로빈은
+    각 하위질의의 1위를 최상위 `len(subqueries)`개 슬롯 안에 무조건 넣어 이 희석을 원천 차단한다.
+
+    반환: (hits, subqueries) — subqueries: decompose_query()가 반환한 원본 리스트(디버깅/검증용,
+    각 하위질의가 실제로 어느 전략을 탔는지는 호출측이 로그로 확인 가능하도록 "resolved_type"
+    키를 추가해 채워 넣음)."""
+    if client is None:
+        import os
+        from openai import OpenAI
+        client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
+
+    subqueries = decompose_query(query, client=client, model=decompose_model)
+
+    per_subquery_hits = []
+    for sq in subqueries:
+        sub_q = sq["query"]
+        sq_type = sq["type"]
+        if sq_type == "single":
+            hits, resolved_qtype = route_search(index, sub_q, client=client, top_k=top_k,
+                                                 classifier=classifier, entity_aware=entity_aware)
+            sq["resolved_type"] = resolved_qtype
+        elif sq_type == "keyword_specific":
+            hits = hybrid_search(index, sub_q, top_k=top_k, fusion="rrf")
+            sq["resolved_type"] = "keyword_specific"
+        else:  # abstract
+            if entity_aware:
+                if index.entity_count is None:
+                    index.entity_count = count_document_entities(index, client=client)
+                if index.entity_count <= 1:
+                    hits, _ = hyde_search(index, sub_q, client=client, top_k=top_k, use_bm25=False)
+                    sq["resolved_type"] = "abstract(HyDE)"
+                else:
+                    hits, _ = mqe_search(index, sub_q, client=client, top_k=top_k, use_bm25=False)
+                    sq["resolved_type"] = "abstract(MQE)"
+            else:
+                hits, _ = mqe_search(index, sub_q, client=client, top_k=top_k, use_bm25=False)
+                sq["resolved_type"] = "abstract(MQE)"
+        per_subquery_hits.append(hits)
+
+    seen_ids = set()
+    result_hits = []
+    max_len = max((len(h) for h in per_subquery_hits), default=0)
+    for rank in range(max_len):
+        for hits in per_subquery_hits:
+            if rank >= len(hits):
+                continue
+            h = hits[rank]
+            if h["chunk_id"] in seen_ids:
+                continue
+            seen_ids.add(h["chunk_id"])
+            result_hits.append(h)
+            if len(result_hits) >= top_k:
+                return result_hits, subqueries
+    return result_hits, subqueries
+
+
 def ingest_and_search(pdf_path, yolo_model, query: str, doc_title: str = None,
                        page_boxes: dict = None, client=None, top_k: int = 5,
                        speculative_hyde: bool = True) -> tuple:
