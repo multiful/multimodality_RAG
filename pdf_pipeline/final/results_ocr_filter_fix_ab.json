@@ -1,0 +1,16 @@
+{
+  "c밴드(오탐 검사)": {
+    "cards": 12,
+    "damaged_before": 4,
+    "damaged_after": 6
+  },
+  "Construct(진성 검사)": {
+    "cards": 1,
+    "damaged_before": 7,
+    "damaged_after": 7
+  },
+  "unit_test": {
+    "true_positive_kept": true,
+    "false_positive_gone": true
+  }
+}

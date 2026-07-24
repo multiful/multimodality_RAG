@@ -156,8 +156,23 @@ def get_texts(item: dict) -> tuple[str, str]:
             common.clean_text(" ".join(foot_parts)))
 
 
-def build_embed_text(caption: str, footnote: str, ocr_text: str, narrative: str | None) -> str:
+CHART_TABLE_EMBED_MAX_CHARS = 1200
+
+
+def build_embed_text(caption: str, footnote: str, ocr_text: str, narrative: str | None,
+                     chart_table: str | None = None) -> str:
+    """[수정 — 재일] `chart_table`(4a VLM이 복원한 데이터 표)을 검색 본문에 함께 싣는다.
+
+    기존엔 `narrative`(4b가 그 표를 받아 쓴 서술문)만 실렸다. 그런데 4b는 OpenAI 호출이라
+    쿼터/네트워크로 실패할 수 있고, 그러면 **4a가 GPU를 써서 복원한 실제 수치가 검색에 전혀
+    도달하지 못한 채 버려진다**(카드에 chart_table 필드로만 남음). 실제로 그 상태에서는 차트
+    근거가 축 눈금 OCR뿐이라, 스텝차트 목표주가 시계열이 조작되는 사고로 이어졌다.
+
+    표 자체가 서술문보다 **정확한 수치**를 담으므로(실측: 값 라벨 막대차트 19/19 정확) 둘 다
+    있으면 둘 다 싣고, 서술문이 없어도 표만으로 검색이 되게 한다."""
     parts = [caption, footnote, (ocr_text or "")[:500]]
+    if chart_table:
+        parts.append("[차트 복원 데이터]\n" + chart_table[:CHART_TABLE_EMBED_MAX_CHARS])
     if narrative:
         parts.append(narrative)
     return "\n".join(p for p in parts if p)
@@ -475,7 +490,7 @@ def process(args: argparse.Namespace) -> None:
 
         card["embed_text"] = build_embed_text(card.get("caption", ""), card.get("footnote", ""),
                                               (card.get("ocr") or {}).get("text", ""),
-                                              card.get("narrative"))
+                                              card.get("narrative"), card.get("chart_table"))
         rows.append(card)
 
     # ---- [5] 구조화 출력 (선택, --with-structured-output, useful 카드만) ----
@@ -545,8 +560,17 @@ def main() -> None:
     p.add_argument("--with-classifier", dest="with_classifier", action="store_true", default=True,
                    help="[3] 그림 분류기 병기 (기본 on, 장당 ~10ms로 사실상 무료)")
     p.add_argument("--no-classifier", dest="with_classifier", action="store_false")
-    p.add_argument("--with-chart-analysis", action="store_true",
-                   help="[4] MinerU VLM 표추출+서술형해석 (기본 off, chart당 ~19초로 비용 큼)")
+    # [수정 — 재일] 기본값 off -> **on**. 근거: 차트 OCR은 스텝/라인 차트에서 축 눈금만 긁어오고
+    # 실제 계열 값이 없어서, 생성 단계가 Y축 눈금과 X축 날짜를 순서대로 짝지어 존재하지 않는
+    # 시계열을 만들어내는 사고가 실제로 발생했다(c밴드 4개 기업 전부 목표주가 추세가 정반대로
+    # 서술됨). 5개 차트 실측(pdf_pipeline/final/results_chart_vlm_multi.json)에서 값 라벨
+    # 막대차트는 19/19 정확, 스텝차트는 추세 정확·값 근사였고, 겹친 텍스트로 깨졌던 OCR 손상
+    # 2건(한샘 11.7->1.7, 금호건설 값 복원)도 함께 해결됐다. 비용은 차트당 15~22초 —
+    # 끄려면 --no-chart-analysis.
+    p.add_argument("--with-chart-analysis", dest="with_chart_analysis", action="store_true", default=True,
+                   help="[4] MinerU VLM 표추출+서술형해석 (기본 on, chart당 15~22초)")
+    p.add_argument("--no-chart-analysis", dest="with_chart_analysis", action="store_false",
+                   help="[4] 차트분석 끄기 — 지연이 critical하고 문서에 차트가 많을 때만 권장")
     p.add_argument("--chart-max-new-tokens", type=int, default=CHART_MAX_NEW_TOKENS,
                    help="MinerU VLM 생성 토큰 상한 (무제한 시 폭주 버그 있음, 기본 1024)")
     p.add_argument("--narrative-model", default=CFG["LLM_MODEL"],

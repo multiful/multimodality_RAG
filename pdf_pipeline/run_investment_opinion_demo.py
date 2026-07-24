@@ -133,15 +133,42 @@ def _fallback_image_cards(pdf_id: str) -> list:
 # "라벨 (N)" 패턴을 "라벨 -N"으로 치환해 부호를 명시적으로 만든다.
 _CHART_PAREN_NEGATIVE_RE = re.compile(r"\((\d+(?:\.\d+)?)\)")
 _CHART_TRAIL_PAREN_RE = re.compile(r"(?<![\d(])(\d+(?:\.\d+)?)\)")   # 여는괄호 없이 'N)'만 (겹친 텍스트 OCR 손상)
-_CHART_NUM_RE = re.compile(r"\d+(?:\.\d+)?")
+# [수정 — 오탐 해결, 재일] 숫자 토큰 정규식을 쉼표까지 포함하도록 바꿈. 기존 `\d+(?:\.\d+)?`은
+# 쉼표를 몰라서, PP-OCR이 마침표를 쉼표로 읽은 순간("24.07" -> "24,07") 토큰이 "24"+"07"로 쪼개졌다.
+# 반면 텍스트레이어 쪽은 같은 값을 "24.07" 한 토큰으로 잡으므로 조각은 **절대 매칭될 수 없고**,
+# 결과적으로 멀쩡한 축 라벨이 통째로 [OCR손상]으로 지워졌다(실측 c밴드 p3: '07'이 텍스트레이어
+# 토큰 집합에 없음 -> "24,[OCR손상]", "[OCR손상],[OCR손상]"). 이제 양쪽 모두 쉼표/마침표를 품은
+# 하나의 토큰으로 뽑고, 구분자 표기 차이를 흡수한 변형 집합으로 비교한다.
+_CHART_NUM_RE = re.compile(r"\d[\d,.]*\d|\d")
+
+
+def _number_variants(token: str) -> set:
+    """구분자 표기 차이를 흡수한 비교용 변형들 — 천단위 쉼표 제거형, 쉼표<->마침표 교환형.
+    "24,07"과 "24.07", "35,000"과 "35000"이 서로 같은 값으로 취급되게 한다."""
+    t = token.strip(".,")
+    if not t:
+        return set()
+    return {v for v in {t, t.replace(",", ""), t.replace(",", "."), t.replace(".", ","),
+                        t.replace(",", "").replace(".", "")} if v}
 
 
 def _page_number_set(doc, page: int):
-    """PDF 텍스트레이어(권위) 페이지 숫자 집합 — 이미지 OCR 손상값 대조용."""
+    """PDF 텍스트레이어(권위) 페이지 숫자 집합 — 이미지 OCR 손상값 대조용.
+    차트 쪽과 **동일한 토큰화**를 쓰고, 각 토큰의 구분자 변형까지 모두 담아 표기 차이로 인한
+    오탐을 없앤다."""
     try:
-        return set(m.lstrip("-") for m in re.findall(r"-?\d+(?:\.\d+)?", doc[page - 1].get_text()))
+        out = set()
+        for m in _CHART_NUM_RE.findall(doc[page - 1].get_text()):
+            out |= _number_variants(m)
+        return out
     except Exception:
         return None
+
+
+# 한 카드의 숫자 중 이 비율 이상이 텍스트레이어에 없으면, 그 차트는 애초에 텍스트레이어가 덮지
+# 않는 래스터 이미지로 보고 손상 판정을 통째로 건너뛴다(전멸 방지). 진짜 손상은 소수 토큰에서만
+# 일어나므로 이 임계로 "일부 손상"과 "대조 불가"를 가른다.
+_OCR_CHECK_MAX_MISS_RATIO = 0.5
 
 
 _AXIS_LADDER_MIN = 5   # 등간격 숫자가 이만큼 이상이면 데이터가 아니라 축 눈금으로 본다
@@ -193,10 +220,21 @@ def _normalize_chart_card_signs(cards: list, pdf_path=None) -> list:
             t = _CHART_TRAIL_PAREN_RE.sub(r"-\1", t)
             if doc is not None and c.get("page"):
                 pn = _page_number_set(doc, c["page"])
-                if pn is not None:
-                    t = _CHART_NUM_RE.sub(
-                        lambda m: "[OCR손상]" if (m.group(0) not in pn and len(m.group(0).replace(".", "")) >= 2)
-                        else m.group(0), t)
+                if pn:
+                    def _damaged(tok: str) -> bool:
+                        # 한 자리 숫자는 우연히 안 맞을 여지가 커서 대상에서 제외(기존 규칙 유지)
+                        if len(re.sub(r"[^\d]", "", tok)) < 2:
+                            return False
+                        return not (_number_variants(tok) & pn)
+
+                    toks = _CHART_NUM_RE.findall(t)
+                    miss = [x for x in toks if _damaged(x)]
+                    # [수정] 전멸 방지 — 대부분이 안 맞으면 이 페이지 텍스트레이어가 이 차트를
+                    # 아예 안 덮는 것(래스터 차트)이므로 손상 판정을 건너뛴다. 안 그러면 정상
+                    # 차트가 통째로 [OCR손상] 범벅이 돼 근거로서의 가독성이 사라진다.
+                    if toks and len(miss) / len(toks) <= _OCR_CHECK_MAX_MISS_RATIO:
+                        t = _CHART_NUM_RE.sub(
+                            lambda m: "[OCR손상]" if _damaged(m.group(0)) else m.group(0), t)
             # (4) [재일 — c밴드 사례] 축 눈금만 읽힌 차트에 경고 문구를 붙인다. 차트분석(4a, MinerU
             # VLM)이 켜져 있어 실제 계열 값(chart_table/narrative)이 있으면 붙이지 않는다.
             if not (c.get("chart_table") or c.get("narrative")) and _looks_like_axis_ladder(t):
