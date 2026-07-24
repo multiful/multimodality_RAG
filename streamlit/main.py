@@ -624,12 +624,25 @@ def answer_question(ticker: str, query: str) -> dict:
 # PDF + 질문 -> 파이프라인 실행
 # ---------------------------------------------------------------------------
 
-def index_pdf_fast(pdf_path: Path, pdf_id: str, ticker: str | None, sector: str | None, status) -> dict:
-    """1단계(빠름, 업로드 즉시 블로킹) — 스캔본 감지 -> YOLO 페이지 분류 -> 텍스트/표 브랜치만
-    동시 실행해 document_evidence에 즉시 적재한다. 이미지/차트 VLM 분석(15초+/장)은 여기 포함
-    하지 않는다 — run_investment_opinion_demo.main()처럼 3브랜치를 한꺼번에 동시실행하면 가장
-    느린 이미지 브랜치가 끝날 때까지 텍스트/표도 발이 묶여, "업로드 즉시 질문 가능"이 안 된다.
-    이미지는 index_images_background()가 별도 스레드로 뒤이어 처리한다."""
+def index_pdf(pdf_path: Path, pdf_id: str, ticker: str | None, sector: str | None, status) -> dict:
+    """재일님 파이프라인(run_investment_opinion_demo.main())과 같은 구성 — 텍스트/표/이미지
+    3브랜치를 전부 처리해 한 번에 document_evidence에 적재한다(사용자 지적: "비동기 2단계라
+    헷갈리니 한 번에 인덱싱해"). 업로드 시 한 번만 기다리면, 그 뒤 여러 질문은 전부 이 결과를
+    재사용한다(재인덱싱 없음).
+
+    텍스트/표는 ThreadPoolExecutor로 동시 실행하지만, 이미지 브랜치는 그 뒤에 순차로 돌린다 —
+    재일님이 PR #39에서 남긴 제약("로컬 VLM은 GPU 공유라 스레드 병렬화 금지")대로, 텍스트
+    브랜치의 BGE-m3-ko 임베딩과 이미지 브랜치의 MinerU2.5-Pro VLM을 같은 MPS 디바이스에서
+    동시에 돌리면 예전에 실측으로 잡힌 TATR+BGE-m3-ko 동시성 버그(결과가 조용히 틀어짐)와
+    같은 위험이 있다. run_investment_opinion_demo.main()은 3브랜치를 전부 동시 실행하지만,
+    이 함수는 그 위험을 피하려 이미지만 분리했다 — 총 대기시간은 조금 늘지만(텍스트/표
+    + 이미지 순차 합산) 정확성을 우선한다.
+
+    이미지 브랜치는 with_chart_analysis=True(PR #39 기준 팀 기본값)로 실제 MinerU VLM
+    차트→표 변환 + qwen3:8b(Ollama, localhost:11434) 서술형 해석까지 돌린다. 4a(VLM)가
+    성공하면 chart_table 자체가 embed_text에 실리므로(PR #39 수정) 4b(Ollama)가 실패해도
+    핵심 데이터는 안 사라진다. run_investment_opinion_demo._normalize_chart_card_signs()
+    (부호/OCR손상 정규화 + 축 눈금 오독 경고)도 이중 안전장치로 그대로 적용한다."""
     db_url = os.environ.get("SUPABASE_DIRECT_DB_URL")
     if not db_url:
         raise RuntimeError("SUPABASE_DIRECT_DB_URL 환경변수가 설정되어 있지 않습니다.")
@@ -678,46 +691,18 @@ def index_pdf_fast(pdf_path: Path, pdf_id: str, ticker: str | None, sector: str 
         f_table = ex.submit(_table_branch)
         counts["text_chunks"], counts["text_stored"] = f_text.result()
         counts["table_rows"], counts["table_stored"] = f_table.result()
+    status.write(f"텍스트 {counts['text_stored']}건 · 표 {counts['table_stored']}건 적재 완료")
 
-    status.write(f"완료 — 텍스트 {counts['text_stored']}건 · 표 {counts['table_stored']}건 즉시 적재")
-    return counts
-
-
-_IMAGE_STAGE_LOCK = threading.Lock()
-
-
-def _set_image_stage(pdf_id: str, state: str, message: str) -> None:
-    with _IMAGE_STAGE_LOCK:
-        st.session_state.setdefault("image_stage", {})[pdf_id] = {"state": state, "message": message}
-
-
-def index_images_background(pdf_path: Path, pdf_id: str, ticker: str | None, sector: str | None) -> None:
-    """2단계(백그라운드 스레드) — image_processing.s2_onestop_mineru로 이미지/차트 카드를
-    만들고(OCR + 분류기), document_evidence에 이미지 근거를 추가 적재한다. 1단계(텍스트/표)
-    완료 후 별도 스레드에서 돌려 사용자 질문을 막지 않는다.
-
-    [수정] with_chart_analysis=True — Ollama(qwen3:8b)가 이 머신에 설치·확인됐으므로(로컬
-    HTTP API, localhost:11434) 4a(MinerU2.5-Pro VLM, 차트→표) + 4b(qwen3:8b, 서술형 해석)를
-    실제로 켠다. 4a가 성공해도 build_embed_text()는 narrative만 담고 chart_table 자체는 안
-    담기 때문에(s2_onestop_mineru.py 확인) 4b(Ollama)가 없으면 4a 비용(15초+/장)이 그냥
-    버려진다 — 그래서 Ollama 없이는 이 옵션을 켜봐야 소용없었다. 그와 별개로
-    run_investment_opinion_demo._normalize_chart_card_signs()(팀 최신 수정 — 부호/OCR손상
-    정규화 + "축 눈금을 시계열로 오독하지 말 것" 경고, chart_table/narrative가 이미 있으면
-    경고를 안 붙임)는 VLM 성패와 무관하게 항상 적용해 이중 안전장치로 둔다.
-    완료되면 entity_fusion.invalidate_evidence_cache()로 캐시를 지워, 다음 질문부터 즉시
-    반영되게 한다. 실패해도 예외를 삼키고 상태만 기록 — 백그라운드 스레드의 예외는 Streamlit
-    UI로 안 올라간다."""
-    _set_image_stage(pdf_id, "running", "이미지/차트 근거(MinerU) 백그라운드 처리 중...")
+    status.write("이미지/차트 브랜치 처리 중 (MinerU — 차트 VLM 켜지면 차트당 약 10초)...")
     try:
         import entity_fusion
         from run_investment_opinion_demo import _find_onestop_cards, _normalize_chart_card_signs
 
-        # [교차리뷰 수정] mineru 패키지가 이 파이썬에 있으면 기존대로 인프로세스(맥/동일 venv 환경),
+        # [교차리뷰 수정] mineru 패키지가 이 파이썬에 있으면 인프로세스(맥/동일 venv 환경),
         # 없으면(예: Windows — mineru는 별도 venv) MINERU_EXE 옆의 파이썬으로 s2를 서브프로세스
-        # 실행한다. 기존엔 인프로세스 임포트만 있어서 이 PC의 업로드 이미지 단계가 전부 조용히
-        # 실패했고(실측: 최근 upload_* 전부 image evidence 0건), 성공했더라도 카드 경로가
-        # `pdf_pipeline/data/onestop`으로 하드코딩돼 있어(§13.1 데이터 루트 이동 전 경로) 카드를
-        # 못 찾았을 것 — 경로는 데모와 같은 _find_onestop_cards()로 통일한다.
+        # 실행한다. 인프로세스 임포트만 있으면 mineru 없는 환경의 업로드 이미지 단계가 전부
+        # 조용히 실패한다(실측: upload_* 전부 image evidence 0건이던 사례) — 카드 경로도
+        # _find_onestop_cards()로 통일(하드코딩 경로는 §13.1 데이터 루트 이동 전 버그).
         try:
             import mineru  # noqa: F401
             _in_process = True
@@ -740,9 +725,9 @@ def index_images_background(pdf_path: Path, pdf_id: str, ticker: str | None, sec
             mineru_exe = os.environ.get("MINERU_EXE", "")
             venv_python = Path(mineru_exe).parent / "python.exe" if mineru_exe else None
             if not (venv_python and venv_python.exists()):
-                _set_image_stage(pdf_id, "failed",
-                                 "mineru 미설치 + MINERU_EXE 미설정 — 이미지 근거 생략(텍스트/표만 사용)")
-                return
+                counts["image_skipped"] = True
+                status.write("mineru 미설치 + MINERU_EXE 미설정 — 이미지 근거 생략(텍스트/표만 사용)")
+                return counts
             # 서브프로세스 경로는 차트 VLM(4a/4b)을 끈다 — venv에 vlm extra/Ollama가 없는 환경
             # 전제(OCR+분류 카드만으로도 §8.4 실측 엔티티 recall 최강 브랜치).
             r = subprocess.run(
@@ -753,23 +738,27 @@ def index_images_background(pdf_path: Path, pdf_id: str, ticker: str | None, sec
             )
             if r.returncode != 0:
                 tail = ((r.stderr or "") + (r.stdout or ""))[-250:].strip()
-                _set_image_stage(pdf_id, "failed", f"MinerU 서브프로세스 실패: {tail}")
-                return
+                counts["image_skipped"] = True
+                status.write(f"MinerU 서브프로세스 실패: {tail}")
+                return counts
 
         cards_path = _find_onestop_cards(pdf_id, pdf_path)
-        if not cards_path.exists():
-            _set_image_stage(pdf_id, "failed", "MinerU 카드 생성 실패 — 텍스트/표 근거만 유지됩니다.")
-            return
-
-        cards = [json.loads(line) for line in cards_path.read_text(encoding="utf-8").splitlines() if line.strip()]
-        cards = _normalize_chart_card_signs(cards, pdf_path=pdf_path)
-        image_items, image_emb = entity_fusion.embed_items(entity_fusion.from_image_cards(pdf_id, cards))
-        db_url = os.environ["SUPABASE_DIRECT_DB_URL"]
-        n = entity_fusion.store_evidence(db_url, pdf_id, image_items, image_emb, ticker=ticker)
-        entity_fusion.invalidate_evidence_cache(pdf_id=pdf_id)
-        _set_image_stage(pdf_id, "done", f"이미지/차트 근거 {n}건 추가 적재 완료 — 다음 질문부터 반영됩니다")
+        if cards_path.exists():
+            cards = [json.loads(line) for line in cards_path.read_text(encoding="utf-8").splitlines() if line.strip()]
+            cards = _normalize_chart_card_signs(cards, pdf_path=pdf_path)
+            image_items, image_emb = entity_fusion.embed_items(entity_fusion.from_image_cards(pdf_id, cards))
+            counts["image_cards"] = len(cards)
+            counts["image_stored"] = entity_fusion.store_evidence(db_url, pdf_id, image_items, image_emb, ticker=ticker)
+            entity_fusion.invalidate_evidence_cache(pdf_id=pdf_id)
+            status.write(f"이미지/차트 {counts['image_stored']}건 적재 완료")
+        else:
+            counts["image_skipped"] = True
+            status.write("MinerU 카드 생성 실패 — 텍스트/표 근거만 적재됩니다.")
     except Exception as e:
-        _set_image_stage(pdf_id, "failed", f"이미지/차트 근거 처리 실패: {e}")
+        counts["image_skipped"] = True
+        status.write(f"이미지/차트 브랜치 실패 — 텍스트/표 근거만 적재됩니다: {e}")
+
+    return counts
 
 
 def prewarm_news_background(pdf_path: Path) -> None:
@@ -981,10 +970,11 @@ def render_upload():
         st.session_state["page"] = "home"
         st.rerun()
 
-    _hero_headline("PDF를 올리면,", "바로 인덱싱을 시작합니다.")
+    _hero_headline("PDF를 올리면,", "한 번에 인덱싱합니다.")
     st.caption(
-        "PDF를 올리는 즉시 텍스트/표 근거를 인덱싱해 바로 질문할 수 있습니다. 이미지/차트 근거는 "
-        "백그라운드에서 따로 처리되고, 완료되면 다음 질문부터 자동으로 반영됩니다."
+        "PDF를 올리면 텍스트/표/이미지(MinerU VLM 차트→표 + qwen3:8b 서술형 해석)를 전부 인덱싱한 "
+        "뒤(재일님 파이프라인과 동일 구성, 차트당 약 10초) 바로 질문할 수 있습니다. 한 번 인덱싱해 "
+        "두면 같은 문서에 여러 질문을 다시 인덱싱 없이 물어볼 수 있습니다."
     )
 
     with st.container(border=True):
@@ -1007,12 +997,8 @@ def render_upload():
             ticker, name = item["ticker"], item["name"]
 
         sector = st.text_input("업종/섹터 (선택)", placeholder="예: 건설, 반도체")
-        use_real_images = st.checkbox(
-            "이미지/차트 근거도 백그라운드에서 처리 (MinerU VLM + qwen3:8b — 텍스트/표 질문은 막지 않음)",
-            value=True,
-        )
 
-        _step_label(2, "리포트 업로드 (올리는 즉시 텍스트·표 인덱싱 시작)")
+        _step_label(2, "리포트 업로드 (텍스트·표·이미지 한 번에 인덱싱)")
         uploaded = st.file_uploader("PDF 파일 선택", type=["pdf"])
 
         if uploaded is not None:
@@ -1027,9 +1013,9 @@ def render_upload():
                 tmp_path.write_bytes(uploaded.getvalue())
 
                 try:
-                    with st.status(f"'{uploaded.name}' 인덱싱 중 (텍스트·표)...", expanded=True) as status:
-                        counts = index_pdf_fast(tmp_path, pdf_id, ticker, sector or None, status)
-                        status.update(label="텍스트·표 인덱싱 완료 — 바로 질문 가능", state="complete")
+                    with st.status(f"'{uploaded.name}' 인덱싱 중 (텍스트·표·이미지)...", expanded=True) as status:
+                        counts = index_pdf(tmp_path, pdf_id, ticker, sector or None, status)
+                        status.update(label="인덱싱 완료 — 바로 질문 가능", state="complete")
                 except Exception as e:
                     # 메시지만으론 발생 지점을 못 찾는다(실사용에서 "[Errno 22]"만 보고 원인
                     # 추적에 시간을 씀) — 전체 트레이스백을 터미널 로그와 화면 expander 양쪽에 남긴다.
@@ -1048,13 +1034,6 @@ def render_upload():
                 }
                 st.session_state.pop("qa_result", None)
 
-                if use_real_images:
-                    threading.Thread(
-                        target=index_images_background,
-                        args=(tmp_path, pdf_id, ticker, sector or None),
-                        daemon=True,
-                    ).start()
-
                 # [지연 개선] 뉴스 감성 수집을 **업로드 직후** 백그라운드로 미리 시작한다 —
                 # 기존엔 첫 질문 시점에 동기 수집(종목당 ~40–70s)이 답변을 2분+ 막았다(실측).
                 # 여기서 미리 돌려두면 사용자가 질문을 입력할 때쯤 캐시가 차 있고, 질문 경로는
@@ -1065,21 +1044,14 @@ def render_upload():
     indexed = st.session_state.get("indexed_doc")
     if indexed:
         counts = indexed["counts"]
-        st.success(
-            f"텍스트 {counts['text_stored']}건, 표 {counts['table_stored']}건 즉시 적재 완료 "
-            f"({counts['n_pages']}페이지) — 아래에서 바로 질문하세요."
-        )
+        parts = [f"텍스트 {counts['text_stored']}건", f"표 {counts['table_stored']}건"]
+        if counts.get("image_stored") is not None:
+            parts.append(f"이미지/차트 {counts['image_stored']}건")
+        st.success(f"{', '.join(parts)} 적재 완료 ({counts['n_pages']}페이지) — 아래에서 바로 질문하세요.")
         if counts.get("scanned_pages"):
             st.warning(f"스캔본으로 판정된 페이지 {counts['scanned_pages']}는 텍스트 품질이 낮을 수 있습니다.")
-
-        img_status = st.session_state.get("image_stage", {}).get(indexed["pdf_id"])
-        if img_status:
-            if img_status["state"] == "running":
-                st.info(f"⏳ {img_status['message']} (다른 입력을 하면 진행 상황이 갱신됩니다)")
-            elif img_status["state"] == "done":
-                st.success(f"✅ {img_status['message']}")
-            elif img_status["state"] == "failed":
-                st.warning(f"⚠ {img_status['message']}")
+        if counts.get("image_skipped"):
+            st.warning("이미지/차트 브랜치 처리에 실패해 텍스트/표 근거만 적재했습니다.")
 
         st.divider()
         query = st.text_area("질문", placeholder="예: 이 PDF 내용을 바탕으로 투자 의견을 알려줘", height=80)
