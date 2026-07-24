@@ -1,12 +1,26 @@
 """LGCNS PDF 한 건으로 ERD 전체 흐름을 실행: 스캔본 페이지 감지(MinerU 전용 처리) -> 텍스트/
-테이블/이미지 세 브랜치 -> 엔티티 합성(가중치 정제) -> 통합 Supabase 테이블 적재 -> 쿼리 라우팅
-검색(route_search — gpt-4o 분류 후 keyword_specific=hybrid RRF, abstract=entity_count 기반
-HyDE/MQE) -> citation-check 포함 LLM 투자의견 생성까지 한 번에 돈다.
+테이블/이미지 세 브랜치 -> 엔티티 합성(가중치 정제) -> 통합 Supabase 테이블 적재 -> (문서 근거
+검색 + 기업 DB 매칭)을 병렬로 -> citation-check 포함 LLM 투자의견 생성까지 한 번에 돈다.
 
-[수정] 검색 단계를 entity_fusion.weighted_hybrid_search()(항상 고정 dense+BM25 가중합, 쿼리
-분류/HyDE/MQE 없음)에서 index_text.route_search()로 교체 — 4문서 A/B(파이프라인_최종정리_
-핸드오프.md §5)에서 route_search(entity_aware=True)가 ndcg 0.848(4문서 평균)로 dense-only
-(0.554)/고정 hybrid(0.428~0.470)/구 라우팅(0.754) 전부보다 높게 나온, 검증상 최고 성능 경로.
+[수정 이력]
+1) 검색 단계를 entity_fusion.weighted_hybrid_search()(항상 고정 dense+BM25 가중합)에서
+   index_text.route_search()로 교체 — 4문서 A/B(파이프라인_최종정리_핸드오프.md §5)에서
+   route_search(entity_aware=True)가 ndcg 0.848(4문서 평균)로 dense-only(0.554)/고정 hybrid
+   (0.428~0.470)/구 라우팅(0.754) 전부보다 높게 나온, 검증상 최고 성능 경로.
+2) 그런데 route_search 단일 분류로는 복합 질의("인사이트 도출해주고(추상) + 건설업종 종목
+   주간 수익률 최고 기업 추출(키워드형)")를 통째로 abstract로 오분류해 BM25를 다 버리고, 정밀
+   키워드 매칭이 필요한 절의 정답 근거가 밀려나는 걸 실측으로 확인(도표3 건설업종 vs 도표4
+   건자재업종 역전). index_text.decompose_and_route_search()로 재교체 — 질의를 성격별
+   하위질의로 먼저 쪼갠 뒤 각자 맞는 전략(keyword_specific=hybrid RRF, abstract=HyDE/MQE)으로
+   따로 검색해 라운드로빈으로 합친다(단일 성격 질의는 route_search와 동일하게 동작).
+3) "기업명 및 티커"(ERD) — 사용자 지적: 사용자가 티커를 먼저 고르는 게 아니라, PDF 근거에
+   DB(KOSPI200)가 아는 기업이 언급됐는지 파이프라인이 스스로 찾아 연결해야 함. dense(임베딩)
+   매칭은 부정확해서(company_profile_chunks가 영문 위주라 한글 질의와 안 붙음, 4건 중 1건만
+   히트) `company_entity_linking.py`로 교체 — pykrx 한글명 199개와 PDF 근거 텍스트를 정확
+   문자열 매칭(이름→티커는 조회 문제지 의미 유사도 문제가 아님). 이 매칭+DB 조회(financial_
+   summaries/company_profile_chunks)를 문서 근거 검색과 **병렬로**(ThreadPoolExecutor) 실행해
+   둘 다 최종 프롬프트에 합쳐 넣는다.
+4) 최종 생성 모델을 gpt-4o-mini에서 gpt-4.1(컨텍스트 ~1M, 더 강한 추론)로 교체.
 
 [40] 사용자 지적("Entity Fusion sync barrier" — 세 브랜치를 다 모은 뒤 한 번에 DB 적재하면, 가장
 느린 브랜치(이미지/VLM, 문서당 최대 152초+)가 끝날 때까지 몇 초면 끝나는 텍스트/테이블 결과까지
@@ -70,8 +84,9 @@ from text_extraction import process_pdf  # noqa: E402
 import run_table_metadata_pipeline as rtmp  # noqa: E402
 from citation_check import generate_with_citation_check  # noqa: E402
 from scanned_page_router import detect_scanned_pages  # noqa: E402
-from index_text import route_search, precompute_entity_count  # noqa: E402
+from index_text import decompose_and_route_search, precompute_entity_count  # noqa: E402
 import entity_fusion  # noqa: E402
+import company_entity_linking  # noqa: E402
 
 load_dotenv(ROOT / ".env")
 
@@ -262,40 +277,66 @@ def main(pdf_path=None, pdf_id: str = None, ticker: str = None, query: str = Non
     # entity_count로 HyDE/MQE를 가르므로, [46] 권장대로 인제스트 직후(질의 전에) 미리 계산해
     # 캐시해둔다 — 안 해두면 첫 질의가 그 계산 지연을 그대로 떠안는다.
     t0 = time.perf_counter()
-    print("6b) 문서 엔티티 수 사전계산 (route_search의 HyDE/MQE 분기 판단용)")
+    print("6b) 문서 엔티티 수 사전계산 (HyDE/MQE 분기 판단용)")
     precompute_entity_count(index, pdf_path=pdf_path, client=client)
     print(f"   entity_count={index.entity_count}")
     timings["6b_precompute_entity_count"] = time.perf_counter() - t0
 
-    t0 = time.perf_counter()
-    print("7) 쿼리 라우팅 검색 (route_search — gpt-4o 분류 → keyword_specific=hybrid RRF / "
-          "abstract=entity_count로 HyDE·MQE 분기, 소스 가중치는 내부에서 동일 적용)")
-    hits, qtype = route_search(index, query, client=client, top_k=8)
-    print(f"   분류: {qtype} (entity_count={index.entity_count})")
-    for h in hits:
-        source_type = h["chunk"].get("source_type")
-        extra = (f"dense={h['dense_score']:.3f}, bm25={h['bm25_score']:.3f}"
-                 if "dense_score" in h else "MQE/HyDE 융합 점수(개별 dense/bm25 분해 없음)")
-        print(f"   - [{source_type}] page{h['chunk'].get('page')} score={h['score']:.3f} ({extra})")
-    timings["7_route_search"] = time.perf_counter() - t0
+    # [수정] "기업명 및 티커"(ERD) — PDF 근거 검색과 기업 DB 매칭을 병렬로 돌린다("두 개 DB를
+    # 병렬로 검색"). 서로 독립적(하나는 document_evidence 인덱스, 하나는 financial_summaries/
+    # company_profile_chunks + 원본 PDF 텍스트)이라 동시 실행해도 안전.
+    def _run_document_search():
+        hits, subqueries = decompose_and_route_search(index, query, client=client, top_k=8)
+        return hits, subqueries
+
+    def _run_entity_linking():
+        import fitz
+        doc = fitz.open(str(pdf_path))
+        full_text = "\n".join(doc[i].get_text() for i in range(doc.page_count))
+        doc.close()
+        matched = company_entity_linking.find_mentioned_companies(full_text)
+        db_context = company_entity_linking.fetch_company_db_context(DB_URL, matched)
+        return matched, db_context
 
     t0 = time.perf_counter()
-    print("8) LLM 투자의견 생성 (gpt-4o-mini, citation-check 포함)")
+    print("7) 문서 근거 검색(질의 분해 라우팅) + 기업 DB 매칭 — 병렬 실행")
+    with ThreadPoolExecutor(max_workers=2) as ex:
+        f_search = ex.submit(_run_document_search)
+        f_link = ex.submit(_run_entity_linking)
+        hits, subqueries = f_search.result()
+        matched_companies, company_db_context = f_link.result()
+    for sq in subqueries:
+        print(f"   [하위질의] {sq['type']}->{sq['resolved_type']}: {sq['query']}")
+    for h in hits:
+        source_type = h["chunk"].get("source_type")
+        print(f"   - [{source_type}] page{h['chunk'].get('page')} score={h['score']:.4f}")
+    print(f"   [기업 DB 매칭] {len(matched_companies)}건: "
+          f"{[m['name'] for m in matched_companies] if matched_companies else '없음'}")
+    timings["7_search_and_entity_link"] = time.perf_counter() - t0
+
+    t0 = time.perf_counter()
+    print("8) LLM 투자의견 생성 (gpt-4.1, citation-check 포함)")
     evidence_context = "\n\n".join(
         f"[{h['chunk'].get('source_type')} / p{h['chunk'].get('page')}] {h['chunk']['content']}" for h in hits
     )
+    full_context = evidence_context
+    if company_db_context:
+        full_context += "\n\n=== 기업 DB 참고 정보(PDF에 언급된 기업을 KOSPI200 DB와 매칭) ===\n\n" + company_db_context
 
-    prompt = f"""다음은 한 기업 리포트 PDF에서 텍스트/표/이미지(차트) 세 소스를 통합한 하이브리드
-검색(BM25+BGE-m3-ko, 소스별 가중치 반영)으로 찾은 근거입니다. 각 항목 앞의 [text/table/image]는
-어느 브랜치에서 나온 근거인지를 나타냅니다.
+    prompt = f"""다음은 한 기업 리포트 PDF에서 텍스트/표/이미지(차트) 세 소스를 통합해 찾은 근거와,
+그 PDF에 언급된 기업을 KOSPI200 DB(재무제표/기업프로필 요약)와 매칭해 가져온 보충 정보입니다.
+각 항목 앞의 [text/table/image]는 어느 브랜치에서 나온 근거인지, "기업 DB 참고 정보" 구간은
+DB에서 직접 조회한 정보임을 나타냅니다.
 
 [통합 근거]
-{evidence_context}
+{full_context}
 
 [작성 지침]
 - 반드시 위 근거에 등장하는 구체적 수치를 최소 3개 이상 인용할 것. 수치 없는 뭉뚱그린 서술만으로
   결론짓지 말 것.
 - 가능하면 text/table/image 여러 소스의 근거를 섞어서 활용할 것(한 소스에만 의존하지 말 것).
+- "기업 DB 참고 정보"가 있으면 PDF 근거와 종합해서 활용하되, PDF에 없는 DB만의 수치를 인용할
+  땐 출처가 DB임을 명시할 것.
 - 긍정적 근거와 부정적/유의할 근거를 모두 찾아 균형 있게 제시할 것.
 - 위 근거에 없는 내용은 추측하지 말 것.
 - [image] 소스는 차트를 OCR로 읽은 원문이라 수치 앞뒤에 부호가 명시적으로 안 붙어 있을 수 있다.
@@ -309,7 +350,7 @@ def main(pdf_path=None, pdf_id: str = None, ticker: str = None, query: str = Non
 {query}
 """
     result = generate_with_citation_check(
-        client, prompt, context=evidence_context, model="gpt-4o-mini", max_retries=2)
+        client, prompt, context=full_context, model="gpt-4.1", max_retries=2)
     answer = result["answer"]
     timings["8_llm_generation"] = time.perf_counter() - t0
 
@@ -327,8 +368,9 @@ def main(pdf_path=None, pdf_id: str = None, ticker: str = None, query: str = Non
         print(f"   {name:30s} {sec:7.2f}s  ({sec / total * 100:5.1f}%)")
 
     return {
-        "pdf_id": pdf_id, "ticker": ticker, "query": query, "qtype": qtype,
+        "pdf_id": pdf_id, "ticker": ticker, "query": query, "subqueries": subqueries,
         "entity_count": index.entity_count,
+        "matched_companies": matched_companies, "company_db_context": company_db_context,
         "text_chunks": text_chunks, "row_records": row_records, "image_cards": image_cards,
         "all_items": all_items, "n_evidence_by_source": by_source,
         "hits": hits, "answer": answer, "citation_result": result,
