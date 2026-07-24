@@ -127,6 +127,17 @@ def fetch_company_db_context(db_url: str, matched: list) -> str:
         # 컬럼과 unpack 개수가 어긋난 걸 이 침묵 때문에 한 번 놓쳤다) — 경고만 남기고 계속 진행.
         print(f"   [경고] 뉴스 감성 컨텍스트 생략됨: {type(e).__name__}: {e}")
 
+    # [민성 Layer1~4 배선] 재무 스코어/기술지표(현재가 포함)/융합 신호 — DB 적재 없이 질의
+    # 시점 실시간 계산(사용자 결정). 뉴스 캐시를 읽으므로 위 뉴스 블록(refresh_for_matched)
+    # **다음에** 와야 캐시가 데워진 상태다. 실패해도 다른 컨텍스트는 그대로 나간다.
+    try:
+        from layer_signals_link import fetch_layer_signals_context
+        sig_block = fetch_layer_signals_context(db_url, matched)
+        if sig_block:
+            lines.append(sig_block)
+    except Exception as e:
+        print(f"   [경고] Layer1~4 시그널 컨텍스트 생략됨: {type(e).__name__}: {e}")
+
     return "\n\n".join(lines)
 
 

@@ -537,6 +537,18 @@ def answer_question(ticker: str, query: str) -> dict:
         index = entity_fusion.load_evidence_from_db(db_url, ticker=ticker)
         return entity_fusion.weighted_hybrid_search(index, query, top_k=5)
 
+    def _layer_signal_lines():
+        # [민성 Layer1~4 배선] 재무 스코어/기술지표(현재가)/융합 신호 — DB 적재 없이 질의 시점
+        # 실시간 계산(company_entity_linking 쪽과 같은 모듈 재사용). 실패는 빈 리스트(보조 신호).
+        try:
+            from layer_signals_link import fetch_layer_signals_context
+            from company_entity_linking import get_korean_name_map
+            name = get_korean_name_map().get(ticker, ticker)
+            block = fetch_layer_signals_context(db_url, [{"ticker": ticker, "name": name}]) if db_url else ""
+            return [block] if block else []
+        except Exception:
+            return []
+
     def _dividend_lines():
         # [배당 스코어링 배선] dividend_scores(적재·요약문 완비)를 소비하는 코드가 없어 LLM에
         # 도달하지 못하던 것을 연결. v2(고도화 산식) 최신 사업연도 요약문 1건 — 티커 정확
@@ -555,10 +567,11 @@ def answer_question(ticker: str, query: str) -> dict:
         except Exception:
             return []
 
-    with ThreadPoolExecutor(max_workers=4) as ex:
+    with ThreadPoolExecutor(max_workers=5) as ex:
         f_fin = ex.submit(lambda: financial_store.query(query, top_k=3, ticker=ticker) or [])
         f_prof = ex.submit(lambda: profile_store.query(query, top_k=2, ticker=ticker) or [])
         f_div = ex.submit(_dividend_lines)
+        f_sig = ex.submit(_layer_signal_lines)
         f_hyb = ex.submit(_hybrid_hits) if run_hybrid else None
 
         evidence_lines = []
@@ -568,6 +581,8 @@ def answer_question(ticker: str, query: str) -> dict:
             evidence_lines.append(f"[company_profile] {hit['content']}")
         for line in f_div.result():
             evidence_lines.append(f"[dividend_scores] {line}")
+        for line in f_sig.result():
+            evidence_lines.append(f"[layer_signals] {line}")
 
         used_hybrid = False
         if f_hyb is not None:
