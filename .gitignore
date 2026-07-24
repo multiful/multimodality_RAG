@@ -12,3 +12,16 @@ logos/
 .venv/
 pdf_pipeline/data/
 pdf_pipeline/logs/
+
+# 멀티모달 파이프라인 (pipeline/, eval/, data/)
+demo_venv/
+venv/
+data/raw/**/*.pdf
+data/parsed/
+data/images/useful/
+data/images/discarded/
+data/cache/
+logs/
+eval/*.html
+eval/image_labels.csv
+debug_*.html

@@ -155,3 +155,6 @@ python scripts/download_models.py llava  # LLaVA-OneVision-7B-OV만
 
 자세한 설계 배경과 실험 기록은 [docs/PRD_pdf_pipeline.md](docs/PRD_pdf_pipeline.md) 및 각 단계
 디렉토리의 `실험.md`(`pdf_pipeline/text_processing/실험.md`, `table_processing/실험.md` 등) 참고.
+
+이미지 크롭을 분류·정형화·저장하는 **이미지 파이프라인 고도화판**(VLM 캐시, pHash 중복제거,
+그림 분류기 게이트, ChartQA A/B 등)은 [pipeline/README.md](pipeline/README.md) 참고.

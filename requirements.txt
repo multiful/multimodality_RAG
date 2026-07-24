@@ -39,3 +39,7 @@ unstructured_paddleocr
 mineru[pipeline,vlm]>=3.4.0
 opencv-python>=4.9.0
 pyarrow
+
+# 멀티모달 파이프라인(pipeline/)은 위 의존성을 그대로 재사용한다. 전용 venv를 새로 만들 경우
+# mineru / torch / torchvision / pillow / requests / python-dotenv / transformers 만 있으면 동작하고,
+# 그림 분류기(S3 게이트, --route clf)는 docling-project/DocumentFigureClassifier-v2.5 를 쓴다.
