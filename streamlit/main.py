@@ -211,11 +211,11 @@ st.markdown(
     .pp-badge svg { width: 14px; height: 14px; stroke: var(--primary); flex-shrink: 0; }
 
     .pp-card-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
-    .pp-avatar {
-        width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
-        background: var(--primary-soft); color: var(--primary);
-        display: flex; align-items: center; justify-content: center;
-        font-family: 'Bebas Neue', 'Pretendard', sans-serif; font-size: 1.2rem; font-weight: 400;
+    .pp-price-badge {
+        min-width: 36px; height: 30px; padding: 0 10px; border-radius: var(--radius-pill);
+        flex-shrink: 0; background: var(--primary-soft); color: var(--primary);
+        display: flex; align-items: center; justify-content: center; white-space: nowrap;
+        font-family: 'Fragment Mono', 'Pretendard', monospace; font-size: .82rem; font-weight: 600;
     }
     .pp-ticker-pill {
         font-family: 'Fragment Mono', 'Pretendard', monospace; font-size: .68rem; color: var(--muted);
@@ -228,6 +228,7 @@ st.markdown(
            기준으로 min-height를 잡아 모든 카드 높이를 맞춘다 — 어떤 이름도 잘리지 않는다. */
         font-family: 'Inter', 'Pretendard', sans-serif; font-weight: 600; font-size: 1.02rem; color: var(--text);
         white-space: normal; overflow-wrap: anywhere; line-height: 1.3; min-height: 3.9em;
+        text-align: center;
     }
 
     .pp-hero-title { font-family: 'Bebas Neue', 'Pretendard', sans-serif !important; font-weight: 400 !important;
@@ -275,9 +276,9 @@ def _render_logo() -> None:
         )
 
 
-def _avatar_html(label: str) -> str:
-    initial = (label or "?").strip()[0] if (label or "").strip() else "?"
-    return f'<div class="pp-avatar">{initial}</div>'
+def _price_badge_html(price: float | None) -> str:
+    text = f"{price:,.0f}" if price is not None else "-"
+    return f'<div class="pp-price-badge">{text}</div>'
 
 
 def _step_label(n: int, text: str) -> None:
@@ -457,6 +458,27 @@ def has_document_evidence(ticker: str) -> bool:
 @st.cache_data(ttl=300)
 def load_price_history(ticker: str):
     return yf.Ticker(ticker).history(period="6mo")
+
+
+@st.cache_data(ttl=300)
+def load_current_prices(tickers: tuple[str, ...]) -> dict[str, float | None]:
+    """관심 주식 카드의 가격 배지에 쓸 현재가 일괄 조회. 카드 개수(최대 199개)만큼 yfinance를
+    종목별로 따로 호출하면 홈 화면이 수십 초씩 멈춘 것처럼 보이므로, yf.download()로 한 번에
+    배치 조회한다(5분 캐시)."""
+    if not tickers:
+        return {}
+    import pandas as pd
+
+    data = yf.download(list(tickers), period="1d", progress=False, group_by="ticker", threads=True)
+    is_multi = isinstance(data.columns, pd.MultiIndex)
+    prices: dict[str, float | None] = {}
+    for t in tickers:
+        try:
+            close = (data[t]["Close"] if is_multi else data["Close"]).dropna()
+            prices[t] = float(close.iloc[-1]) if not close.empty else None
+        except Exception:
+            prices[t] = None
+    return prices
 
 
 # ---------------------------------------------------------------------------
@@ -775,6 +797,9 @@ def render_home():
 
     st.subheader(f"관심 주식 ({len(universe)}개)")
 
+    with st.spinner("현재가 불러오는 중..."):
+        prices = load_current_prices(tuple(u["ticker"] for u in universe))
+
     cols_per_row = 4
     for i in range(0, len(universe), cols_per_row):
         row = universe[i : i + cols_per_row]
@@ -784,7 +809,7 @@ def render_home():
                 st.markdown(
                     f'''
                     <div class="pp-card-head">
-                        {_avatar_html(item["name"])}
+                        {_price_badge_html(prices.get(item["ticker"]))}
                         <span class="pp-ticker-pill">{item["ticker"]}</span>
                     </div>
                     <div class="pp-card-name">{item["name"]}</div>
