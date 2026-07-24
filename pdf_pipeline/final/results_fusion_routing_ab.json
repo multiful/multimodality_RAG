@@ -1,0 +1,1490 @@
+{
+  "topk": 8,
+  "n_queries": 18,
+  "classifier": {
+    "K1": "error:Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}",
+    "K2": "error:Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}",
+    "K3": "error:Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}",
+    "K4": "error:Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}",
+    "K5": "error:Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}",
+    "K6": "error:Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}",
+    "H1": "error:Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}",
+    "H2": "error:Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}",
+    "H3": "error:Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}",
+    "H4": "error:Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}",
+    "H5": "error:Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}",
+    "H6": "error:Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}",
+    "A1": "error:Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}",
+    "A2": "error:Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}",
+    "A3": "error:Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}",
+    "A4": "error:Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}",
+    "A5": "error:Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}",
+    "A6": "error:Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}"
+  },
+  "classifier_agreement": "6/18",
+  "per_method": {
+    "dense_only": {
+      "키워드형": {
+        "ndcg": 1.0,
+        "mrr": 1.0,
+        "recall": 1.0
+      },
+      "ALL": {
+        "ndcg": 0.834,
+        "mrr": 0.84,
+        "recall": 0.889
+      },
+      "하이브리드형": {
+        "ndcg": 0.962,
+        "mrr": 1.0,
+        "recall": 1.0
+      },
+      "추상형": {
+        "ndcg": 0.539,
+        "mrr": 0.521,
+        "recall": 0.667
+      },
+      "latency_s_mean": 0.048
+    },
+    "bm25_only": {
+      "키워드형": {
+        "ndcg": 0.52,
+        "mrr": 0.403,
+        "recall": 0.833
+      },
+      "ALL": {
+        "ndcg": 0.587,
+        "mrr": 0.506,
+        "recall": 0.833
+      },
+      "하이브리드형": {
+        "ndcg": 0.75,
+        "mrr": 0.666,
+        "recall": 1.0
+      },
+      "추상형": {
+        "ndcg": 0.492,
+        "mrr": 0.45,
+        "recall": 0.667
+      },
+      "latency_s_mean": 0.0
+    },
+    "linear_0.7/0.3": {
+      "키워드형": {
+        "ndcg": 0.88,
+        "mrr": 0.917,
+        "recall": 1.0
+      },
+      "ALL": {
+        "ndcg": 0.815,
+        "mrr": 0.833,
+        "recall": 0.944
+      },
+      "하이브리드형": {
+        "ndcg": 0.908,
+        "mrr": 0.917,
+        "recall": 1.0
+      },
+      "추상형": {
+        "ndcg": 0.656,
+        "mrr": 0.667,
+        "recall": 0.833
+      },
+      "latency_s_mean": 0.046
+    },
+    "linear_0.5/0.5": {
+      "키워드형": {
+        "ndcg": 0.88,
+        "mrr": 0.917,
+        "recall": 1.0
+      },
+      "ALL": {
+        "ndcg": 0.767,
+        "mrr": 0.743,
+        "recall": 0.944
+      },
+      "하이브리드형": {
+        "ndcg": 0.842,
+        "mrr": 0.805,
+        "recall": 1.0
+      },
+      "추상형": {
+        "ndcg": 0.578,
+        "mrr": 0.505,
+        "recall": 0.833
+      },
+      "latency_s_mean": 0.046
+    },
+    "rrf_k60": {
+      "키워드형": {
+        "ndcg": 0.816,
+        "mrr": 0.75,
+        "recall": 1.0
+      },
+      "ALL": {
+        "ndcg": 0.708,
+        "mrr": 0.657,
+        "recall": 0.889
+      },
+      "하이브리드형": {
+        "ndcg": 0.732,
+        "mrr": 0.639,
+        "recall": 1.0
+      },
+      "추상형": {
+        "ndcg": 0.577,
+        "mrr": 0.583,
+        "recall": 0.667
+      },
+      "latency_s_mean": 0.046
+    },
+    "hyde": {
+      "키워드형": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "recall": 0.0
+      },
+      "ALL": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "recall": 0.0
+      },
+      "하이브리드형": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "recall": 0.0
+      },
+      "추상형": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "recall": 0.0
+      },
+      "latency_s_mean": 1.876,
+      "invalid": "quota_429_호출실패"
+    },
+    "mqe": {
+      "키워드형": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "recall": 0.0
+      },
+      "ALL": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "recall": 0.0
+      },
+      "하이브리드형": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "recall": 0.0
+      },
+      "추상형": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "recall": 0.0
+      },
+      "latency_s_mean": 1.812,
+      "invalid": "quota_429_호출실패"
+    },
+    "route(gpt-4o)": {
+      "키워드형": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "recall": 0.0
+      },
+      "ALL": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "recall": 0.0
+      },
+      "하이브리드형": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "recall": 0.0
+      },
+      "추상형": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "recall": 0.0
+      },
+      "latency_s_mean": 1.816,
+      "invalid": "quota_429_호출실패"
+    },
+    "decompose+route": {
+      "키워드형": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "recall": 0.0
+      },
+      "ALL": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "recall": 0.0
+      },
+      "하이브리드형": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "recall": 0.0
+      },
+      "추상형": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "recall": 0.0
+      },
+      "latency_s_mean": 1.854,
+      "invalid": "quota_429_호출실패"
+    }
+  },
+  "per_query": {
+    "K1": {
+      "dense_only": {
+        "ndcg": 1.0,
+        "mrr": 1.0,
+        "hit": 1,
+        "n_rel": 1,
+        "latency_s": 0.053
+      },
+      "bm25_only": {
+        "ndcg": 0.356,
+        "mrr": 0.167,
+        "hit": 1,
+        "n_rel": 1,
+        "latency_s": 0.0
+      },
+      "linear_0.7/0.3": {
+        "ndcg": 0.818,
+        "mrr": 1.0,
+        "hit": 1,
+        "n_rel": 2,
+        "latency_s": 0.043
+      },
+      "linear_0.5/0.5": {
+        "ndcg": 0.832,
+        "mrr": 1.0,
+        "hit": 1,
+        "n_rel": 2,
+        "latency_s": 0.045
+      },
+      "rrf_k60": {
+        "ndcg": 1.0,
+        "mrr": 1.0,
+        "hit": 1,
+        "n_rel": 1,
+        "latency_s": 0.041
+      },
+      "hyde": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.966
+      },
+      "mqe": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.699
+      },
+      "route(gpt-4o)": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.8
+      },
+      "decompose+route": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.746
+      }
+    },
+    "K2": {
+      "dense_only": {
+        "ndcg": 1.0,
+        "mrr": 1.0,
+        "hit": 1,
+        "n_rel": 2,
+        "latency_s": 0.05
+      },
+      "bm25_only": {
+        "ndcg": 1.0,
+        "mrr": 1.0,
+        "hit": 1,
+        "n_rel": 2,
+        "latency_s": 0.0
+      },
+      "linear_0.7/0.3": {
+        "ndcg": 1.0,
+        "mrr": 1.0,
+        "hit": 1,
+        "n_rel": 2,
+        "latency_s": 0.043
+      },
+      "linear_0.5/0.5": {
+        "ndcg": 1.0,
+        "mrr": 1.0,
+        "hit": 1,
+        "n_rel": 2,
+        "latency_s": 0.047
+      },
+      "rrf_k60": {
+        "ndcg": 1.0,
+        "mrr": 1.0,
+        "hit": 1,
+        "n_rel": 1,
+        "latency_s": 0.044
+      },
+      "hyde": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.885
+      },
+      "mqe": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.746
+      },
+      "route(gpt-4o)": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.774
+      },
+      "decompose+route": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.882
+      }
+    },
+    "K3": {
+      "dense_only": {
+        "ndcg": 1.0,
+        "mrr": 1.0,
+        "hit": 1,
+        "n_rel": 1,
+        "latency_s": 0.052
+      },
+      "bm25_only": {
+        "ndcg": 0.631,
+        "mrr": 0.5,
+        "hit": 1,
+        "n_rel": 1,
+        "latency_s": 0.0
+      },
+      "linear_0.7/0.3": {
+        "ndcg": 0.631,
+        "mrr": 0.5,
+        "hit": 1,
+        "n_rel": 1,
+        "latency_s": 0.042
+      },
+      "linear_0.5/0.5": {
+        "ndcg": 0.631,
+        "mrr": 0.5,
+        "hit": 1,
+        "n_rel": 1,
+        "latency_s": 0.046
+      },
+      "rrf_k60": {
+        "ndcg": 0.631,
+        "mrr": 0.5,
+        "hit": 1,
+        "n_rel": 1,
+        "latency_s": 0.043
+      },
+      "hyde": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.839
+      },
+      "mqe": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.838
+      },
+      "route(gpt-4o)": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.796
+      },
+      "decompose+route": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.963
+      }
+    },
+    "K4": {
+      "dense_only": {
+        "ndcg": 1.0,
+        "mrr": 1.0,
+        "hit": 1,
+        "n_rel": 1,
+        "latency_s": 0.048
+      },
+      "bm25_only": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 0.0
+      },
+      "linear_0.7/0.3": {
+        "ndcg": 1.0,
+        "mrr": 1.0,
+        "hit": 1,
+        "n_rel": 1,
+        "latency_s": 0.046
+      },
+      "linear_0.5/0.5": {
+        "ndcg": 1.0,
+        "mrr": 1.0,
+        "hit": 1,
+        "n_rel": 1,
+        "latency_s": 0.047
+      },
+      "rrf_k60": {
+        "ndcg": 0.631,
+        "mrr": 0.5,
+        "hit": 1,
+        "n_rel": 1,
+        "latency_s": 0.041
+      },
+      "hyde": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 2.177
+      },
+      "mqe": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.795
+      },
+      "route(gpt-4o)": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.876
+      },
+      "decompose+route": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.822
+      }
+    },
+    "K5": {
+      "dense_only": {
+        "ndcg": 1.0,
+        "mrr": 1.0,
+        "hit": 1,
+        "n_rel": 1,
+        "latency_s": 0.046
+      },
+      "bm25_only": {
+        "ndcg": 0.631,
+        "mrr": 0.5,
+        "hit": 1,
+        "n_rel": 1,
+        "latency_s": 0.0
+      },
+      "linear_0.7/0.3": {
+        "ndcg": 1.0,
+        "mrr": 1.0,
+        "hit": 1,
+        "n_rel": 1,
+        "latency_s": 0.053
+      },
+      "linear_0.5/0.5": {
+        "ndcg": 1.0,
+        "mrr": 1.0,
+        "hit": 1,
+        "n_rel": 1,
+        "latency_s": 0.042
+      },
+      "rrf_k60": {
+        "ndcg": 0.631,
+        "mrr": 0.5,
+        "hit": 1,
+        "n_rel": 1,
+        "latency_s": 0.044
+      },
+      "hyde": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.901
+      },
+      "mqe": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.849
+      },
+      "route(gpt-4o)": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.847
+      },
+      "decompose+route": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.721
+      }
+    },
+    "K6": {
+      "dense_only": {
+        "ndcg": 1.0,
+        "mrr": 1.0,
+        "hit": 1,
+        "n_rel": 1,
+        "latency_s": 0.044
+      },
+      "bm25_only": {
+        "ndcg": 0.501,
+        "mrr": 0.25,
+        "hit": 1,
+        "n_rel": 2,
+        "latency_s": 0.0
+      },
+      "linear_0.7/0.3": {
+        "ndcg": 0.832,
+        "mrr": 1.0,
+        "hit": 1,
+        "n_rel": 2,
+        "latency_s": 0.051
+      },
+      "linear_0.5/0.5": {
+        "ndcg": 0.818,
+        "mrr": 1.0,
+        "hit": 1,
+        "n_rel": 2,
+        "latency_s": 0.042
+      },
+      "rrf_k60": {
+        "ndcg": 1.0,
+        "mrr": 1.0,
+        "hit": 1,
+        "n_rel": 1,
+        "latency_s": 0.044
+      },
+      "hyde": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.792
+      },
+      "mqe": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.858
+      },
+      "route(gpt-4o)": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.736
+      },
+      "decompose+route": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.881
+      }
+    },
+    "H1": {
+      "dense_only": {
+        "ndcg": 0.92,
+        "mrr": 1.0,
+        "hit": 1,
+        "n_rel": 2,
+        "latency_s": 0.052
+      },
+      "bm25_only": {
+        "ndcg": 1.0,
+        "mrr": 1.0,
+        "hit": 1,
+        "n_rel": 1,
+        "latency_s": 0.0
+      },
+      "linear_0.7/0.3": {
+        "ndcg": 1.0,
+        "mrr": 1.0,
+        "hit": 1,
+        "n_rel": 2,
+        "latency_s": 0.05
+      },
+      "linear_0.5/0.5": {
+        "ndcg": 0.92,
+        "mrr": 1.0,
+        "hit": 1,
+        "n_rel": 2,
+        "latency_s": 0.043
+      },
+      "rrf_k60": {
+        "ndcg": 0.631,
+        "mrr": 0.5,
+        "hit": 1,
+        "n_rel": 1,
+        "latency_s": 0.052
+      },
+      "hyde": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.885
+      },
+      "mqe": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.941
+      },
+      "route(gpt-4o)": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.804
+      },
+      "decompose+route": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.832
+      }
+    },
+    "H2": {
+      "dense_only": {
+        "ndcg": 1.0,
+        "mrr": 1.0,
+        "hit": 1,
+        "n_rel": 1,
+        "latency_s": 0.047
+      },
+      "bm25_only": {
+        "ndcg": 0.5,
+        "mrr": 0.333,
+        "hit": 1,
+        "n_rel": 1,
+        "latency_s": 0.0
+      },
+      "linear_0.7/0.3": {
+        "ndcg": 0.631,
+        "mrr": 0.5,
+        "hit": 1,
+        "n_rel": 1,
+        "latency_s": 0.048
+      },
+      "linear_0.5/0.5": {
+        "ndcg": 0.631,
+        "mrr": 0.5,
+        "hit": 1,
+        "n_rel": 1,
+        "latency_s": 0.043
+      },
+      "rrf_k60": {
+        "ndcg": 0.5,
+        "mrr": 0.333,
+        "hit": 1,
+        "n_rel": 1,
+        "latency_s": 0.046
+      },
+      "hyde": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.759
+      },
+      "mqe": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.928
+      },
+      "route(gpt-4o)": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.738
+      },
+      "decompose+route": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.826
+      }
+    },
+    "H3": {
+      "dense_only": {
+        "ndcg": 1.0,
+        "mrr": 1.0,
+        "hit": 1,
+        "n_rel": 1,
+        "latency_s": 0.049
+      },
+      "bm25_only": {
+        "ndcg": 1.0,
+        "mrr": 1.0,
+        "hit": 1,
+        "n_rel": 1,
+        "latency_s": 0.0
+      },
+      "linear_0.7/0.3": {
+        "ndcg": 1.0,
+        "mrr": 1.0,
+        "hit": 1,
+        "n_rel": 1,
+        "latency_s": 0.042
+      },
+      "linear_0.5/0.5": {
+        "ndcg": 1.0,
+        "mrr": 1.0,
+        "hit": 1,
+        "n_rel": 1,
+        "latency_s": 0.051
+      },
+      "rrf_k60": {
+        "ndcg": 1.0,
+        "mrr": 1.0,
+        "hit": 1,
+        "n_rel": 1,
+        "latency_s": 0.053
+      },
+      "hyde": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.687
+      },
+      "mqe": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 2.009
+      },
+      "route(gpt-4o)": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.99
+      },
+      "decompose+route": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.879
+      }
+    },
+    "H4": {
+      "dense_only": {
+        "ndcg": 1.0,
+        "mrr": 1.0,
+        "hit": 1,
+        "n_rel": 1,
+        "latency_s": 0.056
+      },
+      "bm25_only": {
+        "ndcg": 0.5,
+        "mrr": 0.333,
+        "hit": 1,
+        "n_rel": 1,
+        "latency_s": 0.0
+      },
+      "linear_0.7/0.3": {
+        "ndcg": 1.0,
+        "mrr": 1.0,
+        "hit": 1,
+        "n_rel": 1,
+        "latency_s": 0.047
+      },
+      "linear_0.5/0.5": {
+        "ndcg": 1.0,
+        "mrr": 1.0,
+        "hit": 1,
+        "n_rel": 1,
+        "latency_s": 0.049
+      },
+      "rrf_k60": {
+        "ndcg": 1.0,
+        "mrr": 1.0,
+        "hit": 1,
+        "n_rel": 1,
+        "latency_s": 0.05
+      },
+      "hyde": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.887
+      },
+      "mqe": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.707
+      },
+      "route(gpt-4o)": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.654
+      },
+      "decompose+route": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.742
+      }
+    },
+    "H5": {
+      "dense_only": {
+        "ndcg": 1.0,
+        "mrr": 1.0,
+        "hit": 1,
+        "n_rel": 1,
+        "latency_s": 0.042
+      },
+      "bm25_only": {
+        "ndcg": 1.0,
+        "mrr": 1.0,
+        "hit": 1,
+        "n_rel": 1,
+        "latency_s": 0.0
+      },
+      "linear_0.7/0.3": {
+        "ndcg": 1.0,
+        "mrr": 1.0,
+        "hit": 1,
+        "n_rel": 1,
+        "latency_s": 0.041
+      },
+      "linear_0.5/0.5": {
+        "ndcg": 1.0,
+        "mrr": 1.0,
+        "hit": 1,
+        "n_rel": 1,
+        "latency_s": 0.045
+      },
+      "rrf_k60": {
+        "ndcg": 0.631,
+        "mrr": 0.5,
+        "hit": 1,
+        "n_rel": 1,
+        "latency_s": 0.047
+      },
+      "hyde": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.757
+      },
+      "mqe": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.823
+      },
+      "route(gpt-4o)": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.829
+      },
+      "decompose+route": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.959
+      }
+    },
+    "H6": {
+      "dense_only": {
+        "ndcg": 0.85,
+        "mrr": 1.0,
+        "hit": 1,
+        "n_rel": 2,
+        "latency_s": 0.045
+      },
+      "bm25_only": {
+        "ndcg": 0.5,
+        "mrr": 0.333,
+        "hit": 1,
+        "n_rel": 1,
+        "latency_s": 0.0
+      },
+      "linear_0.7/0.3": {
+        "ndcg": 0.818,
+        "mrr": 1.0,
+        "hit": 1,
+        "n_rel": 2,
+        "latency_s": 0.045
+      },
+      "linear_0.5/0.5": {
+        "ndcg": 0.5,
+        "mrr": 0.333,
+        "hit": 1,
+        "n_rel": 1,
+        "latency_s": 0.059
+      },
+      "rrf_k60": {
+        "ndcg": 0.631,
+        "mrr": 0.5,
+        "hit": 1,
+        "n_rel": 1,
+        "latency_s": 0.047
+      },
+      "hyde": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 2.037
+      },
+      "mqe": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.892
+      },
+      "route(gpt-4o)": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.748
+      },
+      "decompose+route": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.788
+      }
+    },
+    "A1": {
+      "dense_only": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 0.043
+      },
+      "bm25_only": {
+        "ndcg": 0.818,
+        "mrr": 1.0,
+        "hit": 1,
+        "n_rel": 2,
+        "latency_s": 0.0
+      },
+      "linear_0.7/0.3": {
+        "ndcg": 0.807,
+        "mrr": 1.0,
+        "hit": 1,
+        "n_rel": 2,
+        "latency_s": 0.043
+      },
+      "linear_0.5/0.5": {
+        "ndcg": 0.832,
+        "mrr": 1.0,
+        "hit": 1,
+        "n_rel": 2,
+        "latency_s": 0.046
+      },
+      "rrf_k60": {
+        "ndcg": 0.92,
+        "mrr": 1.0,
+        "hit": 1,
+        "n_rel": 2,
+        "latency_s": 0.047
+      },
+      "hyde": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 2.308
+      },
+      "mqe": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.694
+      },
+      "route(gpt-4o)": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.881
+      },
+      "decompose+route": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.899
+      }
+    },
+    "A2": {
+      "dense_only": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 0.048
+      },
+      "bm25_only": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 0.0
+      },
+      "linear_0.7/0.3": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 0.049
+      },
+      "linear_0.5/0.5": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 0.047
+      },
+      "rrf_k60": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 0.045
+      },
+      "hyde": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.836
+      },
+      "mqe": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.936
+      },
+      "route(gpt-4o)": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.894
+      },
+      "decompose+route": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.953
+      }
+    },
+    "A3": {
+      "dense_only": {
+        "ndcg": 0.92,
+        "mrr": 1.0,
+        "hit": 1,
+        "n_rel": 2,
+        "latency_s": 0.048
+      },
+      "bm25_only": {
+        "ndcg": 0.693,
+        "mrr": 0.5,
+        "hit": 1,
+        "n_rel": 2,
+        "latency_s": 0.0
+      },
+      "linear_0.7/0.3": {
+        "ndcg": 0.92,
+        "mrr": 1.0,
+        "hit": 1,
+        "n_rel": 2,
+        "latency_s": 0.043
+      },
+      "linear_0.5/0.5": {
+        "ndcg": 0.693,
+        "mrr": 0.5,
+        "hit": 1,
+        "n_rel": 2,
+        "latency_s": 0.041
+      },
+      "rrf_k60": {
+        "ndcg": 0.693,
+        "mrr": 0.5,
+        "hit": 1,
+        "n_rel": 2,
+        "latency_s": 0.042
+      },
+      "hyde": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.699
+      },
+      "mqe": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.688
+      },
+      "route(gpt-4o)": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.798
+      },
+      "decompose+route": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.819
+      }
+    },
+    "A4": {
+      "dense_only": {
+        "ndcg": 1.0,
+        "mrr": 1.0,
+        "hit": 1,
+        "n_rel": 1,
+        "latency_s": 0.047
+      },
+      "bm25_only": {
+        "ndcg": 1.0,
+        "mrr": 1.0,
+        "hit": 1,
+        "n_rel": 1,
+        "latency_s": 0.0
+      },
+      "linear_0.7/0.3": {
+        "ndcg": 1.0,
+        "mrr": 1.0,
+        "hit": 1,
+        "n_rel": 1,
+        "latency_s": 0.046
+      },
+      "linear_0.5/0.5": {
+        "ndcg": 1.0,
+        "mrr": 1.0,
+        "hit": 1,
+        "n_rel": 1,
+        "latency_s": 0.044
+      },
+      "rrf_k60": {
+        "ndcg": 1.0,
+        "mrr": 1.0,
+        "hit": 1,
+        "n_rel": 1,
+        "latency_s": 0.047
+      },
+      "hyde": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.858
+      },
+      "mqe": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.731
+      },
+      "route(gpt-4o)": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.873
+      },
+      "decompose+route": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.803
+      }
+    },
+    "A5": {
+      "dense_only": {
+        "ndcg": 0.315,
+        "mrr": 0.125,
+        "hit": 1,
+        "n_rel": 1,
+        "latency_s": 0.045
+      },
+      "bm25_only": {
+        "ndcg": 0.442,
+        "mrr": 0.2,
+        "hit": 1,
+        "n_rel": 2,
+        "latency_s": 0.0
+      },
+      "linear_0.7/0.3": {
+        "ndcg": 0.58,
+        "mrr": 0.5,
+        "hit": 1,
+        "n_rel": 2,
+        "latency_s": 0.043
+      },
+      "linear_0.5/0.5": {
+        "ndcg": 0.442,
+        "mrr": 0.2,
+        "hit": 1,
+        "n_rel": 2,
+        "latency_s": 0.04
+      },
+      "rrf_k60": {
+        "ndcg": 0.85,
+        "mrr": 1.0,
+        "hit": 1,
+        "n_rel": 2,
+        "latency_s": 0.047
+      },
+      "hyde": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.665
+      },
+      "mqe": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.797
+      },
+      "route(gpt-4o)": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.919
+      },
+      "decompose+route": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.891
+      }
+    },
+    "A6": {
+      "dense_only": {
+        "ndcg": 1.0,
+        "mrr": 1.0,
+        "hit": 1,
+        "n_rel": 1,
+        "latency_s": 0.044
+      },
+      "bm25_only": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 0.0
+      },
+      "linear_0.7/0.3": {
+        "ndcg": 0.631,
+        "mrr": 0.5,
+        "hit": 1,
+        "n_rel": 1,
+        "latency_s": 0.049
+      },
+      "linear_0.5/0.5": {
+        "ndcg": 0.5,
+        "mrr": 0.333,
+        "hit": 1,
+        "n_rel": 1,
+        "latency_s": 0.045
+      },
+      "rrf_k60": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 0.049
+      },
+      "hyde": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.832
+      },
+      "mqe": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.69
+      },
+      "route(gpt-4o)": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.738
+      },
+      "decompose+route": {
+        "ndcg": 0.0,
+        "mrr": 0.0,
+        "hit": 0,
+        "n_rel": 0,
+        "latency_s": 1.958
+      }
+    }
+  },
+  "_note": "이 파일의 마지막 실행에서 OpenAI 조직 쿼터가 소진(429 exceeded quota)되어 LLM을 쓰는 4개 방법(hyde/mqe/route/decompose+route)과 질의 분류가 전부 실패했다 — 아래 그 4개 행의 0.0 값은 성능이 아니라 '호출 실패'다(invalid=true로 표시). 비-LLM 방법(dense/bm25/linear/rrf)은 최종 인덱스 기준 유효하다. LLM 4개 방법의 유효 측정치는 직전 실행(같은 골든셋, 표요약 청크까지 반영된 232청크 인덱스, 단위노트 수정만 미반영)에서 얻었으며 아래 valid_prev_run에 보존한다.",
+  "valid_prev_run": {
+    "hyde": {
+      "키워드형": {
+        "ndcg": 0.687,
+        "recall": 1.0
+      },
+      "하이브리드형": {
+        "ndcg": 0.816,
+        "recall": 1.0
+      },
+      "추상형": {
+        "ndcg": 0.658,
+        "recall": 1.0
+      },
+      "ALL": {
+        "ndcg": 0.72,
+        "recall": 1.0
+      },
+      "latency_s_mean": 3.04
+    },
+    "mqe": {
+      "키워드형": {
+        "ndcg": 0.939,
+        "recall": 1.0
+      },
+      "하이브리드형": {
+        "ndcg": 0.676,
+        "recall": 0.83
+      },
+      "추상형": {
+        "ndcg": 0.455,
+        "recall": 0.83
+      },
+      "ALL": {
+        "ndcg": 0.69,
+        "recall": 0.89
+      },
+      "latency_s_mean": 1.59
+    },
+    "route(gpt-4o)": {
+      "키워드형": {
+        "ndcg": 0.794,
+        "recall": 1.0
+      },
+      "하이브리드형": {
+        "ndcg": 0.763,
+        "recall": 1.0
+      },
+      "추상형": {
+        "ndcg": 0.271,
+        "recall": 0.5
+      },
+      "ALL": {
+        "ndcg": 0.609,
+        "recall": 0.83
+      },
+      "latency_s_mean": 0.92
+    },
+    "decompose+route": {
+      "키워드형": {
+        "ndcg": 0.794,
+        "recall": 1.0
+      },
+      "하이브리드형": {
+        "ndcg": 0.77,
+        "recall": 1.0
+      },
+      "추상형": {
+        "ndcg": 0.362,
+        "recall": 0.67
+      },
+      "ALL": {
+        "ndcg": 0.642,
+        "recall": 0.89
+      },
+      "latency_s_mean": 1.97
+    },
+    "_classifier_agreement": "12/18 (하이브리드형 6개가 전부 keyword_specific으로 흡수 — 분류기가 2진이라 표현 불가)"
+  }
+}

@@ -281,18 +281,51 @@ def _text_strategy_gate(table: list) -> bool:
     return (consistency >= 0.5 and modal >= 2) or numeric_ratio >= 0.55
 
 
+ORPHAN_LABEL_MAX_CHARS = 6  # 이보다 짧고 숫자도 없는 라벨은 줄바꿈 조각으로 본다(아래 (c))
+
+
 def _word_clustering_looks_flattened(parsed_rows: list) -> bool:
-    """word-clustering은 라벨 뒤 나머지를 통째로 한 셀(cells[0])에 담으므로, 그 안에 숫자 토큰이
-    여러 개(예: "479.0 512.3 734.5"처럼 연도별 값이 한 셀에 뭉침) 있으면 실제로는 다중 컬럼 구조가
-    한 셀로 뭉개진 것 — TATR의 강점(행+열 격자 인식)이 필요한 신호. 행이 아예 없어도(구조 파악
-    실패) 에스컬레이션 대상."""
+    """word-clustering 결과가 부실해 TATR 격자 인식이 필요한지 판정. 행이 아예 없어도(구조 파악
+    실패) 에스컬레이션 대상.
+
+    (a) cells 쪽 뭉침: word-clustering은 라벨 뒤 나머지를 통째로 한 셀(cells[0])에 담으므로, 그
+        안에 숫자 토큰이 여러 개(예: "479.0 512.3 734.5"처럼 연도별 값이 한 셀에 뭉침) 있으면
+        다중 컬럼이 한 셀로 뭉개진 것.
+
+    [수정 — (b),(c) 추가. 근거: pdf_pipeline/final/work/diag_order_table.py 로 재현한 Construct
+    p5 "주간 수주 공시" 표(날짜/건설사/프로젝트/계약금액/세대수/세대당금액/비고 7컬럼)] (a)만으로는
+    이 표를 놓쳤다 — 이 표는 x간격이 가장 큰 지점이 맨 오른쪽(세대당 금액) 앞이라 word-clustering이
+    "2026-07-13 IPARK현대산업개발 태평3구역 ... 5,852 2,480"을 전부 **라벨**에 넣고 cells에는
+    "2.4" 하나만 남겼다. 즉 뭉침이 cells가 아니라 **라벨 쪽**에서 일어나 (a)가 0건으로 통과시켜
+    버렸고(실측 flattened 판정=False), TATR을 강제 실행해 보면 같은 표를 5컬럼으로 정확히 뽑는다.
+    그래서 두 신호를 더한다:
+    (b) 라벨 쪽 뭉침: 라벨이 충분히 길면서(>=20자) 그 안에 숫자 토큰이 3개 이상 — 정상적인 표
+        라벨("매출액", "2026-07-13")은 짧거나 숫자가 적어 걸리지 않는다.
+    (c) 줄바꿈 고아행: 셀 안에서 줄바꿈된 텍스트("...정비사업 시공/사 선정")가 word-clustering의
+        행 클러스터링에서 별도 행으로 튀어나온 것 — 라벨이 아주 짧고(<=6자) 숫자값도 없는 행.
+        실측에서 '사','형','업','시설','시공자' 같은 조각 행이 14행 중 6행이었다."""
     if not parsed_rows:
         return True
-    flattened = sum(
-        1 for row in parsed_rows
-        if row["cells"] and len(_MULTI_VALUE_RE.findall(row["cells"][0])) >= 3
-    )
-    return flattened / len(parsed_rows) >= 0.3
+    broken = 0
+    for row in parsed_rows:
+        label = row.get("label") or ""
+        cells = row.get("cells") or []
+        if cells and len(_MULTI_VALUE_RE.findall(cells[0])) >= 3:      # (a)
+            broken += 1
+        elif len(label) >= 20 and len(_MULTI_VALUE_RE.findall(label)) >= 3:  # (b)
+            broken += 1
+        elif len(label) <= ORPHAN_LABEL_MAX_CHARS and not any(_MULTI_VALUE_RE.search(c) for c in cells):  # (c)
+            broken += 1
+    return broken / len(parsed_rows) >= 0.3
+
+
+def _mean_cell_count(rows: list) -> float:
+    """행당 평균 셀 개수 — "컬럼이 실제로 분해됐는가"의 구조 품질 대리지표(값 정확도가 아니라
+    구조 분해도만 본다). word-clustering은 원리상 라벨+최대 1셀이라 1.0을 넘기 어렵고, 격자
+    인식이 성공한 TATR 결과는 컬럼 수에 비례해 커진다(실측: 수주공시표 0.86 -> 7.0)."""
+    if not rows:
+        return 0.0
+    return sum(len(r.get("cells") or []) for r in rows) / len(rows)
 
 
 def parse_table_hybrid(page_pp, bbox_pt: tuple, median_line_height_pt: float,
@@ -332,7 +365,13 @@ def parse_table_hybrid(page_pp, bbox_pt: tuple, median_line_height_pt: float,
             tatr_rows = parse_table_adaptive(model, processor, doc_fitz, page_pp, page_num, bbox_pt,
                                               tatr_render_dpi, tatr_pad_top_pt, tatr_pad_side_pt,
                                               median_line_height_pt, conf=tatr_conf)
-            if tatr_rows:
+            # [수정] TATR 결과를 무조건 채택하지 않고 "구조가 실제로 나아졌을 때만" 채택.
+            # 근거(pdf_pipeline/final/results_flatten_detector_ab.json): 확장된 탐지기가 Construct
+            # p5 수주공시표를 올바르게 승격(셀평균 0.86 -> 7.0, 고아행 0.43 -> 0.12)시키는 한편,
+            # 같은 문서 p4의 이미 깨진 표(글자 겹침으로 원문 자체가 인터리빙)는 TATR도 똑같이
+            # 셀평균 1.0/고아율 0.75로 못 고쳤다 — 그런 표는 TATR 결과로 갈아끼워도 이득이 없으므로
+            # 이미 가진 word-clustering 결과를 유지한다(불필요한 결과 교체로 인한 회귀 위험 제거).
+            if tatr_rows and _mean_cell_count(tatr_rows) > _mean_cell_count(word_clustered):
                 return tatr_rows
         except Exception:
             pass  # TATR 자체가 실패해도 이미 있는 word-clustering 결과로 안전하게 폴백

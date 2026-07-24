@@ -711,8 +711,20 @@ def count_document_entities(index: TextIndex, full_pdf_text: str = None, client=
 
     문서당 1회만(질의마다 아님) — 인제스트 시점 비용. model 기본값 gpt-4o-mini로 충분(단순
     카운팅 작업이라 4o급 추론 불필요)."""
-    entity_sets = [set(c.get("structured_metadata", {}).get("entities") or [])
-                   for c in index.chunks if c.get("structured_metadata")]
+    # [재일 — 스키마 감사] 이 무료 경로가 실제로는 항상 죽어 있었다. entity_fusion이 만든 융합
+    # 인덱스의 청크는 structured_metadata를 최상위가 아니라 `metadata.structured_metadata`로
+    # 한 겹 중첩해 담는데(entity_fusion.py from_text_chunks/from_table_records/from_image_cards
+    # 셋 다), 여기선 최상위만 봐서 항상 None -> 1)번 경로가 통째로 스킵되고 매 인제스트마다 3)번
+    # LLM 폴백이 돌았다. 두 위치를 모두 보고, 브랜치마다 다른 키 이름(text=entities,
+    # table/image=entities_mentioned)도 함께 읽는다.
+    def _sm(c):
+        return c.get("structured_metadata") or (c.get("metadata") or {}).get("structured_metadata") or {}
+
+    entity_sets = []
+    for c in index.chunks:
+        sm = _sm(c)
+        if sm:
+            entity_sets.append(set(sm.get("entities") or sm.get("entities_mentioned") or []))
     if entity_sets:
         all_entities = set().union(*entity_sets)
         if all_entities:
