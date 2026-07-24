@@ -1,0 +1,33 @@
+{
+  "recall": 0.7,
+  "hits": [
+    "LG CNS",
+    "064400",
+    "LG전자",
+    "LG화학",
+    "LG유플러스",
+    "NH농협은행",
+    "교보증권"
+  ],
+  "misses": [
+    "네이버클라우드",
+    "우리은행",
+    "국민연금공단"
+  ],
+  "precision_approx": 0.85,
+  "f1_approx": 0.7677,
+  "docling_table_stage_s": 11.223,
+  "page_level_entity_s": 69.949,
+  "table_level_entity_s": 50.124,
+  "entity_extract_stage_s": 120.073,
+  "classify_text_image_stage_s": 390.57,
+  "total_pipeline_s": 521.86,
+  "per_page_entities": {
+    "1": "LG CNS (064400)\nLG CNS(KRX: 063420)\nKOSPI(KS99)\nKOSDAQ(KD99)\nLG CNS(LGND.KR)\nLG CNS(KOSDAQ: LGN)",
+    "2": "LG CNS (064400), 업계, LG CNS, 교보증권 리서치 센터, DART, 엘지전자, 엘지화학, 엘지유플러스, 기타 특수관계자, 대외고객\nLG CNS(KRX: LGN)",
+    "3": "LG CNS (064400), LG전자, 네이버, NH농협은행\nLG CNS(KRX: LGN)\nLG CNS(LGALS)  \nM OEL(E|#OACATION 1 9)(#AOCATIOM 1 9)  \nB-ERPB(EBRBP)  \n\n위의 정보를 바탕으로 추정되는 기업이나 조직들의 이름과 그들 중 알려진 종목 코드가 있습니다.\nLG CNS는 LGALs라는 종목 코드를 가지고 있으며, M OEL와 같은 경우에는 특정 회사를 나타내기 위한 약어",
+    "4": "LG CNS (064400), 교보증권 리서치 센터\nLG CNS(KRX: LGN)\nLG CNS(KOSDAQ: LGN)\nLG CNS(KRX: 088190)\nLG CNS (KRX: KOSDAQ)\nLG CNS(KRX: LGN)\nLG CNS (0992)",
+    "5": "LG CNS (064400), 교보증권 리서치 센터\nLG CNS(LG CNS)",
+    "6": "LG CNS (064400), Research Center\nLG CNS(KRX: 063420)"
+  }
+}

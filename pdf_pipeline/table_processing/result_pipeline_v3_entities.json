@@ -1,0 +1,33 @@
+{
+  "recall": 0.7,
+  "hits": [
+    "LG CNS",
+    "064400",
+    "LG전자",
+    "LG화학",
+    "LG유플러스",
+    "NH농협은행",
+    "교보증권"
+  ],
+  "misses": [
+    "네이버클라우드",
+    "우리은행",
+    "국민연금공단"
+  ],
+  "precision_approx": 0.9589,
+  "f1_approx": 0.8092,
+  "docling_table_stage_s": 10.965,
+  "page_level_entity_s": 45.689,
+  "table_level_entity_s": 80.838,
+  "entity_extract_stage_s": 126.527,
+  "classify_text_image_stage_s": 390.57,
+  "total_pipeline_s": 528.06,
+  "per_page_entities": {
+    "1": "LG CNS (064400)\n이 정보가 제공되지 않았습니다. 추가적인 정보를 주시면 도와드리겠습니다.\n*1XX7 (KRX)\nLG CNS(KR)\nYOY (%): N/A  \nOP [2]: N/A  \nEPS [(%)] : N/A  \n\n이러한 정보를 제공할 수 없습니다. 해당 표가 특정 회사를 나타내고 있는 것인지 확인해 주시기 바랍니다. 또한, 추가적인 정보나 맥락이 필요합니다.",
+    "2": "LG CNS (064400), 업계, LG CNS, 교보증권 리서치 센터, DART, 엘지전자, 엘지화학, 엘지유플러스, 기타 특수관계자, 대외고객\nDigital Business Services (종목 코드 없음)\nGPM (%)\nOPM (%)",
+    "3": "LG CNS (064400), LG전자, 네이버, NH농협은행\nAl 92 (없음)\nZLH (없음)\n\n각 기업이나 조직의 코드나 명칭이 제공되지 않았습니다.\n따라서 정확히 어떤 회사를 나타내고 있는지는 알 수 없습니다.\nLOT Physical Al90279 (LGAL)\nM OeleCoaction(1)9\nB-Erp7$\nLgalA",
+    "4": "LG CNS (064400), 교보증권 리서치 센터\n삼성전자 (005930)\n- 삼성전자 (005930)\n- LG전자 (066570) \n- SK하이닉스 (000660)\n- 현대차그룹 (005380)\n- KT (030200)\n- LG생활건강 (064190)\n- LG화학 (051910)\n- LG디스플레이 (0659\nEbitda (8819)\nTEZA (TEZ)\n- 715 (종목 코드 없음)\n- 365 \n- 353  \n- 86   \n- (-)24    \n-(-)-5     \n- 296      \n- 121       \n- (-)(-)122(%)    \n- -(+)42        \n- (+/-)+(-)/+(-)%    \n- +(+/+)/(+)/+(+/-%)    \n- +(++)/(++%/++)\n- 6.\n- OH EOH (종료)\n- EBITDA \n- EBITDA Margin (%)\n- 3819  \n- #·209   \n- EXITX    \n- 1/7H     \n- OIXH      \n- 0|9803    \n- EPS       \n- PER       \n- BPS       \n- PBR       \n- EBITDAPS  \n- EV/EBITDA \n- SPS       \n- PSR       \n- CFPS      \n- D",
+    "5": "LG CNS (064400), 교보증권 리서치 센터\nFx012.XXXX (없음)",
+    "6": "LG CNS (064400), Research Center\n이 정보가 제공되지 않았습니다. 추가적인 정보를 주시면 도와드리겠습니다."
+  }
+}
