@@ -347,22 +347,58 @@ def _upsert(db_url: str, rows: list) -> None:
         conn.close()
 
 
-def refresh_for_matched(db_url: str, matched: list, ttl_hours: int = NEWS_TTL_HOURS) -> int:
+# 질의를 블로킹한 채 동기로 수집할 최대 종목 수 — 실측 종목당 ~40–70s(GPU)라, 다기업 리포트
+# (7종목 매칭)에서 전부 동기로 돌리면 첫 질의가 분 단위로 밀린다(CPU 시절엔 31분까지 관측).
+# 상한을 넘는 미캐시 종목은 데몬 스레드로 넘겨 **이번 답변은 캐시된 것만 쓰고**, 백그라운드
+# 수집이 끝나면 다음 질의부터 자동 반영된다(읽기-통과 캐시 설계가 이미 그 역할을 하도록 돼 있음).
+NEWS_SYNC_MAX_TICKERS = 2
+
+
+import threading as _threading
+
+# 수집·채점 직렬화 락 — Qwen3/FinBert가 GPU 하나를 공유하는 프로세스 싱글턴이라, 동기/백그라운드
+# 스레드(또는 streamlit 다중 세션)가 동시에 수집하면 (a) _MODEL_CACHE 체크-후-로드 레이스로
+# 같은 모델이 두 벌 로드되고(실측: 1.7B×2 등 전부 이중 로드, VRAM 2배) (b) GPU 경합으로 동기
+# 구간이 오히려 4~5배 느려졌다(실측 67s → 305s). 핸드오프의 "GPU 공유 스레드 병렬화 금지"
+# (TATR+BGE 동시성 버그, §5/§11.3 VLM 주의) 클래스 — 수집은 언제나 한 번에 하나만 돈다.
+_COLLECT_LOCK = _threading.Lock()
+
+
+def _collect_and_upsert(db_url: str, targets: list) -> int:
+    rows = []
+    for t, name in targets:
+        with _COLLECT_LOCK:
+            rec = score_ticker_live(t, name)
+        if rec:
+            rows.append(rec)
+            _upsert(db_url, [rec])   # 종목 단위로 즉시 적재 — 백그라운드가 길어져도 끝난 것부터 반영
+    return len(rows)
+
+
+def refresh_for_matched(db_url: str, matched: list, ttl_hours: int = NEWS_TTL_HOURS,
+                        sync_max: int = NEWS_SYNC_MAX_TICKERS) -> int:
     """[읽기-통과 캐시] 매칭된 기업 중 캐시가 없거나 오래된 것만 Layer3로 실시간 채워 넣는다.
-    반환: 새로 채운 기업 수. 자격증명이 없거나 수집이 실패하면 0(기존 캐시로 그대로 진행)."""
+
+    [지연 개선] 동기 수집은 sync_max 종목까지만 — 나머지 미캐시 종목은 데몬 스레드에서 마저
+    채운다(이번 답변엔 미포함, 다음 질의부터 반영). 백그라운드 스레드는 **동기 수집이 끝난 뒤**
+    시작한다(_COLLECT_LOCK과 함께 GPU 경합/모델 이중 로드 방지 — 동기 구간이 밀리면 본말전도).
+    반환: 이번 호출에서 동기로 채운 기업 수. 자격증명 없음/실패 시 0(기존 캐시로 진행)."""
     if not matched:
         return 0
     by_ticker = {m["ticker"]: m.get("name") or m["ticker"] for m in matched}
     need = _stale_or_missing(db_url, list(by_ticker), ttl_hours)
     if not need or not _naver_credentials_available():
         return 0
-    rows = []
-    for t in need:
-        rec = score_ticker_live(t, by_ticker[t])
-        if rec:
-            rows.append(rec)
-    _upsert(db_url, rows)
-    return len(rows)
+    targets = [(t, by_ticker[t]) for t in need]
+    sync_targets, bg_targets = targets[:max(sync_max, 0)], targets[max(sync_max, 0):]
+    if bg_targets:
+        print(f"   [뉴스] 미캐시 {len(need)}종목 중 {len(sync_targets)}개만 동기 수집, "
+              f"{len(bg_targets)}개는 백그라운드 진행(다음 질의부터 반영)")
+    n = _collect_and_upsert(db_url, sync_targets)
+    if bg_targets:
+        _threading.Thread(target=_collect_and_upsert, args=(db_url, list(bg_targets)),
+                          daemon=True, name="news-refresh-bg").start()
+    return n
 
 
 def main():

@@ -46,7 +46,10 @@ def _load(repo_id: str, local_path: Path) -> tuple:
         return _MODEL_CACHE[repo_id]
 
     source = str(local_path) if local_path.exists() else repo_id
-    device = "mps" if torch.backends.mps.is_available() else "cpu"
+    # [수정 — 재일] "mps 아니면 cpu" 이진 분기라 Windows에서 CUDA GPU를 놔두고 CPU로 돌았다
+    # — 뉴스 첫 수집이 종목당 ~5분 걸리던 주범(교차리뷰의 "MPS 전용 분기" 클래스). cuda 최우선.
+    device = ("cuda" if torch.cuda.is_available()
+              else "mps" if torch.backends.mps.is_available() else "cpu")
     print(f"[qwen3] loading {source} on {device}", flush=True)
     tokenizer = AutoTokenizer.from_pretrained(source)
     model = AutoModelForCausalLM.from_pretrained(

@@ -53,7 +53,9 @@ def _load_model():
     global _model, _tokenizer
     if _model is not None:
         return _model, _tokenizer
-    device = "mps" if torch.backends.mps.is_available() else "cpu"
+    # [수정 — 재일] layer3_qwen3_llm과 동일 — Windows에서 CUDA를 못 보고 CPU로 강등되던 분기.
+    device = ("cuda" if torch.cuda.is_available()
+              else "mps" if torch.backends.mps.is_available() else "cpu")
     print(f"[finbert] loading {MODEL_ID} on {device}", flush=True)
     _tokenizer = AutoTokenizer.from_pretrained(MODEL_ID)
     _model = AutoModelForSequenceClassification.from_pretrained(MODEL_ID).to(device)
